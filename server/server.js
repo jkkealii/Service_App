@@ -1,5 +1,6 @@
 var Hapi = require('hapi'),
-    Good = require('good');
+    Good = require('good'),
+    routes = require('/routes/routes.js');
 
 var host = "0.0.0.0",
     port = 8080;
