@@ -14,6 +14,13 @@ var Routes = [
         handler: function(request, reply) {
             reply.file("./pages/"+request.params.path);
         }
+    },
+    {
+        path:"/",
+        method: "GET",
+        handler: function(request, reply) {
+            reply.file("./pages/index.html");
+        }
     }
 ];
 
