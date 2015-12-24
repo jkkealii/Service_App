@@ -1,4 +1,4 @@
-var Api = require("../api/api.js")
+var Api = require("../api/Api")
 
 var Routes = [
     {
