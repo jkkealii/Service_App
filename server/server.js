@@ -1,5 +1,6 @@
 var Hapi = require('hapi'),
     Good = require('good'),
+    Inert = require('inert'),
     routes = require('./routes/routes.js'),
     config = require('./config.json');
 
@@ -49,6 +50,10 @@ var server = function (config, routes, options, registerCallback) {
             options: options
         }, registerCallback);
     }
+
+    hapi.register({
+        register: Inert
+    }, registerCallback);
 
     return hapi;
 };
