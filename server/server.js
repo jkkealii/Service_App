@@ -1,20 +1,69 @@
 var Hapi = require('hapi'),
     Good = require('good'),
-    routes = require('/routes/routes.js');
+    routes = require('./routes/routes.js'),
+    config = require('./config.json');
 
-var host = "0.0.0.0",
-    port = 8080;
+// Read from our config.json file
+var readConfigEntry = function (entry) {
+    if (!config.hasOwnProperty(entry)) {
+        entry = 'default';
+    }
+    var entryObj = config[entry];
+    
+    console.log("Config: " + entryObj.name);
+    return {
+        'host': entryObj.host,
+        'port': entryObj.port,
+        'logToConsole': entryObj.logToConsole
+    };
+};
 
-function handleRequest(request, response){
-    response.end('It Works!! Path Hit: ' + request.url);
+// For nice console reporting
+var options = {
+    opsInterval: 1000,
+    reporters: [{
+        reporter: require('good-console'),
+        events: { log: '*', response: '*' }
+    }]
+};
+
+// DON'T WORRY ABOUT IT
+var registerCallback = function (err) {
+    if (err) {
+        throw err; // something bad happened loading the plugin
+    }
+};
+
+// Lets make a server
+var server = function (config, routes, options, registerCallback) {
+    var hapi = new Hapi.Server();
+    hapi.connection({
+        host: config.host,
+        port: config.port
+    });
+    hapi.route(routes);
+
+    if (config.logToConsole) {
+        hapi.register({
+            register: Good,
+            options: options
+        }, registerCallback);
+    }
+
+    return hapi;
+};
+
+// Lets get that config name
+var entry = 'default';
+if (process.argv[2]) {
+    entry = process.argv[2];
 }
+configProperties = readConfigEntry(entry);
 
-//Create a server
-var server = http.createServer(handleRequest);
-
-//Lets start our server
-server.listen(port, function(){
-    //Callback triggered when server is successfully listening. Hurray!
-    console.log("Server listening on: http://localhost:%s", port);
+// Make & Start that damn Server
+var Service = server(configProperties, routes, options, registerCallback);
+Service.start(function () {
+    console.log("Server started on %s:%s", configProperties.host, configProperties.port);
 });
 
+module.exports = Service;
