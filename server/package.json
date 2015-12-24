@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "good": "^6.4.0",
+    "good-console": "^5.2.0",
     "hapi": "^11.1.2"
   }
 }
