@@ -11,7 +11,7 @@ var readConfigEntry = function (entry) {
     }
     var entryObj = config[entry];
     
-    console.log("Config: " + entryObj.name);
+    console.log("Config: %s", entryObj.name);
     return {
         'host': entryObj.host,
         'port': entryObj.port,
@@ -63,12 +63,15 @@ var entry = 'default';
 if (process.argv[2]) {
     entry = process.argv[2];
 }
-configProperties = readConfigEntry(entry);
+ServerConfig = readConfigEntry(entry);
 
 // Make & Start that damn Server
-var Service = server(configProperties, routes, options, registerCallback);
+var Service = server(ServerConfig, routes, options, registerCallback);
 Service.start(function () {
-    console.log("Server started on %s:%s", configProperties.host, configProperties.port);
+    console.log("Server started on %s:%s", ServerConfig.host, ServerConfig.port);
 });
 
-module.exports = Service;
+module.exports = {
+    Service: Service,
+    ServerConfig: ServerConfig
+};
