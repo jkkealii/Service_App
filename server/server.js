@@ -13,9 +13,11 @@ var readConfigEntry = function (entry) {
     
     console.log("Config: %s", entryObj.name);
     return {
-        'host': entryObj.host,
-        'port': entryObj.port,
-        'logToConsole': entryObj.logToConsole
+        host: entryObj.host,
+        port: entryObj.port,
+        logToConsole: entryObj.logToConsole,
+        parseAppId: entryObj.parseAppId,
+        parseJavascriptKey: entryObj.parseJavascriptKey
     };
 };
 
