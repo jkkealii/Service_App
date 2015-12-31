@@ -1,5 +1,4 @@
-var ServerConfig = require('./../../server.js').ServerConfig,
-    Parse = require('parse').Parse;
+var ServerParse = require('./../../server.js').ServerParse;
 
 // Add initialize to individual queries
 // Parse.initialize(ServerConfig.parseAppId, ServerConfig.parseJavascriptKey);

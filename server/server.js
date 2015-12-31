@@ -2,7 +2,8 @@ var Hapi = require('hapi'),
     Good = require('good'),
     Inert = require('inert'),
     routes = require('./routes/routes.js'),
-    config = require('./config.json');
+    config = require('./config.json'),
+    Parse = require('parse/node').Parse;
 
 // Read from our config.json file
 var readConfigEntry = function (entry) {
@@ -17,7 +18,8 @@ var readConfigEntry = function (entry) {
         port: entryObj.port,
         logToConsole: entryObj.logToConsole,
         parseAppId: entryObj.parseAppId,
-        parseJavascriptKey: entryObj.parseJavascriptKey
+        parseJavascriptKey: entryObj.parseJavascriptKey,
+        parseMasterKey: entryObj.parseMasterKey
     };
 };
 
@@ -73,7 +75,10 @@ Service.start(function () {
     console.log("Server started on %s:%s", ServerConfig.host, ServerConfig.port);
 });
 
+Parse.initialize(ServerConfig.parseAppId, ServerConfig.parseJavascriptKey, ServerConfig.parseMasterKey);
+
 module.exports = {
     Service: Service,
-    ServerConfig: ServerConfig
+    ServerConfig: ServerConfig,
+    ServerParse: Parse
 };
