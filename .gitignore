@@ -1,3 +1,5 @@
 node_modules
 parse-js-blank/*
 config.json
+.parse.local
+.parse.project
