@@ -15,8 +15,8 @@ app.get('/hello', function(req, res) {
 });
 app.get('/', function(req, res) {
     res.render('index', {
-        left_message: 'Congrats bitches, you did it',
-        right_message: 'But seriously, WTF!?'
+        leftMessage: 'Congrats bitches, you did it',
+        rightMessage: 'But seriously, WTF!?'
     });
 });
 
