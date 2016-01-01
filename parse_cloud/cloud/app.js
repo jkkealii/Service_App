@@ -13,6 +13,9 @@ app.use(express.bodyParser());    // Middleware for reading request body
 app.get('/hello', function(req, res) {
     res.render('hello', { message: 'Congrats, you just set up your app!' });
 });
+app.get('/', function(req, res) {
+    res.render('index', { message: 'Congrats bitches, you did it'});
+});
 
 app.post('/hello', function(req, res) {
     res.render('hello', { message: req.body.message });
