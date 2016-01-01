@@ -1,3 +1,11 @@
 h1 {
     color: #000000;
 }
+
+.brand-logo {
+    height: 35px;
+}
+
+.brand-contain {
+    padding: 7px 15px;
+}
