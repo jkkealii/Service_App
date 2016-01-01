@@ -14,7 +14,10 @@ app.get('/hello', function(req, res) {
     res.render('hello', { message: 'Congrats, you just set up your app!' });
 });
 app.get('/', function(req, res) {
-    res.render('index', { message: 'Congrats bitches, you did it'});
+    res.render('index', {
+        left_message: 'Congrats bitches, you did it',
+        right_message: 'But seriously, WTF!?'
+    });
 });
 
 app.post('/hello', function(req, res) {
