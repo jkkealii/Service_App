@@ -22,7 +22,6 @@ app.post('/hello', function(req, res) {
     res.render('hello', { message: req.body.message });
 });
 
-
 app.get('/', function(req, res) {
     var alerts = [];
 
@@ -42,24 +41,22 @@ app.get('/', function(req, res) {
         });
     }
 
-    var currentUser = Parse.User.current();
-    if (currentUser) {
+    // show info alert for login status
+    if (Parse.User.current()) {
         alerts.push({
             type: 'info',
             message: 'Signed In'
         });
-        var loggedIn = true;
     } else {
         alerts.push({
             type: 'info',
             message: 'Not Signed In'
         });
-        var loggedIn = false;
     }
 
     res.render('index', {
         alerts: alerts,
-        loggedIn: loggedIn,
+        loggedIn: (Parse.User.current() ? true : false),
         leftMessage: 'Congrats bitches, you did it',
         rightMessage: 'But seriously, WTF!?'
     });
@@ -71,7 +68,9 @@ app.get('/index', function(req,res) {
 
 app.get('/login', function(req, res) {
     console.log('login page requested');
-    res.render('login');
+    res.render('login', {
+        loggedIn: (Parse.User.current() ? true : false)
+    });
 });
 
 app.post('/login', function(req, res) {
@@ -93,7 +92,9 @@ app.post('/login', function(req, res) {
 
 app.get('/signup', function(req, res) {
     console.log('signup page requested');
-    res.render('signup');
+    res.render('signup', {
+        loggedIn: (Parse.User.current() ? true : false)
+    });
 });
 
 app.post('/signup', function(req, res) {
@@ -122,7 +123,8 @@ app.post('/signup', function(req, res) {
                         message: error.message
                     });
                     res.render('signup', {
-                        alerts: alerts
+                        alerts: alerts,
+                        loggedIn: (Parse.User.current() ? true : false)
                     });
                 }
             });
@@ -134,7 +136,8 @@ app.post('/signup', function(req, res) {
                 message: 'password and confirm_password do not match'
             });
             res.render('signup', {
-                alerts: alerts
+                alerts: alerts,
+                loggedIn: (Parse.User.current() ? true : false)
             });
         }
     } else {
@@ -144,7 +147,8 @@ app.post('/signup', function(req, res) {
             message: 'missing username, password, and/or confirm_password'
         });
         res.render('signup', {
-            alerts: alerts
+            alerts: alerts,
+            loggedIn: (Parse.User.current() ? true : false)
         });
     }
 });
