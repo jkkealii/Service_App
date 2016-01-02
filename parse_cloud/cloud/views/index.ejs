@@ -3,6 +3,14 @@
 <% include _navbar %>
 
 <div class="container-fluid">
+  <% if (alerts) { %>
+    <% alerts.forEach(function(alert) { %>
+      <% include _alert %>
+    <% }) %>
+  <% } %>
+</div>
+
+<div class="container-fluid">
   <h1>The Crimson Circle Service Organization</h1>
 </div>
 <div class="container">
