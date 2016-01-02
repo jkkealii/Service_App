@@ -1,11 +1,11 @@
-<% include _header %>
+<% include helper/_header %>
 
-<% include _navbar %>
+<% include helper/_navbar %>
 
 <div class="container-fluid">
-  <% if (alerts) { %>
+  <% if (locals.alerts) { %>
     <% alerts.forEach(function(alert) { %>
-      <% include _alert %>
+      <% include helper/_alert %>
     <% }) %>
   <% } %>
 </div>
@@ -86,6 +86,6 @@
   </div>
 </div>
 
-<% include _basecode %>
+<% include helper/_basecode %>
 
-<% include _footer %>
+<% include helper/_footer %>

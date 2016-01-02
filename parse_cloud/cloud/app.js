@@ -55,9 +55,7 @@ app.get('/index', function(req,res) {
 
 app.get('/login', function(req, res) {
     console.log('login page requested');
-    res.render('login', {
-        alerts: []
-    });
+    res.render('login');
 });
 
 app.post('/login', function(req, res) {
@@ -79,9 +77,7 @@ app.post('/login', function(req, res) {
 
 app.get('/signup', function(req, res) {
     console.log('signup page requested');
-    res.render('signup', {
-        alerts: []
-    });
+    res.render('signup');
 });
 
 app.post('/signup', function(req, res) {
