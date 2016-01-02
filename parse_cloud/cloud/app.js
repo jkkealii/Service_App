@@ -24,14 +24,24 @@ app.post('/hello', function(req, res) {
 
 
 app.get('/', function(req, res) {
-    console.log('req.query.login: ' + req.query.login);
     var alerts = [];
+
+    console.log('req.query.login: ' + req.query.login);
     if(req.query.login == 'success') {
         alerts.push({
             type: 'success',
             message: 'Login Successful'
         });
     }
+
+    console.log('req.query.signup: ' + req.query.signup);
+    if(req.query.signup == 'success') {
+        alerts.push({
+            type: 'success',
+            message: 'Signup Successful'
+        });
+    }
+
     res.render('index', {
         alerts: alerts,
         leftMessage: 'Congrats bitches, you did it',
@@ -39,23 +49,92 @@ app.get('/', function(req, res) {
     });
 });
 app.get('/index', function(req,res) {
-    var alerts = [];
-    res.render('index', {
-        alerts: alerts,
-        leftMessage: 'Congrats bitches, you did it',
-        rightMessage: 'But seriously, WTF!?'
-    });
+    console.log('routing through /index');
+    res.redirect('/');
 });
 
 app.get('/login', function(req, res) {
-    console.log('login page requested')
-    res.render('login');
+    console.log('login page requested');
+    res.render('login', {
+        alerts: []
+    });
 });
 
 app.post('/login', function(req, res) {
-    // console.log(req);
-    res.redirect('/?login=success')
-    // Parse.User.logIn(req.body.usename, req.body.password)
+    console.log(req.body);
+    Parse.User.logIn(req.body.username, req.body.password).then(function(user) {
+        res.redirect('/?login=success');
+    }, function(error) {
+        console.log(error);
+        var alerts = [];
+        alerts.push({
+            type: 'danger',
+            message: error.code
+        });
+        res.render('login', {
+            alerts: alerts
+        });
+    });
+});
+
+app.get('/signup', function(req, res) {
+    console.log('signup page requested');
+    res.render('signup', {
+        alerts: []
+    });
+});
+
+app.post('/signup', function(req, res) {
+    console.log(req.body);
+    if (req.body.username && req.body.password && req.body.confirm_password) {
+        if (req.body.password === req.body.confirm_password) {
+            var user = new Parse.User();
+            user.set("username", req.body.username);
+            user.set("password", req.body.password);
+
+            // other fields can be set just like with Parse.Object
+            // user.set("phone", "415-392-0202");
+
+            user.signUp(null, {
+                success: function(user) {
+                    // Hooray! Let them use the app now.
+                    res.redirect('/?signup=success');
+                },
+                error: function(user, error) {
+                    // Show the error message somewhere and let the user try again.
+                    // alert("Error: " + error.code + " " + error.message);
+                    console.log(error);
+                    var alerts = [];
+                    alerts.push({
+                        type: 'danger',
+                        message: error.message
+                    });
+                    res.render('signup', {
+                        alerts: alerts
+                    });
+                }
+            });
+
+        } else {
+            var alerts = [];
+            alerts.push({
+                type: 'danger',
+                message: 'password and confirm_password do not match'
+            });
+            res.render('signup', {
+                alerts: alerts
+            });
+        }
+    } else {
+        var alerts = [];
+        alerts.push({
+            type: 'danger',
+            message: 'missing username, password, and/or confirm_password'
+        });
+        res.render('signup', {
+            alerts: alerts
+        });
+    }
 });
 
 // // Example reading from the request query string of an HTTP get request.
