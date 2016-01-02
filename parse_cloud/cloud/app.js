@@ -14,10 +14,14 @@ app.get('/hello', function(req, res) {
     res.render('hello', { message: 'Congrats, you just set up your app!' });
 });
 app.get('/', function(req, res) {
+<<<<<<< Updated upstream
     res.render('index', {
         leftMessage: 'Congrats bitches, you did it',
         rightMessage: 'But seriously, WTF!?'
     });
+=======
+    res.render('index', { message: 'Congrats bitches, you did it'});
+>>>>>>> Stashed changes
 });
 
 app.post('/hello', function(req, res) {
