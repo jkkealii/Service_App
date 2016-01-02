@@ -6,3 +6,7 @@
 .brand-contain {
     padding: 7px 15px;
 }
+
+body {
+    padding-top: 60px; 
+}
