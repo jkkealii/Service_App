@@ -42,8 +42,24 @@ app.get('/', function(req, res) {
         });
     }
 
+    var currentUser = Parse.User.current();
+    if (currentUser) {
+        alerts.push({
+            type: 'info',
+            message: 'Signed In'
+        });
+        var loggedIn = true;
+    } else {
+        alerts.push({
+            type: 'info',
+            message: 'Not Signed In'
+        });
+        var loggedIn = false;
+    }
+
     res.render('index', {
         alerts: alerts,
+        loggedIn: loggedIn,
         leftMessage: 'Congrats bitches, you did it',
         rightMessage: 'But seriously, WTF!?'
     });
@@ -130,6 +146,16 @@ app.post('/signup', function(req, res) {
         res.render('signup', {
             alerts: alerts
         });
+    }
+});
+
+app.get('/logout', function(req, res) {
+    if (Parse.User.current()) {
+        Parse.User.logOut();
+        res.redirect('/');
+    } else {
+        console.log('No user to Logout');
+        res.redirect('/');
     }
 });
 
