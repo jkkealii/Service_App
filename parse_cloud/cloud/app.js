@@ -169,6 +169,12 @@ app.get('/logout', function(req, res) {
     }
 });
 
+app.get('/events', function(req, res) {
+    res.render('events', {
+        loggedIn: (Parse.User.current() ? true : false)
+    });
+});
+
 // // Example reading from the request query string of an HTTP get request.
 // app.get('/test', function(req, res) {
 //   // GET http://example.parseapp.com/test?message=hello
