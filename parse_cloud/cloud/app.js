@@ -22,6 +22,12 @@ app.post('/hello', function(req, res) {
     res.render('hello', { message: req.body.message });
 });
 
+app.get('/aboutus', function(req, res) {
+    res.render('aboutus', {
+        loggedIn: (Parse.User.current() ? true : false)
+    });
+});
+
 app.get('/', function(req, res) {
     var alerts = [];
 
