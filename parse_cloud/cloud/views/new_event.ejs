@@ -16,26 +16,75 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-4">
-      <form method="post" action="/events/new-event">
+    <div class="col-sm-5">
+      <form method="get" action="" id="eventForm">
 
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" class="form-control" placeholder="Username" name="name">
+          <input type="text" class="form-control" placeholder="Service" id="name">
         </div>
 
         <div class="form-group">
-          <label for="password">Date</label>
-          <input type="password" class="form-control" placeholder="Password" name="password">
+          <label for="start-date">Start Date/Time</label>
+          <div class="input-group date" id="datetimestart">
+            <input type="text" class="form-control" id="start-date"/>
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
         </div>
 
         <div class="form-group">
-          <label for="password">Confirm Password</label>
-          <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password">
+          <label for="end-date">End Date/Time</label>
+          <div class="input-group date" id="datetimeend">
+            <input type="text" class="form-control" id="end-date"/>
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="location">Address</label>
+          <input type="text" class="form-control" placeholder="1 Infinite Loop, Cupertino, CA, 95014" id="location">
+        </div>
+
+        <div class="form-group">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>People</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Josh Kuroda</td>
+              </tr>
+              <tr>
+                <td>Carlos Melendez</td>
+              </tr>
+              <tr>
+                <td>Benjamin Johnstone</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="input-group">
+            <input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Search for Person to Add" placeholder="Add Person...">
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Add Person</button>
+            </span>
+          </div><!-- /input-group -->
         </div>
 
         <div class="">
-          <input class="button btn btn-default" type="submit" value="Signup">
+          <input class="button btn btn-default" type="button" value="Create Event" id="create-event">
         </div>
 
       </form>
@@ -44,5 +93,7 @@
 </div><!-- /.container  -->
 
 <% include helper/_basecode %>
+
+<script type="text/javascript" src="/js/new-event.js"></script>
 
 <% include helper/_footer %>
