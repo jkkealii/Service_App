@@ -22,6 +22,15 @@ $(function () {
         $('#add-person').val($(this).data('name'));
     });
 
+    $('#add-person').keyup(function() {
+        var rxp = new RegExp($('#add-person').val(), 'i');
+        $('.option').hide().each(function(index, element) {
+            if (rxp.test($(element).data('name'))) {
+                $(element).show();
+            }
+        });
+    });
+
     $('#create-event').click(function() {
         console.log($('#name').val());
     });
