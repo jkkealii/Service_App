@@ -47,6 +47,13 @@ app.get('/', function(req, res) {
         });
     }
 
+    if(req.query.notice) {
+        alerts.push({
+            type: 'info',
+            message: req.query.notice
+        });
+    }
+
     // show info alert for login status
     if (Parse.User.current()) {
         alerts.push({
@@ -180,6 +187,40 @@ app.get('/events/new-event', function(req, res) {
         loggedIn: (Parse.User.current() ? true : false)
     });
 });
+
+// app.get('/users', function(req, res) {
+//     var queryUser = new Parse.Query(Parse.User);
+//     var queryAdmin = new Parse.Query(Parse.Role);
+//     queryUser.equalTo("username", "sirseim");
+//     queryAdmin.equalTo("name", "Administrator");
+//     queryMember.first({
+//         success: function(memberRole) {
+//             queryAdmin.first({
+//                 success: function(adminRole) {
+//                     memberRole.getRoles().add(adminRole);
+//                     memberRole.save(null, {
+//                         success: function(obj) {
+//                             console.log(obj);
+//                             res.redirect('/?notice=RoleUpdated');
+//                         },
+//                         error: function(err) {
+//                             console.log(err);
+//                             res.redirect('/?notice=MemberSaveError' + err.code);
+//                         }
+//                     });
+//                 },
+//                 error: function(err) {
+//                     console.log(err);
+//                     res.redirect('/?notice=AdminQueryError' + err.code);
+//                 }
+//             });
+//         },
+//         error: function(err) {
+//             console.log(err);
+//             res.redirect('/?notice=MemberQueryError' + err.code);
+//         }
+//     });
+// });
 
 // // Example reading from the request query string of an HTTP get request.
 // app.get('/test', function(req, res) {
