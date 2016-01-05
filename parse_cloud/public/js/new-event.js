@@ -31,6 +31,16 @@ $(function () {
         });
     });
 
+    var refreshRemoveButtons = function() {
+        $('.rm-row').click(function(event) {
+            var jThis = $(this);
+            // console.log('removing...');
+            jThis.parent().parent().remove();
+        });
+    }
+
+    refreshRemoveButtons();
+
     $('#create-event').click(function() {
         console.log($('#name').val());
     });

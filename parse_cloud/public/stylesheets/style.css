@@ -26,6 +26,10 @@ h1 {
     overflow-x: auto;
 }
 
+.last-col-right tr td:last-child, .last-col-right tr th:last-child {
+    text-align: right;
+}
+
 @media screen and (max-width:767px) {
     .ctable-responsive {
         width: 100%;
