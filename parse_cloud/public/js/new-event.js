@@ -17,6 +17,10 @@ $(function () {
     //     console.log('focus');
     //     $('.dropdown-toggle').dropdown('toggle');
     // });
+    
+    $('.option').click(function(event) {
+        $('#add-person').val($(this).data('name'));
+    });
 
     $('#create-event').click(function() {
         console.log($('#name').val());

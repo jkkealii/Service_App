@@ -52,6 +52,8 @@
             <% } else { %>
               <li><a href="#">Profile</a></li>
               <li><a href="#">Check Hours</a></li>
+            <% } %>
+            <% if (locals.admin) { %>
               <li role="separator" class="divider"></li>
               <li class="dropdown-header">Administrative</li>
               <li><a href="/users">Manage Users</a></li>

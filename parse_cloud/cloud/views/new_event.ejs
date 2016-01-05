@@ -69,16 +69,15 @@
             </tbody>
           </table>
           <div class="input-group">
-            <input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Search for Person to Add" placeholder="Add Person...">
+            <input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Search for Person to Add" placeholder="Add Person..." id="add-person">
             <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
+              <li class="option" data-name="Joshua Kuroda"><a href="#">Joshua Kuroda</a></li>
+              <li class="option" data-name="Carlos Melendez"><a href="#">Carlos Melendez</a></li>
+              <li class="option" data-name="Benjamin Johnstone"><a href="#">Benjamin Johnstone</a></li>
+              <li class="option" data-name="Max Alvarado"><a href="#">Max Alvarado</a></li>
             </ul>
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Add Person</button>
+              <button class="btn btn-default" type="button" id="confirm-add-person">Add Person</button>
             </span>
           </div><!-- /input-group -->
         </div>
@@ -88,6 +87,7 @@
         </div>
 
       </form>
+      <div class="spaced"></div>
     </div><!-- /.col -->
   </div><!-- /.row -->
 </div><!-- /.container  -->
