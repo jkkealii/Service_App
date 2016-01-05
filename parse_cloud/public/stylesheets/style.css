@@ -1,0 +1,85 @@
+
+.brand-logo {
+    height: 35px;
+}
+
+.brand-contain {
+    padding: 7px 15px;
+}
+
+body {
+    padding-top: 60px; 
+}
+
+h1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.spaced {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ctable-responsive {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
+.last-col-right tr td:last-child, .last-col-right tr th:last-child {
+    text-align: right;
+}
+
+@media screen and (max-width:767px) {
+    .ctable-responsive {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-y: hidden;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        border: 1px solid #ddd;
+    }
+
+    .ctable-responsive > .ctable {
+        margin-bottom: 0
+    }
+}
+
+.ctable {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.ctable .row {
+    margin-left: 0;
+    margin-right: 0;
+    display: table-row;
+}
+
+.chead {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+}
+
+.chead .ctable-content {
+    font-weight: bold;
+}
+
+.cbody {
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+.cbody:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.ctable-content {
+    padding: 8px;
+    text-align: left;
+    /*white-space: nowrap;*/
+}
+
+/*.cbody-alt {
+    background-color: #f9f9f9;
+}*/

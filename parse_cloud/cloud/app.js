@@ -23,15 +23,38 @@ app.post('/hello', function(req, res) {
 });
 
 app.get('/aboutus', function(req, res) {
-    res.render('aboutus', {
-        loggedIn: (Parse.User.current() ? true : false)
-    });
+    if (Parse.User.current()) {
+        var query = new Parse.Query(Parse.Role);
+        query.equalTo("name", "Administrator");
+        query.equalTo("users", Parse.User.current());
+        query.first().then(function(adminRole) {
+            res.render('aboutus', {
+                loggedIn: true,
+                admin: (adminRole ? true : false)
+            });
+        }, function(error) {
+            var alerts = [];
+            alerts.push({
+                type: 'warning',
+                message: ("AdminQueryError: " + error.code + " " + error.message)
+            });
+            res.render('aboutus', {
+                alerts: alerts,
+                loggedIn: true,
+                admin: false
+            });
+        });
+    } else {
+        res.render('aboutus', {
+            loggedIn: false,
+            admin: false
+        });
+    }
 });
 
 app.get('/', function(req, res) {
     var alerts = [];
 
-    console.log('req.query.login: ' + req.query.login);
     if(req.query.login == 'success') {
         alerts.push({
             type: 'success',
@@ -39,11 +62,17 @@ app.get('/', function(req, res) {
         });
     }
 
-    console.log('req.query.signup: ' + req.query.signup);
     if(req.query.signup == 'success') {
         alerts.push({
             type: 'success',
             message: 'Signup Successful'
+        });
+    }
+
+    if(req.query.notice) {
+        alerts.push({
+            type: 'info',
+            message: req.query.notice
         });
     }
 
@@ -60,12 +89,40 @@ app.get('/', function(req, res) {
         });
     }
 
-    res.render('index', {
-        alerts: alerts,
-        loggedIn: (Parse.User.current() ? true : false),
-        leftMessage: 'Congrats bitches, you did it',
-        rightMessage: 'But seriously, WTF!?'
-    });
+    if (Parse.User.current()) {
+        var query = new Parse.Query(Parse.Role);
+        query.equalTo("name", "Administrator");
+        query.equalTo("users", Parse.User.current());
+        query.first().then(function(adminRole) {
+            res.render('index', {
+                alerts: alerts,
+                loggedIn: true,
+                admin: (adminRole ? true : false),
+                leftMessage: 'Congrats bitches, you did it',
+                rightMessage: 'But seriously, WTF!?'
+            });
+        }, function(error) {
+            alerts.push({
+                type: 'warning',
+                message: ("AdminQueryError: " + error.code + " " + error.message)
+            });
+            res.render('index', {
+                alerts: alerts,
+                loggedIn: true,
+                admin: false,
+                leftMessage: 'Congrats bitches, you did it',
+                rightMessage: 'But seriously, WTF!?'
+            });
+        });
+    } else {
+        res.render('index', {
+            alerts: alerts,
+            loggedIn: false,
+            admin: false,
+            leftMessage: 'Congrats bitches, you did it',
+            rightMessage: 'But seriously, WTF!?'
+        });
+    }
 });
 app.get('/index', function(req,res) {
     console.log('routing through /index');
@@ -73,10 +130,33 @@ app.get('/index', function(req,res) {
 });
 
 app.get('/login', function(req, res) {
-    console.log('login page requested');
-    res.render('login', {
-        loggedIn: (Parse.User.current() ? true : false)
-    });
+    if (Parse.User.current()) {
+        var query = new Parse.Query(Parse.Role);
+        query.equalTo("name", "Administrator");
+        query.equalTo("users", Parse.User.current());
+        query.first().then(function(adminRole) {
+            res.render('login', {
+                loggedIn: true,
+                admin: (adminRole ? true : false)
+            });
+        }, function(error) {
+            var alerts = [];
+            alerts.push({
+                type: 'warning',
+                message: ("AdminQueryError: " + error.code + " " + error.message)
+            });
+            res.render('login', {
+                alerts: alerts,
+                loggedIn: true,
+                admin: false
+            });
+        });
+    } else {
+        res.render('login', {
+            loggedIn: false,
+            admin: false
+        });
+    }
 });
 
 app.post('/login', function(req, res) {
@@ -84,78 +164,196 @@ app.post('/login', function(req, res) {
     Parse.User.logIn(req.body.username, req.body.password).then(function(user) {
         res.redirect('/?login=success');
     }, function(error) {
-        console.log(error);
         var alerts = [];
+
         alerts.push({
             type: 'danger',
-            message: error.code
+            message: ("LoginError: " + error.code + " " + error.message)
         });
-        res.render('login', {
-            alerts: alerts
-        });
+
+        if (Parse.User.current()) {
+            var query = new Parse.Query(Parse.Role);
+            query.equalTo("name", "Administrator");
+            query.equalTo("users", Parse.User.current());
+            query.first().then(function(adminRole) {
+                res.render('login', {
+                    alerts: alerts,
+                    loggedIn: true,
+                    admin: (adminRole ? true : false)
+                });
+            }, function(error) {
+                alerts.push({
+                    type: 'warning',
+                    message: ("AdminQueryError: " + error.code + " " + error.message)
+                });
+                res.render('login', {
+                    alerts: alerts,
+                    loggedIn: true,
+                    admin: false
+                });
+            });
+        } else {
+            res.render('login', {
+                alerts: alerts,
+                loggedIn: false,
+                admin: false
+            });
+        }
     });
 });
 
 app.get('/signup', function(req, res) {
-    console.log('signup page requested');
-    res.render('signup', {
-        loggedIn: (Parse.User.current() ? true : false)
-    });
-});
-
-app.post('/signup', function(req, res) {
-    console.log(req.body);
-    if (req.body.username && req.body.password && req.body.confirm_password) {
-        if (req.body.password === req.body.confirm_password) {
-            var user = new Parse.User();
-            user.set("username", req.body.username);
-            user.set("password", req.body.password);
-
-            // other fields can be set just like with Parse.Object
-            // user.set("phone", "415-392-0202");
-
-            user.signUp(null, {
-                success: function(user) {
-                    // Hooray! Let them use the app now.
-                    res.redirect('/?signup=success');
-                },
-                error: function(user, error) {
-                    // Show the error message somewhere and let the user try again.
-                    // alert("Error: " + error.code + " " + error.message);
-                    console.log(error);
-                    var alerts = [];
-                    alerts.push({
-                        type: 'danger',
-                        message: error.message
-                    });
-                    res.render('signup', {
-                        alerts: alerts,
-                        loggedIn: (Parse.User.current() ? true : false)
-                    });
-                }
+    if (Parse.User.current()) {
+        var query = new Parse.Query(Parse.Role);
+        query.equalTo("name", "Administrator");
+        query.equalTo("users", Parse.User.current());
+        query.first().then(function(adminRole) {
+            res.render('signup', {
+                loggedIn: true,
+                admin: (adminRole ? true : false)
             });
-
-        } else {
+        }, function(error) {
             var alerts = [];
             alerts.push({
-                type: 'danger',
-                message: 'password and confirm_password do not match'
+                type: 'warning',
+                message: ("AdminQueryError: " + error.code + " " + error.message)
             });
             res.render('signup', {
                 alerts: alerts,
-                loggedIn: (Parse.User.current() ? true : false)
+                loggedIn: true,
+                admin: false
             });
+        });
+    } else {
+        res.render('signup', {
+            loggedIn: false,
+            admin: false
+        });
+    }
+});
+
+app.post('/signup', function(req, res) {
+    var alerts = [];
+
+    if (req.body.username && req.body.password && req.body.confirmPassword) {
+        if (req.body.password === req.body.confirmPassword) {
+            var user = new Parse.User();
+            user.set('username', req.body.username);
+            user.set('password', req.body.password);
+            user.set('firstName', req.body.firstName);
+            user.set('lastName', req.body.lastName);
+
+            user.signUp().then(function(userX) {
+                var queryMember = new Parse.Query(Parse.Role);
+                queryMember.equalTo('name', 'Member');
+                return queryMember.first();
+            }).then(function(role) {
+                Parse.Cloud.useMasterKey();
+                role.getUsers().add(user);
+                return role.save();
+            }).then(function(obj) {
+                res.redirect('/?signup=success');
+            }, function(error) {
+                alerts.push({
+                    type: 'danger',
+                    message: ("Error: " + error.code + " " + error.message)
+                });
+                if (Parse.User.current()) {
+                    var query = new Parse.Query(Parse.Role);
+                    query.equalTo("name", "Administrator");
+                    query.equalTo("users", Parse.User.current());
+                    query.first().then(function(adminRole) {
+                        res.render('signup', {
+                            alerts: alerts,
+                            loggedIn: true,
+                            admin: (adminRole ? true : false)
+                        });
+                    }, function(error) {
+                        alerts.push({
+                            type: 'warning',
+                            message: ("AdminQueryError: " + error.code + " " + error.message)
+                        });
+                        res.render('signup', {
+                            alerts: alerts,
+                            loggedIn: true,
+                            admin: false
+                        });
+                    });
+                } else {
+                    res.render('signup', {
+                        alerts: alerts,
+                        loggedIn: false,
+                        admin: false
+                    });
+                }
+            });
+        } else {
+            alerts.push({
+                type: 'danger',
+                message: 'Password and Confirm Password do not match'
+            });
+            if (Parse.User.current()) {
+                var query = new Parse.Query(Parse.Role);
+                query.equalTo("name", "Administrator");
+                query.equalTo("users", Parse.User.current());
+                query.first().then(function(adminRole) {
+                    res.render('signup', {
+                        alerts: alerts,
+                        loggedIn: true,
+                        admin: (adminRole ? true : false)
+                    });
+                }, function(error) {
+                    alerts.push({
+                        type: 'warning',
+                        message: ("AdminQueryError: " + error.code + " " + error.message)
+                    });
+                    res.render('signup', {
+                        alerts: alerts,
+                        loggedIn: true,
+                        admin: false
+                    });
+                });
+            } else {
+                res.render('signup', {
+                    alerts: alerts,
+                    loggedIn: false,
+                    admin: false
+                });
+            }
         }
     } else {
-        var alerts = [];
         alerts.push({
             type: 'danger',
-            message: 'missing username, password, and/or confirm_password'
+            message: 'missing Username, Password, Confirm Password, First Name, and/or Last Name'
         });
-        res.render('signup', {
-            alerts: alerts,
-            loggedIn: (Parse.User.current() ? true : false)
-        });
+        if (Parse.User.current()) {
+            var query = new Parse.Query(Parse.Role);
+            query.equalTo("name", "Administrator");
+            query.equalTo("users", Parse.User.current());
+            query.first().then(function(adminRole) {
+                res.render('signup', {
+                    alerts: alerts,
+                    loggedIn: true,
+                    admin: (adminRole ? true : false)
+                });
+            }, function(error) {
+                alerts.push({
+                    type: 'warning',
+                    message: ("AdminQueryError: " + error.code + " " + error.message)
+                });
+                res.render('signup', {
+                    alerts: alerts,
+                    loggedIn: true,
+                    admin: false
+                });
+            });
+        } else {
+            res.render('signup', {
+                alerts: alerts,
+                loggedIn: false,
+                admin: false
+            });
+        }
     }
 });
 
@@ -164,28 +362,92 @@ app.get('/logout', function(req, res) {
         Parse.User.logOut();
         res.redirect('/');
     } else {
-        console.log('No user to Logout');
         res.redirect('/');
     }
 });
 
 app.get('/events', function(req, res) {
-    res.render('events', {
-        loggedIn: (Parse.User.current() ? true : false)
-    });
+    if (Parse.User.current()) {
+        var query = new Parse.Query(Parse.Role);
+        query.equalTo("name", "Administrator");
+        query.equalTo("users", Parse.User.current());
+        query.first().then(function(adminRole) {
+            res.render('events', {
+                loggedIn: true,
+                admin: (adminRole ? true : false)
+            });
+        }, function(error) {
+            var alerts = [];
+            alerts.push({
+                type: 'warning',
+                message: ("AdminQueryError: " + error.code + " " + error.message)
+            });
+            res.render('events', {
+                alerts: alerts,
+                loggedIn: true,
+                admin: false
+            });
+        });
+    } else {
+        res.render('events', {
+            loggedIn: false,
+            admin: false
+        });
+    }
 });
 
-// // Example reading from the request query string of an HTTP get request.
-// app.get('/test', function(req, res) {
-//   // GET http://example.parseapp.com/test?message=hello
-//   res.send(req.query.message);
+app.get('/events/new-event', function(req, res) {
+    if (Parse.User.current()) {
+        var query = new Parse.Query(Parse.Role);
+        query.equalTo("name", "Administrator");
+        query.equalTo("users", Parse.User.current());
+        query.first().then(function(adminRole) {
+            res.render('new_event', {
+                loggedIn: true,
+                admin: (adminRole ? true : false)
+            });
+        }, function(error) {
+            var alerts = [];
+            alerts.push({
+                type: 'warning',
+                message: ("AdminQueryError: " + error.code + " " + error.message)
+            });
+            res.render('new_event', {
+                alerts: alerts,
+                loggedIn: true,
+                admin: false
+            });
+        });
+    } else {
+        res.render('new_event', {
+            loggedIn: false,
+            admin: false
+        });
+    }
+});
+
+// app.get('/users', function(req, res) {
+//     var queryUser = new Parse.Query(Parse.User);
+//     var queryAdmin = new Parse.Query(Parse.Role);
+//     queryUser.equalTo("username", "sirseim");
+//     queryAdmin.equalTo("name", "Administrator");
+//     var userLocal;
+
+//     queryUser.first().then(function(user) {
+//         userLocal = user;
+//         return queryAdmin.first();
+//     }).then(function(role) {
+//         Parse.Cloud.useMasterKey();
+//         role.getUsers().add(userLocal);
+//         return role.save();
+//     }).then(function(obj) {
+//         console.log(obj);
+//         res.redirect('/?notice=RoleUpdated');
+//     }, function(error) {
+//         console.log(error);
+//         res.redirect('/?notice=Error' + error.code + error.message);
+//     });
 // });
 
-// // Example reading from the request body of an HTTP post request.
-// app.post('/test', function(req, res) {
-//   // POST http://example.parseapp.com/test (with request body "message=hello")
-//   res.send(req.body.message);
-// });
 
-// Attach the Express app to Cloud Code.
 app.listen();

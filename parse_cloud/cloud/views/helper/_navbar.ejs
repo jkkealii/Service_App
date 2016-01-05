@@ -53,6 +53,11 @@
               <li><a href="#">Profile</a></li>
               <li><a href="#">Check Hours</a></li>
             <% } %>
+            <% if (locals.admin) { %>
+              <li role="separator" class="divider"></li>
+              <li class="dropdown-header">Administrative</li>
+              <li><a href="/users">Manage Users</a></li>
+            <% } %>
             <li role="separator" class="divider"></li>
             <li><a href="/events">Events</a></li>
             <li><a href="#">Members</a></li>
