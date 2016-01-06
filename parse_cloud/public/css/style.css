@@ -1,6 +1,6 @@
 
 .brand-logo {
-    height: 35px;
+    height: 45px;
 }
 
 .brand-contain {
@@ -8,7 +8,7 @@
 }
 
 body {
-    padding-top: 60px; 
+    padding-top: 0px; 
 }
 
 h1 {
@@ -122,15 +122,15 @@ p.intro{
 	line-height: 24px;
 	font-family: 'Open Sans', sans-serif;
 }
-a{ color: #9f1934;}
+a{ color: rgb(102, 13, 15);}
 a:hover,
 a:focus{
 	text-decoration: none;
-	color: #9f1934;
+	color: rgb(102, 13, 15);
 }
 
 .section-title hr{
-	border-color: #9f1934;
+	border-color: rgb(102, 13, 15);
 	border-width: 4px;
 	width: 60px;
 	float: left;
@@ -181,7 +181,7 @@ font-weight: 900;
 .navbar-default .navbar-nav > .active > a, 
 .navbar-default .navbar-nav > .active > a:hover, 
 .navbar-default .navbar-nav > .active > a:focus {
-	color: #9f1934 !important;
+	color: rgb(102, 13, 15) !important;
 	background-color: transparent;
 	font-weight: 700;
 }
@@ -191,8 +191,8 @@ font-weight: 900;
 	}
 .navbar-default .navbar-toggle:hover, 
 .navbar-default .navbar-toggle:focus {
-	background-color: #9f1934;
-	border-color: #9f1934;
+	background-color: rgb(102, 13, 15);
+	border-color: rgb(102, 13, 15);
 	}
 .navbar-default .navbar-toggle:hover>.icon-bar {
 	background-color: #FFF;
@@ -228,7 +228,7 @@ font-weight: 900;
 }
 
 .color{
-	color: #9f1934;
+	color: rgb(102, 13, 15);
 }
 
 a.fa.fa-angle-down {
@@ -241,9 +241,9 @@ a.fa.fa-angle-down {
 	transition: all 0.5s;
 }
 a.fa.fa-angle-down:hover{
-	background: #9f1934;
+	background: rgb(102, 13, 15);
 	color: #ffffff;
-	border: 2px solid #9f1934;
+	border: 2px solid rgb(102, 13, 15);
 }
 /* About Section */
 #tf-about{
@@ -289,7 +289,7 @@ ul.about-list li span{
 	font-weight: 300;
 }
 .section-title.center .line{
-	border-top: 4px solid #9f1934;
+	border-top: 4px solid rgb(102, 13, 15);
 	height: 10px;
 	width: 60px;
 	text-align: center;
@@ -320,7 +320,7 @@ img.img-circle.team-img {
 	transition: all 0.5s;
 }
 #tf-team .item .thumbnail:hover>img.img-circle.team-img{
-	border: 4px solid #9f1934;
+	border: 4px solid rgb(102, 13, 15);
 }
 #tf-team .thumbnail {
 	background: transparent;
@@ -350,10 +350,10 @@ img.img-circle.team-img {
 .owl-theme .owl-controls.clickable .owl-page:hover span {
 	filter: Alpha(Opacity=100);
 	opacity: 1;
-	background: #9f1934;
+	background: rgb(102, 13, 15);
 }
 .owl-theme .owl-controls .owl-page.active span{
-	background: #9f1934;
+	background: rgb(102, 13, 15);
 }
 
 /* Services Section */
@@ -367,7 +367,7 @@ img.img-circle.team-img {
 
 #tf-services i.fa {
 	font-size: 40px;
-	border: 4px solid #9f1934;
+	border: 4px solid rgb(102, 13, 15);
 	width: 100px;
 	height: 100px;
 	padding: 27px 25px;
@@ -382,7 +382,7 @@ img.img-circle.team-img {
 }
 
 #tf-services .service:hover>i.fa{
-	background: #9f1934;
+	background: rgb(102, 13, 15);
 	color: #ffffff;
 }
 
@@ -518,11 +518,11 @@ ol.type li a.active { font-weight: 700; }
 #tf-works i.fa {
 	height: 30px;
 	width: 30px;
-	border: 1px solid #9f1934;
+	border: 1px solid rgb(102, 13, 15);
 	font-size: 20px;
 	padding: 5px;
 	border-radius: 50%;
-	color: #9f1934;
+	color: rgb(102, 13, 15);
 }
 /* Testimonials Section */
 #tf-testimonials{
@@ -597,7 +597,7 @@ label {
 
 button.btn.tf-btn.btn-default {
 	float: right;
-	background: #9f1934;
+	background: rgb(102, 13, 15);
 	border: 0;
 	border-radius: 0;
 	padding: 10px 40px;
@@ -648,6 +648,6 @@ nav#footer p{
 	transition: all 0.5s;
 }
 #footer i.fa:hover{
-	background: #9f1934;
-	border-color: #9f1934;
+	background: rgb(102, 13, 15);
+	border-color: rgb(102, 13, 15);
 	color: #ffffff;
