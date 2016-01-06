@@ -4,9 +4,7 @@
 //
 //
 
-function main() {
-
-(function () {
+(function ($) {
     'use strict';
 
     /* ==============================================
@@ -121,8 +119,5 @@ function main() {
 
 
 
-}());
+})(jQuery);
 
-
-}
-main();
