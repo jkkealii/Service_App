@@ -175,7 +175,7 @@ font-weight: 900;
 	letter-spacing: 1px;
 }
 .on {
-	background-color: #222222 !important;
+	background-color: rgba(135, 135, 135, 1) !important;
 	padding: 0 !important;
 }
 .navbar-default .navbar-nav > .active > a, 
@@ -465,7 +465,7 @@ button.btn.tf-btn.btn-default {
 }
 /* Footer */
 nav#footer{
-	background: rgba(33, 33, 33, 0.44);
+	background: rgba(135, 135, 135, 1);
 	color: #ffffff;
 	padding: 20px 0 15px 0;
 }
