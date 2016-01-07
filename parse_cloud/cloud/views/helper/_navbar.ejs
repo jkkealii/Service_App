@@ -106,17 +106,12 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Crimsons<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <% if (locals.loggedIn) { %>
-              <li><a href="/logout">Logout</a></li>
-            <% } else { %>
-              <li><a href="/login">Login</a></li>
-            <% } %>
-            <% if (!locals.loggedIn) { %>
-              <li><a href="/login">Login</a></li>
-              <li><a href="/signup">Signup</a></li>
-            <% } else { %>
               <li><a href="#">Profile</a></li>
               <li><a href="#">Check Hours</a></li>
               <li><a href="/logout">Logout</a></li>
+            <% } else { %>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/signup">Signup</a></li>
             <% } %>
             <% if (locals.admin) { %>
               <li role="separator" class="divider"></li>

@@ -199,7 +199,7 @@ font-weight: 900;
 	}
 /* Home Style */
 #tf-home{
-	background: url(../img/2015-2016-crimson.png);
+	background: url(/img/2015-2016-crimson.png);
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
@@ -268,7 +268,7 @@ ul.about-list li span{
 
 /* Team Section */
 #tf-team{
-	background: url(../img/03.jpg);
+	background: url(/img/03.jpg);
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
@@ -344,7 +344,7 @@ ul.about-list li span{
 
 /* Crimson in action Section */
 #tf-works{
-	background: url(../img/04.jpg);
+	background: url(/img/04.jpg);
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
@@ -367,7 +367,7 @@ ul.about-list li span{
 
 /* Testimonials Section */
 #tf-testimonials{
-	background: url(../img/2015-urban-gala.jpg);
+	background: url(/img/2015-urban-gala.jpg);
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
