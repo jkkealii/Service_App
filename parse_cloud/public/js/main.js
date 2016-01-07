@@ -44,7 +44,6 @@
         offset: 80
     })
 
-<<<<<<< Updated upstream
     $(document).ready(function() {
         $("#team").owlCarousel({
      
@@ -90,8 +89,6 @@
         });
 
     });
-=======
->>>>>>> Stashed changes
 
     /*====================================
     Portfolio Isotope Filter
