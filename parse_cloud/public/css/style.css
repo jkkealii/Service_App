@@ -7,6 +7,10 @@
     padding: 7px 15px;
 }
 
+.icon-bar {
+	background-color: #fff !important;
+}
+
 body {
     padding-top: 0px; 
 }
@@ -154,7 +158,7 @@ ul, ol{
 }
 /* Navigation */
 #tf-menu {
-	padding: 20px;
+	padding: 20px 0;
 	transition: all 0.8s;
 }
 #tf-menu.navbar-default {
