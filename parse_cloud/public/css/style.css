@@ -373,6 +373,10 @@ ul.about-list li span{
 	background-attachment: fixed;
 }
 
+/* Crimson Moderator Section */
+#tf-clients{
+	padding: 80px 0;
+}
 
 /* Testimonials Section */
 #tf-testimonials{
