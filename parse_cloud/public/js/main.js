@@ -28,14 +28,11 @@
     Show Menu on Book
     ======================================*/
     $(window).bind('scroll', function() {
-        alert(".bind ran");
         var navHeight = $(window).height() - 100;
         if ($(window).scrollTop() > navHeight) {
             $('.navbar-default').addClass('on');
-            alert("on");
         } else {
             $('.navbar-default').removeClass('on');
-            alert("off");
         }
     });
 
