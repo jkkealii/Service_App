@@ -272,7 +272,7 @@ ul.about-list li span{
 
 /* Team Section */
 #tf-team{
-	background: url(/img/03.jpg);
+	background: url(/img/meet-our-members.jpg);
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
@@ -346,9 +346,14 @@ ul.about-list li span{
 	color: #ffffff;
 }
 
+#tf-services i.fa:hover{
+    background: rgb(102, 13, 15);
+	color: #ffffff;
+}
+
 /* Crimson in action Section */
 #tf-works{
-	background: url(/img/04.jpg);
+	background: url(/img/urban-action.jpg);
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
@@ -483,11 +488,11 @@ nav#footer p{
 	margin-top: 10px;
 }
 #footer i.fa {
-	height: 30px;
-	width: 30px;
+	height: 34px;
+	width: 34px;
 	border: 2px solid rgba(238, 238, 238, 0.86);
 	font-size: 20px;
-	padding: 4px 5px;
+	padding: 5px 7px;
 	border-radius: 50%;
 	color: rgba(238, 238, 238, 0.86);
 	transition: all 0.5s;
