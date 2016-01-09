@@ -133,7 +133,17 @@ h1 {
 }
 
 #login .section-title.center{
-	padding: 90px 0;
+	padding: 120px 0;
+}
+
+#login button.btn.tf-btn.btn-default {
+	float: right;
+	background: #ffffff;
+	border: 0;
+	border-radius: 0;
+	padding: 10px 40px;
+	color: rgb(102, 13, 15);
+	text-transform: uppercase;
 }
 
 
