@@ -1,114 +1,38 @@
-<% include helper/_header %>
-
-<% include helper/_navbar %>
-
-<div class="container-fluid">
-  <% if (locals.alerts) { %>
-    <% alerts.forEach(function(alert) { %>
-      <% include helper/_alert %>
-    <% }) %>
-  <% } %>
-</div>
-
 <div class="container">
-  <div class="container">
     <h1>Event Schedule</h1>
     <a href="/events/new-event" class="btn btn-primary spaced">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Event
     </a>
-  </div>
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Event</th>
-          <th>Date Time</th>
-          <th>Location</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Urban Compass</td>
-          <td>Friday, March 14, 2016, 3:10 PM</td>
-          <td><a href="http://maps.google.com/?q=11224%20S%20Western%20Ave%20Los%20Angeles,%20CA%2090047" target="_blank">11224 S Western Ave Los Angeles, CA 90047</a></td>
-          <td><a href="#" class="btn btn-primary btn-sm">Details</a></td>
-        </tr>
-        <tr>
-          <td>Urban Compass</td>
-          <td>Friday, March 14, 2016, 3:10 PM</td>
-          <td><a href="http://maps.google.com/?q=11224%20S%20Western%20Ave%20Los%20Angeles,%20CA%2090047" target="_blank">11224 S Western Ave Los Angeles, CA 90047</a></td>
-          <td><a href="#" class="btn btn-primary btn-sm">Details</a></td>
-        </tr>
-        <tr>
-          <td>Urban Compass</td>
-          <td>Friday, March 14, 2016, 3:10 PM</td>
-          <td><a href="http://maps.google.com/?q=11224%20S%20Western%20Ave%20Los%20Angeles,%20CA%2090047" target="_blank">11224 S Western Ave Los Angeles, CA 90047</a></td>
-          <td><a href="#" class="btn btn-primary btn-sm">Details</a></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="text-center" id="calendar">
-        <iframe src="https://docs.google.com/spreadsheets/d/16QYzLKBDG0khLyhH7BHbj3ntvR9wMlzjFBu04Vf8MeM/pubhtml?widget=true&amp;headers=false"></iframe>
-      </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Date Time</th>
+              <th>Location</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Urban Compass</td>
+              <td>Friday, March 14, 2016, 3:10 PM</td>
+              <td><a href="https://www.google.com/maps/place/Verbum+Dei+High+School/@33.9346847,-118.255696,17z/data=!3m1!4b1!4m2!3m1!1s0x80c2ca2d232ca0fb:0x43f903cd443cdfd8" target="_blank">11100 S Central Ave, Los Angeles, CA 90059</a></td>
+              <td><a href="#" class="btn btn-primary btn-sm">Details</a></td>
+            </tr>
+            <tr>
+              <td>Urban Compass</td>
+              <td>Friday, March 14, 2016, 3:10 PM</td>
+              <td><a href="https://www.google.com/maps/place/Verbum+Dei+High+School/@33.9346847,-118.255696,17z/data=!3m1!4b1!4m2!3m1!1s0x80c2ca2d232ca0fb:0x43f903cd443cdfd8" target="_blank">11100 S Central Ave, Los Angeles, CA 90059</a></td>
+              <td><a href="#" class="btn btn-primary btn-sm">Details</a></td>
+            </tr>
+            <tr>
+              <td>Urban Compass</td>
+              <td>Friday, March 14, 2016, 3:10 PM</td>
+              <td><a href="https://www.google.com/maps/place/Verbum+Dei+High+School/@33.9346847,-118.255696,17z/data=!3m1!4b1!4m2!3m1!1s0x80c2ca2d232ca0fb:0x43f903cd443cdfd8" target="_blank">11100 S Central Ave, Los Angeles, CA 90059</a></td>
+              <td><a href="#" class="btn btn-primary btn-sm">Details</a></td>
+            </tr>
+          </tbody>
+        </table>
     </div>
-  </div>
 </div>
-
-<!-- <div class="container">
-  <div class="ctable-responsive">
-    <div class="ctable">
-      <div class="chead row">
-        <div class="col-xs-3 ctable-content">Event</div>
-        <div class="col-xs-3 ctable-content">Date Time</div>
-        <div class="col-xs-4 ctable-content">Location</div>
-        <div class="col-xs-2 ctable-content">Action</div>
-      </div>
-      <div class="cbody row">
-        <div class="col-xs-3 ctable-content">Urban Compass</div>
-        <div class="col-xs-3 ctable-content">Friday, March 14, 2016, 3:10 PM</div>
-        <div class="col-xs-4 ctable-content"><a href="http://maps.google.com/?q=11224%20S%20Western%20Ave%20Los%20Angeles,%20CA%2090047" target="_blank">11224 S Western Ave Los Angeles, CA 90047</a></div>
-        <div class="col-xs-2 ctable-content"><button type="button" class="btn btn-primary btn-sm visible-xs-block" data-toggle="modal" data-target="#eventModal" data-obj="1">Deets</button><button type="button" class="btn btn-primary btn-sm hidden-xs" data-toggle="modal" data-target="#eventModal" data-obj="1">Details</button></div>
-      </div>
-      <div class="cbody row">
-        <div class="col-xs-3 ctable-content">Urban Compass</div>
-        <div class="col-xs-3 ctable-content">Friday, March 14, 2016, 3:10 PM</div>
-        <div class="col-xs-4 ctable-content"><a href="http://maps.google.com/?q=11224%20S%20Western%20Ave%20Los%20Angeles,%20CA%2090047" target="_blank">11224 S Western Ave Los Angeles, CA 90047</a></div>
-        <div class="col-xs-2 ctable-content"><button type="button" class="btn btn-primary btn-sm visible-xs-block" data-toggle="modal" data-target="#eventModal" data-obj="2">Deets</button><button type="button" class="btn btn-primary btn-sm hidden-xs" data-toggle="modal" data-target="#eventModal" data-obj="2">Details</button></div>
-      </div>
-      <div class="cbody row">
-        <div class="col-xs-3 ctable-content">Urban Compass</div>
-        <div class="col-xs-3 ctable-content">Friday, March 14, 2016, 3:10 PM</div>
-        <div class="col-xs-4 ctable-content"><a href="http://maps.google.com/?q=11224%20S%20Western%20Ave%20Los%20Angeles,%20CA%2090047" target="_blank">11224 S Western Ave Los Angeles, CA 90047</a></div>
-        <div class="col-xs-2 ctable-content"><button type="button" class="btn btn-primary btn-sm visible-xs-block" data-toggle="modal" data-target="#eventModal" data-obj="2">Deets</button><button type="button" class="btn btn-primary btn-sm hidden-xs" data-toggle="modal" data-target="#eventModal" data-obj="2">Details</button></div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-
-
-<!-- <div class="modal" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="eventModalLabel">Event Details</h4>
-      </div>
-      <div class="modal-body">
-        <h3>Some info here</h3>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<% include helper/_basecode %>
-
-<% include helper/_footer %>
