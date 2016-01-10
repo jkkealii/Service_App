@@ -10,20 +10,29 @@
   <% } %>
 </div>
 
-<div class="container">
+<div class="container" id="events">
     <h1>Event Schedule</h1>
-    <a href="/events/new-event" class="btn btn-primary spaced">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Event
-    </a>
-    <div class="btn-group" role="group" aria-label="time-period">
-      <button type="button" class="btn btn-default">Day</button>
-      <button type="button" class="btn btn-default">Week</button>
-      <button type="button" class="btn btn-default">Month</button>
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="/events/new-event" class="btn btn-primary spaced">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Event
+            </a>
+        </div>
+        <div class="col-sm-3">
+          <div class="btn-group" role="group" aria-label="time-period">
+            <button type="button" class="btn btn-default">Day</button>
+            <button type="button" class="btn btn-default">Week</button>
+            <button type="button" class="btn btn-default">Month</button>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="btn-group" role="group" aria-label="filter">
+            <button type="button" class="btn btn-default">Name</button>
+            <button type="button" class="btn btn-default">Date</button>
+          </div>
+        </div>
     </div>
-    <div class="btn-group" role="group" aria-label="filter">
-      <button type="button" class="btn btn-default">Name</button>
-      <button type="button" class="btn btn-default">Date</button>
-    </div>
+    
     <div class="table-responsive">
         <table class="table table-striped">
           <thead>

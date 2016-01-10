@@ -84,11 +84,6 @@ h1 {
     background-color: #f9f9f9;
 }*/
 
-#calendar iframe{
-    height: 1100px;
-    width: 895px;
-}
-
 /* Login and signup pages */
 #login{
 	background: url(/img/2015-2016-crimson.png);
@@ -601,6 +596,36 @@ button.btn.tf-btn.btn-default {
 	outline: none;
 	outline-offset: none;
 }
+
+/* Calendar page */
+
+#calendar-doc {
+    padding: 80px 0px 0px 0px;
+}
+
+#calendar-doc iframe{
+    height: 1100px;
+    width: 895px;
+}
+
+/* New Event page */
+
+#new_event {
+    padding: 80px 0px 0px 0px;
+}
+
+/* Users page */
+
+#users {
+    padding: 80px 0px 0px 0px;
+}
+
+/* Events page */
+
+#events {
+    padding: 80px 0px 0px 0px;
+}
+
 /* Footer */
 
 nav#footer{

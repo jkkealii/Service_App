@@ -29,12 +29,14 @@
     ======================================*/
     $(window).bind('scroll', function() {
         var navHeight = $(window).height() - 100;
-        if ($(window).scrollTop() > navHeight) {
-            $('.navbar-default').addClass('on');
-            $('.dropdown-menu').addClass('on');
-        } else {
-            $('.navbar-default').removeClass('on');
-            $('.dropdown-menu').removeClass('on');
+        if (lastPathSegment !== 'calendar' || lastPathSegment !== 'events' || lastPathSegment !== 'new-event' || lastPathSegment !== 'users') {
+            if ($(window).scrollTop() > navHeight) {
+                $('.navbar-default').addClass('on');
+                $('.dropdown-menu').addClass('on');
+            } else {
+                $('.navbar-default').removeClass('on');
+                $('.dropdown-menu').removeClass('on');
+            }
         }
     });
 
@@ -43,6 +45,17 @@
         offset: 80
     })
 
+    $(document).ready(function() {
+        var href = document.location.href;
+        var lastPathSegment = href.substr(href.lastIndexOf('/') + 1); 
+        if (lastPathSegment == 'calendar' || lastPathSegment == 'events' || lastPathSegment == 'new-event' || lastPathSegment == 'users') {
+            $('.navbar-default').addClass('on');
+            $('.dropdown-menu').addClass('on');
+        } else {
+            $('.navbar-default').removeClass('on');
+            $('.dropdown-menu').removeClass('on');
+        }
+    });
 
 
 })(jQuery);

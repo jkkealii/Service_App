@@ -10,46 +10,54 @@
   <% } %>
 </div>
 
-<div class="container">
+<div class="container" id="users">
     <h1>Crimson Circle Members</h1>
-    <a href="/events/signup" class="btn btn-primary spaced">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New User
-    </a>
-    <div class="btn-group" role="group" aria-label="filter">
-      <button type="button" class="btn btn-default">First Name</button>
-      <button type="button" class="btn btn-default">Last Name</button>
-      <button type="button" class="btn btn-default">Year</button>
-    </div>
-    <div class="checkbox">
-      <label><input type="checkbox" value="">Show inactive members</label>
+    <div class="row">
+        <div class="col-md-3">
+            <a href="/events/signup" class="btn btn-primary spaced">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New User
+            </a>
+        </div>
+        <div class="col-md-3">
+            <div class="btn-group" role="group" aria-label="filter">
+              <button type="button" class="btn btn-default">First Name</button>
+              <button type="button" class="btn btn-default">Last Name</button>
+              <button type="button" class="btn btn-default">Year</button>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="checkbox">
+              <label><input type="checkbox" value="">Show inactive members</label>
+            </div>
+        </div>
     </div>
     <div class="table-responsive">
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Event</th>
-              <th>Date & Time</th>
-              <th>Location</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Year</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Urban Compass</td>
-              <td>Friday, March 14, 2016, 3:10 PM</td>
-              <td><a href="https://www.google.com/maps/place/Verbum+Dei+High+School/@33.9346847,-118.255696,17z/data=!3m1!4b1!4m2!3m1!1s0x80c2ca2d232ca0fb:0x43f903cd443cdfd8" target="_blank">11100 S Central Ave, Los Angeles, CA 90059</a></td>
+              <td>Ryan</td>
+              <td>Laird</td>
+              <td>2016</td>
               <td><a href="#" class="btn btn-primary btn-sm">Details</a></td>
             </tr>
             <tr>
-              <td>Urban Compass</td>
-              <td>Friday, March 14, 2016, 3:10 PM</td>
-              <td><a href="https://www.google.com/maps/place/Verbum+Dei+High+School/@33.9346847,-118.255696,17z/data=!3m1!4b1!4m2!3m1!1s0x80c2ca2d232ca0fb:0x43f903cd443cdfd8" target="_blank">11100 S Central Ave, Los Angeles, CA 90059</a></td>
+              <td>Harrison</td>
+              <td>Husting</td>
+              <td>2017</td>
               <td><a href="#" class="btn btn-primary btn-sm">Details</a></td>
             </tr>
             <tr>
-              <td>Urban Compass</td>
-              <td>Friday, March 14, 2016, 3:10 PM</td>
-              <td><a href="https://www.google.com/maps/place/Verbum+Dei+High+School/@33.9346847,-118.255696,17z/data=!3m1!4b1!4m2!3m1!1s0x80c2ca2d232ca0fb:0x43f903cd443cdfd8" target="_blank">11100 S Central Ave, Los Angeles, CA 90059</a></td>
+              <td>Christian</td>
+              <td>Papadopolos</td>
+              <td>2018</td>
               <td><a href="#" class="btn btn-primary btn-sm">Details</a></td>
             </tr>
           </tbody>

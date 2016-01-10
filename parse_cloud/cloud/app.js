@@ -426,6 +426,14 @@ app.get('/events/new-event', function(req, res) {
     }
 });
 
+app.get('/users', function(req, res) {
+    res.render('users', { message: 'Congrats, you just set up your app!' });
+});
+
+app.get('/calendar', function(req, res) {
+    res.render('calendar', { message: 'Congrats, you just set up your app!' });
+});
+
 // app.get('/users', function(req, res) {
 //     var queryUser = new Parse.Query(Parse.User);
 //     var queryAdmin = new Parse.Query(Parse.Role);
