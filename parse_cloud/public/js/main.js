@@ -29,7 +29,9 @@
     ======================================*/
     $(window).bind('scroll', function() {
         var navHeight = $(window).height() - 100;
-        if (lastPathSegment !== 'calendar' || lastPathSegment !== 'events' || lastPathSegment !== 'new-event' || lastPathSegment !== 'users') {
+        var href = document.location.href;
+        var lastPathSegment = href.substr(href.lastIndexOf('/') + 1); 
+        if (lastPathSegment !== 'calendar' && lastPathSegment !== 'events' && lastPathSegment !== 'new-event' && lastPathSegment !== 'users') {
             if ($(window).scrollTop() > navHeight) {
                 $('.navbar-default').addClass('on');
                 $('.dropdown-menu').addClass('on');
