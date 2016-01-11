@@ -1,4 +1,6 @@
 $(function () {
+    Parse.initialize("KDM3EFhGofXHgqVoffNXEDBRwYALGDVzzUpLJZkn", "RvLLrcjo6kbpubpjubyyd2gBDw5F5a4g7FGVUfAd");
+
     $('#datetimestart').datetimepicker({
         // focusOnShow: false //don't bring up keyboard on iOS
     });
@@ -42,6 +44,27 @@ $(function () {
     refreshRemoveButtons();
 
     $('#create-event').click(function() {
-        console.log($('#name').val());
+        console.log('saving event...');
+        console.log(Parse.User.current());
+        console.log(Parse.Session.current());
+        var EventType = Parse.Object.extend('Event');
+        var eventObject = new EventType();
+
+        var startDate = moment($('#start-date').val(), 'MM/DD/YYYY hh:mm AA').toDate();
+        var endDate = moment($('#end-date').val(), 'MM/DD/YYYY hh:mm AA').toDate();
+
+        eventObject.set('name', $('#name').val());
+        eventObject.set('startDateTime', startDate);
+        eventObject.set('endDateTime', endDate);
+        eventObject.set('location', $('#location').val());
+        eventObject.set('hours', parseInt($('#hours').val()));
+
+        eventObject.save().then(function(obj) {
+            console.log('success');
+            console.log(obj);
+        }, function(error) {
+            console.log('error');
+            console.log(error);
+        });
     });
 });
