@@ -28,7 +28,7 @@
     Show Menu on Book
     ======================================*/
     $(window).bind('scroll', function() {
-        var navHeight = $(window).height() - 100;
+        var navHeight = $(window).height() - 120;
         var href = document.location.href;
         var lastPathSegment = href.substr(href.lastIndexOf('/') + 1); 
         if (lastPathSegment !== 'calendar' && lastPathSegment !== 'events' && lastPathSegment !== 'new-event' && lastPathSegment !== 'users') {
