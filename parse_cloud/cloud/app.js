@@ -1,6 +1,7 @@
 
 // These two lines are required to initialize Express in Cloud Code.
 var express = require('express');
+var moment = require('cloud/modules/moment.js');
 var app = express();
 var parseExpressHttpsRedirect = require('parse-express-https-redirect');
 var parseExpressCookieSession = require('parse-express-cookie-session');
@@ -424,6 +425,61 @@ app.get('/events/new-event', function(req, res) {
             admin: false
         });
     }
+});
+
+app.post('/events/new-event', function(req, res) {
+    console.log('running new event post');
+    console.log(req.body.startDateTime);
+    // res.status(500).json({ error: 'there was a server error' });
+
+    var eventObject = new (Parse.Object.extend('Event'))();
+    eventObject.set('name', req.body.name);
+    eventObject.set('startDateTime', moment(req.body.startDateTime).toDate());
+    eventObject.set('endDateTime', moment(req.body.endDateTime).toDate());
+    eventObject.set('location', req.body.location);
+    eventObject.set('hours', req.body.hours);
+    console.log('set event properties');
+
+    eventObject.save().then(function(obj) {
+        console.log('saved??');
+        res.status(200).json(obj);
+    }, function(error) {
+        console.log(error);
+        var jsonRes = (error.message ? ({ error: error.message }) : ({ error: 'Internal Server Error'}));
+        var errorCode = (error.code ? error.code : 500);
+        res.status(errorCode).json(jsonRes);
+    });
+    // if (Parse.User.current()) {
+    //     console.log(Parse.User.current());
+    //     var query = new Parse.Query(Parse.Role);
+    //     query.equalTo("name", "Administrator");
+    //     query.equalTo("users", Parse.User.current());
+    //     query.first().then(function(adminRole) {
+    //         console.log('authenticated user');
+    //         var eventObject = new (Parse.Object.extend('Event'))();
+    //         eventObject.set('name', req.body.name);
+    //         eventObject.set('startDateTime', moment(req.body.startDateTime).toDate());
+    //         eventObject.set('endDateTime', moment(req.body.endDateTime).toDate());
+    //         eventObject.set('location', req.body.location);
+    //         eventObject.set('hours', req.body.hours);
+    //         return eventObject.save();
+    //     }, function(error) {
+    //         console.log(error);
+    //         var jsonRes = (error.message ? { error: error.message } : { error: 'Internal Server Error'});
+    //         var errorCode = (error.code ? error.code : 500);
+    //         res.status(errorCode).json(jsonRes);
+    //     }).then(function(obj) {
+    //         console.log('success saving event');
+    //         res.status(200).json(obj);
+    //     }, function(error) {
+    //         console.log(error);
+    //         var jsonRes = (error.message ? { error: error.message } : { error: 'you are not an admin'});
+    //         var errorCode = (error.code ? error.code : 403);
+    //         res.status(errorCode).json(jsonRes);
+    //     });
+    // } else {
+    //     res.status(403).json({ error: 'you are not logged in'});
+    // }
 });
 
 app.get('/users', function(req, res) {

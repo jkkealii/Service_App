@@ -44,27 +44,52 @@ $(function () {
     refreshRemoveButtons();
 
     $('#create-event').click(function() {
-        console.log('saving event...');
-        console.log(Parse.User.current());
-        console.log(Parse.Session.current());
-        var EventType = Parse.Object.extend('Event');
-        var eventObject = new EventType();
+        var data = {
+            name: $('#name').val(),
+            startDateTime: moment($('#start-date').val(), 'MM/DD/YYYY hh:mm AA').toDate(),
+            endDateTime: moment($('#end-date').val(), 'MM/DD/YYYY hh:mm AA').toDate(),
+            location: $('#location').val(),
+            hours: parseInt($('#hours').val())
+        };
 
-        var startDate = moment($('#start-date').val(), 'MM/DD/YYYY hh:mm AA').toDate();
-        var endDate = moment($('#end-date').val(), 'MM/DD/YYYY hh:mm AA').toDate();
+        console.log('sending request...');
 
-        eventObject.set('name', $('#name').val());
-        eventObject.set('startDateTime', startDate);
-        eventObject.set('endDateTime', endDate);
-        eventObject.set('location', $('#location').val());
-        eventObject.set('hours', parseInt($('#hours').val()));
-
-        eventObject.save().then(function(obj) {
+        $.ajax({
+            method: 'POST',
+            url: '/events/new-event',
+            data: data
+        }).then(function(data, textStatus, jqXHR) {
             console.log('success');
-            console.log(obj);
-        }, function(error) {
+            console.log(data);
+            console.log(textStatus);
+        }, function(jqXHR, textStatus, error) {
             console.log('error');
+            console.log(textStatus);
             console.log(error);
         });
+
+
+        // console.log('saving event...');
+        // console.log(Parse.User.current());
+        // console.log(Parse.Session.current());
+        // var EventType = Parse.Object.extend('Event');
+        // var eventObject = new EventType();
+
+        // var startDate = moment($('#start-date').val(), 'MM/DD/YYYY hh:mm AA').toDate();
+        // var endDate = moment($('#end-date').val(), 'MM/DD/YYYY hh:mm AA').toDate();
+
+        // eventObject.set('name', $('#name').val());
+        // eventObject.set('startDateTime', startDate);
+        // eventObject.set('endDateTime', endDate);
+        // eventObject.set('location', $('#location').val());
+        // eventObject.set('hours', parseInt($('#hours').val()));
+
+        // eventObject.save().then(function(obj) {
+        //     console.log('success');
+        //     console.log(obj);
+        // }, function(error) {
+        //     console.log('error');
+        //     console.log(error);
+        // });
     });
 });
