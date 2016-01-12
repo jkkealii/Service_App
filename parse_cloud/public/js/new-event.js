@@ -43,6 +43,8 @@ $(function () {
     refreshRemoveButtons();
 
     $('#create-event').click(function() {
+        var $btn = $(this).button('loading');
+
         var data = {
             name: $('#name').val(),
             startDateTime: moment($('#start-date').val(), 'MM/DD/YYYY hh:mm AA').toDate(),
@@ -61,10 +63,13 @@ $(function () {
             console.log('success');
             console.log(data);
             console.log(textStatus);
+            $btn.button('reset');
+            window.location.replace("/events");
         }, function(jqXHR, textStatus, error) {
             console.log('error');
             console.log(textStatus);
             console.log(error);
+            $btn.button('reset');
         });
 
 
