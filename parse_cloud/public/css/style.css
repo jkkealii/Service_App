@@ -599,30 +599,12 @@ button.btn.tf-btn.btn-default {
 
 /* Calendar page */
 
-#calendar-doc {
-    padding: 80px 0px 0px 0px;
-}
-
 #calendar-doc iframe{
     height: 1100px;
     width: 895px;
 }
 
-/* New Event page */
-
-#new_event {
-    padding: 80px 0px 0px 0px;
-}
-
-/* Users page */
-
-#users {
-    padding: 80px 0px 0px 0px;
-}
-
-/* Events page */
-
-#events {
+.page-contains {
     padding: 80px 0px 0px 0px;
 }
 

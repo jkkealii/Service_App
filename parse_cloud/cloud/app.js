@@ -574,11 +574,63 @@ app.get('/events/:event_id', function(req, res) {
 });
 
 app.get('/users', function(req, res) {
-    res.render('users', { message: 'Congrats, you just set up your app!' });
+    if (Parse.User.current()) {
+        var query = new Parse.Query(Parse.Role);
+        query.equalTo("name", "Administrator");
+        query.equalTo("users", Parse.User.current());
+        query.first().then(function(adminRole) {
+            res.render('users', {
+                loggedIn: true,
+                admin: (adminRole ? true : false)
+            });
+        }, function(error) {
+            var alerts = [];
+            alerts.push({
+                type: 'warning',
+                message: ("AdminQueryError: " + error.code + " " + error.message)
+            });
+            res.render('users', {
+                alerts: alerts,
+                loggedIn: true,
+                admin: false
+            });
+        });
+    } else {
+        res.render('users', {
+            loggedIn: false,
+            admin: false
+        });
+    }
 });
 
 app.get('/calendar', function(req, res) {
-    res.render('calendar', { message: 'Congrats, you just set up your app!' });
+    if (Parse.User.current()) {
+        var query = new Parse.Query(Parse.Role);
+        query.equalTo("name", "Administrator");
+        query.equalTo("users", Parse.User.current());
+        query.first().then(function(adminRole) {
+            res.render('calendar', {
+                loggedIn: true,
+                admin: (adminRole ? true : false)
+            });
+        }, function(error) {
+            var alerts = [];
+            alerts.push({
+                type: 'warning',
+                message: ("AdminQueryError: " + error.code + " " + error.message)
+            });
+            res.render('calendar', {
+                alerts: alerts,
+                loggedIn: true,
+                admin: false
+            });
+        });
+    } else {
+        res.render('calendar', {
+            loggedIn: false,
+            admin: false
+        });
+    }
 });
 
 // app.get('/users', function(req, res) {

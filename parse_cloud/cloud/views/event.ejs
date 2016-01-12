@@ -2,7 +2,7 @@
 
 <% include helper/_navbar %>
 
-<div class="container-fluid">
+<div class="container-fluid <%= (locals.alers ? 'page-contains' : '') %>">
   <% if (locals.alerts) { %>
     <% alerts.forEach(function(alert) { %>
       <% include helper/_alert %>
@@ -10,7 +10,7 @@
   <% } %>
 </div>
 
-<div class="container" id="event">
+<div class="container <%= (locals.alers ? '' : 'page-contains') %>">
   <div class="container-fluid">
     <h1><%= (locals.eventObj ? locals.eventObj.name : 'Unknown Event') %></h1>
   </div>
