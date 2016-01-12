@@ -1,0 +1,27 @@
+<% include helper/_header %>
+
+<% include helper/_navbar %>
+
+<div class="container-fluid">
+  <% if (locals.alerts) { %>
+    <% alerts.forEach(function(alert) { %>
+      <% include helper/_alert %>
+    <% }) %>
+  <% } %>
+</div>
+
+<div class="container" id="event">
+  <div class="container-fluid">
+    <h1><%= (locals.eventObj ? locals.eventObj.name : 'Unknown Event') %></h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-5">
+      
+      <div class="spaced"></div>
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+</div><!-- /.container  -->
+
+<% include helper/_basecode %>
+
+<% include helper/_footer %>

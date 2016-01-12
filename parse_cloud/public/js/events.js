@@ -2,7 +2,7 @@ $(function () {
     var newRow = function(parseObject) {
         return '<tr><td>' + parseObject.name + '</td>' + 
             '<td>' + moment(parseObject.startDateTime).format("dddd, MMMM Do YYYY, h:mm a") + 
-            '</td>' + '<td><a href="maps.google.com/?q=' + parseObject.location +
+            '</td>' + '<td><a href="https://maps.google.com/?q=' + parseObject.location +
             '">' + parseObject.location + '</a></td>' +
             '<td><a href="/events/' + parseObject.objectId + '" class="btn btn-primary btn-sm">Details</a></td></tr>';
     };

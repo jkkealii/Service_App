@@ -496,6 +496,83 @@ app.get('/events/list', function(req, res) {
     });
 });
 
+app.get('/events/:event_id', function(req, res) {
+    var eventId = req.params.event_id;
+
+    var query = new Parse.Query(Parse.Object.extend('Event'));
+    query.get(eventId).then(function(eventObject) {
+        var resObj = {
+            name: eventObject.get('name'),
+            objectId: eventObject.get('objectId'),
+            hours: eventObject.get('hours'),
+            location: eventObject.get('location'),
+            startDateTime: eventObject.get('startDateTime'),
+            endDateTime: eventObject.get('endDateTime')
+        };
+
+
+        if (Parse.User.current()) {
+            var query = new Parse.Query(Parse.Role);
+            query.equalTo("name", "Administrator");
+            query.equalTo("users", Parse.User.current());
+            query.first().then(function(adminRole) {
+                res.render('event', {
+                    loggedIn: true,
+                    eventObj: resObj,
+                    admin: (adminRole ? true : false)
+                });
+            }, function(error) {
+                var alerts = [];
+                alerts.push({
+                    type: 'warning',
+                    message: ("AdminQueryError: " + error.code + " " + error.message)
+                });
+                res.render('event', {
+                    alerts: alerts,
+                    loggedIn: true,
+                    eventObj: resObj,
+                    admin: false
+                });
+            });
+        } else {
+            res.render('event', {
+                loggedIn: false,
+                eventObj: resObj,
+                admin: false
+            });
+        }
+    }, function(object, error) {
+        if (Parse.User.current()) {
+            var query = new Parse.Query(Parse.Role);
+            query.equalTo("name", "Administrator");
+            query.equalTo("users", Parse.User.current());
+            query.first().then(function(adminRole) {
+                res.render('event', {
+                    loggedIn: true,
+                    admin: (adminRole ? true : false)
+                });
+            }, function(error) {
+                var alerts = [];
+                alerts.push({
+                    type: 'warning',
+                    message: ("AdminQueryError: " + error.code + " " + error.message)
+                });
+                res.render('event', {
+                    alerts: alerts,
+                    loggedIn: true,
+                    admin: false
+                });
+            });
+        } else {
+            res.render('event', {
+                loggedIn: false,
+                admin: false
+            });
+        }
+    });
+    
+});
+
 app.get('/users', function(req, res) {
     res.render('users', { message: 'Congrats, you just set up your app!' });
 });
