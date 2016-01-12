@@ -1,10 +1,10 @@
 $(function () {
     var newRow = function(parseObject) {
-        return '<tr><td>' + parseObject.get('name') + '</td>' + 
-            '<td>' + parseObject.get('startDateTime') + '</td>' + 
-            '<td><a href="maps.google.com/?q=' + parseObject.get('location') +
-            '">' + parseObject.get('location') + '</a></td>' +
-            '<td><a href="#" class="btn btn-primary btn-sm">Details</a></td></tr>';
+        return '<tr><td>' + parseObject.name + '</td>' + 
+            '<td>' + moment(parseObject.startDateTime).format("dddd, MMMM Do YYYY, h:mm a") + 
+            '</td>' + '<td><a href="maps.google.com/?q=' + parseObject.location +
+            '">' + parseObject.location + '</a></td>' +
+            '<td><a href="/events/' + parseObject.objectId + '" class="btn btn-primary btn-sm">Details</a></td></tr>';
     };
 
     $('table tbody').empty();
@@ -13,7 +13,8 @@ $(function () {
         url: '/events/list',
     }).then(function(data, textStatus, jqXHR) {
         console.log('done');
-        $.each(data, function(index, value) {
+        console.log(data);
+        $.each(data.objects, function(index, value) {
             $('table tbody').append(newRow(value));
         });
     }, function(jqXHR, textStatus, error) {

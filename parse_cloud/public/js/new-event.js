@@ -1,5 +1,4 @@
 $(function () {
-    Parse.initialize("KDM3EFhGofXHgqVoffNXEDBRwYALGDVzzUpLJZkn", "RvLLrcjo6kbpubpjubyyd2gBDw5F5a4g7FGVUfAd");
 
     $('#datetimestart').datetimepicker({
         // focusOnShow: false //don't bring up keyboard on iOS

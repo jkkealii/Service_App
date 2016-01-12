@@ -483,8 +483,17 @@ app.post('/events/new-event', function(req, res) {
 });
 
 app.get('/events/list', function(req, res) {
-    var query = new Parse.Query(Parse.Object.extend("Event");
-    query.find().then(function(results))
+    var query = new Parse.Query(Parse.Object.extend("Event"));
+    query.find().then(function(results) {
+        var data = {
+            objects: results
+        };
+        res.status(200).json(data);
+    }, function(error) {
+        var errorCode = (error.code ? error.code : 500);
+        var errorObj = (error.message ? ({ error: error.message }) : ({ error: "Internal Server Error" }));
+        res.status(errorCode).json(errorObj);
+    });
 });
 
 app.get('/users', function(req, res) {
