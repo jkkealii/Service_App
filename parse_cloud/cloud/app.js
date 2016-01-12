@@ -482,6 +482,11 @@ app.post('/events/new-event', function(req, res) {
     // }
 });
 
+app.get('/events/list', function(req, res) {
+    var query = new Parse.Query(Parse.Object.extend("Event");
+    query.find().then(function(results))
+});
+
 app.get('/users', function(req, res) {
     res.render('users', { message: 'Congrats, you just set up your app!' });
 });
