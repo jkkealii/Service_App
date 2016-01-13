@@ -2,7 +2,7 @@
 
 <% include helper/_navbar %>
 
-<div class="container-fluid <%= (locals.alers ? 'page-contains' : '') %>">
+<div class="container-fluid <%= (locals.alerts ? 'page-contains' : '') %>">
   <% if (locals.alerts) { %>
     <% alerts.forEach(function(alert) { %>
       <% include helper/_alert %>
@@ -10,7 +10,7 @@
   <% } %>
 </div>
 
-<div class="container <%= (locals.alers ? '' : 'page-contains') %>">
+<div class="container <%= (locals.alerts ? '' : 'page-contains') %>">
   <div class="container-fluid">
     <h1>New Event</h1>
   </div>
@@ -25,7 +25,7 @@
 
         <div class="form-group">
           <label for="start-date">Start Date/Time</label>
-          <div class="input-group date" id="datetimestart">
+          <div class="input-group date form-control" id="datetimestart">
             <input type="text" class="form-control" id="start-date"/>
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
@@ -35,7 +35,7 @@
 
         <div class="form-group">
           <label for="end-date">End Date/Time</label>
-          <div class="input-group date" id="datetimeend">
+          <div class="input-group date form-control" id="datetimeend">
             <input type="text" class="form-control" id="end-date"/>
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
@@ -50,8 +50,10 @@
 
         <div class="form-group">
           <label for="hours">Hours</label>
-          <input type="text" class="form-control" placeholder="3" aria-describedby="addon1" id="hours">
-          <span class="input-group-addon" id="addon1">hour(s)</span>
+          <div class="input-group form-control">
+            <input type="text" class="form-control" placeholder="3" aria-describedby="addon1" id="hours">
+            <span class="input-group-addon" id="addon1">hour(s)</span>
+          </div>
         </div>
 
         <div class="form-group">

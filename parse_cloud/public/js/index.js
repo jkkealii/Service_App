@@ -45,6 +45,9 @@
         offset: 80
     });
 
+    $('.navbar-default').removeClass('on');
+    $('.dropdown-menu').removeClass('on');
+
 
 })(jQuery);
 
