@@ -1,6 +1,11 @@
 $(function() {
-    $('.navbar-default').addClass('on');
-    $('.dropdown-menu').addClass('on');
+//     not jank
+    var href = document.location.href;
+    var lastPathSegment = href.substr(href.lastIndexOf('/') + 1);
+    if (lastPathSegment !== '') {
+        $('.navbar-default').addClass('on');
+        $('.dropdown-menu').addClass('on');
+    }
 });
 
 setCarouselHeight('#carousel-example');

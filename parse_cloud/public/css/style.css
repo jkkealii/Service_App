@@ -205,8 +205,12 @@ a {
 
 a:hover,
 a:focus {
-	text-decoration: underline;
 	color: rgb(102, 13, 15);
+}
+
+#angle-down:focus,
+#angle-down:hover {
+    text-decoration: none !important;
 }
 
 .section-title hr{
@@ -326,7 +330,7 @@ ul, ol{
 	text-align: justify;
 }
 /* Home Style */
-#tf-home{
+#hale{
 	background: url(/img/2015-2016-crimson.png);
 	background-size: cover;
 	background-position: center;
@@ -335,7 +339,7 @@ ul, ol{
 	color: #cfcfcf;
 }
 
-#tf-home .overlay{
+#hale .overlay{
 	background: -moz-linear-gradient(top,  rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.73) 17%, rgba(0,0,0,0.66) 35%, rgba(0,0,0,0.55) 62%, rgba(0,0,0,0.4) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.8)), color-stop(17%,rgba(0,0,0,0.73)), color-stop(35%,rgba(0,0,0,0.66)), color-stop(62%,rgba(0,0,0,0.55)), color-stop(100%,rgba(0,0,0,0.4))); /* Chrome,Safari4+ */
 	background: -webkit-linear-gradient(top,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%); /* Chrome10+,Safari5.1+ */
@@ -346,12 +350,12 @@ ul, ol{
 	height: 750px;
 	background-attachment: fixed;
 }
-#tf-home p.lead{
+#hale p.lead{
     font-size: 30px;
 	color: #ffffff;
 }
 
-#tf-home h1.title{
+#hale h1.title{
     font-size: 45px;
     color: #ffffff;
 }
