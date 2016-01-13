@@ -145,7 +145,7 @@ h1 {
 	padding: 120px 0;
 }
 
-#login button.btn.tf-btn.btn-default {
+#login button.btn.buton.btn-default {
 	float: right;
 	background: #ffffff;
 	border: 0;
@@ -584,7 +584,7 @@ label {
 	box-shadow: transparent;
 }
 
-button.btn.tf-btn.btn-default {
+button.btn.buton.btn-default {
 	float: right;
 	background: rgb(102, 13, 15);
 	border: 0;
