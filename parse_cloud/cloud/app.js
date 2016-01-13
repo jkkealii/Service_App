@@ -468,7 +468,7 @@ app.get('/events/:event_id', function(req, res) {
     query.get(eventId).then(function(eventObject) {
         var resObj = {
             name: eventObject.get('name'),
-            objectId: eventObject.get('objectId'),
+            objectId: eventId,
             hours: eventObject.get('hours'),
             location: eventObject.get('location'),
             startDateTime: eventObject.get('startDateTime'),
@@ -631,29 +631,6 @@ app.get('/calendar', function(req, res) {
         });
     }
 });
-
-// app.get('/users', function(req, res) {
-//     var queryUser = new Parse.Query(Parse.User);
-//     var queryAdmin = new Parse.Query(Parse.Role);
-//     queryUser.equalTo("username", "sirseim");
-//     queryAdmin.equalTo("name", "Administrator");
-//     var userLocal;
-
-//     queryUser.first().then(function(user) {
-//         userLocal = user;
-//         return queryAdmin.first();
-//     }).then(function(role) {
-//         Parse.Cloud.useMasterKey();
-//         role.getUsers().add(userLocal);
-//         return role.save();
-//     }).then(function(obj) {
-//         console.log(obj);
-//         res.redirect('/?notice=RoleUpdated');
-//     }, function(error) {
-//         console.log(error);
-//         res.redirect('/?notice=Error' + error.code + error.message);
-//     });
-// });
 
 
 app.listen();

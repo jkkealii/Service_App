@@ -71,31 +71,12 @@
                 <th>Remove</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Josh Kuroda</td>
-                <td>
-                  <button type="button" class="btn btn-default btn-xs rm-row" disabled>
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Carlos Melendez</td>
-                <td>
-                  <button type="button" class="btn btn-default btn-xs rm-row" disabled>
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Benjamin Johnstone</td>
-                <td>
-                  <button type="button" class="btn btn-default btn-xs rm-row" disabled>
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </button>
-                </td>
-              </tr>
+            <tbody id="attending-members">
+              <% if (locals.members) { %>
+                <% locals.members.forEach(function(member) { %>
+                  <% include helper/_attending %>
+                <% }) %>
+              <% } %>
             </tbody>
           </table>
           <div class="input-group">
