@@ -22,10 +22,13 @@ $(function () {
     $('#location').val($('#location').data('original'));
     $('#hours').val($('#hours').data('original'));
     
-    $('.option').click(function(event) {
-        $('#add-person').val($(this).data('name'));
-        $('#add-person').data('member', $(this).data('member'));
-    });
+    var refreshOptions = function() {
+        $('.option').click(function(event) {
+            $('#add-person').val($(this).data('name'));
+            $('#add-person').data('member', $(this).data('member'));
+            console.log('clicked');
+        });
+    };
 
     // search for person
     $('#add-person').keyup(function() {
@@ -49,10 +52,19 @@ $(function () {
 
     // Get all Members to show suggestions
     var newRowMember = function(member) {
-        return '<li class="option" id="' + member.objectId + '" data-name="' + member.firstName +
+        return '<li class="option" id="' + member.objectId +
+        '" data-name="' + member.firstName +
         ' ' + member.lastName + '"><a href="#">' + member.firstName +
         ' ' + member.lastName + '</a></li>';
     };
+    var newAttendingMember = function(member) {
+        return '<tr data-objectid="' + member.objectId + '"><td>' +
+        member.firstName + ' ' + member.lastName +
+        '</td><td><button type="button" class="btn btn-default btn-xs rm-row">' +
+        '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
+        '</button></td></tr>';
+    };
+
     var getAllMembers = function() {
         $.ajax({
             method: 'GET',
@@ -66,6 +78,7 @@ $(function () {
                 $('#' + member.objectId).data('member', member);
                 console.log($('#' + member.objectId).data('member'));
             });
+            refreshOptions();
         }, function(jqXHR, textStatus, error) {
             console.log('error');
             console.log(textStatus);
@@ -75,6 +88,16 @@ $(function () {
     };
     $('#list-members').empty();
     getAllMembers();
+
+    $('#confirm-add-person').click(function() {
+        var addPerson = $('#add-person');
+        if (addPerson.data('member')) {
+            $('#attending-members').append(newAttendingMember(addPerson.data('member')));
+        } else {
+            // what if they type in the whole name manually?
+        }
+        refreshRemoveButtons();
+    });
 
     // allow event to be edited
     $('#edit-event').click(function() {
@@ -122,35 +145,4 @@ $(function () {
             $btn.button('reset');
         });
     });
-
-    // $('#create-event').click(function() {
-    //     var $btn = $(this).button('loading');
-
-    //     var data = {
-    //         name: $('#name').val(),
-    //         startDateTime: moment($('#start-date').val(), 'MM/DD/YYYY hh:mm AA').toDate(),
-    //         endDateTime: moment($('#end-date').val(), 'MM/DD/YYYY hh:mm AA').toDate(),
-    //         location: $('#location').val(),
-    //         hours: parseInt($('#hours').val())
-    //     };
-
-    //     console.log('sending request...');
-
-    //     $.ajax({
-    //         method: 'POST',
-    //         url: '/events/new-event',
-    //         data: data
-    //     }).then(function(data, textStatus, jqXHR) {
-    //         console.log('success');
-    //         console.log(data);
-    //         console.log(textStatus);
-    //         $btn.button('reset');
-    //         window.location.replace("/events");
-    //     }, function(jqXHR, textStatus, error) {
-    //         console.log('error');
-    //         console.log(textStatus);
-    //         console.log(error);
-    //         $btn.button('reset');
-    //     });
-    // });
 });
