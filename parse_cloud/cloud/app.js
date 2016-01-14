@@ -542,6 +542,7 @@ app.post('/events/:event_id', function(req, res) {
     var eventId = req.params.event_id;
 
     var query = new Parse.Query(Parse.Object.extend("Event"));
+    var localEvent;
     query.get(eventId).then(function(eventObject) {
         eventObject.set('name', req.body.name);
         eventObject.set('startDateTime', moment(req.body.startDateTime).toDate());
@@ -549,11 +550,28 @@ app.post('/events/:event_id', function(req, res) {
         eventObject.set('location', req.body.location);
         eventObject.set('hours', req.body.hours);
 
-        var peopleRelation = eventObject.relation("members");
-        peopleRelation.add(req.body.members);
+        // var peopleRelation = eventObject.relation("members");
+        // peopleRelation.add(req.body.members);
+        // req.body.members.forEach(function(memberId) {
 
-        return eventObject.save();
+        // });
+        localEvent = eventObject;
+
+        var query = new Parse.Query(Parse.User);
+        query.containedIn('objectId', req.body.members);
+        console.log('first then');
+
+        return query.find();
+    }).then(function(listUsers) {
+        var peopleRelation = localEvent.relation('members');
+        listUsers.forEach(function(user) {
+            peopleRelation.add(user);
+        });
+        console.log('second then');
+        console.log(localEvent);
+        return localEvent.save();
     }).then(function(eventObject) {
+        console.log('third then');
         res.status(200).json(eventObject);
     }, function(error) {
         var errorCode = (error.code ? error.code : 500);
