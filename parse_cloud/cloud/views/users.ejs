@@ -10,30 +10,29 @@
   <% } %>
 </div>
 
-<div class="container page-contains" id="users">
-    <h1>Crimson Circle Members</h1>
+<div class="container page-contains text-center">
+    <div class="section-title center">
+      <h2>Crimson Circle <strong>Members</strong></h2>
+      <div class="line">
+        <hr>
+      </div>
+    </div>
+</div>
+<div class="container" id="users">
     <div class="row">
-        <div class="col-md-2">
-          <a href="/events/signup" class="btn btn-primary spaced">
+        <div class="col-md-3">
+          <a href="/events/signup" class="btn buton btn-default spaced">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New User
           </a>
         </div>
-        <div class="col-md-4">
-          <div class="btn-group spaced" role="group" aria-label="filter">
-            <button type="button" class="btn btn-default">First Name</button>
-            <button type="button" class="btn btn-default">Last Name</button>
-            <button type="button" class="btn btn-default">Year</button>
-            <button type="button" class="btn btn-default">Hours</button>
+        <div class="col-md-6">
+          <div class="input-group spaced"> <span class="input-group-addon">Search</span>
+            <input id="filter-search" type="text" class="form-control" placeholder="Type here...">
           </div>
         </div>
         <div class="col-md-3">
           <div class="checkbox spaced">
             <label><input type="checkbox" value="">Show inactive members</label>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="input-group spaced"> <span class="input-group-addon">Search</span>
-            <input id="filter-search" type="text" class="form-control" placeholder="Type here...">
           </div>
         </div>
     </div>
@@ -44,7 +43,7 @@
               <th>First Name</th>
               <th>Last Name</th>
               <th>Year</th>
-              <th>Hours</th>
+              <th data-sortable="numeric">Hours</th>
               <th data-sortable="false">Actions</th>
             </tr>
           </thead>

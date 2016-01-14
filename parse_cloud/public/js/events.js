@@ -3,8 +3,8 @@ $(function () {
         return '<tr><td>' + parseObject.name + '</td>' + 
             '<td>' + moment(parseObject.startDateTime.iso).format("MMMM D, YYYY, h:mm a") + 
             '</td>' + '<td><a href="https://maps.google.com/?q=' + parseObject.location +
-            '">' + parseObject.location + '</a></td>' +
-            '<td><a href="/events/' + parseObject.objectId + '" class="btn btn-primary btn-sm">Details</a></td></tr>';
+            '">' + parseObject.location + '</a></td>' + '<td>' + parseObject.hours + '</td> ' +
+            '<td><a href="/events/' + parseObject.objectId + '" class="btn buton btn-default btn-sm">Details</a></td></tr>';
     };
 
     $('table tbody').empty();

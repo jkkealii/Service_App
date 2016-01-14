@@ -10,12 +10,19 @@
   <% } %>
 </div>
 
-<div class="container <%= (locals.alerts ? '' : 'page-contains') %>">
-    <h1>Event Schedule</h1>
+<div class="container page-contains text-center">
+    <div class="section-title center">
+      <h2>Events and <strong>Service</strong></h2>
+      <div class="line">
+        <hr>
+      </div>
+    </div>
+</div>
+<div class="container">
     <div class="row">
         <div class="col-sm-3">
           <div>
-            <a href="/events/new-event" class="btn btn-primary spaced">
+            <a href="/events/new-event" class="btn buton btn-default spaced">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Event
             </a>
           </div>
@@ -27,13 +34,7 @@
             <button type="button" class="btn btn-default">Month</button>
           </div>
         </div>
-        <div class="col-sm-3">
-          <div class="btn-group spaced" role="group" aria-label="filter">
-            <button type="button" class="btn btn-default">Name</button>
-            <button type="button" class="btn btn-default">Date</button>
-          </div>
-        </div>
-        <div class="col-sm-3">
+        <div class="col-sm-6">
           <div class="input-group spaced"> <span class="input-group-addon">Search</span>
             <input id="filter-search" type="text" class="form-control" placeholder="Type here...">
           </div>
@@ -46,7 +47,8 @@
             <tr>
               <th>Event</th>
               <th data-sortable-type="date">Date & Time</th>
-              <th>Location</th>
+              <th data-sortable="false">Location</th>
+              <th data-sortable-type="numeric">Hours</th>
               <th data-sortable="false">Actions</th>
             </tr>
           </thead>
