@@ -403,7 +403,7 @@ ul.about-list li span{
 
 /* Team Section */
 #me-mateys{
-	background: url(/img/meet-our-members.jpg);
+	background: url(/img/meet-our-members.png);
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
@@ -515,7 +515,7 @@ ul.about-list li span{
 
 /* Testimonials Section */
 #wordz{
-	background: url(/img/2015-urban-gala.jpg);
+	background: url(/img/2015-urban-gala.png);
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
