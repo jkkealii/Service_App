@@ -548,6 +548,10 @@ app.post('/events/:event_id', function(req, res) {
         eventObject.set('endDateTime', moment(req.body.endDateTime).toDate());
         eventObject.set('location', req.body.location);
         eventObject.set('hours', req.body.hours);
+
+        var peopleRelation = eventObject.relation("members");
+        peopleRelation.add(req.body.members);
+
         return eventObject.save();
     }).then(function(eventObject) {
         res.status(200).json(eventObject);
@@ -632,5 +636,21 @@ app.get('/calendar', function(req, res) {
     }
 });
 
+
+
+app.get('/makeCurrentAdmin', function(req, res) {
+    var query = Parse.Query(Parse.Role);
+    query.equalTo('name', 'Administrator');
+    query.first().then(function(adminRole) {
+        Parse.Cloud.useMasterKey();
+        adminRole.getUsers().add(Parse.User.current());
+        return adminRole.save();
+    }).then(function(adminRole) {
+        res.redirect('/');
+    }, function(error) {
+        console.log(error);
+        res.redirect('/login');
+    });
+});
 
 app.listen();

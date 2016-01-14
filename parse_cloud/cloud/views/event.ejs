@@ -16,6 +16,7 @@
       <div class="col-sm-4">
         <h1><%= (locals.eventObj ? locals.eventObj.name : 'Unknown Event') %></h1>
         <div class="eventId" data-eventid="<%= (locals.eventObj ? locals.eventObj.objectId : '') %>"></div>
+      </div>
       <div class="col-sm-3">
         <button type="button" class="btn btn-primary spaced" id="edit-event" <%= (locals.admin ? '' : 'disabled') %> >Edit</button>
       </div>

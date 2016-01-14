@@ -89,10 +89,13 @@ $(function () {
     $('#list-members').empty();
     getAllMembers();
 
+    // Add person to list of attending
     $('#confirm-add-person').click(function() {
         var addPerson = $('#add-person');
         if (addPerson.data('member')) {
             $('#attending-members').append(newAttendingMember(addPerson.data('member')));
+            $('#attending-members:last-child').data('member', addPerson.data('member'));
+            addPerson.removeData('member');
         } else {
             // what if they type in the whole name manually?
         }
@@ -117,12 +120,18 @@ $(function () {
     $('#update-event').click(function() {
         var $btn = $(this).button('loading');
 
+        var userArray = []
+        $('#attending-members').children().each(function(index, element) {
+            userArray.push($(element).data('member'));
+        });
+
         var data = {
             name: $('#name').val(),
             startDateTime: moment($('#start-date').val(), 'MM/DD/YYYY hh:mm AA').toDate(),
             endDateTime: moment($('#end-date').val(), 'MM/DD/YYYY hh:mm AA').toDate(),
             location: $('#location').val(),
-            hours: parseInt($('#hours').val())
+            hours: parseInt($('#hours').val()),
+            members: userArray
         };
 
         console.log('sending request...');
