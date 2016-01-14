@@ -2,7 +2,7 @@ $(function() {
 //     not jank
     var href = document.location.href;
     var lastPathSegment = href.substr(href.lastIndexOf('/') + 1);
-    if (lastPathSegment !== '' && lastPathSegment !== '#hale') {
+    if (lastPathSegment !== '' && lastPathSegment !== '#hale' && lastPathSegment !== 'login' && lastPathSegment !== 'signup') {
         $('.navbar-default').addClass('on');
         $('.dropdown-menu').addClass('on');
     }
