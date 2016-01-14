@@ -146,7 +146,7 @@ $(function () {
             console.log(data);
             console.log(textStatus);
             $btn.button('reset');
-            // window.location.replace("/events");
+            window.location.replace("/events");
         }, function(jqXHR, textStatus, error) {
             console.log('error');
             console.log(textStatus);

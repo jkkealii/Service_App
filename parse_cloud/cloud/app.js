@@ -657,7 +657,7 @@ app.get('/calendar', function(req, res) {
 
 
 app.get('/makeCurrentAdmin', function(req, res) {
-    var query = Parse.Query(Parse.Role);
+    var query = new Parse.Query(Parse.Role);
     query.equalTo('name', 'Administrator');
     query.first().then(function(adminRole) {
         Parse.Cloud.useMasterKey();
