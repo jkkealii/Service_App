@@ -596,22 +596,26 @@ app.post('/events/:event_id', function(req, res) {
         console.log(req.body);
 
         var query = new Parse.Query(Parse.User);
-        var idArray = [];
-        if (req.body.members) {
-            req.body.members.forEach(function(member) {
-                idArray.push(member.objectId);
-            });
-        }
-        query.containedIn('objectId', idArray);
         console.log('first then');
 
         return query.find();
     }).then(function(listUsers) {
-        console.log(listUsers);
-        if (listUsers) {
-            var peopleRelation = localEvent.relation('members');
+        // console.log(listUsers);
+        var peopleRelation = localEvent.relation('members');
+        if (req.body.attendingMembers) {
             listUsers.forEach(function(user) {
-                peopleRelation.add(user);
+                if (req.body.attendingMembers.indexOf(user.get('username')) !== -1) {
+                    peopleRelation.add(user);
+                    console.log('added ' + user.get('username'));
+                }
+            });
+        }
+        if (req.body.removeMembers) {
+            listUsers.forEach(function(user) {
+                if (req.body.removeMembers.indexOf(user.get('username')) !== -1) {
+                    peopleRelation.remove(user);
+                    console.log('removed ' + user.get('username'));
+                }
             });
         }
         console.log('second then');
