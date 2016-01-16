@@ -58,7 +58,8 @@ $(function () {
         ' ' + member.lastName + '</a></li>';
     };
     var newAttendingMember = function(member) {
-        return '<tr class="attending-member" id="member' + member.objectId + '" data-objectid="' + member.objectId + '"><td>' +
+        return '<tr class="attending-member" id="member' + member.objectId +
+        '" data-username="' + member.username + '"><td>' +
         member.firstName + ' ' + member.lastName +
         '</td><td><button type="button" class="btn btn-default btn-xs rm-row">' +
         '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +

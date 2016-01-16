@@ -73,8 +73,8 @@
               </tr>
             </thead>
             <tbody id="attending-members">
-              <% if (locals.members) { %>
-                <% locals.members.forEach(function(member) { %>
+              <% if (locals.eventObj && eventObj.members) { %>
+                <% locals.eventObj.members.forEach(function(member) { %>
                   <% include helper/_attending %>
                 <% }) %>
               <% } %>

@@ -463,10 +463,11 @@ app.get('/events/list', function(req, res) {
 
 app.get('/events/:event_id', function(req, res) {
     var eventId = req.params.event_id;
+    var localEvent;
 
     var query = new Parse.Query(Parse.Object.extend('Event'));
     query.get(eventId).then(function(eventObject) {
-        var resObj = {
+        localEvent = {
             name: eventObject.get('name'),
             objectId: eventId,
             hours: eventObject.get('hours'),
@@ -475,6 +476,22 @@ app.get('/events/:event_id', function(req, res) {
             endDateTime: eventObject.get('endDateTime')
         };
 
+        var query = eventObject.relation('members').query();
+        return query.find();
+    }).then(function(members) {
+        membersArray = [];
+        if(members) {
+            members.forEach(function(member) {
+                console.log(member)
+                membersArray.push({
+                    firstName: member.get('firstName'),
+                    lastName: member.get('lastName'),
+                    objectId: member.get('objectId'),
+                    username: member.get('username')
+                });
+            });
+        }
+        localEvent.members = membersArray;
 
         if (Parse.User.current()) {
             var query = new Parse.Query(Parse.Role);
@@ -483,7 +500,7 @@ app.get('/events/:event_id', function(req, res) {
             query.first().then(function(adminRole) {
                 res.render('event', {
                     loggedIn: true,
-                    eventObj: resObj,
+                    eventObj: localEvent,
                     admin: (adminRole ? true : false)
                 });
             }, function(error) {
@@ -495,42 +512,61 @@ app.get('/events/:event_id', function(req, res) {
                 res.render('event', {
                     alerts: alerts,
                     loggedIn: true,
-                    eventObj: resObj,
+                    eventObj: localEvent,
                     admin: false
                 });
             });
         } else {
             res.render('event', {
                 loggedIn: false,
-                eventObj: resObj,
+                eventObj: localEvent,
                 admin: false
             });
         }
-    }, function(object, error) {
+    }, function(error) {
         if (Parse.User.current()) {
             var query = new Parse.Query(Parse.Role);
             query.equalTo("name", "Administrator");
             query.equalTo("users", Parse.User.current());
             query.first().then(function(adminRole) {
-                res.render('event', {
-                    loggedIn: true,
-                    admin: (adminRole ? true : false)
-                });
-            }, function(error) {
                 var alerts = [];
                 alerts.push({
                     type: 'warning',
-                    message: ("AdminQueryError: " + error.code + " " + error.message)
+                    message: ("EventQueryError: " + error.code + " " + error.message)
                 });
                 res.render('event', {
                     alerts: alerts,
                     loggedIn: true,
+                    eventObj: localEvent,
+                    admin: (adminRole ? true : false)
+                });
+            }, function(err) {
+                var alerts = [];
+                alerts.push({
+                    type: 'warning',
+                    message: ("EventQueryError: " + error.code + " " + error.message)
+                });
+                alerts.push({
+                    type: 'warning',
+                    message: ("AdminQueryError: " + err.code + " " + err.message)
+                });
+                res.render('event', {
+                    alerts: alerts,
+                    loggedIn: true,
+                    eventObj: localEvent,
                     admin: false
                 });
             });
         } else {
+            var alerts = [];
+            alerts.push({
+                type: 'warning',
+                message: ("EventQueryError: " + error.code + " " + error.message)
+            });
             res.render('event', {
+                alerts: alerts,
                 loggedIn: false,
+                eventObj: localEvent,
                 admin: false
             });
         }
