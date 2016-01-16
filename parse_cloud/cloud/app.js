@@ -551,18 +551,25 @@ app.post('/events/:event_id', function(req, res) {
         eventObject.set('hours', req.body.hours);
 
         // var peopleRelation = eventObject.relation("members");
-        // peopleRelation.add(req.body.members);
-        // req.body.members.forEach(function(memberId) {
-
+        // req.body.members.forEach(function(member) {
+        //     peopleRelation.add(member);
         // });
+        // return eventObject.save();
         localEvent = eventObject;
 
+        console.log(req.body.members);
+
         var query = new Parse.Query(Parse.User);
-        query.containedIn('objectId', req.body.members);
+        var idArray = [];
+        req.body.members.forEach(function(member) {
+            idArray.push(member.objectId);
+        })
+        query.containedIn('objectId', idArray);
         console.log('first then');
 
         return query.find();
     }).then(function(listUsers) {
+        console.log(listUsers);
         var peopleRelation = localEvent.relation('members');
         listUsers.forEach(function(user) {
             peopleRelation.add(user);

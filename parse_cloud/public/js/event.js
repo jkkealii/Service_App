@@ -52,13 +52,13 @@ $(function () {
 
     // Get all Members to show suggestions
     var newRowMember = function(member) {
-        return '<li class="option" id="' + member.objectId +
+        return '<li class="option" id="option' + member.objectId +
         '" data-name="' + member.firstName +
         ' ' + member.lastName + '"><a href="#">' + member.firstName +
         ' ' + member.lastName + '</a></li>';
     };
     var newAttendingMember = function(member) {
-        return '<tr data-objectid="' + member.objectId + '"><td>' +
+        return '<tr class="attending-member" id="member' + member.objectId + '" data-objectid="' + member.objectId + '"><td>' +
         member.firstName + ' ' + member.lastName +
         '</td><td><button type="button" class="btn btn-default btn-xs rm-row">' +
         '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
@@ -75,7 +75,7 @@ $(function () {
             console.log(textStatus);
             $.each(data.objects, function(index, member) {
                 $('#list-members').append(newRowMember(member));
-                $('#' + member.objectId).data('member', member);
+                $('#option' + member.objectId).data('member', member);
                 console.log($('#' + member.objectId).data('member'));
             });
             refreshOptions();
@@ -93,8 +93,9 @@ $(function () {
     $('#confirm-add-person').click(function() {
         var addPerson = $('#add-person');
         if (addPerson.data('member')) {
-            $('#attending-members').append(newAttendingMember(addPerson.data('member')));
-            $('#attending-members:last-child').data('member', addPerson.data('member'));
+            var member = addPerson.data('member');
+            $('#attending-members').append(newAttendingMember(member));
+            $('#member' + member.objectId).data('member', member);
             addPerson.removeData('member');
         } else {
             // what if they type in the whole name manually?
@@ -120,9 +121,11 @@ $(function () {
     $('#update-event').click(function() {
         var $btn = $(this).button('loading');
 
-        var userArray = []
+        var userArray = [];
         $('#attending-members').children().each(function(index, element) {
             userArray.push($(element).data('member'));
+            console.log(index);
+            console.log($(element).data('member'));
         });
 
         var data = {
@@ -134,6 +137,7 @@ $(function () {
             members: userArray
         };
 
+        console.log(userArray);
         console.log('sending request...');
 
         var eventUrl = '/events/' + $('.eventId').data('eventid');
@@ -146,7 +150,7 @@ $(function () {
             console.log(data);
             console.log(textStatus);
             $btn.button('reset');
-            window.location.replace("/events");
+            // window.location.replace("/events");
         }, function(jqXHR, textStatus, error) {
             console.log('error');
             console.log(textStatus);
