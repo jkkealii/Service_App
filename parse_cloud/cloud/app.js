@@ -557,23 +557,27 @@ app.post('/events/:event_id', function(req, res) {
         // return eventObject.save();
         localEvent = eventObject;
 
-        console.log(req.body.members);
+        console.log(req.body);
 
         var query = new Parse.Query(Parse.User);
         var idArray = [];
-        req.body.members.forEach(function(member) {
-            idArray.push(member.objectId);
-        })
+        if (req.body.members) {
+            req.body.members.forEach(function(member) {
+                idArray.push(member.objectId);
+            });
+        }
         query.containedIn('objectId', idArray);
         console.log('first then');
 
         return query.find();
     }).then(function(listUsers) {
         console.log(listUsers);
-        var peopleRelation = localEvent.relation('members');
-        listUsers.forEach(function(user) {
-            peopleRelation.add(user);
-        });
+        if (listUsers) {
+            var peopleRelation = localEvent.relation('members');
+            listUsers.forEach(function(user) {
+                peopleRelation.add(user);
+            });
+        }
         console.log('second then');
         console.log(localEvent);
         return localEvent.save();

@@ -76,7 +76,6 @@ $(function () {
             $.each(data.objects, function(index, member) {
                 $('#list-members').append(newRowMember(member));
                 $('#option' + member.objectId).data('member', member);
-                console.log($('#' + member.objectId).data('member'));
             });
             refreshOptions();
         }, function(jqXHR, textStatus, error) {
@@ -122,10 +121,8 @@ $(function () {
         var $btn = $(this).button('loading');
 
         var userArray = [];
-        $('#attending-members').children().each(function(index, element) {
+        $('.attending-member').each(function(index, element) {
             userArray.push($(element).data('member'));
-            console.log(index);
-            console.log($(element).data('member'));
         });
 
         var data = {
@@ -137,7 +134,6 @@ $(function () {
             members: userArray
         };
 
-        console.log(userArray);
         console.log('sending request...');
 
         var eventUrl = '/events/' + $('.eventId').data('eventid');
@@ -150,7 +146,7 @@ $(function () {
             console.log(data);
             console.log(textStatus);
             $btn.button('reset');
-            // window.location.replace("/events");
+            window.location.replace("/events");
         }, function(jqXHR, textStatus, error) {
             console.log('error');
             console.log(textStatus);
