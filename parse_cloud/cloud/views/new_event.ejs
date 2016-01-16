@@ -68,40 +68,32 @@
                           <table class="table last-col-right">
                             <thead>
                               <tr>
-                                <th>People</th>
+                                <th>Attending Only</th>
                                 <th>Remove</th>
                               </tr>
                             </thead>
-                            <tbody>
-                              <tr>
-                                <td>Josh Kuroda</td>
-                                <td>
-                                  <button type="button" class="btn btn-default btn-xs rm-row">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                  </button>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>Carlos Melendez</td>
-                                <td>
-                                  <button type="button" class="btn btn-default btn-xs rm-row">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                  </button>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>Benjamin Johnstone</td>
-                                <td>
-                                  <button type="button" class="btn btn-default btn-xs rm-row">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                  </button>
-                                </td>
-                              </tr>
+                            <tbody id="attending-members">
                             </tbody>
                           </table>
+                        </div>
+
+                        <div class="form-group">
+                          <table class="table last-col-right">
+                            <thead>
+                              <tr>
+                                <th>Attending & Driving</th>
+                                <th>Remove</th>
+                              </tr>
+                            </thead>
+                            <tbody id="driving-members">
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div class="form-group">
                           <div class="input-group">
                             <input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Search for Person to Add" placeholder="Add Person..." id="add-person">
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" id="list-members">
                               <li class="option" data-name="Joshua Kuroda"><a href="#">Joshua Kuroda</a></li>
                               <li class="option" data-name="Carlos Melendez"><a href="#">Carlos Melendez</a></li>
                               <li class="option" data-name="Benjamin Johnstone"><a href="#">Benjamin Johnstone</a></li>
@@ -109,6 +101,9 @@
                             </ul>
                             <span class="input-group-btn">
                               <button class="btn btn-default" type="button" id="confirm-add-person">Add Person</button>
+                            </span>
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button" id="confirm-add-driver">Add Driver</button>
                             </span>
                           </div>
                         </div>               

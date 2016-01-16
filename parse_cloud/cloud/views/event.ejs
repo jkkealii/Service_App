@@ -68,18 +68,41 @@
           <table class="table last-col-right">
             <thead>
               <tr>
-                <th>People</th>
+                <th>Attending Only</th>
                 <th>Remove</th>
               </tr>
             </thead>
             <tbody id="attending-members">
               <% if (locals.eventObj && eventObj.members) { %>
                 <% locals.eventObj.members.forEach(function(member) { %>
+                  <% var type = 'attending' %>
                   <% include helper/_attending %>
                 <% }) %>
               <% } %>
             </tbody>
           </table>
+        </div>
+
+        <div class="form-group">
+          <table class="table last-col-right">
+            <thead>
+              <tr>
+                <th>Attending & Driving</th>
+                <th>Remove</th>
+              </tr>
+            </thead>
+            <tbody id="driving-members">
+              <% if (locals.eventObj && eventObj.drivers) { %>
+                <% locals.eventObj.drivers.forEach(function(member) { %>
+                  <% var type = 'driving' %>
+                  <% include helper/_attending %>
+                <% }) %>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="form-group">
           <div class="input-group">
             <input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Search for Person to Add" placeholder="Add Person..." id="add-person" disabled>
             <ul class="dropdown-menu" id="list-members">
@@ -89,7 +112,10 @@
               <li class="option" data-name="Max Alvarado"><a href="#">Max Alvarado</a></li>
             </ul>
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button" id="confirm-add-person" disabled>Add Person</button>
+              <button class="btn btn-default" type="button" id="confirm-add-person" disabled>Add Attending Only</button>
+            </span>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" id="confirm-add-driver" disabled>Add Driver</button>
             </span>
           </div><!-- /input-group -->
         </div>

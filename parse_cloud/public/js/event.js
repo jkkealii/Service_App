@@ -17,8 +17,26 @@ $(function () {
         $('#datetimestart').data('DateTimePicker').maxDate(e.date);
     });
 
+    var printAllMembers = function() {
+        console.log(' ');
+        console.log('Attending Original');
+        console.log($('#attending-members').data('original-members'));
+        console.log('Attending Attending');
+        console.log($('#attending-members').data('attending-members'));
+        console.log('Attending Remove');
+        console.log($('#attending-members').data('remove-members'));
+        console.log(' ');
+        console.log('Driving Original');
+        console.log($('#driving-members').data('original-members'));
+        console.log('Driving Attending');
+        console.log($('#driving-members').data('attending-members'));
+        console.log('Driving Remove');
+        console.log($('#driving-members').data('remove-members'));
+        console.log(' ');
+    };
 
-    // Manage current list of attending and people to remove from event
+
+    // Manage current list of attending to be added and removed
     var removeAttendingMember = function(username) {
         var originalMembers = $('#attending-members').data('original-members');
         var currentRemoveMembers = $('#attending-members').data('remove-members');
@@ -27,16 +45,13 @@ $(function () {
         var userInRemove = ($.inArray(username, currentRemoveMembers) !== -1);
         var userInAttending = ($.inArray(username, currentAttendingMembers) !== -1);
         var userOriginal = ($.inArray(username, originalMembers) !== -1);
+
         if (userOriginal && (!userInRemove)) {
             currentRemoveMembers.push(username);
         }
         if (userInAttending) {
             currentAttendingMembers.splice($.inArray(username, currentAttendingMembers), 1);
         }
-        console.log('currentAttendingMembers');
-        console.log(currentAttendingMembers);
-        console.log('currentRemoveMembers');
-        console.log(currentRemoveMembers);
 
         $('#attending-members').data('attending-members', currentAttendingMembers);
         $('#attending-members').data('remove-members', currentRemoveMembers);
@@ -53,13 +68,45 @@ $(function () {
         if (!userInAttending) {
             currentAttendingMembers.push(username);
         }
-        console.log('currentAttendingMembers');
-        console.log(currentAttendingMembers);
-        console.log('currentRemoveMembers');
-        console.log(currentRemoveMembers);
 
         $('#attending-members').data('attending-members', currentAttendingMembers);
         $('#attending-members').data('remove-members', currentRemoveMembers);
+    };
+
+    // Manage current lsit of driving to be added and removed
+    var removeDrivingMember = function(username) {
+        var originalMembers = $('#driving-members').data('original-members');
+        var currentRemoveMembers = $('#driving-members').data('remove-members');
+        var currentAttendingMembers = $('#driving-members').data('attending-members');
+
+        var userInRemove = ($.inArray(username, currentRemoveMembers) !== -1);
+        var userInAttending = ($.inArray(username, currentAttendingMembers) !== -1);
+        var userOriginal = ($.inArray(username, originalMembers) !== -1);
+        if (userOriginal && (!userInRemove)) {
+            currentRemoveMembers.push(username);
+        }
+        if (userInAttending) {
+            currentAttendingMembers.splice($.inArray(username, currentAttendingMembers), 1);
+        }
+
+        $('#driving-members').data('attending-members', currentAttendingMembers);
+        $('#driving-members').data('remove-members', currentRemoveMembers);
+    };
+    var addDrivingMember = function(username) {
+        var currentAttendingMembers = $('#driving-members').data('attending-members');
+        var currentRemoveMembers = $('#driving-members').data('remove-members');
+
+        var userInRemove = ($.inArray(username, currentRemoveMembers) !== -1);
+        var userInAttending = ($.inArray(username, currentAttendingMembers) !== -1);
+        if (userInRemove) {
+            currentRemoveMembers.splice($.inArray(username, currentRemoveMembers), 1);
+        }
+        if (!userInAttending) {
+            currentAttendingMembers.push(username);
+        }
+
+        $('#driving-members').data('attending-members', currentAttendingMembers);
+        $('#driving-members').data('remove-members', currentRemoveMembers);
     };
 
 
@@ -72,7 +119,7 @@ $(function () {
         $('.option').click(function(event) {
             $('#add-person').val($(this).data('name'));
             $('#add-person').data('member', $(this).data('member'));
-            console.log('clicked');
+            console.log('Option clicked');
         });
     };
 
@@ -87,12 +134,19 @@ $(function () {
     });
 
     var refreshRemoveButtons = function() {
-        $('.rm-row').click(function(event) {
+        $('.rm-row-attending').click(function(event) {
             var jThis = $(this);
             var attendingMember = jThis.parent().parent();
-            console.log('user to remove ' + attendingMember.data('username'));
+            console.log('attending to remove ' + attendingMember.data('username'));
             removeAttendingMember(attendingMember.data('username'))
             attendingMember.remove();
+        });
+        $('.rm-row-driving').click(function(event) {
+            var jThis = $(this);
+            var drivingMember = jThis.parent().parent();
+            console.log('driving to remove ' + drivingMember.data('username'));
+            removeDrivingMember(drivingMember.data('username'))
+            drivingMember.remove();
         });
     };
 
@@ -107,10 +161,18 @@ $(function () {
         ' ' + member.lastName + '</a></li>';
     };
     var newAttendingMember = function(member) {
-        return '<tr class="attending-member" id="member' + member.objectId +
+        return '<tr class="attending-member" id="attending-member' + member.objectId +
         '" data-username="' + member.username + '"><td>' +
         member.firstName + ' ' + member.lastName +
-        '</td><td><button type="button" class="btn btn-default btn-xs rm-row">' +
+        '</td><td><button type="button" class="btn btn-default btn-xs rm-row-attending">' +
+        '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
+        '</button></td></tr>';
+    };
+    var newDrivingMember = function(member) {
+        return '<tr class="driving-member" id="driving-member' + member.objectId +
+        '" data-username="' + member.username + '"><td>' +
+        member.firstName + ' ' + member.lastName +
+        '</td><td><button type="button" class="btn btn-default btn-xs rm-row-driving">' +
         '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
         '</button></td></tr>';
     };
@@ -140,14 +202,34 @@ $(function () {
 
     // Add person to list of attending
     $('#confirm-add-person').click(function() {
+        console.log('Add Attending clicked');
         var addPerson = $('#add-person');
         if (addPerson.data('member')) {
             var member = addPerson.data('member');
             $('#attending-members').append(newAttendingMember(member));
-            $('#member' + member.objectId).data('member', member);
-            $('#member' + member.objectId).data('username', member.username);
+            $('#attending-member' + member.objectId).data('member', member);
+            $('#attending-member' + member.objectId).data('username', member.username);
             addAttendingMember(member.username);
             addPerson.removeData('member');
+            addPerson.val('');
+        } else {
+            // what if they type in the whole name manually?
+        }
+        refreshRemoveButtons();
+    });
+
+    // Add person to list of driving
+    $('#confirm-add-driver').click(function() {
+        console.log('Add Driver clicked');
+        var addPerson = $('#add-person');
+        if (addPerson.data('member')) {
+            var member = addPerson.data('member');
+            $('#driving-members').append(newDrivingMember(member));
+            $('#driving-member' + member.objectId).data('member', member);
+            $('#driving-member' + member.objectId).data('username', member.username);
+            addDrivingMember(member.username);
+            addPerson.removeData('member');
+            addPerson.val('');
         } else {
             // what if they type in the whole name manually?
         }
@@ -164,18 +246,30 @@ $(function () {
         $('tbody button').prop('disabled', false);
         $('#add-person').prop('disabled', false);
         $('#confirm-add-person').prop('disabled', false);
+        $('#confirm-add-driver').prop('disabled', false);
         $('#update-event').prop('disabled', false);
     });
 
 
     // Add Original Attending Members to list for possible removal
-    var potentialRemoves = [];
+    var potentialAttendingRemoves = [];
     $('.attending-member').each(function(index, element) {
-        potentialRemoves.push($(element).data('username'));
+        potentialAttendingRemoves.push($(element).data('username'));
     });
-    $('#attending-members').data('original-members', potentialRemoves);
-    $('#attending-members').data('attending-members', potentialRemoves);
+    $('#attending-members').data('original-members', potentialAttendingRemoves.slice());
+    $('#attending-members').data('attending-members', potentialAttendingRemoves.slice());
     $('#attending-members').data('remove-members', []);
+
+    // Add Original Driving Members to list to possible removal
+    var potentialDrivingRemoves = [];
+    $('.driving-member').each(function(index, element) {
+        potentialDrivingRemoves.push($(element).data('username'));
+    });
+    $('#driving-members').data('original-members', potentialDrivingRemoves.slice());
+    $('#driving-members').data('attending-members', potentialDrivingRemoves.slice());
+    $('#driving-members').data('remove-members', []);
+
+    printAllMembers();
 
 
     // Update Event
@@ -184,6 +278,8 @@ $(function () {
 
         var attendingMembers = $('#attending-members').data('attending-members');
         var removeMembers = $('#attending-members').data('remove-members');
+        var attendingDrivers = $('#driving-members').data('attending-members');
+        var removeDrivers = $('#driving-members').data('remove-members');
 
         var data = {
             name: $('#name').val(),
@@ -192,7 +288,9 @@ $(function () {
             location: $('#location').val(),
             hours: parseInt($('#hours').val()),
             attendingMembers: attendingMembers,
-            removeMembers: removeMembers
+            removeMembers: removeMembers,
+            attendingDrivers: attendingDrivers,
+            removeDrivers: removeDrivers
         };
 
         console.log('sending request...');

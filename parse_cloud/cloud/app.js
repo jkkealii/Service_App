@@ -437,7 +437,28 @@ app.post('/events/new-event', function(req, res) {
     eventObject.set('location', req.body.location);
     eventObject.set('hours', req.body.hours);
 
-    eventObject.save().then(function(obj) {
+    var query = new Parse.Query(Parse.User);
+
+    query.find().then(function(listUsers) {
+        var attendingRelation = eventObject.relation('members');
+        var drivingRelation = eventObject.relation('drivers');
+        if (req.body.attendingMembers) {
+            listUsers.forEach(function(user) {
+                if (req.body.attendingMembers.indexOf(user.get('username')) !== -1) {
+                    attendingRelation.add(user);
+                }
+            });
+        }
+        if (req.body.attendingDrivers) {
+            listUsers.forEach(function(user) {
+                if (req.body.attendingDrivers.indexOf(user.get('username')) !== -1) {
+                    drivingRelation.add(user);
+                }
+            });
+        }
+
+        return eventObject.save();
+    }).then(function(obj) {
         res.status(200).json(obj);
     }, function(error) {
         console.log(error);
@@ -464,9 +485,12 @@ app.get('/events/list', function(req, res) {
 app.get('/events/:event_id', function(req, res) {
     var eventId = req.params.event_id;
     var localEvent;
+    var localEventObject;
 
     var query = new Parse.Query(Parse.Object.extend('Event'));
     query.get(eventId).then(function(eventObject) {
+        localEventObject = eventObject;
+
         localEvent = {
             name: eventObject.get('name'),
             objectId: eventId,
@@ -476,13 +500,12 @@ app.get('/events/:event_id', function(req, res) {
             endDateTime: eventObject.get('endDateTime')
         };
 
-        var query = eventObject.relation('members').query();
+        var query = localEventObject.relation('members').query();
         return query.find();
     }).then(function(members) {
         membersArray = [];
-        if(members) {
+        if (members) {
             members.forEach(function(member) {
-                console.log(member)
                 membersArray.push({
                     firstName: member.get('firstName'),
                     lastName: member.get('lastName'),
@@ -492,6 +515,31 @@ app.get('/events/:event_id', function(req, res) {
             });
         }
         localEvent.members = membersArray;
+        // localEvent.drivers = [{
+        //     username: 'sirseim',
+        //     firstName: 'Edward',
+        //     lastName: 'Seim'
+        // }, {
+        //     username: 'jkuroda',
+        //     firstName: 'Joshua',
+        //     lastName: 'Kuroda'
+        // }];
+
+        var query = localEventObject.relation('drivers').query();
+        return query.find();
+    }).then(function(drivers) {
+        driversArray = [];
+        if (drivers) {
+            drivers.forEach(function(driver) {
+                driversArray.push({
+                    firstName: driver.get('firstName'),
+                    lastName: driver.get('lastName'),
+                    objectId: driver.get('objectId'),
+                    username: driver.get('username')
+                });
+            });
+        }
+        localEvent.drivers = driversArray;
 
         if (Parse.User.current()) {
             var query = new Parse.Query(Parse.Role);
@@ -601,20 +649,33 @@ app.post('/events/:event_id', function(req, res) {
         return query.find();
     }).then(function(listUsers) {
         // console.log(listUsers);
-        var peopleRelation = localEvent.relation('members');
+        var attendingRelation = localEvent.relation('members');
+        var drivingRelation = localEvent.relation('drivers');
         if (req.body.attendingMembers) {
             listUsers.forEach(function(user) {
                 if (req.body.attendingMembers.indexOf(user.get('username')) !== -1) {
-                    peopleRelation.add(user);
-                    console.log('added ' + user.get('username'));
+                    attendingRelation.add(user);
                 }
             });
         }
         if (req.body.removeMembers) {
             listUsers.forEach(function(user) {
                 if (req.body.removeMembers.indexOf(user.get('username')) !== -1) {
-                    peopleRelation.remove(user);
-                    console.log('removed ' + user.get('username'));
+                    attendingRelation.remove(user);
+                }
+            });
+        }
+        if (req.body.attendingDrivers) {
+            listUsers.forEach(function(user) {
+                if (req.body.attendingDrivers.indexOf(user.get('username')) !== -1) {
+                    drivingRelation.add(user);
+                }
+            });
+        }
+        if (req.body.removeDrivers) {
+            listUsers.forEach(function(user) {
+                if (req.body.removeDrivers.indexOf(user.get('username')) !== -1) {
+                    drivingRelation.remove(user);
                 }
             });
         }
