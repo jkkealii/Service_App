@@ -1,8 +1,10 @@
 $(function() {
 //     not jank
+/*
     var href = document.location.href;
     var lastPathSegment = href.substr(href.lastIndexOf('/') + 1);
-    if (lastPathSegment !== '' && lastPathSegment !== '#hale' && lastPathSegment !== 'login' && lastPathSegment !== 'signup' && lastPathSegment !== '?login=success') {
+*/
+    if (!($('.pagelet').data("transparent-navbar"))) {
         $('.navbar-default').addClass('on');
         $('.dropdown-menu').addClass('on');
     }

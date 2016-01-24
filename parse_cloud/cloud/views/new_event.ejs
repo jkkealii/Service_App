@@ -2,6 +2,8 @@
 
 <% include helper/_navbar %>
 
+<div class="pagelet" data-transparent-navbar="false"></div>
+
 <div class="container-fluid <%= (locals.alerts ? 'page-contains' : '') %>">
   <% if (locals.alerts) { %>
     <% alerts.forEach(function(alert) { %>
