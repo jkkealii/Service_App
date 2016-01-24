@@ -189,12 +189,21 @@ $(function () {
         var attendingMembers = $('#attending-members').data('attending-members');
         var attendingDrivers = $('#driving-members').data('attending-members');
 
+        var uniform = $('input[name=uniform]:checked', '#eventForm').val();
+        if (!uniform) {
+            uniform = '';
+        }
+
         var data = {
             name: $('#name').val(),
             startDateTime: moment($('#start-date').val(), 'MM/DD/YYYY hh:mm AA').toDate(),
             endDateTime: moment($('#end-date').val(), 'MM/DD/YYYY hh:mm AA').toDate(),
             location: $('#location').val(),
-            hours: parseInt($('#hours').val()),
+            meetingPlace: $('#meeting-place').val(),
+            hours: parseFloat($('#hours').val()),
+            driverHours: parseFloat($('#driver-hours').val()),
+            uniform: uniform,
+            isOnCampus: ($('input[name=is-on-campus]:checked', '#eventForm').val() === 'true'),
             attendingMembers: attendingMembers,
             attendingDrivers: attendingDrivers
         };

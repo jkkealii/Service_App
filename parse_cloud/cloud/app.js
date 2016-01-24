@@ -458,7 +458,12 @@ app.post('/events/new-event', function(req, res) {
     eventObject.set('startDateTime', moment(req.body.startDateTime).toDate());
     eventObject.set('endDateTime', moment(req.body.endDateTime).toDate());
     eventObject.set('location', req.body.location);
-    eventObject.set('hours', req.body.hours);
+    eventObject.set('meetingPlace', req.body.meetingPlace);
+    eventObject.set('hours', parseFloat(req.body.hours));
+    eventObject.set('driverHours', parseFloat(req.body.driverHours));
+    eventObject.set('isOnCampus', (req.body.isOnCampus === 'true'));
+    eventObject.set('uniform', req.body.uniform);
+
 
     var query = new Parse.Query(Parse.User);
 
@@ -518,6 +523,7 @@ app.get('/events/:event_id', function(req, res) {
             name: eventObject.get('name'),
             objectId: eventId,
             hours: eventObject.get('hours'),
+            driverHours: eventObject.get('driverHours'),
             isOnCampus: eventObject.get('isOnCampus'),
             location: eventObject.get('location'),
             meetingPlace: eventObject.get('meetingPlace'),
@@ -659,6 +665,7 @@ app.get('/events/:event_id/edit', function(req, res) {
                         name: eventObject.get('name'),
                         objectId: eventId,
                         hours: eventObject.get('hours'),
+                        driverHours: eventObject.get('driverHours'),
                         isOnCampus: eventObject.get('isOnCampus'),
                         location: eventObject.get('location'),
                         meetingPlace: eventObject.get('meetingPlace'),
@@ -741,7 +748,7 @@ app.post('/events/:event_id/edit', function(req, res) {
         eventObject.set('startDateTime', moment(req.body.startDateTime).toDate());
         eventObject.set('endDateTime', moment(req.body.endDateTime).toDate());
         eventObject.set('location', req.body.location);
-        eventObject.set('hours', req.body.hours);
+        eventObject.set('hours', parseFloat(req.body.hours));
         if (req.body.uniform) {
             eventObject.set('uniform', req.body.uniform);
         }
@@ -751,6 +758,7 @@ app.post('/events/:event_id/edit', function(req, res) {
             eventObject.set('isOnCampus', false);
         }
         eventObject.set('meetingPlace', req.body.meetingPlace);
+        eventObject.set('driverHours', parseFloat(req.body.driverHours));
 
         // var peopleRelation = eventObject.relation("members");
         // req.body.members.forEach(function(member) {

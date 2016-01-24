@@ -113,7 +113,9 @@ $(function () {
     // Filling Current Event Details
     $('#name').val($('#name').data('original'));
     $('#location').val($('#location').data('original'));
+    $('#meeting-place').val($('#meeting-place').data('original'));
     $('#hours').val($('#hours').data('original'));
+    $('#driver-hours').val($('#driver-hours').data('original'));
     $('#meeting-place').val($('#meeting-place').data('original'));
     
     var refreshOptions = function() {
@@ -279,7 +281,8 @@ $(function () {
             endDateTime: moment($('#end-date').val(), 'MM/DD/YYYY hh:mm AA').toDate(),
             location: $('#location').val(),
             meetingPlace: $('#meeting-place').val(),
-            hours: parseInt($('#hours').val()),
+            hours: parseFloat($('#hours').val()),
+            driverHours: parseFloat($('#driver-hours').val()),
             uniform: uniform,
             isOnCampus: ($('input[name=is-on-campus]:checked', '#eventForm').val() === 'true'),
             attendingMembers: attendingMembers,
