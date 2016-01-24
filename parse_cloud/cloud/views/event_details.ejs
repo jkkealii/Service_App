@@ -51,7 +51,7 @@
             </div>
           </div>
 
-          <button type="button" class="btn btn-primary spaced" id="edit-event" <%= (locals.admin ? '' : 'disabled') %> >Edit</button>
+          <a href="/events/<%= (locals.eventObj ? locals.eventObj.objectId : '') %>/edit" class="btn btn-primary spaced" <%= (locals.admin ? '' : 'disabled') %> >Edit</a>
         </div>
       </div>
     </div>

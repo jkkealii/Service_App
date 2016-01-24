@@ -495,7 +495,10 @@ app.get('/events/:event_id', function(req, res) {
             name: eventObject.get('name'),
             objectId: eventId,
             hours: eventObject.get('hours'),
+            isOnCampus: eventObject.get('isOnCampus'),
             location: eventObject.get('location'),
+            meetingPlace: eventObject.get('meetingPlace'),
+            uniform: eventObject.get('uniform'),
             startDateTime: eventObject.get('startDateTime'),
             endDateTime: eventObject.get('endDateTime')
         };
@@ -515,15 +518,6 @@ app.get('/events/:event_id', function(req, res) {
             });
         }
         localEvent.members = membersArray;
-        // localEvent.drivers = [{
-        //     username: 'sirseim',
-        //     firstName: 'Edward',
-        //     lastName: 'Seim'
-        // }, {
-        //     username: 'jkuroda',
-        //     firstName: 'Joshua',
-        //     lastName: 'Kuroda'
-        // }];
 
         var query = localEventObject.relation('drivers').query();
         return query.find();
@@ -546,7 +540,7 @@ app.get('/events/:event_id', function(req, res) {
             query.equalTo("name", "Administrator");
             query.equalTo("users", Parse.User.current());
             query.first().then(function(adminRole) {
-                res.render('event', {
+                res.render('event_details', {
                     loggedIn: true,
                     eventObj: localEvent,
                     admin: (adminRole ? true : false)
@@ -557,7 +551,7 @@ app.get('/events/:event_id', function(req, res) {
                     type: 'warning',
                     message: ("AdminQueryError: " + error.code + " " + error.message)
                 });
-                res.render('event', {
+                res.render('event_details', {
                     alerts: alerts,
                     loggedIn: true,
                     eventObj: localEvent,
@@ -565,7 +559,7 @@ app.get('/events/:event_id', function(req, res) {
                 });
             });
         } else {
-            res.render('event', {
+            res.render('event_details', {
                 loggedIn: false,
                 eventObj: localEvent,
                 admin: false
@@ -582,7 +576,7 @@ app.get('/events/:event_id', function(req, res) {
                     type: 'warning',
                     message: ("EventQueryError: " + error.code + " " + error.message)
                 });
-                res.render('event', {
+                res.render('event_details', {
                     alerts: alerts,
                     loggedIn: true,
                     eventObj: localEvent,
@@ -598,7 +592,7 @@ app.get('/events/:event_id', function(req, res) {
                     type: 'warning',
                     message: ("AdminQueryError: " + err.code + " " + err.message)
                 });
-                res.render('event', {
+                res.render('event_details', {
                     alerts: alerts,
                     loggedIn: true,
                     eventObj: localEvent,
@@ -611,7 +605,7 @@ app.get('/events/:event_id', function(req, res) {
                 type: 'warning',
                 message: ("EventQueryError: " + error.code + " " + error.message)
             });
-            res.render('event', {
+            res.render('event_details', {
                 alerts: alerts,
                 loggedIn: false,
                 eventObj: localEvent,
@@ -620,6 +614,98 @@ app.get('/events/:event_id', function(req, res) {
         }
     });
     
+});
+
+app.get('/events/:event_id/edit', function(req, res) {
+    var eventId = req.params.event_id;
+    var localEvent;
+    var localEventObject;
+
+    if (Parse.User.current()) {
+        var query = new Parse.Query(Parse.Role);
+        query.equalTo("name", "Administrator");
+        query.equalTo("users", Parse.User.current());
+        query.first().then(function(adminRole) {
+            if (adminRole) {
+
+                var query = new Parse.Query(Parse.Object.extend('Event'));
+                query.get(eventId).then(function(eventObject) {
+                    localEventObject = eventObject;
+
+                    localEvent = {
+                        name: eventObject.get('name'),
+                        objectId: eventId,
+                        hours: eventObject.get('hours'),
+                        isOnCampus: eventObject.get('isOnCampus'),
+                        location: eventObject.get('location'),
+                        meetingPlace: eventObject.get('meetingPlace'),
+                        uniform: eventObject.get('uniform'),
+                        startDateTime: eventObject.get('startDateTime'),
+                        endDateTime: eventObject.get('endDateTime')
+                    };
+
+                    var query = localEventObject.relation('members').query();
+                    return query.find();
+                }).then(function(members) {
+                    membersArray = [];
+                    if (members) {
+                        members.forEach(function(member) {
+                            membersArray.push({
+                                firstName: member.get('firstName'),
+                                lastName: member.get('lastName'),
+                                objectId: member.get('objectId'),
+                                username: member.get('username')
+                            });
+                        });
+                    }
+                    localEvent.members = membersArray;
+
+                    var query = localEventObject.relation('drivers').query();
+                    return query.find();
+                }).then(function(drivers) {
+                    driversArray = [];
+                    if (drivers) {
+                        drivers.forEach(function(driver) {
+                            driversArray.push({
+                                firstName: driver.get('firstName'),
+                                lastName: driver.get('lastName'),
+                                objectId: driver.get('objectId'),
+                                username: driver.get('username')
+                            });
+                        });
+                    }
+                    localEvent.drivers = driversArray;
+
+                    res.render('event', {
+                        loggedIn: true,
+                        eventObj: localEvent,
+                        admin: true
+                    });
+                    
+                }, function(error) {
+                    var alerts = [];
+                    alerts.push({
+                        type: 'warning',
+                        message: ("EventQueryError: " + error.code + " " + error.message)
+                    });
+                    res.render('event', {
+                        alerts: alerts,
+                        loggedIn: true,
+                        eventObj: localEvent,
+                        admin: true
+                    });
+                });
+
+            } else {
+                res.redirect('/events/' + eventId);
+            }
+        }, function(error) {
+            res.redirect('/events/' + eventId);
+        });
+    } else {
+        res.redirect('/events/' + eventId);
+    }
+
 });
 
 app.post('/events/:event_id', function(req, res) {
