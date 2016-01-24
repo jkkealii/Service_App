@@ -2,7 +2,7 @@
 
 <% include helper/_navbar %>
 
-<div class="pagelet" data-transparent-navbar="true"></div>
+<div class="pagelet" data-transparent-navbar="false"></div>
 
 <div class="container-fluid <%= (locals.alerts ? 'page-contains' : '') %>">
   <% if (locals.alerts) { %>
@@ -12,7 +12,7 @@
   <% } %>
 </div>
 
-<div id="login" class="text-center">
+<div class="text-center page-contains">
   <div class="overlay">
     <div class="section-title center">
       <h2 class="animated slideInDown">Event Details: <strong><%= (locals.eventObj ? locals.eventObj.name : 'Unknown Event') %></strong></h2>
@@ -27,41 +27,71 @@
           <div class="row">
             <div class="col-md-6 center">    
                 <div class="deet-text">
+                  <h3>START TIME</h3>
                   <p>
                     <%= (locals.eventObj ? locals.eventObj.startDateTime : '') %>
                   </p>
                 </div>
                 
                 <div class="deet-text">
+                  <h3>END TIME</h3>
                   <p>
                     <%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>
                   </p>
                 </div>    
                 
                 <div class="deet-text">
+                  <h3>EVENT LOCATION</h3>
                   <p>
                     <%= (locals.eventObj ? locals.eventObj.location : '') %>
+                  </p>
+                </div>
+                
+                <div class="deet-text">
+                  <h3>MEET AT</h3>
+                  <p>
+                    
                   </p>
                 </div>
             </div>                
             <div class="col-md-6">
                 <div class="deet-text">
-                  <p>
-                    <%= (locals.eventObj ? locals.eventObj.hours : '') %>
-                  </p>
-                </div>
-        
-                <div class="deet-text">
+                  <h3>ON/OFF CAMPUS</h3>
                   <p>
                     
                   </p>
                 </div>
                 
                 <div class="deet-text">
+                  <h3>UNIFORM</h3>
                   <p>
                     
                   </p>
-                </div>                    
+                </div> 
+                
+                <div class="deet-text">
+                  <h3>HOURS</h3>
+                  <p>
+                    <%= (locals.eventObj ? locals.eventObj.hours : '') %>
+                  </p>
+                </div>
+                
+                <div class="deet-text">
+                  <h3>DRIVERS</h3>
+                  <p>
+                  
+                  </p>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <div class="deet-text">
+                <h3>MEMBERS</h3>
+                <p>
+                  
+                </p>
+              </div>
             </div>
           </div>
 
