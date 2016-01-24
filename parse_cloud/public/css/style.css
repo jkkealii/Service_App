@@ -30,6 +30,10 @@ h1 {
     margin-bottom: 10px;
 }
 
+.min-radio {
+	min-height: 20px;
+}
+
 .ctable-responsive {
     min-height: .01%;
     overflow-x: auto;

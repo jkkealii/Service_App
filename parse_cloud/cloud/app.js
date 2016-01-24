@@ -403,15 +403,32 @@ app.get('/events/new-event', function(req, res) {
         query.equalTo("name", "Administrator");
         query.equalTo("users", Parse.User.current());
         query.first().then(function(adminRole) {
-            res.render('new_event', {
-                loggedIn: true,
-                admin: (adminRole ? true : false)
-            });
+            if (adminRole) {
+                res.render('new_event', {
+                    loggedIn: true,
+                    admin: true
+                });
+            } else {
+                var alerts = [];
+                alerts.push({
+                    type: 'danger',
+                    message: 'You must be an Admin to create an event'
+                });
+                res.redirect('new_event', {
+                    loggedIn: true,
+                    alerts: alerts,
+                    admin: false
+                })
+            }
         }, function(error) {
             var alerts = [];
             alerts.push({
                 type: 'warning',
                 message: ("AdminQueryError: " + error.code + " " + error.message)
+            });
+            alerts.push({
+                type: 'danger',
+                message: 'You must be an Admin to create an event'
             });
             res.render('new_event', {
                 alerts: alerts,
@@ -420,8 +437,14 @@ app.get('/events/new-event', function(req, res) {
             });
         });
     } else {
+        var alerts = [];
+        alerts.push({
+            type: 'danger',
+            message: 'You must be logged in and an Admin to create an event'
+        });
         res.render('new_event', {
             loggedIn: false,
+            alerts: alerts,
             admin: false
         });
     }
@@ -708,7 +731,7 @@ app.get('/events/:event_id/edit', function(req, res) {
 
 });
 
-app.post('/events/:event_id', function(req, res) {
+app.post('/events/:event_id/edit', function(req, res) {
     var eventId = req.params.event_id;
 
     var query = new Parse.Query(Parse.Object.extend("Event"));
@@ -719,6 +742,15 @@ app.post('/events/:event_id', function(req, res) {
         eventObject.set('endDateTime', moment(req.body.endDateTime).toDate());
         eventObject.set('location', req.body.location);
         eventObject.set('hours', req.body.hours);
+        if (req.body.uniform) {
+            eventObject.set('uniform', req.body.uniform);
+        }
+        if (req.body.isOnCampus === 'true') {
+            eventObject.set('isOnCampus', true);
+        } else {
+            eventObject.set('isOnCampus', false);
+        }
+        eventObject.set('meetingPlace', req.body.meetingPlace);
 
         // var peopleRelation = eventObject.relation("members");
         // req.body.members.forEach(function(member) {

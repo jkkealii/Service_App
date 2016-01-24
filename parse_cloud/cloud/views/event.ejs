@@ -19,9 +19,9 @@
         <h1><%= (locals.eventObj ? locals.eventObj.name : 'Unknown Event') %></h1>
         <div class="eventId" data-eventid="<%= (locals.eventObj ? locals.eventObj.objectId : '') %>"></div>
       </div>
-      <div class="col-sm-3">
+      <!-- <div class="col-sm-3">
         <button type="button" class="btn btn-primary spaced" id="edit-event" <%= (locals.admin ? '' : 'disabled') %> >Edit</button>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="row">  
@@ -30,13 +30,13 @@
 
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" class="form-control" placeholder="Service" data-original="<%= (locals.eventObj ? locals.eventObj.name : '') %>" id="name" disabled>
+          <input type="text" class="form-control" placeholder="Service" data-original="<%= (locals.eventObj ? locals.eventObj.name : '') %>" id="name">
         </div>
 
         <div class="form-group">
           <label for="start-date">Start Date/Time</label>
           <div class="input-group date form-control" id="datetimestart">
-            <input type="text" class="form-control" id="start-date" data-original="<%= (locals.eventObj ? locals.eventObj.startDateTime : '') %>" disabled/>
+            <input type="text" class="form-control" id="start-date" data-original="<%= (locals.eventObj ? locals.eventObj.startDateTime : '') %>"/>
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -46,7 +46,7 @@
         <div class="form-group">
           <label for="end-date">End Date/Time</label>
           <div class="input-group date form-control" id="datetimeend">
-            <input type="text" class="form-control" id="end-date" data-original="<%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>" disabled/>
+            <input type="text" class="form-control" id="end-date" data-original="<%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>"/>
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -55,14 +55,85 @@
 
         <div class="form-group">
           <label for="location">Address</label>
-          <input type="text" class="form-control" placeholder="1 Infinite Loop, Cupertino, CA, 95014" id="location" data-original="<%= (locals.eventObj ? locals.eventObj.location : '') %>" disabled>
+          <input type="text" class="form-control" placeholder="1 Infinite Loop, Cupertino, CA, 95014" id="location" data-original="<%= (locals.eventObj ? locals.eventObj.location : '') %>">
+        </div>
+
+        <div class="">
+          <div class="radio min-radio">
+            <label>
+              <input type="radio" name="is-on-campus" id="is-on-campus-true" value="true" 
+              <%= (locals.eventObj ?
+                    (locals.eventObj.isOnCampus ? 'checked' : '')
+                  :
+                    ''
+                  ) %>
+              >
+              On Campus
+            </label>
+          </div>
+          <div class="radio min-radio">
+            <label>
+              <input type="radio" name="is-on-campus" id="is-on-campus-false" value="false" 
+              <%= (locals.eventObj ?
+                    (locals.eventObj.isOnCampus ? '' : 'checked')
+                  :
+                    ''
+                  ) %>
+              >
+              Off Campus
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="meeting-place">Meeting Place</label>
+          <input type="text" class="form-control" placeholder="Flag Poles" id="meeting-place" data-original="<%= (locals.eventObj ? locals.eventObj.meetingPlace : '') %>">
         </div>
 
         <div class="form-group">
           <label for="hours">Hours</label>
           <div class="input-group form-control">
-            <input type="text" class="form-control" placeholder="3" aria-describedby="addon1" id="hours" data-original="<%= (locals.eventObj ? locals.eventObj.hours : '') %>" disabled>
+            <input type="text" class="form-control" placeholder="3" aria-describedby="addon1" id="hours" data-original="<%= (locals.eventObj ? locals.eventObj.hours : '') %>">
             <span class="input-group-addon" id="addon1">hour(s)</span>
+          </div>
+        </div>
+
+        <div class="">
+          <div class="radio min-radio">
+            <label>
+              <input type="radio" name="uniform" id="uniform-casual" value="Casual" 
+              <%= ((locals.eventObj && locals.eventObj.uniform) ? 
+                    ((locals.eventObj.uniform == 'Casual') ? 'checked' : '')
+                  :
+                    ''
+                  ) %>
+              >
+              Casual Uniform
+            </label>
+          </div>
+          <div class="radio min-radio">
+            <label>
+              <input type="radio" name="uniform" id="uniform-polo" value="Polos" 
+              <%= ((locals.eventObj && locals.eventObj.uniform) ? 
+                    ((locals.eventObj.uniform == 'Polos') ? 'checked' : '')
+                  :
+                    ''
+                  ) %>
+              >
+              Polos Uniform
+            </label>
+          </div>
+          <div class="radio min-radio">
+            <label>
+              <input type="radio" name="uniform" id="uniform-sweater" value="Sweaters" 
+              <%= ((locals.eventObj && locals.eventObj.uniform) ? 
+                    ((locals.eventObj.uniform == 'Sweaters') ? 'checked' : '')
+                  :
+                    ''
+                  ) %>
+              >
+              Sweaters Uniform
+            </label>
           </div>
         </div>
 
@@ -106,24 +177,20 @@
 
         <div class="form-group">
           <div class="input-group">
-            <input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Search for Person to Add" placeholder="Add Person..." id="add-person" disabled>
+            <input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Search for Person to Add" placeholder="Add Person..." id="add-person">
             <ul class="dropdown-menu" id="list-members">
-              <li class="option" data-name="Joshua Kuroda"><a href="#">Joshua Kuroda</a></li>
-              <li class="option" data-name="Carlos Melendez"><a href="#">Carlos Melendez</a></li>
-              <li class="option" data-name="Benjamin Johnstone"><a href="#">Benjamin Johnstone</a></li>
-              <li class="option" data-name="Max Alvarado"><a href="#">Max Alvarado</a></li>
             </ul>
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button" id="confirm-add-person" disabled>Add Attending Only</button>
+              <button class="btn btn-default" type="button" id="confirm-add-person">Add Attending Only</button>
             </span>
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button" id="confirm-add-driver" disabled>Add Driver</button>
+              <button class="btn btn-default" type="button" id="confirm-add-driver">Add Driver</button>
             </span>
           </div><!-- /input-group -->
         </div>
 
         <div class="">
-          <input class="button btn btn-default" data-loading-text="Updating Event..." type="button" value="Update Event" id="update-event" disabled>
+          <input class="button btn btn-default" data-loading-text="Updating Event..." type="button" value="Update Event" id="update-event" <%= (locals.admin ? '' : 'disabled') %>>
         </div>
 
       </form>

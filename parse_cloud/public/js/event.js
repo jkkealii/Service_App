@@ -114,6 +114,7 @@ $(function () {
     $('#name').val($('#name').data('original'));
     $('#location').val($('#location').data('original'));
     $('#hours').val($('#hours').data('original'));
+    $('#meeting-place').val($('#meeting-place').data('original'));
     
     var refreshOptions = function() {
         $('.option').click(function(event) {
@@ -236,20 +237,6 @@ $(function () {
         refreshRemoveButtons();
     });
 
-    // allow event to be edited
-    $('#edit-event').click(function() {
-        $('#name').prop('disabled', false);
-        $('#start-date').prop('disabled', false);
-        $('#end-date').prop('disabled', false);
-        $('#location').prop('disabled', false);
-        $('#hours').prop('disabled', false);
-        $('tbody button').prop('disabled', false);
-        $('#add-person').prop('disabled', false);
-        $('#confirm-add-person').prop('disabled', false);
-        $('#confirm-add-driver').prop('disabled', false);
-        $('#update-event').prop('disabled', false);
-    });
-
 
     // Add Original Attending Members to list for possible removal
     var potentialAttendingRemoves = [];
@@ -281,12 +268,20 @@ $(function () {
         var attendingDrivers = $('#driving-members').data('attending-members');
         var removeDrivers = $('#driving-members').data('remove-members');
 
+        var uniform = $('input[name=uniform]:checked', '#eventForm').val();
+        if (!uniform) {
+            uniform = '';
+        }
+
         var data = {
             name: $('#name').val(),
             startDateTime: moment($('#start-date').val(), 'MM/DD/YYYY hh:mm AA').toDate(),
             endDateTime: moment($('#end-date').val(), 'MM/DD/YYYY hh:mm AA').toDate(),
             location: $('#location').val(),
+            meetingPlace: $('#meeting-place').val(),
             hours: parseInt($('#hours').val()),
+            uniform: uniform,
+            isOnCampus: ($('input[name=is-on-campus]:checked', '#eventForm').val() === 'true'),
             attendingMembers: attendingMembers,
             removeMembers: removeMembers,
             attendingDrivers: attendingDrivers,
@@ -295,7 +290,7 @@ $(function () {
 
         console.log('sending request...');
 
-        var eventUrl = '/events/' + $('.eventId').data('eventid');
+        var eventUrl = '/events/' + $('.eventId').data('eventid') + '/edit';
         $.ajax({
             method: 'POST',
             url: eventUrl,
@@ -305,7 +300,7 @@ $(function () {
             console.log(data);
             console.log(textStatus);
             $btn.button('reset');
-            window.location.replace("/events");
+            window.location.replace('/events/' + $('.eventId').data('eventid'));
         }, function(jqXHR, textStatus, error) {
             console.log('error');
             console.log(textStatus);

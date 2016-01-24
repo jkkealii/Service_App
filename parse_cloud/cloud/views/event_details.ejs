@@ -28,29 +28,29 @@
             <div class="col-md-6 center">    
                 <div class="deet-text">
                   <h3>START TIME</h3>
-                  <p>
+                  <p id="start-date" data-original="<%= (locals.eventObj ? locals.eventObj.startDateTime : '') %>">
                     <%= (locals.eventObj ? locals.eventObj.startDateTime : '') %>
                   </p>
                 </div>
                 
                 <div class="deet-text">
                   <h3>END TIME</h3>
-                  <p>
+                  <p id="end-date" data-original="<%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>">
                     <%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>
                   </p>
                 </div>    
                 
                 <div class="deet-text">
                   <h3>EVENT LOCATION</h3>
-                  <p>
+                  <a href="<%= (locals.eventObj ? ('https://maps.google.com/?q=' + locals.eventObj.location) : '#') %>">
                     <%= (locals.eventObj ? locals.eventObj.location : '') %>
-                  </p>
+                  </a>
                 </div>
                 
                 <div class="deet-text">
                   <h3>MEET AT</h3>
                   <p>
-                    
+                    <%= (locals.eventObj ? locals.eventObj.meetingPlace : '') %>
                   </p>
                 </div>
             </div>                
@@ -58,14 +58,14 @@
                 <div class="deet-text">
                   <h3>ON/OFF CAMPUS</h3>
                   <p>
-                    
+                    <%= (locals.eventObj ? (locals.eventObj.isOnCampus ? 'On Campus' : 'Off Campus') : '') %>
                   </p>
                 </div>
                 
                 <div class="deet-text">
                   <h3>UNIFORM</h3>
                   <p>
-                    
+                    <%= (locals.eventObj ? (locals.eventObj.uniform ? locals.eventObj.uniform : 'No Uniform Set') : '') %>
                   </p>
                 </div> 
                 
@@ -77,9 +77,23 @@
                 </div>
                 
                 <div class="deet-text">
+                  <!-- <table class="table">
+                    <thead>
+                      <tr>
+                        <th>DRIVERS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                    </tbody>
+                  </table> -->
                   <h3>DRIVERS</h3>
                   <p>
-                  
+                    <% if (locals.eventObj && eventObj.drivers) { %>
+                      <% locals.eventObj.drivers.forEach(function(member) { %>
+                        <% include helper/_attending_details %>
+                      <% }) %>
+                    <% } %>
                   </p>
                 </div>
             </div>
@@ -87,15 +101,29 @@
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
               <div class="deet-text">
+                <!-- <table class="table">
+                  <thead>
+                    <tr>
+                      <th>MEMBERS</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                  </tbody>
+                </table> -->
                 <h3>MEMBERS</h3>
                 <p>
-                  
+                  <% if (locals.eventObj && eventObj.members) { %>
+                    <% locals.eventObj.members.forEach(function(member) { %>
+                      <% include helper/_attending_details %>
+                    <% }) %>
+                  <% } %>
                 </p>
               </div>
             </div>
           </div>
 
-          <a id="deets" href="/events/<%= (locals.eventObj ? locals.eventObj.objectId : '') %>/edit" role="button" class="btn buton btn-default" <%= (locals.admin ? '' : 'disabled') %> >Edit</a>
+          <a id="deets" href="<%= (locals.eventObj ? ('/events/' + locals.eventObj.objectId + '/edit') : '#') %>" role="button" class="btn buton btn-default" <%= (locals.admin ? '' : 'disabled') %> >Edit</a>
         </div>
       </div>
     </div>
@@ -104,6 +132,9 @@
 
 <% include helper/_basecode %>
 
-<script type="text/javascript" src="/js/event.js"></script>
+<script type="text/javascript" >
+  $('#start-date').text(moment($('#start-date').data('original')).format("MMMM D, YYYY, h:mm A"));
+  $('#end-date').text(moment($('#end-date').data('original')).format("MMMM D, YYYY, h:mm A"));
+</script>
 
 <% include helper/_footer %>
