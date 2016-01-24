@@ -1,0 +1,65 @@
+<% include helper/_header %>
+
+<% include helper/_navbar %>
+
+<div class="container-fluid <%= (locals.alerts ? 'page-contains' : '') %>">
+  <% if (locals.alerts) { %>
+    <% alerts.forEach(function(alert) { %>
+      <% include helper/_alert %>
+    <% }) %>
+  <% } %>
+</div>
+
+<div id="login" class="text-center">
+  <div class="overlay">
+    <div class="section-title center">
+      <h2 class="animated slideInDown">Event Details: <strong><%= (locals.eventObj ? locals.eventObj.name : 'Unknown Event') %></strong></h2>
+      <div class="line">
+        <hr>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                  
+                </div>
+                
+                <div class="form-group">
+                  
+                </div>
+                
+                <div class="form-group">
+                  
+                </div>    
+            </div>                
+            <div class="col-md-6">
+                <div class="form-group">
+                  
+                </div>
+        
+                <div class="form-group">
+                  
+                </div>
+                
+                <div class="form-group">
+                  
+                </div>                    
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary spaced" id="edit-event" <%= (locals.admin ? '' : 'disabled') %> >Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include helper/_basecode %>
+
+<script type="text/javascript" src="/js/event.js"></script>
+
+<% include helper/_footer %>
