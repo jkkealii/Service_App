@@ -37,7 +37,7 @@ $(document).ready(function () {
             var rex = new RegExp($(this).val(), 'i');
             $('.searchable tr').hide();
             $('.searchable tr').filter(function () {
-                return rex.test($(this).text());
+                return rex.test($(this).text()) && ($(this).data('searchable'));
             }).show();
 
         })
