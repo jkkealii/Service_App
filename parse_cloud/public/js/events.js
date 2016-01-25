@@ -16,10 +16,29 @@ $(function () {
         console.log('done');
         console.log(data);
         $.each(data.objects, function(index, value) {
-            $('table tbody').append(newRow(value));
+            $('table tbody').append($(newRow(value)).data('start-date-time', moment(value.startDateTime.iso)));
         });
     }, function(jqXHR, textStatus, error) {
         console.log(error);
         console.log(textStatus);
+    });
+
+    var refreshShownEvents = function() {
+        var showPastEvents = $('#show-past-events').checked;
+        $('table tbody tr').each(function(index, element) {
+            if (!showPastEvents) {
+                if ($(element).data('start-date-time').isSameOrAfter(moment(), 'day')) {
+                    $(element).show();
+                } else {
+                    $(element).hide();
+                }
+            } else {
+                $(element).show();
+            }
+        });
+    };
+
+    $('#show-past-events').parent().parent().click(function() {
+        refreshShownEvents();
     });
 });
