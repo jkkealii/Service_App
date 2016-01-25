@@ -125,6 +125,11 @@ a.btn.buton.btn-default:focus {
     border-radius: 0;
 }
 
+.check-text {
+    font-size: 15px;
+    padding-top: 5px;
+}
+
 /* Event Details */
 .deet-text p {
     font-size: 17px;
