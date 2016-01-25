@@ -26,11 +26,11 @@ $(function () {
     });
 
     var refreshShownEvents = function() {
-        console.log('refreshShownEvents');
+        // console.log('refreshShownEvents');
         var showPastEvents = $('#show-past-events').is(':checked');
         $('table tbody tr').each(function(index, element) {
             if (!showPastEvents) {
-                console.log('do not show past events');
+                // console.log('do not show past events');
                 if ($(element).data('start-date-time').isSameOrAfter(moment(), 'day')) {
                     // console.log(element);
                     // console.log('show');
@@ -43,7 +43,7 @@ $(function () {
                     $(element).hide();
                 }
             } else {
-                console.log('show past events');
+                // console.log('show past events');
                 $(element).show();
                 $(element).data('searchable', true);
             }
