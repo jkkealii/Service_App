@@ -134,7 +134,9 @@
             </div>
           </div>
 
-          <a id="deets" href="<%= (locals.eventObj ? ('/events/' + locals.eventObj.objectId + '/edit') : '#') %>" role="button" class="btn buton btn-default" <%= (locals.admin ? '' : 'disabled') %> >Edit</a>
+          <% if (locals.admin) { %>
+            <a id="deets" href="<%= (locals.eventObj ? ('/events/' + locals.eventObj.objectId + '/edit') : '#') %>" role="button" class="btn buton btn-default">Edit</a>
+          <% } %>
         </div>
       </div>
     </div>
