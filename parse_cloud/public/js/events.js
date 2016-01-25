@@ -35,14 +35,17 @@ $(function () {
                     // console.log(element);
                     // console.log('show');
                     $(element).show();
+                    $(element).data('searchable', true);
                 } else {
                     // console.log(element);
                     // console.log('hide');
+                    $(element).data('searchable', false);
                     $(element).hide();
                 }
             } else {
                 console.log('show past events');
                 $(element).show();
+                $(element).data('searchable', true);
             }
         });
     };
