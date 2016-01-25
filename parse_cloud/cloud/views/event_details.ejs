@@ -100,6 +100,8 @@
                       <% locals.eventObj.drivers.forEach(function(member) { %>
                         <% include helper/_attending_details %>
                       <% }) %>
+                    <% } else { %>
+                      <p>No Drivers Found</p>
                     <% } %>
                   </p>
                 </div>
@@ -124,6 +126,8 @@
                     <% locals.eventObj.members.forEach(function(member) { %>
                       <% include helper/_attending_details %>
                     <% }) %>
+                  <% } else { %>
+                    <p>No Drivers Found</p>
                   <% } %>
                 </p>
               </div>

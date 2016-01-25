@@ -209,6 +209,7 @@ $(function () {
         };
 
         console.log('sending request...');
+        console.log(data);
 
         $.ajax({
             method: 'POST',

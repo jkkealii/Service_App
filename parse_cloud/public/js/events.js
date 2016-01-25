@@ -18,21 +18,30 @@ $(function () {
         $.each(data.objects, function(index, value) {
             $('table tbody').append($(newRow(value)).data('start-date-time', moment(value.startDateTime.iso)));
         });
+        refreshShownEvents();
+        $('#show-past-events').prop('disabled', false);
     }, function(jqXHR, textStatus, error) {
         console.log(error);
         console.log(textStatus);
     });
 
     var refreshShownEvents = function() {
-        var showPastEvents = $('#show-past-events').checked;
+        console.log('refreshShownEvents');
+        var showPastEvents = $('#show-past-events').is(':checked');
         $('table tbody tr').each(function(index, element) {
             if (!showPastEvents) {
+                console.log('do not show past events');
                 if ($(element).data('start-date-time').isSameOrAfter(moment(), 'day')) {
+                    // console.log(element);
+                    // console.log('show');
                     $(element).show();
                 } else {
+                    // console.log(element);
+                    // console.log('hide');
                     $(element).hide();
                 }
             } else {
+                console.log('show past events');
                 $(element).show();
             }
         });
