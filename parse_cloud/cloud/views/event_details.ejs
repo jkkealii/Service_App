@@ -82,8 +82,11 @@
                     <%= (locals.eventObj ? locals.eventObj.driverHours : '') %>
                   </p>
                 </div>
-                
-                <div class="deet-text">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <div class="deet-text">
                   <!-- <table class="table">
                     <thead>
                       <tr>
@@ -104,10 +107,8 @@
                       <p>No Drivers Found</p>
                     <% } %>
                   </p>
-                </div>
+              </div>
             </div>
-          </div>
-          <div class="row">
             <div class="col-md-8 col-md-offset-2">
               <div class="deet-text">
                 <!-- <table class="table">
@@ -135,8 +136,12 @@
           </div>
 
           <% if (locals.admin) { %>
-            <a id="deets" href="<%= (locals.eventObj ? ('/events/' + locals.eventObj.objectId + '/edit') : '#') %>" role="button" class="btn buton btn-default">Edit</a>
+            <a href="<%= (locals.eventObj ? ('/events/' + locals.eventObj.objectId + '/edit') : '#') %>" role="button" class="btn buton btn-default">Edit</a>
+            <a id="export" role="button" class="btn buton btn-default">Export</a>
           <% } %>
+          <div class="export-text">
+              
+          </div>
         </div>
       </div>
     </div>
@@ -148,6 +153,31 @@
 <script type="text/javascript" >
   $('#start-date').text(moment($('#start-date').data('original')).format("MMMM D, YYYY, h:mm A"));
   $('#end-date').text(moment($('#end-date').data('original')).format("MMMM D, YYYY, h:mm A"));
+  
+  $('#export').click(function(){
+    if (!$(this).data('showing')) {
+      $(this).data('showing', true);
+    } else {
+      $(this).data('showing', false);
+    }
+    
+    if ($(this).data('showing')) {
+      var text =  '<%=locals.eventObj.name%>' + ": " + '<%=locals.eventObj.location%>' + '\n' + 
+      '\t' +  moment($('#start-date').data('original')).format("dddd, MMMM D @ h:mm a") + '-' +
+      moment($('#end-date').data('original')).format("h:mm a") + '\n' +
+      <% locals.eventObj.members.forEach(function(member) { %>
+        '<%= member.firstName + " " + member.lastName %>' + '\n' + 
+        '<%= member.email + ", " + member.phone %>' + '\n' +
+      <% }) %>
+      '';
+     
+      $('.export-text').append('<textarea class="form-control spaced" rows="7">' + text + '</textarea>');
+    } else {
+      $('.export-text').empty();
+    }
+    
+     
+  });
 </script>
 
 <% include helper/_footer %>

@@ -544,7 +544,9 @@ app.get('/events/:event_id', function(req, res) {
                     firstName: member.get('firstName'),
                     lastName: member.get('lastName'),
                     objectId: member.get('objectId'),
-                    username: member.get('username')
+                    username: member.get('username'),
+                    email: member.get('email'),
+                    phone: member.get('phone')
                 });
             });
         }
@@ -560,7 +562,9 @@ app.get('/events/:event_id', function(req, res) {
                     firstName: driver.get('firstName'),
                     lastName: driver.get('lastName'),
                     objectId: driver.get('objectId'),
-                    username: driver.get('username')
+                    username: driver.get('username'),
+                    email: driver.get('email'),
+                    phone: driver.get('phone')
                 });
             });
         }
