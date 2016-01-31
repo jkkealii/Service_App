@@ -7,12 +7,18 @@ require('cloud/app.js');
 Parse.Cloud.job("userHoursUpdate", function(request, status) {
     Parse.Cloud.useMasterKey();
     var counter = 0;
-    var usersObj = {};
+    var users = [];
 
     var query = new Parse.Query(Parse.User);
     query.find().then(function(listUsers) {
-
-    });
+        status.message(listUsers.length + ' users found');
+        users = listUsers;
+    }, function(error) {
+        status.error('UsersQueryError: ' +
+            (error.code ? error.code : 500) + ' ' +
+            (error.message ? error.message : 'Error getting all Users')
+        );
+    }).then(function());
 
     // query.each(function(user) {
     //     // Update to plan value passed in

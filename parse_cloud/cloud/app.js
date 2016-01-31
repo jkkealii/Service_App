@@ -902,6 +902,7 @@ app.get('/users/:user_id', function(req, res) {
                         objectId: userId,
                         email: user.get('email'),
                         phone: user.get('phone'),
+                        year: user.get('year'),
                         hours: user.get('hours'),
                         onCampusHours: user.get('onCampusHours'),
                         offCampusHours: user.get('offCampusHours')
@@ -933,6 +934,7 @@ app.get('/users/:user_id', function(req, res) {
                             objectId: userId,
                             email: user.get('email'),
                             phone: user.get('phone'),
+                            year: user.get('year'),
                             hours: user.get('hours'),
                             onCampusHours: user.get('onCampusHours'),
                             offCampusHours: user.get('offCampusHours')
