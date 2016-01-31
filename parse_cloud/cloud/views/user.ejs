@@ -1,0 +1,19 @@
+<% include helper/_header %>
+
+<% include helper/_navbar %>
+
+<div class="pagelet" data-transparent-navbar="false"></div>
+
+<div class="container-fluid">
+  <% if (locals.alerts) { %>
+    <% alerts.forEach(function(alert) { %>
+      <% include helper/_alert %>
+    <% }) %>
+  <% } %>
+</div>
+
+
+
+<% include helper/_basecode %>
+
+<% include helper/_footer %>
