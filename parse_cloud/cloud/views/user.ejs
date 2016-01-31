@@ -12,8 +12,70 @@
   <% } %>
 </div>
 
+<div class="container page-contains text-center">
+  <div class="section-title center">
+    <h2 class="animated slideInDown"><%= (locals.userObj ? locals.userObj.name : 'Lorenzo') %> <strong><%= (locals.userObj ? locals.userObj.name : 'Malone') %></strong></h2>
+    <div class="line">
+      <hr>
+    </div>
+  </div>
+</div>
 
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4"
+      
+    </div>
+    
+    <div class="col-sm-4">
+    
+    </div>
+    
+    <div class="col-sm-4">
+  </div>
+</div>  
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+          <div>
+            <a href="/events/new-event" class="btn buton btn-default spaced <%= (locals.admin ? '' : 'disabled') %>">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Event
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="checkbox spaced">
+            <label class="check-text"><input type="checkbox" value="" id="show-past-events" disabled>Show past events</label>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="input-group spaced"> <span class="input-group-addon search-bar">Search</span>
+            <input id="filter-search" type="text" class="form-control search-text-box" placeholder="Type here...">
+          </div>
+        </div>
+    </div>
+    
+    <div class="table-responsive">
+        <table class="table table-striped sortable-theme-bootstrap" data-sortable>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th data-sortable-type="date">Date & Time</th>
+              <th data-sortable="false">Location</th>
+              <th>On/Off Campus</th>
+              <th data-sortable="false">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="searchable">
+
+          </tbody>
+        </table>
+    </div>
+</div>
 
 <% include helper/_basecode %>
+
+<script type="text/javascript" src="/js/user.js"></script>
 
 <% include helper/_footer %>

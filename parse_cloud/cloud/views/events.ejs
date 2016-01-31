@@ -24,19 +24,12 @@
     <div class="row">
         <div class="col-sm-3">
           <div>
-            <a href="/events/new-event" class="btn buton btn-default spaced">
+            <a href="/events/new-event" class="btn buton btn-default spaced <%= (locals.admin ? '' : 'disabled')%>">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Event
             </a>
           </div>
         </div>
         <div class="col-sm-3">
-<!--
-          <div class="btn-group spaced" role="group" aria-label="time-period">
-            <button type="button" class="btn btn-default">Day</button>
-            <button type="button" class="btn btn-default">Week</button>
-            <button type="button" class="btn btn-default">Month</button>
-          </div>
--->
           <div class="checkbox spaced">
             <label class="check-text"><input type="checkbox" value="" id="show-past-events" disabled>Show past events</label>
           </div>
