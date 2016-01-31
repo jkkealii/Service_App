@@ -1,7 +1,7 @@
 $(function () {
     var newRow = function(parseObject) {
         var campusText = (parseObject.isOnCampus ? 'On Campus' : 'Off Campus');
-        return '<tr><td>' + parseObject.name + '</td>' + 
+        return '<tr><td>' + '<a href="/events/' + parseObject.objectId + '">' + parseObject.name + '</a>' + '</td>' + 
             '<td>' + moment(parseObject.startDateTime.iso).format("MMM D, YYYY, h:mm a") + 
             '</td>' + '<td><a href="https://maps.google.com/?q=' + parseObject.location +
             '">' + parseObject.location + '</a></td>' + '<td>' + campusText + '</td> ' +
