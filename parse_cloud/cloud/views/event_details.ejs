@@ -25,7 +25,8 @@
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
           <div class="row">
-            <div class="col-md-6 center">    
+            <div class="col-md-6 center">
+                <div class="event-id" data-object-id="<%= (locals.eventObj ? locals.eventObj.objectId : '') %>"></div> 
                 <div class="deet-text">
                   <h3>START TIME</h3>
                   <p id="start-date" data-original="<%= (locals.eventObj ? locals.eventObj.startDateTime : '') %>">
@@ -138,6 +139,7 @@
           <% if (locals.admin) { %>
             <a href="<%= (locals.eventObj ? ('/events/' + locals.eventObj.objectId + '/edit') : '#') %>" role="button" class="btn buton btn-default">Edit</a>
             <a id="export" role="button" class="btn buton btn-default">Export</a>
+            <button class="btn buton btn-default" id="delete" data-loading-text="Deleting Event...">Delete</button>
           <% } %>
           <div class="export-text">
               
@@ -178,6 +180,35 @@
     
      
   });
+
+  $('#delete').click(function() {
+    var $btn = $(this).button('loading');
+    var eventId = $('.event-id').data('object-id')
+    var eventUrl = '/events/' + eventId + '/delete';
+
+    if (eventId) {
+      console.log('sending request...');
+      $.ajax({
+        method: 'POST',
+        url: eventUrl,
+        data: {objectId: eventId}
+      }).then(function(data, textStatus, jqXHR) {
+        console.log('success');
+        console.log(data);
+        console.log(textStatus);
+        $btn.button('reset');
+        window.location.replace('/events');
+      }, function(jqXHR, textStatus, error) {
+        console.log('error');
+        console.log(textStatus);
+        console.log(error);
+        $btn.button('reset');
+      });
+    } else {
+      console.log('no eventId');
+      $btn.button('reset');
+    }
+  })
 </script>
 
 <% include helper/_footer %>

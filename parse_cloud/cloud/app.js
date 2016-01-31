@@ -824,6 +824,24 @@ app.post('/events/:event_id/edit', function(req, res) {
     });
 });
 
+app.post('/events/:event_id/delete', function(req, res) {
+    var eventId = req.params.event_id;
+    var query = new Parse.Query(Parse.Object.extend("Event"));
+    query.get(eventId).then(function(eventObject) {
+        return eventObject.destroy();
+    }, function(error) {
+        var errorCode = (error.code ? error.code : 500);
+        var errorObj = (error.message ? ({ error: error.message }) : ({ error: "Internal Server Error" }));
+        res.status(errorCode).json(errorObj);
+    }).then(function(obj) {
+        res.status(200).json(obj);
+    }, function(error) {
+        var errorCode = (error.code ? error.code : 500);
+        var errorObj = (error.message ? ({ error: error.message }) : ({ error: "Internal Server Error" }));
+        res.status(errorCode).json(errorObj);
+    });
+});
+
 app.get('/users', function(req, res) {
     if (Parse.User.current()) {
         var query = new Parse.Query(Parse.Role);
