@@ -37,21 +37,15 @@
 
 <div class="container">
   <div class="row">
-    <!-- <div class="col-sm-3">
-      <div>
-        <a href="/events/new-event" class="btn buton btn-default spaced <%= (locals.admin ? '' : 'disabled') %>">
-          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Event
-        </a>
+    <div class="col-sm-6 col-sm-offset-3">
+      <div class="input-group spaced"> <span class="input-group-addon search-bar">Search</span>
+        <input id="filter-search" type="text" class="form-control search-text-box" placeholder="Type here...">
       </div>
-    </div> -->
+    </div>
+    
     <div class="col-sm-3">
       <div class="checkbox spaced">
         <label class="check-text"><input type="checkbox" value="" id="show-past-events" disabled>Show past events</label>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="input-group spaced"> <span class="input-group-addon search-bar">Search</span>
-        <input id="filter-search" type="text" class="form-control search-text-box" placeholder="Type here...">
       </div>
     </div>
   </div>
