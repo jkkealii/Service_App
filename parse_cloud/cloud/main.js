@@ -18,7 +18,7 @@ Parse.Cloud.job("userHoursUpdate", function(request, status) {
             (error.code ? error.code : 500) + ' ' +
             (error.message ? error.message : 'Error getting all Users')
         );
-    }).then(function());
+    });
 
     // query.each(function(user) {
     //     // Update to plan value passed in

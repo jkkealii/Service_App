@@ -8,6 +8,29 @@ $(function() {
         $('.navbar-default').addClass('on');
         $('.dropdown-menu').addClass('on');
     }
+    
+    function findBootstrapEnvironment() {
+        var envs = ['xs', 'sm', 'md', 'lg'];
+    
+        var $el = $('<div>');
+        $el.appendTo($('body'));
+    
+        for (var i = envs.length - 1; i >= 0; i--) {
+            var env = envs[i];
+    
+            $el.addClass('hidden-'+env);
+            if ($el.is(':hidden')) {
+                $el.remove();
+                return env;
+            }
+        }
+    }
+    
+    if (findBootstrapEnvironment() === 'sm') {
+        $('.sm-hide').hide();
+    } else {
+        $('.sm-hide').show();
+    }
 });
 
 setCarouselHeight('#carousel-example');
@@ -45,3 +68,13 @@ $(document).ready(function () {
     }(jQuery));
 
 });
+
+$('.spin-on-hover').hover(
+       function(){ $(this).addClass('fa-spin') },
+       function(){ $(this).removeClass('fa-spin') }
+)
+
+$('.pulse-on-hover').hover(
+       function(){ $(this).addClass('fa-pulse') },
+       function(){ $(this).removeClass('fa-pulse') }
+)

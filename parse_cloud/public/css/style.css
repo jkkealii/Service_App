@@ -673,6 +673,32 @@ button.btn.buton.btn-default:focus {
 	outline-offset: none;
 }
 
+#contact-us i.fa {
+	font-size: 40px;
+	border: 4px solid rgb(102, 13, 15);
+	width: 100px;
+	height: 100px;
+	padding: 27px 25px;
+	margin-bottom: 10px;
+	border-radius: 50%;
+	transition: all 0.5s;
+}
+
+#contact-us i.fa.fa-mobile{
+	font-size: 50px;
+	padding: 20px 25px;
+}
+
+#contact-us .email-button:hover>i.fa{
+	background: rgb(102, 13, 15);
+	color: #ffffff;
+}
+
+#contact-us i.fa:hover{
+    background: rgb(102, 13, 15);
+	color: #ffffff;
+}
+
 /* Calendar page */
 
 #calendar-doc iframe{
