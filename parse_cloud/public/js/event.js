@@ -33,6 +33,13 @@ $(function () {
         console.log('Driving Remove');
         console.log($('#driving-members').data('remove-members'));
         console.log(' ');
+        console.log('Special Original');
+        console.log($('#special-members').data('original-members'));
+        console.log('Special Attending');
+        console.log($('#special-members').data('attending-members'));
+        console.log('Special Remove');
+        console.log($('#special-members').data('remove-members'));
+        console.log(' ');
     };
 
 
@@ -333,8 +340,8 @@ $(function () {
     $('.special-member').each(function(index, element) {
         potentialSpecialRemoves.push($(element).data('username'));
     });
-    $('#special-members').data('original-members', potentialDrivingRemoves.slice());
-    $('#special-members').data('attending-members', potentialDrivingRemoves.slice());
+    $('#special-members').data('original-members', potentialSpecialRemoves.slice());
+    $('#special-members').data('attending-members', potentialSpecialRemoves.slice());
     $('#special-members').data('remove-members', []);
 
     printAllMembers();
@@ -376,6 +383,7 @@ $(function () {
         };
 
         console.log('sending request...');
+        printAllMembers();
 
         var eventUrl = '/events/' + $('.eventId').data('eventid') + '/edit';
         $.ajax({

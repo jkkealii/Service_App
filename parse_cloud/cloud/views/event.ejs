@@ -109,8 +109,8 @@
         <div class="form-group">
           <label for="extra-hours">Additional Sepcial Hours</label>
           <div class="input-group form-control">
-            <input type="text" class="form-control" placeholder=".5" aria-describedby="addon2" id="extra-hours" data-original="<%= (locals.eventObj ? locals.eventObj.extraHours : '') %>">
-            <span class="input-group-addon" id="addon2">hour(s)</span>
+            <input type="text" class="form-control" placeholder=".5" aria-describedby="addon3" id="extra-hours" data-original="<%= (locals.eventObj ? locals.eventObj.extraHours : '') %>">
+            <span class="input-group-addon" id="addon3">hour(s)</span>
           </div>
         </div>
 
@@ -200,8 +200,8 @@
               </tr>
             </thead>
             <tbody id="special-members">
-              <% if (locals.eventObj && eventObj.drivers) { %>
-                <% locals.eventObj.drivers.forEach(function(member) { %>
+              <% if (locals.eventObj && eventObj.specials) { %>
+                <% locals.eventObj.specials.forEach(function(member) { %>
                   <% var type = 'special' %>
                   <% include helper/_attending %>
                 <% }) %>

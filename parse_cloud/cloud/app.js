@@ -813,6 +813,7 @@ app.post('/events/:event_id/edit', function(req, res) {
         }
         eventObject.set('meetingPlace', req.body.meetingPlace);
         eventObject.set('driverHours', parseFloat(req.body.driverHours));
+        eventObject.set('extraHours', parseFloat(req.body.extraHours));
 
         // var peopleRelation = eventObject.relation("members");
         // req.body.members.forEach(function(member) {
