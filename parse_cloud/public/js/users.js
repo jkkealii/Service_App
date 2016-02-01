@@ -1,6 +1,6 @@
 $(function () {
     var newRow = function(parseObject) {
-        return '<tr><td><a href="/user/' + parseObject.objectId + '">' + parseObject.firstName + '</a></td>' + 
+        return '<tr><td><a href="/users/' + parseObject.objectId + '">' + parseObject.firstName + '</a></td>' + 
             '<td><a href="/users/' + parseObject.objectId + '">' + parseObject.lastName + '</a></td>' +
             '<td>' + parseObject.year + '</td>' + 
             '<td>' + parseObject.hours + '</td> ' +
