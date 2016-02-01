@@ -23,10 +23,10 @@
 
 <div class="container">
   <div class="row spaced">
-    <div class="col-sm-4 left-stat">
+        <div class="col-xs-1 col-xs-offset-3 side-stat">
       <div class="stat-circle-small">
         <div class="hour-stat-small">
-          <%= (locals.userObj ? locals.userObj.onCampusHours : 'n/a') %>
+          <strong><%= (locals.userObj ? locals.userObj.onCampusHours : 'n/a') %></strong>
         </div>
         <div class="stat-text-small">
           on-campus
@@ -37,10 +37,10 @@
       </div>
     </div>
     
-    <div class="col-sm-4 center-stat">
+    <div class="col-xs-2 col-xs-offset-1 center-stat">
       <div class="stat-circle">
         <div class="hour-stat">
-          <%= (locals.userObj ? locals.userObj.hours : 'n/a') %>
+          <strong><%= (locals.userObj ? locals.userObj.hours : 'n/a') %></strong>
         </div>
         <div class="stat-text">
           total
@@ -51,10 +51,10 @@
       </div>
     </div>
     
-    <div class="col-sm-4 right-stat">
+    <div class="col-xs-1 col-xs-offset-1 side-stat">
       <div class="stat-circle-small">
         <div class="hour-stat-small">
-          <%= (locals.userObj ? locals.userObj.offCampusHours : 'n/a') %>
+          <strong><%= (locals.userObj ? locals.userObj.offCampusHours : 'n/a') %></strong>
         </div>
         <div class="stat-text-small">
           off-campus
@@ -64,6 +64,7 @@
         </div>
       </div>
     </div>
+    
   </div>
   
   <div class="space"></div>
