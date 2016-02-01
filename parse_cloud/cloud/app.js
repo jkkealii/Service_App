@@ -463,6 +463,7 @@ app.post('/events/new-event', function(req, res) {
     eventObject.set('meetingPlace', req.body.meetingPlace);
     eventObject.set('hours', parseFloat(req.body.hours));
     eventObject.set('driverHours', parseFloat(req.body.driverHours));
+    eventObject.set('extraHours', parseFloat(req.body.extraHours));
     eventObject.set('isOnCampus', (req.body.isOnCampus === 'true'));
     eventObject.set('uniform', req.body.uniform);
 
@@ -472,6 +473,7 @@ app.post('/events/new-event', function(req, res) {
     query.find().then(function(listUsers) {
         var attendingRelation = eventObject.relation('members');
         var drivingRelation = eventObject.relation('drivers');
+        var specialRelation = eventObject.relation('specials');
         if (req.body.attendingMembers) {
             listUsers.forEach(function(user) {
                 if (req.body.attendingMembers.indexOf(user.get('username')) !== -1) {
@@ -485,6 +487,13 @@ app.post('/events/new-event', function(req, res) {
                     drivingRelation.add(user);
                 }
             });
+        }
+        if (req.body.attendingSpecials) {
+            listUsers.forEach(function(user) {
+                if (req.body.attendingSpecials.indexOf(user.get('username')) !== -1) {
+                    specialRelation.add(user);
+                }
+            })
         }
 
         return eventObject.save();
@@ -526,6 +535,7 @@ app.get('/events/:event_id', function(req, res) {
             objectId: eventId,
             hours: eventObject.get('hours'),
             driverHours: eventObject.get('driverHours'),
+            extraHours: eventObject.get('extraHours'),
             isOnCampus: eventObject.get('isOnCampus'),
             location: eventObject.get('location'),
             meetingPlace: eventObject.get('meetingPlace'),
@@ -546,7 +556,8 @@ app.get('/events/:event_id', function(req, res) {
                     objectId: member.get('objectId'),
                     username: member.get('username'),
                     email: member.get('email'),
-                    phone: member.get('phone')
+                    phone: member.get('phone'),
+                    year: member.get('year')
                 });
             });
         }
@@ -564,11 +575,31 @@ app.get('/events/:event_id', function(req, res) {
                     objectId: driver.get('objectId'),
                     username: driver.get('username'),
                     email: driver.get('email'),
-                    phone: driver.get('phone')
+                    phone: driver.get('phone'),
+                    year: driver.get('year')
                 });
             });
         }
         localEvent.drivers = driversArray;
+
+        var query = localEventObject.relation('specials').query();
+        return query.find();
+    }).then(function(specials) {
+        specialsArray = [];
+        if (specials) {
+            specials.forEach(function(special) {
+                specialsArray.push({
+                    firstName: special.get('firstName'),
+                    lastName: special.get('lastName'),
+                    objectId: special.get('objectId'),
+                    username: special.get('username'),
+                    email: special.get('email'),
+                    phone: special.get('phone'),
+                    year: special.get('year')
+                });
+            });
+        }
+        localEvent.specials = specialsArray;
 
         if (Parse.User.current()) {
             var query = new Parse.Query(Parse.Role);
@@ -672,6 +703,7 @@ app.get('/events/:event_id/edit', function(req, res) {
                         objectId: eventId,
                         hours: eventObject.get('hours'),
                         driverHours: eventObject.get('driverHours'),
+                        extraHours: eventObject.get('extraHours'),
                         isOnCampus: eventObject.get('isOnCampus'),
                         location: eventObject.get('location'),
                         meetingPlace: eventObject.get('meetingPlace'),
@@ -711,6 +743,22 @@ app.get('/events/:event_id/edit', function(req, res) {
                         });
                     }
                     localEvent.drivers = driversArray;
+
+                    var query = localEventObject.relation('specials').query();
+                    return query.find();
+                }).then(function(specials) {
+                    specialsArray = [];
+                    if (specials) {
+                        specials.forEach(function(special) {
+                            specialsArray.push({
+                                firstName: special.get('firstName'),
+                                lastName: special.get('lastName'),
+                                objectId: special.get('objectId'),
+                                username: special.get('username')
+                            });
+                        });
+                    }
+                    localEvent.specials = specialsArray;
 
                     res.render('event', {
                         loggedIn: true,
@@ -783,6 +831,7 @@ app.post('/events/:event_id/edit', function(req, res) {
         // console.log(listUsers);
         var attendingRelation = localEvent.relation('members');
         var drivingRelation = localEvent.relation('drivers');
+        var specialsRelation = localEvent.relation('specials');
         if (req.body.attendingMembers) {
             listUsers.forEach(function(user) {
                 if (req.body.attendingMembers.indexOf(user.get('username')) !== -1) {
@@ -808,6 +857,20 @@ app.post('/events/:event_id/edit', function(req, res) {
             listUsers.forEach(function(user) {
                 if (req.body.removeDrivers.indexOf(user.get('username')) !== -1) {
                     drivingRelation.remove(user);
+                }
+            });
+        }
+        if (req.body.attendingSpecials) {
+            listUsers.forEach(function(user) {
+                if (req.body.attendingSpecials.indexOf(user.get('username')) !== -1) {
+                    specialsRelation.add(user);
+                }
+            });
+        }
+        if (req.body.removeSpecials) {
+            listUsers.forEach(function(user) {
+                if (req.body.removeSpecials.indexOf(user.get('username')) !== -1) {
+                    specialsRelation.remove(user);
                 }
             });
         }

@@ -73,7 +73,7 @@ $(function () {
         $('#attending-members').data('remove-members', currentRemoveMembers);
     };
 
-    // Manage current lsit of driving to be added and removed
+    // Manage current list of driving to be added and removed
     var removeDrivingMember = function(username) {
         var originalMembers = $('#driving-members').data('original-members');
         var currentRemoveMembers = $('#driving-members').data('remove-members');
@@ -109,6 +109,42 @@ $(function () {
         $('#driving-members').data('remove-members', currentRemoveMembers);
     };
 
+    // Manage current list of specials to be added and removed
+    var removeSpecialMember = function(username) {
+        var originalMembers = $('#special-members').data('original-members');
+        var currentRemoveMembers = $('#special-members').data('remove-members');
+        var currentAttendingMembers = $('#special-members').data('attending-members');
+
+        var userInRemove = ($.inArray(username, currentRemoveMembers) !== -1);
+        var userInAttending = ($.inArray(username, currentAttendingMembers) !== -1);
+        var userOriginal = ($.inArray(username, originalMembers) !== -1);
+        if (userOriginal && (!userInRemove)) {
+            currentRemoveMembers.push(username);
+        }
+        if (userInAttending) {
+            currentAttendingMembers.splice($.inArray(username, currentAttendingMembers), 1);
+        }
+
+        $('#special-members').data('attending-members', currentAttendingMembers);
+        $('#special-members').data('remove-members', currentRemoveMembers);
+    };
+    var addSpecialMember = function(username) {
+        var currentAttendingMembers = $('#special-members').data('attending-members');
+        var currentRemoveMembers = $('#special-members').data('remove-members');
+
+        var userInRemove = ($.inArray(username, currentRemoveMembers) !== -1);
+        var userInAttending = ($.inArray(username, currentAttendingMembers) !== -1);
+        if (userInRemove) {
+            currentRemoveMembers.splice($.inArray(username, currentRemoveMembers), 1);
+        }
+        if (!userInAttending) {
+            currentAttendingMembers.push(username);
+        }
+
+        $('#special-members').data('attending-members', currentAttendingMembers);
+        $('#special-members').data('remove-members', currentRemoveMembers);
+    };
+
 
     // Filling Current Event Details
     $('#name').val($('#name').data('original'));
@@ -116,6 +152,7 @@ $(function () {
     $('#meeting-place').val($('#meeting-place').data('original'));
     $('#hours').val($('#hours').data('original'));
     $('#driver-hours').val($('#driver-hours').data('original'));
+    $('#extra-hours').val($('#extra-hours').data('original'));
     $('#meeting-place').val($('#meeting-place').data('original'));
     
     var refreshOptions = function() {
@@ -151,6 +188,13 @@ $(function () {
             removeDrivingMember(drivingMember.data('username'))
             drivingMember.remove();
         });
+        $('.rm-row-special').click(function(event) {
+            var jThis = $(this);
+            var specialMember = jThis.parent().parent();
+            console.log('special to remove ' + specialMember.data('username'));
+            removeSpecialMember(specialMember.data('username'))
+            specialMember.remove();
+        });
     };
 
     refreshRemoveButtons();
@@ -176,6 +220,14 @@ $(function () {
         '" data-username="' + member.username + '"><td>' +
         member.firstName + ' ' + member.lastName +
         '</td><td><button type="button" class="btn btn-default btn-xs rm-row-driving">' +
+        '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
+        '</button></td></tr>';
+    };
+    var newSpecialMember = function(member) {
+        return '<tr class="special-member" id="special-member' + member.objectId +
+        '" data-username="' + member.username + '"><td>' +
+        member.firstName + ' ' + member.lastName +
+        '</td><td><button type="button" class="btn btn-default btn-xs rm-row-special">' +
         '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
         '</button></td></tr>';
     };
@@ -239,6 +291,24 @@ $(function () {
         refreshRemoveButtons();
     });
 
+    // Add person to list of special
+    $('#confirm-add-special').click(function() {
+        console.log('Add Special clicked');
+        var addPerson = $('#add-person');
+        if (addPerson.data('member')) {
+            var member = addPerson.data('member');
+            $('#special-members').append(newSpecialMember(member));
+            $('#special-member' + member.objectId).data('member', member);
+            $('#special-member' + member.objectId).data('username', member.username);
+            addSpecialMember(member.username);
+            addPerson.removeData('member');
+            addPerson.val('');
+        } else {
+            // what if they type in the whole name manually?
+        }
+        refreshRemoveButtons();
+    });
+
 
     // Add Original Attending Members to list for possible removal
     var potentialAttendingRemoves = [];
@@ -258,6 +328,15 @@ $(function () {
     $('#driving-members').data('attending-members', potentialDrivingRemoves.slice());
     $('#driving-members').data('remove-members', []);
 
+    // Add Original Driving Members to list to possible removal
+    var potentialSpecialRemoves = [];
+    $('.special-member').each(function(index, element) {
+        potentialSpecialRemoves.push($(element).data('username'));
+    });
+    $('#special-members').data('original-members', potentialDrivingRemoves.slice());
+    $('#special-members').data('attending-members', potentialDrivingRemoves.slice());
+    $('#special-members').data('remove-members', []);
+
     printAllMembers();
 
 
@@ -269,6 +348,8 @@ $(function () {
         var removeMembers = $('#attending-members').data('remove-members');
         var attendingDrivers = $('#driving-members').data('attending-members');
         var removeDrivers = $('#driving-members').data('remove-members');
+        var attendingSpecials = $('#special-members').data('attending-members');
+        var removeSpecials = $('#special-members').data('remove-members');
 
         var uniform = $('input[name=uniform]:checked', '#eventForm').val();
         if (!uniform) {
@@ -283,12 +364,15 @@ $(function () {
             meetingPlace: $('#meeting-place').val(),
             hours: parseFloat($('#hours').val()),
             driverHours: parseFloat($('#driver-hours').val()),
+            extraHours: parseFloat($('#extra-hours').val()),
             uniform: uniform,
             isOnCampus: ($('input[name=is-on-campus]:checked', '#eventForm').val() === 'true'),
             attendingMembers: attendingMembers,
             removeMembers: removeMembers,
             attendingDrivers: attendingDrivers,
-            removeDrivers: removeDrivers
+            removeDrivers: removeDrivers,
+            attendingSpecials: attendingSpecials,
+            removeSpecials: removeSpecials
         };
 
         console.log('sending request...');

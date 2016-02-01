@@ -58,6 +58,28 @@ $(function () {
 
         $('#driving-members').data('attending-members', currentAttendingMembers);
     };
+
+    // Manage current lsit of special to be added and removed
+    var removeSpecialMember = function(username) {
+        var currentAttendingMembers = $('#special-members').data('attending-members');
+
+        var userInAttending = ($.inArray(username, currentAttendingMembers) !== -1);
+        if (userInAttending) {
+            currentAttendingMembers.splice($.inArray(username, currentAttendingMembers), 1);
+        }
+
+        $('#special-members').data('attending-members', currentAttendingMembers);
+    };
+    var addSpecialMember = function(username) {
+        var currentAttendingMembers = $('#special-members').data('attending-members');
+
+        var userInAttending = ($.inArray(username, currentAttendingMembers) !== -1);
+        if (!userInAttending) {
+            currentAttendingMembers.push(username);
+        }
+
+        $('#special-members').data('attending-members', currentAttendingMembers);
+    };
     
 
     var refreshOptions = function() {
@@ -92,6 +114,13 @@ $(function () {
             removeDrivingMember(drivingMember.data('username'))
             drivingMember.remove();
         });
+        $('.rm-row-special').click(function(event) {
+            var jThis = $(this);
+            var specialMember = jThis.parent().parent();
+            console.log('special to remove ' + specialMember.data('username'));
+            removeSpecialMember(specialMember.data('username'))
+            specialMember.remove();
+        });
     };
 
     refreshRemoveButtons();
@@ -117,6 +146,14 @@ $(function () {
         '" data-username="' + member.username + '"><td>' +
         member.firstName + ' ' + member.lastName +
         '</td><td><button type="button" class="btn btn-default btn-xs rm-row-driving">' +
+        '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
+        '</button></td></tr>';
+    };
+    var newSpecialMember = function(member) {
+        return '<tr class="special-member" id="special-member' + member.objectId +
+        '" data-username="' + member.username + '"><td>' +
+        member.firstName + ' ' + member.lastName +
+        '</td><td><button type="button" class="btn btn-default btn-xs rm-row-special">' +
         '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
         '</button></td></tr>';
     };
@@ -180,14 +217,34 @@ $(function () {
         refreshRemoveButtons();
     });
 
+    // Add person to list of special
+    $('#confirm-add-special').click(function() {
+        console.log('Add Special clicked');
+        var addPerson = $('#add-person');
+        if (addPerson.data('member')) {
+            var member = addPerson.data('member');
+            $('#special-members').append(newSpecialMember(member));
+            $('#special-member' + member.objectId).data('member', member);
+            $('#special-member' + member.objectId).data('username', member.username);
+            addSpecialMember(member.username);
+            addPerson.removeData('member');
+            addPerson.val('');
+        } else {
+            // what if they type in the whole name manually?
+        }
+        refreshRemoveButtons();
+    });
+
     $('#attending-members').data('attending-members', []);
     $('#driving-members').data('attending-members', []);
+    $('#special-members').data('attending-members', []);
 
     $('#create-event').click(function() {
         var $btn = $(this).button('loading');
 
         var attendingMembers = $('#attending-members').data('attending-members');
         var attendingDrivers = $('#driving-members').data('attending-members');
+        var attendingSpecials = $('#special-members').data('attending-members');
 
         var uniform = $('input[name=uniform]:checked', '#eventForm').val();
         if (!uniform) {
@@ -202,10 +259,12 @@ $(function () {
             meetingPlace: $('#meeting-place').val(),
             hours: parseFloat($('#hours').val()),
             driverHours: parseFloat($('#driver-hours').val()),
+            extraHours: parseFloat($('#extra-hours').val()),
             uniform: uniform,
             isOnCampus: ($('input[name=is-on-campus]:checked', '#eventForm').val() === 'true'),
             attendingMembers: attendingMembers,
-            attendingDrivers: attendingDrivers
+            attendingDrivers: attendingDrivers,
+            attendingSpecials: attendingSpecials
         };
 
         console.log('sending request...');
