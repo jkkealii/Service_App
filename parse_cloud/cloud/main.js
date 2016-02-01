@@ -218,9 +218,11 @@ Parse.Cloud.job("userHoursUpdate", function(request, status) {
             var username = user.get('username');
             status.message('Adding hours to: ' + username);
             var localUserInfo = users[username];
-            user.set('hours', localUserInfo.hours);
-            user.set('onCampusHours', localUserInfo.onCampusHours);
-            user.set('offCampusHours', localUserInfo.offCampusHours);
+            if (localUserInfo) {
+                user.set('hours', localUserInfo.hours);
+                user.set('onCampusHours', localUserInfo.onCampusHours);
+                user.set('offCampusHours', localUserInfo.offCampusHours);
+            }
             return user.save();
         });
     }, function(error) {

@@ -31,6 +31,7 @@ app.get('/aboutus', function(req, res) {
         query.first().then(function(adminRole) {
             res.render('aboutus', {
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: (adminRole ? true : false)
             });
         }, function(error) {
@@ -42,6 +43,7 @@ app.get('/aboutus', function(req, res) {
             res.render('aboutus', {
                 alerts: alerts,
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: false
             });
         });
@@ -98,6 +100,7 @@ app.get('/', function(req, res) {
             res.render('index', {
                 alerts: alerts,
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: (adminRole ? true : false),
                 leftMessage: 'Congrats bitches, you did it',
                 rightMessage: 'But seriously, WTF!?'
@@ -110,6 +113,7 @@ app.get('/', function(req, res) {
             res.render('index', {
                 alerts: alerts,
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: false,
                 leftMessage: 'Congrats bitches, you did it',
                 rightMessage: 'But seriously, WTF!?'
@@ -138,6 +142,7 @@ app.get('/login', function(req, res) {
         query.first().then(function(adminRole) {
             res.render('login', {
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: (adminRole ? true : false)
             });
         }, function(error) {
@@ -149,6 +154,7 @@ app.get('/login', function(req, res) {
             res.render('login', {
                 alerts: alerts,
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: false
             });
         });
@@ -180,6 +186,7 @@ app.post('/login', function(req, res) {
                 res.render('login', {
                     alerts: alerts,
                     loggedIn: true,
+                    userId: Parse.User.current().id,
                     admin: (adminRole ? true : false)
                 });
             }, function(error) {
@@ -190,6 +197,7 @@ app.post('/login', function(req, res) {
                 res.render('login', {
                     alerts: alerts,
                     loggedIn: true,
+                    userId: Parse.User.current().id,
                     admin: false
                 });
             });
@@ -211,6 +219,7 @@ app.get('/signup', function(req, res) {
         query.first().then(function(adminRole) {
             res.render('signup', {
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: (adminRole ? true : false)
             });
         }, function(error) {
@@ -222,6 +231,7 @@ app.get('/signup', function(req, res) {
             res.render('signup', {
                 alerts: alerts,
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: false
             });
         });
@@ -269,6 +279,7 @@ app.post('/signup', function(req, res) {
                         res.render('signup', {
                             alerts: alerts,
                             loggedIn: true,
+                            userId: Parse.User.current().id,
                             admin: (adminRole ? true : false)
                         });
                     }, function(error) {
@@ -279,6 +290,7 @@ app.post('/signup', function(req, res) {
                         res.render('signup', {
                             alerts: alerts,
                             loggedIn: true,
+                            userId: Parse.User.current().id,
                             admin: false
                         });
                     });
@@ -303,6 +315,7 @@ app.post('/signup', function(req, res) {
                     res.render('signup', {
                         alerts: alerts,
                         loggedIn: true,
+                        userId: Parse.User.current().id,
                         admin: (adminRole ? true : false)
                     });
                 }, function(error) {
@@ -313,6 +326,7 @@ app.post('/signup', function(req, res) {
                     res.render('signup', {
                         alerts: alerts,
                         loggedIn: true,
+                        userId: Parse.User.current().id,
                         admin: false
                     });
                 });
@@ -337,6 +351,7 @@ app.post('/signup', function(req, res) {
                 res.render('signup', {
                     alerts: alerts,
                     loggedIn: true,
+                    userId: Parse.User.current().id,
                     admin: (adminRole ? true : false)
                 });
             }, function(error) {
@@ -347,6 +362,7 @@ app.post('/signup', function(req, res) {
                 res.render('signup', {
                     alerts: alerts,
                     loggedIn: true,
+                    userId: Parse.User.current().id,
                     admin: false
                 });
             });
@@ -377,6 +393,7 @@ app.get('/events', function(req, res) {
         query.first().then(function(adminRole) {
             res.render('events', {
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: (adminRole ? true : false)
             });
         }, function(error) {
@@ -388,6 +405,7 @@ app.get('/events', function(req, res) {
             res.render('events', {
                 alerts: alerts,
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: false
             });
         });
@@ -408,6 +426,7 @@ app.get('/events/new-event', function(req, res) {
             if (adminRole) {
                 res.render('new_event', {
                     loggedIn: true,
+                    userId: Parse.User.current().id,
                     admin: true
                 });
             } else {
@@ -418,6 +437,7 @@ app.get('/events/new-event', function(req, res) {
                 });
                 res.redirect('new_event', {
                     loggedIn: true,
+                    userId: Parse.User.current().id,
                     alerts: alerts,
                     admin: false
                 })
@@ -435,6 +455,7 @@ app.get('/events/new-event', function(req, res) {
             res.render('new_event', {
                 alerts: alerts,
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: false
             });
         });
@@ -608,6 +629,7 @@ app.get('/events/:event_id', function(req, res) {
             query.first().then(function(adminRole) {
                 res.render('event_details', {
                     loggedIn: true,
+                    userId: Parse.User.current().id,
                     eventObj: localEvent,
                     admin: (adminRole ? true : false)
                 });
@@ -620,6 +642,7 @@ app.get('/events/:event_id', function(req, res) {
                 res.render('event_details', {
                     alerts: alerts,
                     loggedIn: true,
+                    userId: Parse.User.current().id,
                     eventObj: localEvent,
                     admin: false
                 });
@@ -645,6 +668,7 @@ app.get('/events/:event_id', function(req, res) {
                 res.render('event_details', {
                     alerts: alerts,
                     loggedIn: true,
+                    userId: Parse.User.current().id,
                     eventObj: localEvent,
                     admin: (adminRole ? true : false)
                 });
@@ -661,6 +685,7 @@ app.get('/events/:event_id', function(req, res) {
                 res.render('event_details', {
                     alerts: alerts,
                     loggedIn: true,
+                    userId: Parse.User.current().id,
                     eventObj: localEvent,
                     admin: false
                 });
@@ -762,6 +787,7 @@ app.get('/events/:event_id/edit', function(req, res) {
 
                     res.render('event', {
                         loggedIn: true,
+                        userId: Parse.User.current().id,
                         eventObj: localEvent,
                         admin: true
                     });
@@ -775,6 +801,7 @@ app.get('/events/:event_id/edit', function(req, res) {
                     res.render('event', {
                         alerts: alerts,
                         loggedIn: true,
+                        userId: Parse.User.current().id,
                         eventObj: localEvent,
                         admin: true
                     });
@@ -914,6 +941,7 @@ app.get('/users', function(req, res) {
         query.first().then(function(adminRole) {
             res.render('users', {
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: (adminRole ? true : false)
             });
         }, function(error) {
@@ -925,6 +953,7 @@ app.get('/users', function(req, res) {
             res.render('users', {
                 alerts: alerts,
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: false
             });
         });
@@ -974,6 +1003,7 @@ app.get('/users/:user_id', function(req, res) {
                     res.render('user', {
                         userObj: userObj,
                         loggedIn: true,
+                        userId: Parse.User.current().id,
                         admin: true
                     });
                 }, function(error) {
@@ -985,6 +1015,7 @@ app.get('/users/:user_id', function(req, res) {
                     res.render('404', {
                         alerts: alerts,
                         loggedIn: true,
+                        userId: Parse.User.current().id,
                         admin: true
                     });
                 });
@@ -1006,6 +1037,7 @@ app.get('/users/:user_id', function(req, res) {
                         res.render('user', {
                             userObj: userObj,
                             loggedIn: true,
+                            userId: Parse.User.current().id,
                             admin: true
                         });
                     }, function(error) {
@@ -1017,12 +1049,14 @@ app.get('/users/:user_id', function(req, res) {
                         res.render('404', {
                             alerts: alerts,
                             loggedIn: true,
+                            userId: Parse.User.current().id,
                             admin: true
                         });
                     });
                 } else {
                     res.render('401', {
                         loggedIn: true,
+                        userId: Parse.User.current().id,
                         admin: false
                     });
                 }
@@ -1036,6 +1070,7 @@ app.get('/users/:user_id', function(req, res) {
             res.render('401', {
                 alerts: alerts,
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: false
             });
         });
@@ -1055,6 +1090,7 @@ app.get('/calendar', function(req, res) {
         query.first().then(function(adminRole) {
             res.render('calendar', {
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: (adminRole ? true : false)
             });
         }, function(error) {
@@ -1066,6 +1102,7 @@ app.get('/calendar', function(req, res) {
             res.render('calendar', {
                 alerts: alerts,
                 loggedIn: true,
+                userId: Parse.User.current().id,
                 admin: false
             });
         });
