@@ -222,6 +222,10 @@ Parse.Cloud.job("userHoursUpdate", function(request, status) {
                 user.set('hours', localUserInfo.hours);
                 user.set('onCampusHours', localUserInfo.onCampusHours);
                 user.set('offCampusHours', localUserInfo.offCampusHours);
+            } else {
+                user.set('hours', 0);
+                user.set('onCampusHours', 0);
+                user.set('offCampusHours', 0);
             }
             return user.save();
         });
