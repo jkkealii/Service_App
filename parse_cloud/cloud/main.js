@@ -15,7 +15,10 @@ Parse.Cloud.job("userHoursUpdate", function(request, status) {
         listEvents.forEach(function(eventObject) {
             var eventHours = eventObject.get('hours');
             var driverHours = eventObject.get('driverHours');
+            var extraHours = eventObject.get('extraHours');
+
             var isOnCampus = eventObject.get('isOnCampus');
+
             var queryRelationMembers = eventObject.relation('members').query();
             queryRelationMembers.find().then(function(members) {
                 if (members) {
@@ -48,18 +51,92 @@ Parse.Cloud.job("userHoursUpdate", function(request, status) {
                     });
                 }
             });
+
             var queryRelationDrivers = eventObject.relation('drivers').query();
             queryRelationDrivers.find().then(function(drivers) {
+                if (drivers) {
+                    drivers.forEach(function(driver) {
+                        var username = driver.get('username');
+                        status.message('processing: ' + username);
+                        var addedHours = (eventHours + driverHours);
 
+                        if (users[username]) {
+                            var user = users[username];
+                            user.hours += addedHours;
+                            if (isOnCampus) {
+                                user.onCampusHours += addedHours;
+                            } else {
+                                user.offCampusHours += addedHours;
+                            }
+                        } else {
+                            if (isOnCampus) {
+                                users[username] = {
+                                    hours: addedHours,
+                                    onCampusHours: addedHours,
+                                    offCampusHours: 0
+                                }
+                            } else {
+                                users[username] = {
+                                    hours: addedHours,
+                                    onCampusHours: 0,
+                                    offCampusHours: addedHours
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+
+            var queryRelationDrivers = eventObject.relation('specials').query();
+            queryRelationDrivers.find().then(function(specials) {
+                if (specials) {
+                    specials.forEach(function(special) {
+                        var username = special.get('username');
+                        status.message('processing: ' + username);
+                        var addedHours = (eventHours + extraHours);
+                        
+                        if (users[username]) {
+                            var user = users[username];
+                            user.hours += addedHours;
+                            if (isOnCampus) {
+                                user.onCampusHours += addedHours;
+                            } else {
+                                user.offCampusHours += addedHours;
+                            }
+                        } else {
+                            if (isOnCampus) {
+                                users[username] = {
+                                    hours: addedHours,
+                                    onCampusHours: addedHours,
+                                    offCampusHours: 0
+                                }
+                            } else {
+                                users[username] = {
+                                    hours: addedHours,
+                                    onCampusHours: 0,
+                                    offCampusHours: addedHours
+                                }
+                            }
+                        }
+                    });
+                }
             });
         });
+
+        var query = new Parse.Query(Parse.Users);
+        return query.find();
     }, function(error) {
         status.error('EventsQueryError: ' +
             (error.code ? error.code : 500) + ' ' +
-            (error.message ? error.message : 'Error getting all Users')
+            (error.message ? error.message : 'Error getting all Events')
         );
     }).then(function() {
 
+    }, function(error) {
+        status.error('UserQueryError: ' +
+            (error.code ? error.code : 500) + ' ' +
+            (error.message ? error.message : 'Error getting all Users')
+        );
     });
 
     // query.each(function(user) {

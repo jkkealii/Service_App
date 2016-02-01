@@ -17,7 +17,7 @@ $(function () {
         console.log(data);
         $.each(data.objects, function(index, value) {
             console.log(value);
-            $('table tbody').append(newRow(value));
+            $('table tbody').append($(newRow(value)).data('searchable', true));
         });
     }, function(jqXHR, textStatus, error) {
         console.log(error);
