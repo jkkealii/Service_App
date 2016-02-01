@@ -1082,6 +1082,53 @@ app.get('/users/:user_id', function(req, res) {
     }
 });
 
+app.get('/users/:user_id/events', function(req, res) {
+    var userId = req.params.user_id;
+
+    var queryUser = new Parse.Query(Parse.User);
+    queryUser.get(userId).then(function(user) {
+        var queryMembers = new Parse.Query(Parse.Object.extend('Event'));
+        queryMembers.equalTo('members', user);
+
+        var queryDrivers = new Parse.Query(Parse.Object.extend('Event'));
+        queryDrivers.equalTo('drivers', user);
+
+        var querySpecials = new Parse.Query(Parse.Object.extend('Event'));
+        querySpecials.equalTo('specials', user);
+
+        var totalQuery = Parse.Query.or(queryMembers, queryDrivers, querySpecials);
+        return totalQuery.find();
+    }, function(erorr) {
+        var errorCode = (error.code ? error.code : 500);
+        var errorObj = (error.message ? ({ error: error.message }) : ({ error: "Internal Server Error" }));
+        res.status(errorCode).json(errorObj);
+    }).then(function(listEvents) {
+        var data = {
+            events: listEvents
+        };
+        // if (listEvents) {
+        //     var events = [];
+        //     listEvents.forEach(function(eventObject) {
+        //         events.push({
+        //             name: eventObject.get('name'),
+        //             objectId: eventObject.id,
+
+        //         });
+        //     });
+        //     var data = {
+        //         events: events
+        //     };
+        // } else {
+        //     var data = {};
+        // }
+        res.status(200).json(data);
+    }, function(error) {
+        var errorCode = (error.code ? error.code : 500);
+        var errorObj = (error.message ? ({ error: error.message }) : ({ error: "Internal Server Error" }));
+        res.status(errorCode).json(errorObj);
+    })
+});
+
 app.get('/calendar', function(req, res) {
     if (Parse.User.current()) {
         var query = new Parse.Query(Parse.Role);
