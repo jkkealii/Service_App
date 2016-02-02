@@ -26,20 +26,7 @@
         <div class="col-md-8 col-md-offset-2">
           <div class="row">
             <div class="col-md-6 center">
-                <div class="event-id" data-object-id="<%= (locals.eventObj ? locals.eventObj.objectId : '') %>"></div> 
-                <div class="deet-text">
-                  <h3>START TIME</h3>
-                  <p id="start-date" data-original="<%= (locals.eventObj ? locals.eventObj.startDateTime : '') %>">
-                    <%= (locals.eventObj ? locals.eventObj.startDateTime : '') %>
-                  </p>
-                </div>
-                
-                <div class="deet-text">
-                  <h3>END TIME</h3>
-                  <p id="end-date" data-original="<%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>">
-                    <%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>
-                  </p>
-                </div>    
+                <div class="event-id" data-object-id="<%= (locals.eventObj ? locals.eventObj.objectId : '') %>"></div>    
                 
                 <div class="deet-text">
                   <h3>EVENT LOCATION</h3>
@@ -54,6 +41,21 @@
                     <%= (locals.eventObj ? locals.eventObj.meetingPlace : '') %>
                   </p>
                 </div>
+                
+                <div class="deet-text">
+                  <h3>START TIME</h3>
+                  <p id="start-date" data-original="<%= (locals.eventObj ? locals.eventObj.startDateTime : '') %>">
+                    <%= (locals.eventObj ? locals.eventObj.startDateTime : '') %>
+                  </p>
+                </div>
+                
+                <div class="deet-text">
+                  <h3>END TIME</h3>
+                  <p id="end-date" data-original="<%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>">
+                    <%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>
+                  </p>
+                </div> 
+                
             </div>                
             <div class="col-md-6">
                 <div class="deet-text">
@@ -69,13 +71,6 @@
                     <%= (locals.eventObj ? (locals.eventObj.uniform ? locals.eventObj.uniform : 'No Uniform Set') : '') %>
                   </p>
                 </div> 
-                
-                <div class="deet-text">
-                  <h3>HOURS</h3>
-                  <p>
-                    <%= (locals.eventObj ? locals.eventObj.hours : '') %>
-                  </p>
-                </div>
 
                 <div class="deet-text">
                   <h3>DRIVER ADDITIONAL HOURS</h3>
@@ -93,6 +88,14 @@
             </div>
           </div>
           <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <div class="deet-text">
+                <h3>HOURS</h3>
+                <p>
+                  <%= (locals.eventObj ? locals.eventObj.hours : '') %>
+                </p>
+              </div>
+            </div>
             <div class="col-md-8 col-md-offset-2">
               <div class="deet-text">
                   <h3>DRIVERS</h3>
@@ -131,7 +134,7 @@
                         <% include helper/_attending_details %>
                       <% }) %>
                     <% } else { %>
-                      <p>No Sepcials Found</p>
+                      <p>No Specials Found</p>
                     <% } %>
                   <% } %>
                 </p>
@@ -142,11 +145,10 @@
           <% if (locals.admin) { %>
             <a href="<%= (locals.eventObj ? ('/events/' + locals.eventObj.objectId + '/edit') : '#') %>" role="button" class="btn buton btn-default">Edit</a>
             <a id="export" role="button" class="btn buton btn-default">Export</a>
-            <button class="btn buton btn-default" id="delete" data-loading-text="Deleting Event...">Delete</button>
+            <a id="delete" role="button" class="btn buton btn-default" data-loading-text="rush rimson ircle">Delete</a>
           <% } %>
-          <div class="export-text">
-              
-          </div>
+          <div class="export-text"></div>
+          <div class="space"></div>
         </div>
       </div>
     </div>
@@ -192,7 +194,7 @@
             '<%= member.email + ", " + member.phone %>' + '\n' +
           <% }) %>
         <% } else { %>
-          'No Driverss Listed' + '\n' +
+          'No Drivers Listed' + '\n' +
         <% } %>
       <% } %>
 

@@ -219,7 +219,7 @@ $(function () {
         '" data-username="' + member.username + '"><td>' +
         member.firstName + ' ' + member.lastName +
         '</td><td><button type="button" class="btn btn-default btn-xs rm-row-attending">' +
-        '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
+        '<span class="fa fa-minus" aria-hidden="true"></span>' +
         '</button></td></tr>';
     };
     var newDrivingMember = function(member) {
@@ -227,7 +227,7 @@ $(function () {
         '" data-username="' + member.username + '"><td>' +
         member.firstName + ' ' + member.lastName +
         '</td><td><button type="button" class="btn btn-default btn-xs rm-row-driving">' +
-        '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
+        '<span class="fa fa-minus" aria-hidden="true"></span>' +
         '</button></td></tr>';
     };
     var newSpecialMember = function(member) {
@@ -235,7 +235,7 @@ $(function () {
         '" data-username="' + member.username + '"><td>' +
         member.firstName + ' ' + member.lastName +
         '</td><td><button type="button" class="btn btn-default btn-xs rm-row-special">' +
-        '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
+        '<span class="fa fa-minus" aria-hidden="true"></span>' +
         '</button></td></tr>';
     };
 
