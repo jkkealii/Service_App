@@ -216,7 +216,7 @@ $(function () {
     };
     var newAttendingMember = function(member) {
         return '<tr class="attending-member" id="attending-member' + member.objectId +
-        '" data-username="' + member.username + '"><td>' +
+        '" data-username="' + member.username + '"><td class="fixed-minus-width">' +
         member.firstName + ' ' + member.lastName +
         '</td><td><button type="button" class="btn btn-default btn-xs rm-row-attending">' +
         '<span class="fa fa-minus" aria-hidden="true"></span>' +
@@ -224,7 +224,7 @@ $(function () {
     };
     var newDrivingMember = function(member) {
         return '<tr class="driving-member" id="driving-member' + member.objectId +
-        '" data-username="' + member.username + '"><td>' +
+        '" data-username="' + member.username + '"><td class="fixed-minus-width">' +
         member.firstName + ' ' + member.lastName +
         '</td><td><button type="button" class="btn btn-default btn-xs rm-row-driving">' +
         '<span class="fa fa-minus" aria-hidden="true"></span>' +
@@ -232,7 +232,7 @@ $(function () {
     };
     var newSpecialMember = function(member) {
         return '<tr class="special-member" id="special-member' + member.objectId +
-        '" data-username="' + member.username + '"><td>' +
+        '" data-username="' + member.username + '"><td class="fixed-minus-width">' +
         member.firstName + ' ' + member.lastName +
         '</td><td><button type="button" class="btn btn-default btn-xs rm-row-special">' +
         '<span class="fa fa-minus" aria-hidden="true"></span>' +
