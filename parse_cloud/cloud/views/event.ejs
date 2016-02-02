@@ -59,7 +59,7 @@
                 <div class="deet-text">
                       <h3>ON/OFF CAMPUS</h3>
                       <div class="">
-                      <div class="radio min-radio">
+                      <div class="radio min-radio radio-float-none">
                         <label>
                           <input type="radio" name="is-on-campus" id="is-on-campus-true" value="true" 
                           <%= (locals.eventObj ?
@@ -71,7 +71,7 @@
                           On Campus
                         </label>
                       </div>
-                      <div class="radio min-radio">
+                      <div class="radio min-radio radio-float-none">
                         <label>
                           <input type="radio" name="is-on-campus" id="is-on-campus-false" value="false" 
                           <%= (locals.eventObj ?
@@ -91,7 +91,7 @@
                 <div class="deet-text">
                     <h3>UNIFORM</h3>
                     <div class="">
-                      <div class="radio min-radio">
+                      <div class="radio min-radio radio-float-none">
                         <label>
                           <input type="radio" name="uniform" id="uniform-casual" value="Casual" 
                           <%= ((locals.eventObj && locals.eventObj.uniform) ? 
@@ -103,7 +103,7 @@
                           Casual Uniform
                         </label>
                       </div>
-                      <div class="radio min-radio">
+                      <div class="radio min-radio radio-float-none">
                         <label>
                           <input type="radio" name="uniform" id="uniform-polo" value="Polos" 
                           <%= ((locals.eventObj && locals.eventObj.uniform) ? 
@@ -115,7 +115,7 @@
                           Polos Uniform
                         </label>
                       </div>
-                      <div class="radio min-radio">
+                      <div class="radio min-radio radio-float-none">
                         <label>
                           <input type="radio" name="uniform" id="uniform-sweater" value="Sweaters" 
                           <%= ((locals.eventObj && locals.eventObj.uniform) ? 

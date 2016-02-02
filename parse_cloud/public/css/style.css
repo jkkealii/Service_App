@@ -198,6 +198,7 @@ a.btn.buton.btn-default:focus {
 #update-event {
     float: none;
 }
+
 button.edit {
 	color: rgb(102, 13, 15);
 	background: transparent;
@@ -210,6 +211,11 @@ button.edit:focus {
 	color: #ffffff;
 }
 
+.checkbox-float-none label,
+.radio-float-none label {
+    float: none;
+}
+
 .more-space {
     padding: 25px 0px 0px 0px;
 }
@@ -218,6 +224,8 @@ button.edit:focus {
     width: 350px;
     padding: 8px 8px 8px 75px !important;
 }
+
+
 
 /* Login and signup pages */
 #login{
