@@ -36,9 +36,9 @@
                 </div>
                 
                 <div class="deet-text">
-                  <h3>MEET AT</h3>
+                  <h3>ON/OFF CAMPUS</h3>
                   <p>
-                    <%= (locals.eventObj ? locals.eventObj.meetingPlace : '') %>
+                    <%= (locals.eventObj ? (locals.eventObj.isOnCampus ? 'On Campus' : 'Off Campus') : '') %>
                   </p>
                 </div>
                 
@@ -50,18 +50,17 @@
                 </div>
                 
                 <div class="deet-text">
-                  <h3>END TIME</h3>
-                  <p id="end-date" data-original="<%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>">
-                    <%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>
+                  <h3>DRIVER ADDITIONAL HOURS</h3>
+                  <p>
+                    <%= (locals.eventObj ? locals.eventObj.driverHours : '') %>
                   </p>
-                </div> 
-                
-            </div>                
+                </div>
+            </div>               
             <div class="col-md-6">
                 <div class="deet-text">
-                  <h3>ON/OFF CAMPUS</h3>
+                  <h3>MEET AT</h3>
                   <p>
-                    <%= (locals.eventObj ? (locals.eventObj.isOnCampus ? 'On Campus' : 'Off Campus') : '') %>
+                    <%= (locals.eventObj ? locals.eventObj.meetingPlace : '') %>
                   </p>
                 </div>
                 
@@ -73,11 +72,11 @@
                 </div> 
 
                 <div class="deet-text">
-                  <h3>DRIVER ADDITIONAL HOURS</h3>
-                  <p>
-                    <%= (locals.eventObj ? locals.eventObj.driverHours : '') %>
+                  <h3>END TIME</h3>
+                  <p id="end-date" data-original="<%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>">
+                    <%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>
                   </p>
-                </div>
+                </div> 
 
                 <div class="deet-text">
                   <h3>SPECIAL ADDITIONAL HOURS</h3>
