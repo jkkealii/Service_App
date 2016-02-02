@@ -11,14 +11,23 @@
     <% }) %>
   <% } %>
 </div>
-
+    
 <div class="text-center page-contains">
   <div class="overlay">
+    
     <div class="section-title center">
       <h2 class="animated slideInDown">Event Details: <strong><%= (locals.eventObj ? locals.eventObj.name : 'Unknown Event') %></strong></h2>
       <div class="line">
         <hr>
       </div>
+      <div class="space"></div>
+      <a href="/events" role="button" class="btn buton btn-default"><i class="fa fa-arrow-left"></i>  Back</a>
+      <% if (locals.admin) { %>
+        <a href="<%= (locals.eventObj ? ('/events/' + locals.eventObj.objectId + '/edit') : '#') %>" role="button" class="btn buton btn-default"><i class="fa fa-edit"></i>  Edit</a>
+        <a id="export" role="button" class="btn buton btn-default"><i class="fa fa-download"></i>  Export</a>
+        <a id="delete" role="button" class="btn buton btn-default" data-loading-text="<i class='fa fa-minus fa-spin'></i>  rush rimson ircle"><i class="fa fa-minus"></i>  Delete</a>
+      <% } %>
+      <div class="export-text"></div>
     </div>
     
     <div class="container">
@@ -140,13 +149,6 @@
               </div>
             </div>
           </div>
-
-          <% if (locals.admin) { %>
-            <a href="<%= (locals.eventObj ? ('/events/' + locals.eventObj.objectId + '/edit') : '#') %>" role="button" class="btn buton btn-default">Edit</a>
-            <a id="export" role="button" class="btn buton btn-default">Export</a>
-            <a id="delete" role="button" class="btn buton btn-default" data-loading-text="rush rimson ircle">Delete</a>
-          <% } %>
-          <div class="export-text"></div>
           <div class="space"></div>
         </div>
       </div>

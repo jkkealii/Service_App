@@ -25,42 +25,48 @@
   <div class="row spaced">
         <div class="col-xs-1 col-xs-offset-3 side-stat">
       <div class="stat-circle-small">
-        <div class="hour-stat-small">
+        <div class="hour-stat-small animated bounceInDown">
           <strong><%= (locals.userObj ? locals.userObj.onCampusHours : 'n/a') %></strong>
         </div>
-        <div class="stat-text-small">
-          on-campus
-        </div>
-        <div class="stat-text-small">
-          hours
+        <div class="animated pulse">
+          <div class="stat-text-small">
+            on-campus
+          </div>
+          <div class="stat-text-small">
+            hours
+          </div>
         </div>
       </div>
     </div>
     
     <div class="col-xs-2 col-xs-offset-1 center-stat">
       <div class="stat-circle">
-        <div class="hour-stat">
+        <div class="hour-stat animated infinite pulse">
           <strong><%= (locals.userObj ? locals.userObj.hours : 'n/a') %></strong>
         </div>
-        <div class="stat-text">
-          total
-        </div>
-        <div class="stat-text">
-          hours
+        <div class="animated pulse">
+          <div class="stat-text">
+            total
+          </div>
+          <div class="stat-text">
+            hours
+          </div>
         </div>
       </div>
     </div>
     
     <div class="col-xs-1 col-xs-offset-1 side-stat">
       <div class="stat-circle-small">
-        <div class="hour-stat-small">
+        <div class="hour-stat-small animated bounceInDown">
           <strong><%= (locals.userObj ? locals.userObj.offCampusHours : 'n/a') %></strong>
         </div>
-        <div class="stat-text-small">
-          off-campus
-        </div>
-        <div class="stat-text-small">
-          hours
+        <div class="animated pulse">
+          <div class="stat-text-small">
+            off-campus
+          </div>
+          <div class="stat-text-small">
+            hours
+          </div>
         </div>
       </div>
     </div>
