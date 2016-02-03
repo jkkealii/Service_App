@@ -12,6 +12,269 @@
   <% } %>
 </div>
 
+<div class="text-center page-contains">
+  <div class="overlay">
+    <div class="section-title center">
+      <h2 class="animated slideInDown">Create an <strong>Event</strong></h2>
+      <div class="line">
+        <hr>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="row">
+        <form method="get" action="" id="eventForm">
+        <div class="col-md-8 col-md-offset-2">
+          
+          <div class="row">
+            <div class="col-md-6">
+                <div class="deet-text">
+                  <h3>NAME OF EVENT</h3>
+                  <div class="form-group">
+<!--                     <label for="name">Name</label> -->
+                    <input type="text" class="form-control" placeholder="Fryer's Challenge" id="name">
+                  </div>
+                </div>  
+            </div>
+            
+            <div class="col-md-6">
+                <div class="deet-text">
+                    <h3>HOURS</h3>
+                    <div class="form-group">
+<!--                       <label for="hours">Regular Hours</label> -->
+                      <div class="input-group form-control">
+                        <input type="text" class="form-control" placeholder="3" aria-describedby="addon1" id="hours">
+                        <span class="input-group-addon" id="addon1">hour(s)</span>
+                      </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6">
+                <div class="deet-text">
+                  <h3>ON/OFF CAMPUS</h3>
+                  <div class="">
+                    <div class="radio min-radio">
+                      <label>
+                        <input type="radio" name="is-on-campus" id="is-on-campus-true" value="true" checked>
+                        On Campus
+                      </label>
+                    </div>
+                    <div class="radio min-radio">
+                      <label>
+                        <input type="radio" name="is-on-campus" id="is-on-campus-false" value="false">
+                        Off Campus
+                      </label>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="deet-text">
+                    <h3>UNIFORM</h3>
+                    <div class="">
+                      <div class="radio min-radio">
+                        <label>
+                          <input type="radio" name="uniform" id="uniform-casual" value="Casual">
+                          Casual Uniform
+                        </label>
+                      </div>
+                      <div class="radio min-radio">
+                        <label>
+                          <input type="radio" name="uniform" id="uniform-polo" value="Polos">
+                          Polos Uniform
+                        </label>
+                      </div>
+                      <div class="radio min-radio">
+                        <label>
+                          <input type="radio" name="uniform" id="uniform-sweater" value="Sweaters" checked>
+                          Sweaters Uniform
+                        </label>
+                      </div>
+                    </div>
+                </div> 
+            </div>  
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6">
+                <div class="deet-text">
+                    <h3>MEET AT</h3>
+                    <div class="form-group">
+<!--                       <label for="meeting-place">Meeting Place</label> -->
+                      <input type="text" class="form-control" placeholder="Big Container" id="meeting-place">                    
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="deet-text">
+                    <h3>EVENT LOCATION</h3>
+                    <div class="form-group">
+<!--                       <label for="location">Address</label> -->
+                      <input type="text" class="form-control" placeholder="8047 Campion Dr, Los Angeles, CA 90045" id="location">
+                    </div>
+                </div>
+            </div>  
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6">
+                <div class="deet-text">
+                  <h3>START TIME</h3>
+                  <div class="form-group">
+<!--                       <label for="start-date">Start Date/Time</label> -->
+                      <div class="input-group date form-control" id="datetimestart">
+                        <input type="text" class="form-control" id="start-date"/>
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                      </div>
+                  </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="deet-text">
+                    <h3>END TIME</h3>
+                    <div class="form-group">
+<!--                       <label for="end-date">End Date/Time</label> -->
+                      <div class="input-group date form-control" id="datetimeend">
+                        <input type="text" class="form-control" id="end-date"/>
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                      </div>
+                    </div>
+                </div> 
+            </div>  
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6">
+                <div class="deet-text">
+                    <h3>DRIVER ADDITIONAL HOURS</h3>
+                    <div class="form-group">
+<!--                       <label for="driver-hours">Additional Driver Hours</label> -->
+                      <div class="input-group form-control">
+                        <input type="text" class="form-control" placeholder=".5" aria-describedby="addon2" id="driver-hours">
+                        <span class="input-group-addon" id="addon2">hour(s)</span>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="deet-text">
+                    <h3>SPECIAL ADDITIONAL HOURS</h3>
+                    <div class="form-group">
+<!--                       <label for="extra-hours">Extra Hours</label> -->
+                      <div class="input-group form-control">
+                        <input type="text" class="form-control" placeholder="1" aria-describedby="addon3" id="extra-hours">
+                        <span class="input-group-addon" id="addon3">hour(s)</span>
+                      </div>
+                    </div>
+                </div>
+            </div>  
+          </div>
+          
+          <div class="row">
+            <div class="form-group">
+              <div class="col-md-6 input more-space">
+                <input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Search for Person to Add" placeholder="Richard Robin" id="add-person">
+                <ul class="dropdown-menu" id="list-members"></ul>
+              </div>
+              
+              <div class="col-md-6 input more-space">
+                <button class="edit btn" type="button" id="confirm-add-person"><i class="fa fa-plus"></i> Regular</button>
+                <button class="edit btn" type="button" id="confirm-add-driver"><i class="fa fa-plus"></i> Driver</button>
+                <button class="edit btn" type="button" id="confirm-add-special"><i class="fa fa-plus"></i> Extra</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="more-space">
+              <button class="btn buton btn-default spaced" type="button" id="create-event" data-loading-text="<i class='fa fa-thumbs-o-up fa-spin'></i>  Creating"<%= (locals.admin ? '' : 'disabled') %>><i class="fa fa-thumbs-o-up"></i>  Create</button>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <div class="deet-text">
+                <h3>DRIVERS</h3>
+                <div class="form-group">
+                  <table class="table last-col-right">
+                    <thead>
+<!--
+                      <tr>
+                        <th>Driving</th>
+                        <th>Remove</th>
+                      </tr>
+-->
+                    </thead>
+                    <tbody id="driving-members" class="text-left">
+                        
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-8 col-md-offset-2">
+              <div class="deet-text">
+                <h3>MEMBERS</h3>
+                <div class="form-group">
+                  <table class="table last-col-right">
+                    <thead>
+<!--
+                      <tr>
+                        <th>Regular</th>
+                        <th>Remove</th>
+                      </tr>
+-->
+                    </thead>
+                    <tbody id="attending-members" class="text-left">
+                        
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-8 col-md-offset-2">
+              <div class="deet-text">
+                <h3>SPECIAL MEMBERS</h3>
+                <div class="form-group">
+                  <table class="table last-col-right">
+                    <thead>
+<!--
+                      <tr>
+                        <th>Extra Hours</th>
+                        <th>Remove</th>
+                      </tr>
+-->
+                    </thead>
+                    <tbody id="special-members" class="text-left">
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+
 <div class="container page-contains text-center">
   <div class="section-title center">
     <h2 class="animated slideInDown">Create an <strong>Event</strong></h2>
@@ -183,11 +446,11 @@
                 <div class="">
                   <input class="btn buton btn-default" data-loading-text="Creating Event..." type="button" value="Create Event" id="create-event">
                 </div>
-<!--                 <button type="submit" class="btn buton btn-default">Submit</button> -->
               </form>  
             </div>
           </div>
         </div>
+-->
 
 <% include helper/_basecode %>
 

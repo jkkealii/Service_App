@@ -195,7 +195,8 @@ a.btn.buton.btn-default:focus {
 }
 
 /* Edit event */
-#update-event {
+#update-event,
+#create-event {
     float: none;
 }
 

@@ -39,9 +39,11 @@
                 
                 <div class="deet-text">
                   <h3>EVENT LOCATION</h3>
-                  <a href="<%= (locals.eventObj ? ('https://maps.google.com/?q=' + locals.eventObj.location) : '#') %>">
-                    <%= (locals.eventObj ? locals.eventObj.location : '') %>
-                  </a>
+                  <p>
+                    <a href="<%= (locals.eventObj ? ('https://maps.google.com/?q=' + locals.eventObj.location) : '#') %>">
+                      <%= (locals.eventObj ? locals.eventObj.location : '') %>
+                    </a>
+                  </p>  
                 </div>
                 
                 <div class="deet-text">
