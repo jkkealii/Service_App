@@ -14,7 +14,7 @@
 
 <div class="container page-contains text-center">
   <div class="section-title center">
-    <h2 class="animated slideInDown"><%= (locals.userObj ? locals.userObj.firstName : 'Lorenzo') %> <strong><%= (locals.userObj ? locals.userObj.lastName : 'Malone') %></strong></h2>
+    <h2 class="animated slideInDown" id="user" data-user-id="<%= locals.userObj ? locals.userObj.objectId : '' %>"><%= (locals.userObj ? locals.userObj.firstName : 'Lorenzo') %> <strong><%= (locals.userObj ? locals.userObj.lastName : 'Malone') %></strong></h2>
     <div class="line">
       <hr>
     </div>
