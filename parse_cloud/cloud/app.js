@@ -487,6 +487,7 @@ app.post('/events/new-event', function(req, res) {
     eventObject.set('extraHours', parseFloat(req.body.extraHours));
     eventObject.set('isOnCampus', (req.body.isOnCampus === 'true'));
     eventObject.set('uniform', req.body.uniform);
+    eventObject.set('comments', req.body.comments);
 
 
     var query = new Parse.Query(Parse.User);
@@ -562,7 +563,8 @@ app.get('/events/:event_id', function(req, res) {
             meetingPlace: eventObject.get('meetingPlace'),
             uniform: eventObject.get('uniform'),
             startDateTime: eventObject.get('startDateTime'),
-            endDateTime: eventObject.get('endDateTime')
+            endDateTime: eventObject.get('endDateTime'),
+            comments: eventObject.get('comments')
         };
 
         var query = localEventObject.relation('members').query();
@@ -734,7 +736,8 @@ app.get('/events/:event_id/edit', function(req, res) {
                         meetingPlace: eventObject.get('meetingPlace'),
                         uniform: eventObject.get('uniform'),
                         startDateTime: eventObject.get('startDateTime'),
-                        endDateTime: eventObject.get('endDateTime')
+                        endDateTime: eventObject.get('endDateTime'),
+                        comments: eventObject.get('comments')
                     };
 
                     var query = localEventObject.relation('members').query();
@@ -841,6 +844,9 @@ app.post('/events/:event_id/edit', function(req, res) {
         eventObject.set('meetingPlace', req.body.meetingPlace);
         eventObject.set('driverHours', parseFloat(req.body.driverHours));
         eventObject.set('extraHours', parseFloat(req.body.extraHours));
+        if (req.body.comments) {
+            eventObject.set('comments', req.body.comments);
+        }
 
         // var peopleRelation = eventObject.relation("members");
         // req.body.members.forEach(function(member) {
