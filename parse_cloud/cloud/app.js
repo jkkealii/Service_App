@@ -998,13 +998,17 @@ app.get('/users/:user_id/hours', function(req, res) {
                     var userObj = {
                         firstName: user.get('firstName'),
                         lastName: user.get('lastName'),
+                        username: user.get('username'),
                         objectId: userId,
                         email: user.get('email'),
                         phone: user.get('phone'),
                         year: user.get('year'),
                         hours: user.get('hours'),
                         onCampusHours: user.get('onCampusHours'),
-                        offCampusHours: user.get('offCampusHours')
+                        offCampusHours: user.get('offCampusHours'),
+                        hometown: user.get('hometown'),
+                        major: user.get('major'),
+                        funFact: user.get('funFact')
                     };
                     res.render('user', {
                         userObj: userObj,
@@ -1101,13 +1105,17 @@ app.get('/users/:user_id', function(req, res) {
                     var userObj = {
                         firstName: user.get('firstName'),
                         lastName: user.get('lastName'),
+                        username: user.get('username'),
                         objectId: userId,
                         email: user.get('email'),
                         phone: user.get('phone'),
                         year: user.get('year'),
                         hours: user.get('hours'),
                         onCampusHours: user.get('onCampusHours'),
-                        offCampusHours: user.get('offCampusHours')
+                        offCampusHours: user.get('offCampusHours'),
+                        hometown: user.get('hometown'),
+                        major: user.get('major'),
+                        funFact: user.get('funFact')
                     };
                     res.render('account', {
                         userObj: userObj,
