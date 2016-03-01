@@ -1,3 +1,5 @@
+<% var title = (locals.eventObj ? locals.eventObj.name : 'Unknown Event') %>
+
 <% include helper/_header %>
 
 <% include helper/_navbar %>
@@ -33,6 +35,97 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
+          
+          <div class="row">
+            <div class="col-md-6">
+                <div class="event-id" data-object-id="<%= (locals.eventObj ? locals.eventObj.objectId : '') %>"></div> 
+                <div class="deet-text">
+                  <h3>EVENT LOCATION</h3>
+                  <p>
+                    <a href="<%= (locals.eventObj ? ('https://maps.google.com/?q=' + locals.eventObj.location) : '#') %>">
+                      <%= (locals.eventObj ? locals.eventObj.location : '') %>
+                    </a>
+                  </p>  
+                </div> 
+            </div>
+            
+            <div class="col-md-6">
+                <div class="deet-text">
+                  <h3>MEET AT</h3>
+                  <p>
+                    <%= (locals.eventObj ? locals.eventObj.meetingPlace : '') %>
+                  </p>
+                </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6">
+                <div class="deet-text">
+                  <h3>ON/OFF CAMPUS</h3>
+                  <p>
+                    <%= (locals.eventObj ? (locals.eventObj.isOnCampus ? 'On Campus' : 'Off Campus') : '') %>
+                  </p>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="deet-text">
+                  <h3>UNIFORM</h3>
+                  <p>
+                    <%= (locals.eventObj ? (locals.eventObj.uniform ? locals.eventObj.uniform : 'No Uniform Set') : '') %>
+                  </p>
+                </div> 
+            </div>  
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6">
+                <div class="deet-text">
+                  <h3>START TIME</h3>
+                  <p id="start-date" data-original="<%= (locals.eventObj ? locals.eventObj.startDateTime : '') %>">
+                    <%= (locals.eventObj ? locals.eventObj.startDateTime : '') %>
+                  </p>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="deet-text">
+                  <h3>END TIME</h3>
+                  <p id="end-date" data-original="<%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>">
+                    <%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>
+                  </p>
+                </div>
+            </div>  
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6">
+                <div class="deet-text">
+                  <h3>DRIVER ADDITIONAL HOURS</h3>
+                  <p>
+                    <%= (locals.eventObj ? locals.eventObj.driverHours : '') %>
+                  </p>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="deet-text">
+                  <h3>SPECIAL ADDITIONAL HOURS</h3>
+                  <p>
+                    <%= (locals.eventObj ? locals.eventObj.extraHours : '') %>
+                  </p>
+                </div> 
+            </div>  
+          </div>
+        </div>
+      </div>
+    </div>
+    
+<!--
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
           <div class="row">
             <div class="col-md-6 center">
                 <div class="event-id" data-object-id="<%= (locals.eventObj ? locals.eventObj.objectId : '') %>"></div>    
@@ -61,9 +154,9 @@
                 </div>
                 
                 <div class="deet-text">
-                  <h3>DRIVER ADDITIONAL HOURS</h3>
-                  <p>
-                    <%= (locals.eventObj ? locals.eventObj.driverHours : '') %>
+                  <h3>END TIME</h3>
+                  <p id="end-date" data-original="<%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>">
+                    <%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>
                   </p>
                 </div>
             </div>               
@@ -81,13 +174,13 @@
                     <%= (locals.eventObj ? (locals.eventObj.uniform ? locals.eventObj.uniform : 'No Uniform Set') : '') %>
                   </p>
                 </div> 
-
+                
                 <div class="deet-text">
-                  <h3>END TIME</h3>
-                  <p id="end-date" data-original="<%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>">
-                    <%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>
+                  <h3>DRIVER ADDITIONAL HOURS</h3>
+                  <p>
+                    <%= (locals.eventObj ? locals.eventObj.driverHours : '') %>
                   </p>
-                </div> 
+                </div>
 
                 <div class="deet-text">
                   <h3>SPECIAL ADDITIONAL HOURS</h3>
@@ -97,6 +190,7 @@
                 </div>
             </div>
           </div>
+-->
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
               <div class="deet-text">

@@ -31,12 +31,17 @@
             <% if (locals.loggedIn) { %>
               <li class="dropdown-header">Member-only</li>
               <% if (locals.userId) { %>
-                <li><a href="/users/<%= locals.userId %>">Hours</a></li>
+                <li><a href="/users/<%= locals.userId %>/hours">Hours</a></li>
               <% } else { %>
                 <li><a href="#">Hours</a></li>
               <% } %>
               <li><a href="/events">Events</a></li>
               <li><a href="/calendar">Calendar</a></li>
+              <% if (locals.userId) { %>
+                <li><a href="/users/<%= locals.userId %>">Account</a></li>
+              <% } else { %>
+                <li><a href="#">Account</a></li>
+              <% } %>
               <li><a href="/logout">Logout</a></li>
             <% } else { %>
               <li><a href="/login">Login</a></li>

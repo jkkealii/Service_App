@@ -1,3 +1,5 @@
+<% var title = "New Member" %>
+
 <% include helper/_header %>
 
 <% include helper/_navbar %>
@@ -11,52 +13,6 @@
     <% }) %>
   <% } %>
 </div>
-
-<!--
-<div class="container-fluid">
-  <h1>Simple Signup Page</h1>
-</div>
-
-<div class="container">
-  <h4>All fields are required</h4>
-  <div class="row">
-    <div class="col-sm-4">
-      <form method="post" action="/signup">
-
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" class="form-control" placeholder="Username" name="username">
-        </div>
-
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" placeholder="Password" name="password">
-        </div>
-
-        <div class="form-group">
-          <label for="confirmPassword">Confirm Password</label>
-          <input type="password" class="form-control" placeholder="Confirm Password" name="confirmPassword">
-        </div>
-
-        <div class="form-group">
-          <label for="firstName">First Name</label>
-          <input type="text" class="form-control" placeholder="John" name="firstName">
-        </div>
-
-        <div class="form-group">
-          <label for="lastName">Last Name</label>
-          <input type="text" class="form-control" placeholder="Appleseed" name="lastName">
-        </div>
-
-        <div class="">
-          <input class="button btn btn-default" type="submit" value="Signup">
-        </div>
-
-      </form>
-    </div>
-  </div>
-</div>
--->
 
 <div id="login" class="text-center">
     <div class="overlay">
@@ -73,36 +29,36 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                          <label for="passcode">PASSCODE</label>
-                          <input type="text" class="form-control" placeholder="passcode" name="passcode">
-                        </div>
-                        
-                        <div class="form-group">
                           <label for="username">USERNAME</label>
                           <input type="text" class="form-control" placeholder="username" name="username">
                         </div>
                         
                         <div class="form-group">
+                          <label for="firstName">FIRST NAME</label>
+                          <input type="text" class="form-control" placeholder="Lorenzo" name="firstName">
+                        </div>
+                        
+                        <div class="form-group">
                           <label for="password">PASSWORD</label>
                           <input type="password" class="form-control" placeholder="password" name="password">
-                        </div>
-                
-                        <div class="form-group">
-                          <label for="confirmPassword">CONFIRM PASSWORD</label>
-                          <input type="password" class="form-control" placeholder="confirm password" name="confirmPassword">
-                        </div>  
+                        </div> 
                     </div>                
                     <div class="col-md-6">
                         <div class="form-group">
-                          <label for="firstName">FIRST NAME</label>
-                          <input type="text" class="form-control" placeholder="Lorenzo" name="firstName">
-                        </div>  
+                          <label for="passcode">PASSCODE</label>
+                          <input type="text" class="form-control" placeholder="passcode" name="passcode">
+                        </div>
                 
                         <div class="form-group">
                           <label for="lastName">LAST NAME</label>
                           <input type="text" class="form-control" placeholder="Malone" name="lastName">
                         </div>
                         
+                        <div class="form-group">
+                          <label for="confirmPassword">CONFIRM PASSWORD</label>
+                          <input type="password" class="form-control" placeholder="confirm password" name="confirmPassword">
+                        </div> 
+<!--
                         <div class="form-group">
                           <label for="lastName">EMAIL</label>
                           <input type="text" class="form-control" placeholder="iheartcrimson@lmu.edu" name="email">
@@ -111,7 +67,8 @@
                         <div class="form-group">
                           <label for="firstName">PHONE NUMBER</label>
                           <input type="text" class="form-control" placeholder="(808) 555-1929" name="phone">
-                        </div>               
+                        </div>
+-->               
                     </div>
                 </div>
 

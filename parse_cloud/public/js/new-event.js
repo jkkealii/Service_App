@@ -264,7 +264,8 @@ $(function () {
             isOnCampus: ($('input[name=is-on-campus]:checked', '#eventForm').val() === 'true'),
             attendingMembers: attendingMembers,
             attendingDrivers: attendingDrivers,
-            attendingSpecials: attendingSpecials
+            attendingSpecials: attendingSpecials,
+            comments: $('#comments').val()
         };
 
         console.log('sending request...');

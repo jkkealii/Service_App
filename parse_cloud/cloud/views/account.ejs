@@ -1,0 +1,133 @@
+<% var title = "My Account" %>
+
+<% include helper/_header %>
+
+<% include helper/_navbar %>
+
+<div class="pagelet" data-transparent-navbar="false"></div>
+
+<div class="container-fluid">
+  <% if (locals.alerts) { %>
+    <% alerts.forEach(function(alert) { %>
+      <% include helper/_alert %>
+    <% }) %>
+  <% } %>
+</div>
+
+<div class="container page-contains text-center">
+  <div class="section-title center">
+    <h2 class="animated slideInDown">Account <strong>Information</strong></h2>
+    <div class="line">
+    <hr>
+    </div>
+    <div class="space"></div>
+    <% if (locals.admin) { %>
+      <a href="<%= (locals.eventObj ? ('/users/' + locals.userObj.objectId + '/edit') : '#') %>" role="button" class="btn buton btn-default"><i class="fa fa-edit"></i>  Edit</a>
+    <% } %>
+  </div>
+</div>
+
+<div class="container text-center">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      
+      <div class="row">
+        <div class="col-md-6">
+            <div class="user-id" data-object-id="<%= (locals.userObj ? locals.userObj.objectId : '') %>"></div>
+            <div class="deet-text">
+              <h3>USERNAME</h3>
+              <p>
+                <%= (locals.userObj ? locals.userObj.username : '') %>
+              </p>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="deet-text">
+              <h3>EMAIL</h3>
+              <p>
+                <%= (locals.userObj ? locals.userObj.email : '') %>
+              </p>
+            </div> 
+        </div>  
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6">
+            <div class="deet-text">
+              <h3>FIRST NAME</h3>
+              <p>
+                <%= (locals.userObj ? locals.userObj.firstName : '') %>
+              </p>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="deet-text">
+              <h3>LAST NAME</h3>
+              <p>
+                <%= (locals.userObj ? locals.userObj.lastName : '') %>
+              </p>
+            </div>
+        </div>  
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6">
+            <div class="deet-text">
+              <h3>YEAR</h3>
+              <p>
+                <%= (locals.userObj ? locals.userObj.year : '') %>
+              </p>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="deet-text">
+              <h3>PHONE NUMBER</h3>
+              <p>
+                <%= (locals.userObj ? locals.userObj.phone : '') %>
+              </p>
+            </div> 
+        </div>  
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6"> 
+            <div class="deet-text">
+              <h3>HOMETOWN</h3>
+              <p>
+                <a href="<%= (locals.userObj ? ('https://maps.google.com/?q=' + locals.userObj.hometown) : '#') %>">
+                  <%= (locals.userObj ? locals.userObj.hometown : '') %>
+                </a>
+              </p>  
+            </div> 
+        </div>
+        
+        <div class="col-md-6">
+            <div class="deet-text">
+              <h3>MAJOR</h3>
+              <p>
+                <%= (locals.userObj ? locals.userObj.major : '') %>
+              </p>
+            </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="deet-text">
+            <h3>FUN FACT</h3>
+            <p>
+              <%= (locals.userObj ? locals.userObj.funFact : '') %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include helper/_basecode %>
+
+<% include helper/_footer %>
