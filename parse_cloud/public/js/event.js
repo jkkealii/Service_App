@@ -161,6 +161,7 @@ $(function () {
     $('#driver-hours').val($('#driver-hours').data('original'));
     $('#extra-hours').val($('#extra-hours').data('original'));
     $('#meeting-place').val($('#meeting-place').data('original'));
+    $('#comments').val($('#comments').data('original'));
     
     var refreshOptions = function() {
         $('.option').click(function(event) {
@@ -379,7 +380,8 @@ $(function () {
             attendingDrivers: attendingDrivers,
             removeDrivers: removeDrivers,
             attendingSpecials: attendingSpecials,
-            removeSpecials: removeSpecials
+            removeSpecials: removeSpecials,
+            comments: $('#comments').val()
         };
 
         console.log('sending request...');

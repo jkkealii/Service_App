@@ -33,7 +33,6 @@
                 <div class="deet-text">
                   <h3>NAME OF EVENT</h3>
                   <div class="form-group">
-<!--                     <label for="name">Name</label> -->
                     <input type="text" class="form-control" placeholder="Service" data-original="<%= (locals.eventObj ? locals.eventObj.name : '') %>" id="name">
                   </div>
                 </div>  
@@ -43,7 +42,6 @@
                 <div class="deet-text">
                     <h3>HOURS</h3>
                     <div class="form-group">
-<!--                       <label for="hours">Regular Hours</label> -->
                       <div class="input-group form-control">
                         <input type="text" class="form-control" placeholder="3" aria-describedby="addon1" id="hours" data-original="<%= (locals.eventObj ? locals.eventObj.hours : '') %>">
                         <span class="input-group-addon" id="addon1">hour(s)</span>
@@ -136,7 +134,6 @@
                 <div class="deet-text">
                     <h3>MEET AT</h3>
                     <div class="form-group">
-<!--                       <label for="meeting-place">Meeting Place</label> -->
                       <input type="text" class="form-control" placeholder="Big Container" id="meeting-place" data-original="<%= (locals.eventObj ? locals.eventObj.meetingPlace : '') %>">
                     </div>
                 </div>
@@ -146,7 +143,6 @@
                 <div class="deet-text">
                     <h3>EVENT LOCATION</h3>
                     <div class="form-group">
-<!--                       <label for="location">Address</label> -->
                       <input type="text" class="form-control" placeholder="8047 Campion Dr, Los Angeles, CA 90045" id="location" data-original="<%= (locals.eventObj ? locals.eventObj.location : '') %>">
                     </div>
                 </div>
@@ -158,7 +154,6 @@
                 <div class="deet-text">
                   <h3>START TIME</h3>
                   <div class="form-group">
-<!--                       <label for="start-date">Start Date/Time</label> -->
                       <div class="input-group date form-control" id="datetimestart">
                         <input type="text" class="form-control" id="start-date" data-original="<%= (locals.eventObj ? locals.eventObj.startDateTime : '') %>"/>
                         <span class="input-group-addon">
@@ -173,7 +168,6 @@
                 <div class="deet-text">
                     <h3>END TIME</h3>
                     <div class="form-group">
-<!--                       <label for="end-date">End Date/Time</label> -->
                       <div class="input-group date form-control" id="datetimeend">
                         <input type="text" class="form-control" id="end-date" data-original="<%= (locals.eventObj ? locals.eventObj.endDateTime : '') %>"/>
                         <span class="input-group-addon">
@@ -190,7 +184,6 @@
                 <div class="deet-text">
                     <h3>DRIVER ADDITIONAL HOURS</h3>
                     <div class="form-group">
-<!--                       <label for="driver-hours">Additional Driver Hours</label> -->
                       <div class="input-group form-control">
                         <input type="text" class="form-control" placeholder=".5" aria-describedby="addon2" id="driver-hours" data-original="<%= (locals.eventObj ? locals.eventObj.driverHours : '') %>">
                         <span class="input-group-addon" id="addon2">hour(s)</span>
@@ -203,7 +196,6 @@
                 <div class="deet-text">
                     <h3>SPECIAL ADDITIONAL HOURS</h3>
                     <div class="form-group">
-<!--                       <label for="extra-hours">Extra Hours</label> -->
                       <div class="input-group form-control">
                         <input type="text" class="form-control" placeholder=".5" aria-describedby="addon3" id="extra-hours" data-original="<%= (locals.eventObj ? locals.eventObj.extraHours : '') %>">
                         <span class="input-group-addon" id="addon3">hour(s)</span>
@@ -211,6 +203,15 @@
                     </div>
                 </div>
             </div>  
+            
+            <div class="col-md-12">
+                <div class="deet-text">
+                  <h3>COMMENTS</h3>
+                  <div class="form-group"> 
+                    <textarea type="text" class="form-control" placeholder="écrire vos commentaires ici" data-original="<%= (locals.eventObj ? locals.eventObj.comments : '') %>" id="comments" rows="3"></textarea>
+                  </div>
+                </div>  
+            </div>
           </div>
           
           <div class="row">
@@ -241,12 +242,7 @@
                 <div class="form-group">
                   <table class="table last-col-right">
                     <thead>
-<!--
-                      <tr>
-                        <th>Driving</th>
-                        <th>Remove</th>
-                      </tr>
--->
+
                     </thead>
                     <tbody id="driving-members" class="text-left">
                       <% if (locals.eventObj && eventObj.drivers) { %>
@@ -267,12 +263,7 @@
                 <div class="form-group">
                   <table class="table last-col-right">
                     <thead>
-<!--
-                      <tr>
-                        <th>Regular</th>
-                        <th>Remove</th>
-                      </tr>
--->
+                        
                     </thead>
                     <tbody id="attending-members" class="text-left">
                       <% if (locals.eventObj && eventObj.members) { %>
@@ -293,12 +284,7 @@
                 <div class="form-group">
                   <table class="table last-col-right">
                     <thead>
-<!--
-                      <tr>
-                        <th>Extra Hours</th>
-                        <th>Remove</th>
-                      </tr>
--->
+
                     </thead>
                     <tbody id="special-members" class="text-left">
                       <% if (locals.eventObj && eventObj.specials) { %>
