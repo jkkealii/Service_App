@@ -985,7 +985,7 @@ app.get('/users/list', function(req, res) {
     });
 });
 
-app.get('/users/:user_id', function(req, res) {
+app.get('/users/:user_id/hours', function(req, res) {
     var userId = req.params.user_id;
     if (Parse.User.current()) {
         var query = new Parse.Query(Parse.Role);
@@ -1041,6 +1041,109 @@ app.get('/users/:user_id', function(req, res) {
                             offCampusHours: user.get('offCampusHours')
                         };
                         res.render('user', {
+                            userObj: userObj,
+                            loggedIn: true,
+                            userId: Parse.User.current().id,
+                            admin: true
+                        });
+                    }, function(error) {
+                        var alerts = [];
+                        alerts.push({
+                            type: 'warning',
+                            message: ("UserQueryError: " + error.code + " " + error.message)
+                        });
+                        res.render('404', {
+                            alerts: alerts,
+                            loggedIn: true,
+                            userId: Parse.User.current().id,
+                            admin: true
+                        });
+                    });
+                } else {
+                    res.render('401', {
+                        loggedIn: true,
+                        userId: Parse.User.current().id,
+                        admin: false
+                    });
+                }
+            }
+        }, function(error) {
+            var alerts = [];
+            alerts.push({
+                type: 'warning',
+                message: ("AdminQueryError: " + error.code + " " + error.message)
+            });
+            res.render('401', {
+                alerts: alerts,
+                loggedIn: true,
+                userId: Parse.User.current().id,
+                admin: false
+            });
+        });
+    } else {
+        res.render('401', {
+            loggedIn: false,
+            admin: false
+        });
+    }
+});
+
+app.get('/users/:user_id', function(req, res) {
+    var userId = req.params.user_id;
+    if (Parse.User.current()) {
+        var query = new Parse.Query(Parse.Role);
+        query.equalTo("name", "Administrator");
+        query.equalTo("users", Parse.User.current());
+        query.first().then(function(adminRole) {
+            if (adminRole) {
+                var query = new Parse.Query(Parse.User);
+                query.get(userId).then(function(user) {
+                    var userObj = {
+                        firstName: user.get('firstName'),
+                        lastName: user.get('lastName'),
+                        objectId: userId,
+                        email: user.get('email'),
+                        phone: user.get('phone'),
+                        year: user.get('year'),
+                        hours: user.get('hours'),
+                        onCampusHours: user.get('onCampusHours'),
+                        offCampusHours: user.get('offCampusHours')
+                    };
+                    res.render('account', {
+                        userObj: userObj,
+                        loggedIn: true,
+                        userId: Parse.User.current().id,
+                        admin: true
+                    });
+                }, function(error) {
+                    var alerts = [];
+                    alerts.push({
+                        type: 'warning',
+                        message: ("UserQueryError: " + error.code + " " + error.message)
+                    });
+                    res.render('404', {
+                        alerts: alerts,
+                        loggedIn: true,
+                        userId: Parse.User.current().id,
+                        admin: true
+                    });
+                });
+            } else {
+                if (userId === Parse.User.current().id) {
+                    var query = new Parse.Query(Parse.User);
+                    query.get(userId).then(function(user) {
+                        var userObj = {
+                            firstName: user.get('firstName'),
+                            lastName: user.get('lastName'),
+                            objectId: userId,
+                            email: user.get('email'),
+                            phone: user.get('phone'),
+                            year: user.get('year'),
+                            hours: user.get('hours'),
+                            onCampusHours: user.get('onCampusHours'),
+                            offCampusHours: user.get('offCampusHours')
+                        };
+                        res.render('account', {
                             userObj: userObj,
                             loggedIn: true,
                             userId: Parse.User.current().id,
