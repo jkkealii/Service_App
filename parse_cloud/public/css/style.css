@@ -752,9 +752,23 @@ button.btn.buton.btn-default {
 	text-transform: uppercase;
 }
 
+button.btn.fk-buton.btn-default {
+    float: right;
+    background: rgb(102, 13, 15);
+    border: 0;
+    border-radius: 0;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
 button.btn.buton.btn-default:hover,
 button.btn.buton.btn-default:focus {
 	background: rgba(103, 13, 15, 0.81);
+}
+
+button.btn.fk-buton.btn-default:hover,
+button.btn.fk-buton.btn-default:focus {
+    background: rgba(103, 13, 15, 0.81);
 }
 
 .btn:active, .btn.active {
