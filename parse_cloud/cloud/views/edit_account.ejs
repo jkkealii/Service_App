@@ -20,7 +20,8 @@
     <div class="line">
     <hr>
     </div>
-<!--     <div class="space"></div> -->
+    <div class="space"></div>
+    <a href="<%= (locals.userObj ? ('/users/' + locals.userObj.objectId) : '#') %>" role="button" class="btn buton btn-default"><i class="fa fa-arrow-left"></i>  Back</a>
   </div>
 </div>
 
@@ -34,7 +35,7 @@
             <div class="deet-text">
               <h3>USERNAME</h3>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="username" data-original="<%= (locals.userObj ? locals.userObj.username : '') %>" name="username">
+                <input type="text" class="form-control" placeholder="rimson4lyfe" data-original="<%= (locals.userObj ? locals.userObj.username : '') %>" name="username">
               </div>
             </div>
         </div>
@@ -43,7 +44,7 @@
             <div class="deet-text">
               <h3>EMAIL</h3>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="email@email.com" data-original="<%= (locals.userObj ? locals.userObj.email : '') %>" name="email">
+                <input type="text" class="form-control" placeholder="iluvrimson@lmu.edu" data-original="<%= (locals.userObj ? locals.userObj.email : '') %>" name="email">
               </div>
             </div> 
         </div>  
@@ -64,7 +65,7 @@
             <div class="deet-text">
               <h3>CONFIRM PASSWORD</h3>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="yes, magis" name="confirmPassword">
+                <input type="text" class="form-control" placeholder="confirm magis" name="confirmPassword">
               </div>
             </div> 
         </div>  
@@ -140,11 +141,23 @@
           </div>
         </div>
       </div>
+      
+      <div class="row">
+        <div class="more-space">
+          <button class="btn center-buton btn-default more-spaced" type="submit" data-loading-text="<i class='fa fa-refresh fa-spin'></i>  Updating"><i class="fa fa-refresh"></i>  Update</button>
+        </div>
+      </div>
       </form>
     </div>
   </div>
 </div>
 
 <% include helper/_basecode %>
+
+<script>
+    $('input[data-original], textarea[data-original]').each(function () {
+        $(this).val($(this).data('original'));
+    });
+</script>
 
 <% include helper/_footer %>
