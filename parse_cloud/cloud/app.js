@@ -253,8 +253,10 @@ app.post('/signup', function(req, res) {
             user.set('password', req.body.password);
             user.set('firstName', req.body.firstName);
             user.set('lastName', req.body.lastName);
+/*
             user.set('email', req.body.email);
             user.set('phone', req.body.phone);
+*/
 
             user.signUp().then(function(userX) {
                 var queryMember = new Parse.Query(Parse.Role);

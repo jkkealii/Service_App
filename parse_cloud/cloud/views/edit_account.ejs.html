@@ -1,0 +1,150 @@
+<% var title = "Edit Account" %>
+
+<% include helper/_header %>
+
+<% include helper/_navbar %>
+
+<div class="pagelet" data-transparent-navbar="false"></div>
+
+<div class="container-fluid">
+  <% if (locals.alerts) { %>
+    <% alerts.forEach(function(alert) { %>
+      <% include helper/_alert %>
+    <% }) %>
+  <% } %>
+</div>
+
+<div class="container page-contains text-center">
+  <div class="section-title center">
+    <h2 class="animated slideInDown">Edit <strong>Account</strong></h2>
+    <div class="line">
+    <hr>
+    </div>
+<!--     <div class="space"></div> -->
+  </div>
+</div>
+
+<div class="container text-center">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <form id="edit-account" method="post" action="/users/<%= (locals.userObj ? locals.userObj.objectId : '') %>/edit">
+      <div class="row">
+        <div class="col-md-6">
+            <div class="user-id" data-object-id="<%= (locals.userObj ? locals.userObj.objectId : '') %>"></div>
+            <div class="deet-text">
+              <h3>USERNAME</h3>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="username" data-original="<%= (locals.userObj ? locals.userObj.username : '') %>" name="username">
+              </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="deet-text">
+              <h3>EMAIL</h3>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="email@email.com" data-original="<%= (locals.userObj ? locals.userObj.email : '') %>" name="email">
+              </div>
+            </div> 
+        </div>  
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6">
+            <div class="user-id" data-object-id="<%= (locals.userObj ? locals.userObj.objectId : '') %>"></div>
+            <div class="deet-text">
+              <h3>PASSWORD</h3>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="magis" name="password">
+              </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="deet-text">
+              <h3>CONFIRM PASSWORD</h3>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="yes, magis" name="confirmPassword">
+              </div>
+            </div> 
+        </div>  
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6">
+            <div class="deet-text">
+              <h3>FIRST NAME</h3>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Lorenzo" data-original="<%= (locals.userObj ? locals.userObj.firstName : '') %>" name="firstName">
+              </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="deet-text">
+              <h3>LAST NAME</h3>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Malone" data-original="<%= (locals.userObj ? locals.userObj.lastName : '') %>" name="lastName">
+              </div>
+            </div>
+        </div>  
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6">
+            <div class="deet-text">
+              <h3>YEAR</h3>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="2017" data-original="<%= (locals.userObj ? locals.userObj.year : '') %>" name="year">
+              </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="deet-text">
+              <h3>PHONE NUMBER</h3>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="(310) 555-3229" data-original="<%= (locals.userObj ? locals.userObj.phone : '') %>" name="phone">
+              </div>
+            </div> 
+        </div>  
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6"> 
+            <div class="deet-text">
+              <h3>HOMETOWN</h3>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Los Angeles, CA" data-original="<%= (locals.userObj ? locals.userObj.hometown : '') %>" name="hometown">
+              </div>  
+            </div> 
+        </div>
+        
+        <div class="col-md-6">
+            <div class="deet-text">
+              <h3>MAJOR</h3>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Crimson Studies" data-original="<%= (locals.userObj ? locals.userObj.major : '') %>" name="major">
+              </div>
+            </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="deet-text">
+            <h3>FUN FACT</h3>
+            <div class="form-group"> 
+              <textarea type="text" class="form-control" placeholder="I love service." data-original="<%= (locals.userObj ? locals.userObj.funFact : '') %>" name="funFact" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<% include helper/_basecode %>
+
+<% include helper/_footer %>

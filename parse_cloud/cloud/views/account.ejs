@@ -21,9 +21,7 @@
     <hr>
     </div>
     <div class="space"></div>
-    <% if (locals.admin) { %>
-      <a href="<%= (locals.eventObj ? ('/users/' + locals.userObj.objectId + '/edit') : '#') %>" role="button" class="btn buton btn-default"><i class="fa fa-edit"></i>  Edit</a>
-    <% } %>
+    <a href="<%= (locals.userObj ? ('/users/' + locals.userObj.objectId + '/edit') : '#') %>" role="button" class="btn buton btn-default"><i class="fa fa-edit"></i>  Edit</a>
   </div>
 </div>
 
