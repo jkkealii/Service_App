@@ -532,9 +532,23 @@ app.post('/events/new-event', function(req, res) {
 
 app.get('/events/list', function(req, res) {
     var query = new Parse.Query(Parse.Object.extend("Event"));
+    var localObjects;
     query.find().then(function(results) {
+        localObjects = results;
+
+        var query = new Parse.Query(Parse.Role);
+        query.equalTo("name", "Administrator");
+        query.equalTo("users", Parse.User.current());
+        return query.first();
+    }, function(error) {
+        var errorCode = (error.code ? error.code : 500);
+        var errorObj = (error.message ? ({ error: error.message }) : ({ error: "Internal Server Error" }));
+        res.status(errorCode).json(errorObj);
+    }).then(function(adminRole) {
+        var auth = (adminRole ? 'true' : 'false');
         var data = {
-            objects: results
+            auth: auth,
+            objects: localObjects
         };
         res.status(200).json(data);
     }, function(error) {
@@ -1053,7 +1067,7 @@ app.get('/users/:user_id/hours', function(req, res) {
                             userObj: userObj,
                             loggedIn: true,
                             userId: Parse.User.current().id,
-                            admin: true
+                            admin: false
                         });
                     }, function(error) {
                         var alerts = [];
@@ -1065,7 +1079,7 @@ app.get('/users/:user_id/hours', function(req, res) {
                             alerts: alerts,
                             loggedIn: true,
                             userId: Parse.User.current().id,
-                            admin: true
+                            admin: false
                         });
                     });
                 } else {
@@ -1172,7 +1186,7 @@ app.get('/users/:user_id', function(req, res) {
                             loggedIn: true,
                             alerts: alerts,
                             userId: Parse.User.current().id,
-                            admin: true
+                            admin: false
                         });
                     }, function(error) {
                         alerts.push({
@@ -1183,7 +1197,7 @@ app.get('/users/:user_id', function(req, res) {
                             alerts: alerts,
                             loggedIn: true,
                             userId: Parse.User.current().id,
-                            admin: true
+                            admin: false
                         });
                     });
                 } else {
@@ -1299,7 +1313,7 @@ app.get('/users/:user_id/edit', function(req, res) {
                             userObj: userObj,
                             loggedIn: true,
                             userId: Parse.User.current().id,
-                            admin: true
+                            admin: false
                         });
                     }, function(error) {
                         var alerts = [];
@@ -1311,7 +1325,7 @@ app.get('/users/:user_id/edit', function(req, res) {
                             alerts: alerts,
                             loggedIn: true,
                             userId: Parse.User.current().id,
-                            admin: true
+                            admin: false
                         });
                     });
                 } else {
@@ -1419,21 +1433,6 @@ app.get('/users/:user_id/events', function(req, res) {
         var data = {
             events: listEvents
         };
-        // if (listEvents) {
-        //     var events = [];
-        //     listEvents.forEach(function(eventObject) {
-        //         events.push({
-        //             name: eventObject.get('name'),
-        //             objectId: eventObject.id,
-
-        //         });
-        //     });
-        //     var data = {
-        //         events: events
-        //     };
-        // } else {
-        //     var data = {};
-        // }
         res.status(200).json(data);
     }, function(error) {
         var errorCode = (error.code ? error.code : 500);
