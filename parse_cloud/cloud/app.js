@@ -253,10 +253,9 @@ app.post('/signup', function(req, res) {
             user.set('password', req.body.password);
             user.set('firstName', req.body.firstName);
             user.set('lastName', req.body.lastName);
-/*
-            user.set('email', req.body.email);
-            user.set('phone', req.body.phone);
-*/
+            // user.set('email', req.body.email);
+            // user.set('phone', req.body.phone);
+
 
             user.signUp().then(function(userX) {
                 var queryMember = new Parse.Query(Parse.Role);
@@ -1038,13 +1037,17 @@ app.get('/users/:user_id/hours', function(req, res) {
                         var userObj = {
                             firstName: user.get('firstName'),
                             lastName: user.get('lastName'),
+                            username: user.get('username'),
                             objectId: userId,
                             email: user.get('email'),
                             phone: user.get('phone'),
                             year: user.get('year'),
                             hours: user.get('hours'),
                             onCampusHours: user.get('onCampusHours'),
-                            offCampusHours: user.get('offCampusHours')
+                            offCampusHours: user.get('offCampusHours'),
+                            hometown: user.get('hometown'),
+                            major: user.get('major'),
+                            funFact: user.get('funFact')
                         };
                         res.render('user', {
                             userObj: userObj,
@@ -1096,6 +1099,13 @@ app.get('/users/:user_id/hours', function(req, res) {
 
 app.get('/users/:user_id', function(req, res) {
     var userId = req.params.user_id;
+    var alerts = [];
+    if (req.query.update === 'success') {
+        alerts.push({
+            type: 'success',
+            message: 'Account update Successful'
+        });
+    }
     if (Parse.User.current()) {
         var query = new Parse.Query(Parse.Role);
         query.equalTo("name", "Administrator");
@@ -1122,11 +1132,11 @@ app.get('/users/:user_id', function(req, res) {
                     res.render('account', {
                         userObj: userObj,
                         loggedIn: true,
+                        alerts: alerts,
                         userId: Parse.User.current().id,
                         admin: true
                     });
                 }, function(error) {
-                    var alerts = [];
                     alerts.push({
                         type: 'warning',
                         message: ("UserQueryError: " + error.code + " " + error.message)
@@ -1160,11 +1170,11 @@ app.get('/users/:user_id', function(req, res) {
                         res.render('account', {
                             userObj: userObj,
                             loggedIn: true,
+                            alerts: alerts,
                             userId: Parse.User.current().id,
                             admin: true
                         });
                     }, function(error) {
-                        var alerts = [];
                         alerts.push({
                             type: 'warning',
                             message: ("UserQueryError: " + error.code + " " + error.message)
@@ -1179,6 +1189,7 @@ app.get('/users/:user_id', function(req, res) {
                 } else {
                     res.render('401', {
                         loggedIn: true,
+                        alerts: alerts,
                         userId: Parse.User.current().id,
                         admin: false
                     });
@@ -1207,6 +1218,22 @@ app.get('/users/:user_id', function(req, res) {
 
 app.get('/users/:user_id/edit', function(req, res) {
     var userId = req.params.user_id;
+    var alerts = [];
+    if (req.query.update === 'passnotmatch') {
+        alerts.push({
+            type: 'danger',
+            message: 'Password and Confirm Password do not match'
+        });
+    }
+    if (req.query.update === 'error') {
+        var errorCode = (req.query.code ? req.query.code : 500);
+        var errorMessage = (req.query.message ? req.query.message : 'Internal Server Error');
+        alerts.push({
+            type: 'warning',
+            message: ('UserUpdateError: ' + errorCode + ' ' + errorMessage)
+        });
+    }
+
     if (Parse.User.current()) {
         var query = new Parse.Query(Parse.Role);
         query.equalTo("name", "Administrator");
@@ -1307,6 +1334,58 @@ app.get('/users/:user_id/edit', function(req, res) {
                 userId: Parse.User.current().id,
                 admin: false
             });
+        });
+    } else {
+        res.render('401', {
+            loggedIn: false,
+            admin: false
+        });
+    }
+});
+
+app.post('/users/:user_id/edit', function(req, res) {
+    var userId = req.params.user_id;
+    if (Parse.User.current()){
+        var user = Parse.User.current();
+        if (req.body.username) {
+            user.set('username', req.body.username);
+        }
+        if (req.body.firstName) {
+            user.set('firstName', req.body.firstName);
+        }
+        if (req.body.lastName) {
+            user.set('lastName', req.body.lastName);
+        }
+        if (req.body.email) {
+            user.set('email', req.body.email);
+        }
+        if (req.body.phone) {
+            user.set('phone', req.body.phone);
+        }
+        if (req.body.year) {
+            user.set('year', parseInt(req.body.year));
+        }
+        if (req.body.hometown) {
+            user.set('hometown', req.body.hometown);
+        }
+        if (req.body.major) {
+            user.set('major', req.body.major);
+        }
+        if (req.body.funFact) {
+            user.set('funFact', req.body.funFact);
+        }
+        if (req.body.password && (req.body.password === req.body.confirmPassword)) {
+            user.set('password', req.body.password);
+        } else if (req.body.password && req.body.confirmPassword && !(req.body.password === req.body.confirmPassword)) {
+            res.redirect('/users/' + userId + '/edit?update=passnotmatch');
+        }
+
+        user.save().then(function(user) {
+            res.redirect('/users/' + userId + '?update=success');
+        }, function(error) {
+            var errorCode = (error.code ? error.code : 500);
+            var errorMessage = (error.message ? error.message : 'Internal Server Error');
+            res.redirect('/users/' + userId + '/edit?update=error&code=' + errorCode + '&message=' + errorMessage);
         });
     } else {
         res.render('401', {
