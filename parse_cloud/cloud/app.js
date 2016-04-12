@@ -532,18 +532,26 @@ app.post('/events/new-event', function(req, res) {
 
 app.get('/events/list', function(req, res) {
     var query = new Parse.Query(Parse.Object.extend("Event"));
-    var localObjects;
-    query.find().then(function(results) {
-        localObjects = results;
+    var localObjects = [];
+    // query.find().then(function(results) {
+    //     localObjects = results;
+
+    //     var query = new Parse.Query(Parse.Role);
+    //     query.equalTo("name", "Administrator");
+    //     query.equalTo("users", Parse.User.current());
+    //     return query.first();
+    // }, function(error) {
+    //     var errorCode = (error.code ? error.code : 500);
+    //     var errorObj = (error.message ? ({ error: error.message }) : ({ error: "Internal Server Error" }));
+    //     res.status(errorCode).json(errorObj);
+    // })
+    query.each(function(event) {
+        localObjects.push(event);
 
         var query = new Parse.Query(Parse.Role);
         query.equalTo("name", "Administrator");
         query.equalTo("users", Parse.User.current());
         return query.first();
-    }, function(error) {
-        var errorCode = (error.code ? error.code : 500);
-        var errorObj = (error.message ? ({ error: error.message }) : ({ error: "Internal Server Error" }));
-        res.status(errorCode).json(errorObj);
     }).then(function(adminRole) {
         var auth = (adminRole ? 'true' : 'false');
         var data = {
