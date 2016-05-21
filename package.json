@@ -4,7 +4,9 @@
   "description": "The server for lmucrimsoncircle.com",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --recursive 'test'"
+    "test": "mocha --recursive 'test'",
+    "jslint": "jslint",
+    "codecov": "mocha --recursive --compilers coffee:coffee-script/register --require coffee-coverage/register-istanbul 'test/**/*.coffee' && istanbul report && codecov"
   },
   "repository": {
     "type": "git",
