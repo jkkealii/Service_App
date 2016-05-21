@@ -4,9 +4,11 @@
   "description": "The server for lmucrimsoncircle.com",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --recursive 'test'",
-    "jslint": "jslint",
-    "codecov": "mocha --recursive --compilers coffee:coffee-script/register --require coffee-coverage/register-istanbul 'test/**/*.coffee' && istanbul report && codecov"
+    "test": "mocha --recursive --require mocha-istanbul 'test' && istanbul report text-summary lcov",
+    "jslint": "jslint '**/*.js, !node_modules/**/*.js'",
+    "report": "istanbul report",
+    "report-summary": "istanbul report text-summary lcov",
+    "codecov": "mocha --recursive --require mocha-istanbul 'test' && istanbul report && codecov"
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,7 @@
     "codecov": "^1.0.1",
     "istanbul": "^0.4.3",
     "jslint": "^0.10.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "mocha-istanbul": "^0.2.0"
   }
 }
