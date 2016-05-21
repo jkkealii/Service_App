@@ -8,3 +8,4 @@ after_script:
 - npm run codecov
 notifications:
   email: false
+  slack: crimsoncircle:gtPT50igZ9z1WDADI60abxdX
