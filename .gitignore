@@ -1,5 +1,6 @@
 node_modules
 coverage
+config
 *.log
 .DS_Store*
 parse-js-blank/*
