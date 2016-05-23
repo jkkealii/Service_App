@@ -35,5 +35,12 @@
     "jslint": "^0.10.0",
     "mocha": "^2.4.5",
     "mocha-istanbul": "^0.2.0"
+  },
+  "dependencies": {
+    "config": "^1.20.3",
+    "good": "^7.0.1",
+    "hapi": "^13.4.1",
+    "nunjucks-hapi": "^2.1.0",
+    "vision": "^4.1.0"
   }
 }
