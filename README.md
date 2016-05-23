@@ -7,6 +7,7 @@
 [![Known Vulnerabilities][snyk-img]][snyk-url]
 
 The Crimson Circle website dedicated to tracking and viewing service hours.
+Just some little things, to be removed later:
 
 [crimson-img]: resources/large-crimson-logo.png
 [crimson-url]: https://github.com/jkealii/Service_App
