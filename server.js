@@ -26,10 +26,13 @@ var registerCallback = function (err) {
         throw err; // something bad happened loading the plugin
     }
 };
-var server = function (connection, routes, logToConsole, options, registerCallback, templates) {
+var server = function (setup, routes, logToConsole, options, registerCallback, templates) {
     var hapi = new Hapi.Server();
     
-    hapi.connection(connection);
+    hapi.connection({
+        host: setup.host,
+        port: setup.port
+    });
 
     hapi.route(routes);
 
@@ -45,7 +48,7 @@ var server = function (connection, routes, logToConsole, options, registerCallba
     return hapi;
 };
 
-var Service_App = server(connection, routes, logToConsole, options, registerCallback, templates);
+var Service_App = server(setup, routes, logToConsole, options, registerCallback, templates);
 Service_App.start(showServerRunInfo); 
 
 module.exports = Service_App;
