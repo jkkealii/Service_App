@@ -25,6 +25,13 @@ var routes = [
             // }
     },
     {
+        path: '/favicon.png',
+        method: 'GET',
+        handler: {
+            file: 'favicon.png'
+        }
+    },
+    {
         path: '/',
         method: 'GET',
         handler: function (req, res) {
