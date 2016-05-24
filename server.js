@@ -2,6 +2,7 @@ var Hapi = require('hapi');
 var Config = require('config');
 var Path = require('path');
 var Vision = require('vision');
+var Inert = require('inert');
 
 var setup = Config.get('Node-Server');
 var routes = require(Path.join(__dirname, 'routes/routes.js'));
@@ -32,7 +33,7 @@ var templates = {
     engines: {
         html: require('nunjucks-hapi')
     },
-    path: Path.join(__dirname, 'static/templates')
+    path: Path.join(__dirname, 'templates')
 };
 
 var registerCallback = function (err) {
@@ -43,12 +44,22 @@ var registerCallback = function (err) {
 };
 
 var server = function (setup, routes, options, registerCallback, templates) {
-    var hapi = new Hapi.Server();
+    var hapi = new Hapi.Server({
+        connections: {
+            routes: {
+                files: {
+                    relativeTo: Path.join(__dirname, 'static')
+                }
+            }
+        }
+    });
     
     hapi.connection({
         host: setup.host,
         port: setup.port
     });
+
+    hapi.register(Inert, function () {});
 
     hapi.register(Vision, function (err) {
         hapi.views(templates);
