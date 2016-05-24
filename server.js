@@ -51,13 +51,7 @@ var server = function (setup, routes, options, registerCallback, templates) {
     });
 
     hapi.register(Vision, function (err) {
-        hapi.views({
-            engines: {
-                html: require('nunjucks-hapi')
-            },
-            path: Path.join(__dirname, 'static/templates')
-        });
-
+        hapi.views(templates);
         hapi.route(routes);
     });
 
