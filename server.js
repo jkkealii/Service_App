@@ -3,6 +3,7 @@ var Config = require('config');
 var Path = require('path');
 
 var setup = Config.get('Node-Server');
+var routes = require(Path.join(__dirname, 'routes/routes.js'));
 
 var showServerRunInfo = function () {
     console.log("Server started on %s:%s", setup.host, setup.port);
@@ -16,7 +17,7 @@ var options = {
 };
 var templates = {
     engines: {
-        html: require('nunjucks-hapi');
+        html: require('nunjucks-hapi')
     },
     path: Path.join(__dirname, 'static/templates')
 };
@@ -26,7 +27,7 @@ var registerCallback = function (err) {
         throw err; // something bad happened loading the plugin
     }
 };
-var server = function (setup, routes, logToConsole, options, registerCallback, templates) {
+var server = function (setup, routes, options, registerCallback, templates) {
     var hapi = new Hapi.Server();
     
     hapi.connection({
@@ -48,7 +49,7 @@ var server = function (setup, routes, logToConsole, options, registerCallback, t
     return hapi;
 };
 
-var Service_App = server(setup, routes, logToConsole, options, registerCallback, templates);
+var Service_App = server(setup, routes, options, registerCallback, templates);
 Service_App.start(showServerRunInfo); 
 
 module.exports = Service_App;

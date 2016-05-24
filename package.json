@@ -39,6 +39,7 @@
   "dependencies": {
     "config": "^1.20.3",
     "good": "^7.0.1",
+    "good-console": "^6.1.1",
     "hapi": "^13.4.1",
     "nunjucks-hapi": "^2.1.0",
     "vision": "^4.1.0"
