@@ -4,6 +4,7 @@
   "description": "The server for lmucrimsoncircle.com",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "mocha --recursive --require mocha-istanbul 'test' && istanbul report text-summary lcov",
     "jslint": "jslint '**/*.js, !node_modules/**/*.js'",
     "report": "istanbul report",
