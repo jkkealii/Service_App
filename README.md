@@ -22,7 +22,7 @@ Just some little things, to be removed later:
 [dependency-url]: https://david-dm.org/jkkealii/Service_App
 
 [dev-dependency-img]: https://david-dm.org/jkkealii/Service_App/dev-status.svg
-[dev-dependency-url]: https://david-dm.org/jkkealii/Service_App#info=devDependencies
+[dev-dependency-url]: https://david-dm.org/jkkealii/Service_App?type=dev
 
 [snyk-img]: https://snyk.io/test/github/jkkealii/Service_App.git/badge.svg
 [snyk-url]: https://snyk.io/test/github/jkkealii/Service_App.git
