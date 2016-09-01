@@ -5,7 +5,10 @@ var Vision = require('vision');
 var Inert = require('inert');
 
 var setup = Config.get('Node-Server');
-var routes = require(Path.join(__dirname, 'routes/routes.js'));
+var visionRoutes = require(Path.join(__dirname, 'routes/vision_routes.js'));
+var apiRoutes = require(Path.join(__dirname, 'routes/api_routes.js'));
+
+var routes = visionRoutes.concat(apiRoutes);
 
 var showServerRunInfo = function () {
     console.log("Server started on %s:%s", setup.host, setup.port);
