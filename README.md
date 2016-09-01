@@ -9,10 +9,16 @@
 The Crimson Circle website dedicated to tracking and viewing service hours.
 
 Make sure to install Mongo for dev environment
-
 ```
 brew install mongodb
 ```
+
+Setup the test database by running the following
+```
+npm run db-start
+npm run db-seed
+```
+
 
 [crimson-img]: resources/large-crimson-logo.png
 [crimson-url]: https://github.com/jkealii/Service_App
