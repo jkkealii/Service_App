@@ -16,7 +16,7 @@ brew install mongodb
 Setup the test database by running the following
 ```
 npm run db-start
-npm run db-seed
+npm run db-seed -- --file <filepath>
 ```
 
 

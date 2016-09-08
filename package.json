@@ -12,7 +12,7 @@
     "codecov": "mocha --recursive --require mocha-istanbul 'test' && istanbul report && codecov",
     "db-start": "mkdir -p db; mkdir -p log; mongod --fork --logpath $(npm bin)/../../log/mongodb.log --dbpath $(npm bin)/../../db",
     "db-stop": "kill $(ps aux | grep mongod | awk  '{print $2}')",
-    "db-seed": "mongoimport --db local --collection events --file $(npm bin)/../../seed.json"
+    "db-seed": "mongoimport --db local --collection events"
   },
   "repository": {
     "type": "git",
