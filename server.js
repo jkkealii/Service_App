@@ -55,7 +55,7 @@ var mongoConnection = {
         MongoClient.connect(url, function(err, db) {
             if (err) {
                 server.log(['mongo-connection', 'error'], err);
-                next(err);
+                return next(err);
             }
             server.log(['mongo-connection', 'info'], 'Connected to'+url);
             server.decorate('server', 'mongo', db);
@@ -65,10 +65,10 @@ var mongoConnection = {
                     server.log(['mongo-connection', 'error'], err);
                 });
             });
+            next();
         });
     }
 };
-
 mongoConnection.register.attributes = {
     name: "mongo-connection",
     version: "0.0.0"
