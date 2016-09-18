@@ -52,7 +52,11 @@ Service_App.connection({
     port: setup.port
 });
 
-Service_App.register(mongoConnection);
+Service_App.register(mongoConnection, function (err) {
+    if (err) {
+        console.error('have you started your mongodb instance?\nnpm run db-start\n');
+    }
+});
 Service_App.register(Api, {
     routes: {
         prefix: '/api'

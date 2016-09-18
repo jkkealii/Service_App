@@ -17,7 +17,7 @@ cd Service_App
 npm install
 ```
 
-Install Mongo locally if you don't already have it installed
+Install MongoDB locally if you don't already have it installed
 ```
 brew install mongodb
 ```
@@ -50,6 +50,12 @@ npm run db-seed -- --file <filepath>
 Start the server
 ```
 npm start
+```
+
+Stop the server and local mongo instance
+```
+ctrl-c
+npm run db-stop
 ```
 
 [crimson-img]: resources/large-crimson-logo.png
