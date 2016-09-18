@@ -32,6 +32,11 @@ var apiRoutes = [
         method: 'DELETE',
         path: '/events/{event}',
         handler: Api.deleteEvent
+    },
+    {
+        method: 'GET',
+        path: '/events/{event}',
+        handler: Api.getEvent
     }
 ];
 

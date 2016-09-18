@@ -19,6 +19,13 @@ var query = {
         events.remove({
             _id: new ObjectID(event)
         }, callback);
+    },
+    getEvent: function (db, event, callback) {
+        if (!db) { return callback('no database found to query'); }
+        var events = db.collection('events');
+        events.findOne({
+            _id: new ObjectID(event)
+        }, callback);
     }
 };
 

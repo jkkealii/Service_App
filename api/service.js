@@ -35,6 +35,34 @@ var service = {
     },
     deleteEvent: function (db, event, callback) {
         Query.deleteEvent(db, event, callback);
+    },
+    getEvent: function (db, event, callback) {
+        Query.getEvent(db, event, function (err, rawEvent) {
+            if (err) {
+                callback(err);
+            } else {
+                if (rawEvent) {
+                    callback(undefined, {
+                        id: rawEvent._id,
+                        name: rawEvent.name,
+                        comments: rawEvent.comments,
+                        hours: rawEvent.hours,
+                        driverHours: rawEvent.driverHours,
+                        extraHours: rawEvent.extraHours,
+                        isOnCampus: rawEvent.isOnCampus,
+                        meetingPlace: rawEvent.meetingPlace,
+                        startDateTime: rawEvent.startDateTime,
+                        endDateTime: rawEvent.endDateTime,
+                        uniform: rawEvent.uniform,
+                        members: rawEvent.members,
+                        drivers: rawEvent.drivers,
+                        specials: rawEvent.specials
+                    });
+                } else {
+                    callback();
+                }
+            }
+        });
     }
 };
 

@@ -37,6 +37,19 @@ var respond = {
             message: (result.result.n) ? "Success deleting event!" : "No event found to delete!",
             result: result.result
         }).code(200);
+    },
+    failedToGetEvent: function (res) {
+        res({
+            statusCode: 500,
+            message: "Unable to find event!"
+        }).code(500);
+    },
+    gotEvent: function (res, event) {
+        res({
+            statusCode: 200,
+            message: (event) ? "Success finding event!" : "Event not found!",
+            event: event
+        }).code(200);
     }
 };
 

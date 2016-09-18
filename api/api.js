@@ -29,6 +29,15 @@ var api = {
                 Respond.deletedEvent(res, result);
             }
         });
+    },
+    getEvent: function (req, res) {
+        Service.getEvent(req.mongo, req.params.event, function (err, event) {
+            if (err) {
+                Respond.failedToGetEvent(res);
+            } else {
+                Respond.gotEvent(res, event);
+            }
+        })
     }
 };
 
