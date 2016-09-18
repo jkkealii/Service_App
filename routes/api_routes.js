@@ -1,3 +1,4 @@
+var Path = require('path');
 var Api = require(Path.join(__dirname, '../api/api.js'));
 
 var apiRoutes = [
@@ -13,7 +14,7 @@ var apiRoutes = [
     {
         method: 'GET',
         path: '/api/events',
-        handler: Api.getEventsList
+        handler: Api.getEventList
     }
 ];
 

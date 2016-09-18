@@ -1,4 +1,7 @@
+var Path = require('path');
 var Query = require(Path.join(__dirname, 'query.js'));
+
+console.log(Query);
 
 var service = {
     getEventList: function (callback) {
