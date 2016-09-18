@@ -7,15 +7,24 @@ var apiRoutes = [
         path: '/hello',
         handler: function (req, res) {
             res({
-                'hello': 'Welcome to the Service App!'
+                statusCode: 200,
+                message: 'Welcome to the Service App API!'
             }).code(200);
         }
     },
     {
         method: 'GET',
-        path: '/api/events',
+        path: '/events',
         handler: Api.getEventList
     }
 ];
 
-module.exports = apiRoutes;
+module.exports.register = function (server, options, next) {
+    server.route(apiRoutes);
+    next();
+};
+
+module.exports.register.attributes = {
+    name: "api",
+    version: "0.0.0"
+};
