@@ -39,6 +39,15 @@ var visionRoutes = [
 
             });
         }
+    },
+    {
+        path: '/edit-event',
+        method: 'GET',
+        handler: function (req, res) {
+            res.view('edit_event.html', {
+
+            });
+        }
     }
 ];
 
