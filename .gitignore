@@ -1,9 +1,11 @@
 node_modules
 coverage
 config
+log
 *.log
 .DS_Store*
 parse-js-blank/*
 config.json
 .parse.local
 .parse.project
+db
