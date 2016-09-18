@@ -10,6 +10,7 @@ var service = {
                 var events = [];
                 for (var i = 0; i < rawEvents.length; i++) {
                     events.push({
+                        id: rawEvents[i]._id,
                         name: rawEvents[i].name,
                         comments: rawEvents[i].comments,
                         hours: rawEvents[i].hours,
@@ -30,8 +31,10 @@ var service = {
         });
     },
     createEvent: function (db, payload, callback) {
-        console.log(payload);
         Query.createEvent(db, payload, callback);
+    },
+    deleteEvent: function (db, event, callback) {
+        Query.deleteEvent(db, event, callback);
     }
 };
 

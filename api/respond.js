@@ -24,6 +24,19 @@ var respond = {
             message: "Success creating event!",
             result: result
         }).code(200);
+    },
+    failedToDeleteEvent: function (res) {
+        res({
+            statusCode: 500,
+            message: "Unable to delete event!"
+        }).code(500);
+    },
+    deletedEvent: function (res, result) {
+        res({
+            statusCode: 200,
+            message: (result.result.n) ? "Success deleting event!" : "No event found to delete!",
+            result: result.result
+        }).code(200);
     }
 };
 

@@ -20,6 +20,15 @@ var api = {
                 Respond.createdEvent(res, result);
             }
         });
+    },
+    deleteEvent: function (req, res) {
+        Service.deleteEvent(req.mongo, req.params.event, function (err, result) {
+            if (err) {
+                Respond.failedToDeleteEvent(res);
+            } else {
+                Respond.deletedEvent(res, result);
+            }
+        });
     }
 };
 
