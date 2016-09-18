@@ -11,6 +11,15 @@ var api = {
                 Respond.returnEvents(res, events);
             }
         });
+    },
+    createEvent: function (req, res) {
+        Service.createEvent(req.mongo, req.payload, function (err, result) {
+            if (err) {
+                Respond.failedToCreateEvent(res);
+            } else {
+                Respond.createdEvent(res, result);
+            }
+        });
     }
 };
 

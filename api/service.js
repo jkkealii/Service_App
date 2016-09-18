@@ -28,6 +28,10 @@ var service = {
                 callback(err, events);
             }
         });
+    },
+    createEvent: function (db, payload, callback) {
+        console.log(payload);
+        Query.createEvent(db, payload, callback);
     }
 };
 

@@ -11,6 +11,19 @@ var respond = {
             message: (events.length) ? "Success finding events!" : "There are no events currently!",
             events: events
         }).code(200);
+    },
+    failedToCreateEvent: function (res) {
+        res({
+            statusCode: 500,
+            message: "Unable to create event!"
+        }).code(500);
+    },
+    createdEvent: function (res, result) {
+        res({
+            statusCode: 200,
+            message: "Success creating event!",
+            result: result
+        }).code(200);
     }
 };
 
