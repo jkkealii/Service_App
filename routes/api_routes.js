@@ -1,5 +1,6 @@
 var Path = require('path');
 var Api = require(Path.join(__dirname, '../api/api.js'));
+var Schema = require(Path.join(__dirname, '../api/schema.js'));
 
 var apiRoutes = [
     {
@@ -16,6 +17,16 @@ var apiRoutes = [
         method: 'GET',
         path: '/events',
         handler: Api.getEventList
+    },
+    {
+        method: 'POST',
+        path: '/events',
+        config: {
+            validate: {
+                payload: Schema.event
+            }
+        },
+        handler: Api.createEvent
     }
 ];
 
