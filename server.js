@@ -3,6 +3,7 @@ var Config = require('config');
 var Path = require('path');
 var Vision = require('vision');
 var Inert = require('inert');
+var MongoClient = require('mongodb').MongoClient;
 
 var setup = Config.get('Node-Server');
 var visionRoutes = require(Path.join(__dirname, 'routes/vision_routes.js'));
@@ -46,6 +47,33 @@ var registerCallback = function (err) {
     }
 };
 
+var mongoConnection = {
+    register: function (server, options, next) {
+        var dbconfig = Config.get('Mongo-Server');
+        var url = "mongodb://" + dbconfig.host +
+            ":" + dbconfig.port + "/" + dbconfig.db;
+        MongoClient.connect(url, function(err, db) {
+            if (err) {
+                server.log(['mongo-connection', 'error'], err);
+                next(err);
+            }
+            server.log(['mongo-connection', 'info'], 'Connected to'+url);
+            server.decorate('server', 'mongo', db);
+            server.decorate('request', 'mongo', db);
+            server.on('stop', function () {
+                db.close(function (err) {
+                    server.log(['mongo-connection', 'error'], err);
+                });
+            });
+        });
+    }
+};
+
+mongoConnection.register.attributes = {
+    name: "mongo-connection",
+    version: "0.0.0"
+};
+
 var server = function (setup, routes, options, registerCallback, templates) {
     var hapi = new Hapi.Server({
         connections: {
@@ -62,7 +90,9 @@ var server = function (setup, routes, options, registerCallback, templates) {
         port: setup.port
     });
 
-    hapi.register(Inert, function () {});
+    hapi.register(mongoConnection, function (err) {});
+
+    hapi.register(Inert, function (err) {});
 
     hapi.register(Vision, function (err) {
         hapi.views(templates);

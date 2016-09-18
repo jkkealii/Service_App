@@ -4,7 +4,7 @@ var Respond = require(Path.join(__dirname, 'respond.js'));
 
 var api = {
     getEventList: function (req, res) {
-        Service.getEventList(function (err, events) {
+        Service.getEventList(req.mongo, function (err, events) {
             if (err) {
                 Respond.failedToFindEvents(res);
             } else {
