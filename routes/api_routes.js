@@ -1,3 +1,5 @@
+var Api = require(Path.join(__dirname, '../api/api.js'));
+
 var apiRoutes = [
     {
         method: 'GET',
@@ -7,6 +9,11 @@ var apiRoutes = [
                 'hello': 'Welcome to the Service App!'
             }).code(200);
         }
+    },
+    {
+        method: 'GET',
+        path: '/api/events',
+        handler: Api.getEventsList
     }
 ];
 

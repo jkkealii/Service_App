@@ -47,6 +47,7 @@
     "good-squeeze": "^4.0.0",
     "hapi": "^15.0.2",
     "inert": "^4.0.2",
+    "mongodb": "^2.2.10",
     "nunjucks-hapi": "^2.1.0",
     "vision": "^4.1.0"
   }
