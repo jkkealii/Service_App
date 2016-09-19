@@ -47,11 +47,25 @@ var respond = {
         }).code(500);
     },
     gotEvent: function (res, event) {
-        var code = (result.result.n) ? 200 : 404;
+        var code = (event) ? 200 : 404;
         res({
             statusCode: code,
             message: (event) ? "Success finding event!" : "Event not found!",
             event: event
+        }).code(code);
+    },
+    failedToUpdateEvent: function (res) {
+        res({
+            statusCode: 500,
+            message: "Unable to update event!"
+        }).code(500);
+    },
+    updatedEvent: function (res, result) {
+        var code = (result.result.n) ? 200 : 404;
+        res({
+            statusCode: code,
+            message: (result.result.n) ? "Success updating event!" : "No event found to update!",
+            result: result.result
         }).code(code);
     }
 };

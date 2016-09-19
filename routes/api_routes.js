@@ -37,6 +37,16 @@ var apiRoutes = [
         method: 'GET',
         path: '/events/{event}',
         handler: Api.getEvent
+    },
+    {
+        method: 'PUT',
+        path: '/events/{event}',
+        config: {
+            validate: {
+                payload: Schema.event
+            }
+        },
+        handler: Api.updateEvent
     }
 ];
 

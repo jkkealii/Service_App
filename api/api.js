@@ -37,7 +37,16 @@ var api = {
             } else {
                 Respond.gotEvent(res, event);
             }
-        })
+        });
+    },
+    updateEvent: function (req, res) {
+        Service.updateEvent(req.mongo, req.params.event, req.payload, function (err, result) {
+            if (err) {
+                Respond.failedToUpdateEvent(res);
+            } else {
+                Respond.updatedEvent(res, result);
+            }
+        });
     }
 };
 

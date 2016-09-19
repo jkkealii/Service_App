@@ -63,6 +63,9 @@ var service = {
                 }
             }
         });
+    },
+    updateEvent: function (db, event, payload, callback) {
+        Query.updateEvent(db, event, payload, callback);
     }
 };
 

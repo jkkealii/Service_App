@@ -26,6 +26,15 @@ var query = {
         events.findOne({
             _id: new ObjectID(event)
         }, callback);
+    },
+    updateEvent: function (db, event, payload, callback) {
+        if (!db) { return callback('no database found to query'); }
+        var events = db.collection('events');
+        events.updateOne({
+            _id: new ObjectID(event)
+        }, {
+            $set: payload
+        }, callback);
     }
 };
 
