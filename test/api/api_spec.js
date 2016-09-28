@@ -1,16 +1,27 @@
 var chai = require("chai");
 var expect = chai.expect;
 var Api = require(Path.join(__dirname, "../../api/api.js"));
+var Mongo = require('mongodb');
+var MongoClient = Mongo.MongoClient;
+var ObjectID = Mongo.ObjectID;
 
 describe("API", function() {
-    var db;
+    var mongo;
+    var defMongoConfig = {
+        host: "localhost",
+        port: 27017,
+        db: "db"
+    };
 
     before("Connection to DB",function(done) {
-        var url = "mongodb://" + dbconfig.host +
-            ":" + dbconfig.port + "/" + dbconfig.testdb;
-        MongoClient.connect(url, function(err, localdb) {
-            if (err) { return done(err) }
-            db = localdb;
+        var url = "mongodb://" + defMongoConfig.host +
+            ":" + defMongoConfig.port + "/" + defMongoConfig.db;
+        MongoClient.connect(url, function(err, db) {
+            if (err) {
+                console.log("failed to connect to db");
+                return done(err);
+            }
+            // TODO: Fully connect to DB and setup mongo object
         });
     });
 
