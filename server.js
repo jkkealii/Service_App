@@ -7,13 +7,24 @@ var Mongo = require('mongodb');
 var MongoClient = Mongo.MongoClient;
 var ObjectID = Mongo.ObjectID;
 
-var setup = Config.get('Node-Server');
+var defNodeConfig = {
+    host: "localhost",
+    port: 8080,
+    logToConsole: true
+};
+var defMongoConfig = {
+    host: "localhost",
+    port: 27017,
+    db: "db"
+};
+
+var setup = Config.get('Node-Server') || defNodeConfig;
 var visionRoutes = require(Path.join(__dirname, 'routes/vision_routes.js'));
 var Api = require(Path.join(__dirname, 'routes/api_routes.js'));
 
 var mongoConnection = {
     register: function (server, options, next) {
-        var dbconfig = Config.get('Mongo-Server');
+        var dbconfig = Config.get('Mongo-Server') || defMongoConfig;
         var url = "mongodb://" + dbconfig.host +
             ":" + dbconfig.port + "/" + dbconfig.db;
         MongoClient.connect(url, function(err, db) {
