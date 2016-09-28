@@ -1,9 +1,5 @@
 var chai = require("chai");
-var Config = require("config");
 var expect = chai.expect;
-var MongoClient = require('mongodb').MongoClient;
-
-var dbconfig = Config.get("Mongo-Server");
 var Api = require(Path.join(__dirname, "../../api/api.js"));
 
 describe("API", function() {
