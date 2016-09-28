@@ -2,8 +2,8 @@ var Path = require('path');
 var Query = require(Path.join(__dirname, 'query.js'));
 
 var service = {
-    getEventList: function (db, callback) {
-        Query.getEventList(db, function (err, rawEvents) {
+    getEventList: function (mongo, callback) {
+        Query.getEventList(mongo, function (err, rawEvents) {
             if (err) {
                 callback(err);
             } else {
@@ -30,14 +30,14 @@ var service = {
             }
         });
     },
-    createEvent: function (db, payload, callback) {
-        Query.createEvent(db, payload, callback);
+    createEvent: function (mongo, payload, callback) {
+        Query.createEvent(mongo, payload, callback);
     },
-    deleteEvent: function (db, event, callback) {
-        Query.deleteEvent(db, event, callback);
+    deleteEvent: function (mongo, event, callback) {
+        Query.deleteEvent(mongo, event, callback);
     },
-    getEvent: function (db, event, callback) {
-        Query.getEvent(db, event, function (err, rawEvent) {
+    getEvent: function (mongo, event, callback) {
+        Query.getEvent(mongo, event, function (err, rawEvent) {
             if (err) {
                 callback(err);
             } else {
@@ -64,8 +64,8 @@ var service = {
             }
         });
     },
-    updateEvent: function (db, event, payload, callback) {
-        Query.updateEvent(db, event, payload, callback);
+    updateEvent: function (mongo, event, payload, callback) {
+        Query.updateEvent(mongo, event, payload, callback);
     }
 };
 

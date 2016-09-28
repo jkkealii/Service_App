@@ -3,7 +3,9 @@ var Config = require('config');
 var Path = require('path');
 var Vision = require('vision');
 var Inert = require('inert');
-var MongoClient = require('mongodb').MongoClient;
+var Mongo = require('mongodb');
+var MongoClient = Mongo.MongoClient;
+var ObjectID = Mongo.ObjectID;
 
 var setup = Config.get('Node-Server');
 var visionRoutes = require(Path.join(__dirname, 'routes/vision_routes.js'));
@@ -20,8 +22,14 @@ var mongoConnection = {
                 return next(err);
             }
             server.log(['mongo-connection', 'info'], 'Connected to'+url);
-            server.decorate('server', 'mongo', db);
-            server.decorate('request', 'mongo', db);
+            server.decorate('server', 'mongo', {
+                ObjectID: ObjectID,
+                db: db
+            });
+            server.decorate('request', 'mongo', {
+                ObjectID: ObjectID,
+                db: db
+            });
             server.on('stop', function () {
                 db.close(function (err) {
                     server.log(['mongo-connection', 'error'], err);
