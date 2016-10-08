@@ -9,7 +9,10 @@
     "jslint": "jslint '**/*.js, !node_modules/**/*.js'",
     "report": "istanbul report",
     "report-summary": "istanbul report text-summary lcov",
-    "codecov": "mocha --recursive --require mocha-istanbul 'test' && istanbul report && codecov"
+    "codecov": "mocha --recursive --require mocha-istanbul 'test' && istanbul report && codecov",
+    "db-start": "mkdir -p db; mkdir -p log; mongod --fork --logpath $(npm bin)/../../log/mongodb.log --dbpath $(npm bin)/../../db",
+    "db-stop": "kill $(ps aux | grep mongod | awk  '{print $2}')",
+    "db-seed": "mongoimport --db local --collection events"
   },
   "repository": {
     "type": "git",
@@ -44,6 +47,8 @@
     "good-squeeze": "^4.0.0",
     "hapi": "^15.0.2",
     "inert": "^4.0.2",
+    "joi": "^9.0.4",
+    "mongodb": "^2.2.10",
     "nunjucks-hapi": "^2.1.0",
     "vision": "^4.1.0"
   }

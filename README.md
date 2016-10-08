@@ -7,7 +7,56 @@
 [![Known Vulnerabilities][snyk-img]][snyk-url]
 
 The Crimson Circle website dedicated to tracking and viewing service hours.
-Just some little things, to be removed later:
+
+### Installation
+
+Download repo; install packages
+```
+git clone https://github.com/jkkealii/Service_App.git
+cd Service_App
+npm install
+```
+
+Install MongoDB locally if you don't already have it installed
+```
+brew install mongodb
+```
+
+Configure server with config file to go into `config/default.json`
+```
+{
+    "Node-Server": {
+        "host": <desired host>,
+        "port": <desired port>,
+        "logToConsole": <desired logging boolean>
+    },
+    "Mongo-Server": {
+        "host": <mongodb server>,
+        "port": <mongodb server port>,
+        "db": <db to interact with>
+    }
+}
+```
+Alternately, get the most recent config folder from Team member/Slack
+
+### Running & Development
+
+Start your local db and optionally seed the db
+```
+npm run db-start
+npm run db-seed -- --file <filepath>
+```
+
+Start the server
+```
+npm start
+```
+
+Stop the server and local mongo instance
+```
+ctrl-c
+npm run db-stop
+```
 
 [crimson-img]: resources/large-crimson-logo.png
 [crimson-url]: https://github.com/jkealii/Service_App
