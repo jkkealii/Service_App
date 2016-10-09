@@ -48,6 +48,15 @@ var visionRoutes = [
 
             });
         }
+    },
+    {
+        path: '/members',
+        method: 'GET',
+        handler: function (req, res) {
+            res.view('members.html', {
+
+            });
+        }
     }
 ];
 
