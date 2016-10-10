@@ -1,5 +1,6 @@
 var chai = require("chai");
 var expect = chai.expect;
+var Path = require('path');
 var Api = require(Path.join(__dirname, "../../api/api.js"));
 var Mongo = require('mongodb');
 var MongoClient = Mongo.MongoClient;
@@ -13,20 +14,22 @@ describe("API", function() {
         db: "db"
     };
 
-    before("Connection to DB",function(done) {
-        var url = "mongodb://" + defMongoConfig.host +
-            ":" + defMongoConfig.port + "/" + defMongoConfig.db;
-        MongoClient.connect(url, function(err, db) {
-            if (err) {
-                console.log("failed to connect to db");
-                return done(err);
-            }
-            // TODO: Fully connect to DB and setup mongo object
-        });
+    before("Connection to DB", function (done) {
+        return done();
+        // var url = "mongodb://" + defMongoConfig.host +
+        //     ":" + defMongoConfig.port + "/" + defMongoConfig.db;
+        // MongoClient.connect(url, function(err, db) {
+        //     if (err) {
+        //         console.log("failed to connect to db");
+        //         return done(err);
+        //     }
+        //     // TODO: Fully connect to DB and setup mongo object
+        // });
     });
 
-    after("Close DB Connection", function() {
-        db.close();
+    after("Close DB Connection", function (done) {
+        return done();
+        // db.close();
     });
     describe("GET /hello", function () {
         
@@ -46,7 +49,7 @@ describe("API", function() {
     describe("PUT /events/{event}", function () {
 
     });
-    it("Testing works", function(done) {
+    it("Testing works", function (done) {
         expect("hello").to.eql("hello");
         done();
     });
