@@ -40,6 +40,11 @@ var query = {
         if (!mongo.db) { return callback('no database found to query'); }
         var members = mongo.db.collection('members');
         members.find({}).toArray(callback);
+    },
+    createMember: function (mongo, payload, callback) {
+        if (!mongo.db) { return callback('no database found to query'); }
+        var members = mongo.db.collection('members');
+        members.insertOne(payload, callback);
     }
 };
 

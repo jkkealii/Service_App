@@ -95,6 +95,9 @@ var service = {
                 callback(err, members);
             }
         });
+    },
+    createMember: function (mongo, payload, callback) {
+        Query.createMember(mongo, payload, callback);
     }
 };
 

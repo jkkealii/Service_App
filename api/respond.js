@@ -81,6 +81,19 @@ var respond = {
             message: members.length ? "Success finding members!" : "There are no members currently!",
             members: members
         }).code(code);
+    },
+    failedToCreateMember: function (res) {
+        res({
+            statusCode: 500,
+            message: "Unable to create member!"
+        }).code(500);
+    },
+    createdMember: function (res, result) {
+        res({
+            statusCode: 201,
+            message: "Success creating member!",
+            result: result
+        }).code(201);
     }
 };
 

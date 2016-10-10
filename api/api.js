@@ -56,6 +56,15 @@ var api = {
                 Respond.gotMembers(res, result);
             }
         });
+    },
+    createMember: function (req, res) {
+        Service.createMember(req.mongo, req.payload, function (err, result) {
+            if (err) {
+                Respond.failedToCreateMember(res);
+            } else {
+                Respond.createdMember(res, result);
+            }
+        });
     }
 };
 
