@@ -1,0 +1,246 @@
+{% include "helpers/_header.html" %}
+
+<div>
+  <h2>Crimson <strong>edit event</strong></h2>
+</div>
+
+<form method="post">
+  <div>
+    <h3>service name</h3>
+    <div class="form-or-something">
+      <input type="text" class="form-something" placeholder="Service" data-original="{%= (locals.eventObj ? locals.eventObj.name : '') %}" id="name">
+    </div>
+  </div>
+
+  <div>
+    <h3>hours</h3>
+    <div class="form-or-something">
+      <input type="text" class="form-something" placeholder="2" data-original="{%= (locals.eventObj ? locals.eventObj.name : '') %}" id="hours">
+    </div>
+  </div>
+
+  <div>
+    <h3>service name</h3>
+    <div class="form-or-something">
+      <input type="text" class="form-something" placeholder="Service" data-original="{%= (locals.eventObj ? locals.eventObj.name : '') %}" id="name">
+    </div>
+  </div>
+
+  <div>
+    <h3>on/off campus</h3>
+    <div>
+      <label>
+        <input type="radio" name="is-on-campus" id="is-on-campus-true" value="true" 
+        {%= (locals.eventObj ?
+              (locals.eventObj.isOnCampus ? 'checked' : '')
+            :
+              ''
+            ) %}
+        >
+        On Campus
+      </label>
+    </div>
+    <div>
+      <label>
+        <input type="radio" name="is-on-campus" id="is-on-campus-false" value="false" 
+        {%= (locals.eventObj ?
+              (locals.eventObj.isOnCampus ? '' : 'checked')
+            :
+              ''
+            ) %}
+        >
+        Off Campus
+      </label>
+    </div>
+  </div>
+
+  <div>
+    <h3>uniform</h3>
+    <div>
+      <label>
+        <input type="radio" name="uniform" id="uniform-casual" value="Casual" 
+        {%= ((locals.eventObj && locals.eventObj.uniform) ? 
+              ((locals.eventObj.uniform == 'Casual') ? 'checked' : '')
+            :
+              ''
+            ) %}
+        >
+        Casual Uniform
+      </label>
+    </div>
+    <div>
+      <label>
+        <input type="radio" name="uniform" id="uniform-polo" value="Polos" 
+        {%= ((locals.eventObj && locals.eventObj.uniform) ? 
+              ((locals.eventObj.uniform == 'Polos') ? 'checked' : '')
+            :
+              ''
+            ) %}
+        >
+        Polos Uniform
+      </label>
+    </div>
+    <div>
+      <label>
+        <input type="radio" name="uniform" id="uniform-sweater" value="Sweaters" 
+        {%= ((locals.eventObj && locals.eventObj.uniform) ? 
+              ((locals.eventObj.uniform == 'Sweaters') ? 'checked' : '')
+            :
+              ''
+            ) %}
+        >
+        Sweaters Uniform
+      </label>
+    </div>
+  </div>
+
+  <div>
+    <h3>meeting place</h3>
+    <div class="form-or-something">
+      <input type="text" class="form-control" placeholder="Leavey Circle" id="meeting-place" data-original="{%= (locals.eventObj ? locals.eventObj.meetingPlace : '') %}">
+    </div>
+  </div>
+
+  <div>
+    <h3>start date/time</h3>
+    <div class="form-group">
+      <div class="input-group date form-control" id="datetimestart">
+        <input type="text" class="form-control" id="start-date" data-original="{%= (locals.eventObj ? locals.eventObj.startDateTime : '') %}"/>
+        <span class="input-group-addon">
+          <span class="fa fa-calendar"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h3>end date/time</h3>
+    <div class="form-group">
+      <div class="input-group date form-control" id="datetimeend">
+        <input type="text" class="form-control" id="end-date" data-original="{%= (locals.eventObj ? locals.eventObj.endDateTime : '') %}"/>
+        <span class="input-group-addon">
+          <span class="fa fa-calendar"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h3>driver extra hours</h3>
+    <div class="form-or-something">
+      <input type="text" class="form-something" placeholder="0.5" aria-describedby="addon2" id="driver-hours" data-original="{%= (locals.eventObj ? locals.eventObj.driverHours : '') %}">
+    </div>
+  </div>
+
+  <div>
+    <h3>other extra hours</h3>
+    <div class="form-or-something">
+      <input type="text" class="form-something" placeholder="0.5" aria-describedby="addon3" id="extra-hours" data-original="{%= (locals.eventObj ? locals.eventObj.extraHours : '') %}">
+    </div>
+  </div>
+
+  <div>
+    <h3>comments</h3>
+    <div class="form-something">
+      <textarea type="text" class="form-something" placeholder="écrire vos commentaires ici" data-original="{%= (locals.eventObj ? locals.eventObj.comments : '') %}" id="comments" rows="3"></textarea>
+    </div>
+  </div>
+
+  <div>
+    <h3>add driver</h3>
+    <div class="form-something">
+        <input type="text" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Search for Person to Add" placeholder="Christian Papadapolos" id="add-person">
+        <ul class="dropdown-menu" id="list-members"></ul>
+      
+      <div>
+        <button type="button" id="confirm-add-driver"><i class="fa fa-plus"></i> Driver</button>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h3>add member</h3>
+    <div class="form-something">
+        <input type="text" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Search for Person to Add" placeholder="Christian Papadapolos" id="add-person">
+        <ul class="dropdown-menu" id="list-members"></ul>
+      
+      <div>
+        <button type="button" id="confirm-add-person"><i class="fa fa-plus"></i> Regular</button>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h3>add other</h3>
+    <div class="form-something">
+        <input type="text" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Search for Person to Add" placeholder="Christian Papadapolos" id="add-person">
+        <ul class="dropdown-menu" id="list-members"></ul>
+      
+      <div>
+        <button type="button" id="confirm-add-special"><i class="fa fa-plus"></i> Extra</button>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <button type="button" id="update-event" data-loading-text="<i class='fa fa-refresh fa-spin'></i>  Updating"{%= (locals.admin ? '' : 'disabled') %}<i class="fa fa-refresh"></i>  Update</button>
+  </div>
+
+  <div>
+    <h3>drivers</h3>
+    <div class="form-something">
+      <table>
+        <thead>
+
+        </thead>
+        <tbody id="driving-members">
+          <!-- {% if (locals.eventObj && eventObj.drivers) { %}
+            {% locals.eventObj.drivers.forEach(function(member) { %}
+              {% var type = 'driving' %}
+              {% include helper/_attending %}
+            {% }) %}
+          {% } %} -->
+        </tbody>
+      </table>
+    </div>
+
+    <h3>members</h3>
+    <div class="form-something">
+      <table>
+        <thead>
+            
+        </thead>
+        <tbody id="attending-members">
+          <!-- {% if (locals.eventObj && eventObj.members) { %}
+            {% locals.eventObj.members.forEach(function(member) { %}
+              {% var type = 'attending' %}
+              {% include helper/_attending %}
+            {% }) %}
+          {% } %} -->
+        </tbody>
+      </table>
+    </div>
+
+    <h3>other</h3>
+    <div class="form-something">
+      <table>
+        <thead>
+
+        </thead>
+        <tbody id="special-members">
+          <!-- {% if (locals.eventObj && eventObj.specials) { %}
+            {% locals.eventObj.specials.forEach(function(member) { %}
+              {% var type = 'special' %}
+              {% include helper/_attending %}
+            {% }) %}
+          {% } %} -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</form>
+
+{% include "helpers/_basescripts.html" %}
+
+{% include "helpers/_footer.html" %}
