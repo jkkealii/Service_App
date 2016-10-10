@@ -77,19 +77,9 @@ var service = {
                     members.push({
                         // TODO: whats the full list of things to a member
                         id: rawMembers[i]._id,
-                        name: rawMembers[i].name,
-                        comments: rawMembers[i].comments,
-                        hours: rawMembers[i].hours,
-                        driverHours: rawMembers[i].driverHours,
-                        extraHours: rawMembers[i].extraHours,
-                        isOnCampus: rawMembers[i].isOnCampus,
-                        meetingPlace: rawMembers[i].meetingPlace,
-                        startDateTime: rawMembers[i].startDateTime,
-                        endDateTime: rawMembers[i].endDateTime,
-                        uniform: rawMembers[i].uniform,
-                        members: rawMembers[i].members,
-                        drivers: rawMembers[i].drivers,
-                        specials: rawMembers[i].specials
+                        firstName: rawMembers[i].firstName,
+                        lastName: rawMembers[i].lastName,
+                        hours: rawMembers[i].hours
                     });
                 }
                 callback(err, members);

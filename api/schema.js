@@ -15,6 +15,12 @@ var schema = {
         members: Joi.string().required(),
         drivers: Joi.string().required(),
         specials: Joi.string().required(),
+    }).unknown(false),
+
+    member: Joi.object().keys({
+        firstName: Joi.string().required(),
+        lastName: Joi.string().required(),
+        hours: Joi.number()
     }).unknown(false)
 };
 
