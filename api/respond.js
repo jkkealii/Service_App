@@ -94,6 +94,20 @@ var respond = {
             message: "Success creating member!",
             result: result
         }).code(201);
+    },
+    failedToDeleteMember: function (res) {
+        res({
+            statusCode: 500,
+            message: "Unable to delete member!"
+        }).code(500);
+    },
+    deletedMember: function (res, result) {
+        var code = result.result.n ? 200 : 404;
+        res({
+            statusCode: code,
+            message: result.result.n ? "Success deleting member!" : "No member found to delete!",
+            result: result.result
+        }).code(code);
     }
 };
 

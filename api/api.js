@@ -65,6 +65,15 @@ var api = {
                 Respond.createdMember(res, result);
             }
         });
+    },
+    deleteMember: function (req, res) {
+        Service.deleteMember(req.mongo, req.params.member, function (err, result) {
+            if (err) {
+                Respond.failedToDeleteMember(res);
+            } else {
+                Respond.deletedMember(res, result);
+            }
+        });
     }
 };
 

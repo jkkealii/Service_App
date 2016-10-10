@@ -88,6 +88,9 @@ var service = {
     },
     createMember: function (mongo, payload, callback) {
         Query.createMember(mongo, payload, callback);
+    },
+    deleteMember: function (mongo, member, callback) {
+        Query.deleteMember(mongo, member, callback);
     }
 };
 

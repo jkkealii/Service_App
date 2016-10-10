@@ -63,6 +63,11 @@ var apiRoutes = [
         },
         handler: Api.createMember
     },
+    {
+        method: 'DELETE',
+        path: '/members/{member}',
+        handler: Api.deleteMember
+    }
 ];
 
 module.exports.register = function (server, options, next) {
