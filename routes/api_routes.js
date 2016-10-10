@@ -47,7 +47,22 @@ var apiRoutes = [
             }
         },
         handler: Api.updateEvent
-    }
+    },
+    {
+        method: 'GET',
+        path: '/members',
+        handler: Api.getMemberList
+    },
+    {
+        method: 'POST',
+        path: '/members',
+        config: {
+            validate: {
+                payload: Schema.member
+            }
+        },
+        handler: Api.createMember
+    },
 ];
 
 module.exports.register = function (server, options, next) {

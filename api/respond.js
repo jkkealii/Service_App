@@ -67,6 +67,20 @@ var respond = {
             message: result.result.n ? "Success updating event!" : "No event found to update!",
             result: result.result
         }).code(code);
+    },
+    failedToGetMembers: function (res) {
+        res({
+            statusCode: 500,
+            message: "Unable to retrieve the list of members!"
+        }).code(500);
+    },
+    gotMembers: function (res, members) {
+        var code = members.length ? 200 : 404;
+        res({
+            statusCode: code,
+            message: members.length ? "Success finding members!" : "There are no members currently!",
+            members: members
+        }).code(code);
     }
 };
 

@@ -35,6 +35,11 @@ var query = {
         }, {
             $set: payload
         }, callback);
+    },
+    getMemberList: function (mongo, callback) {
+        if (!mongo.db) { return callback('no database found to query'); }
+        var members = mongo.db.collection('members');
+        members.find({}).toArray(callback);
     }
 };
 

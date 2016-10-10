@@ -47,6 +47,15 @@ var api = {
                 Respond.updatedEvent(res, result);
             }
         });
+    },
+    getMemberList: function (req, res) {
+        Service.getMemberList(req.mongo, function (err, result) {
+            if (err) {
+                Respond.failedToGetMembers(res);
+            } else {
+                Respond.gotMembers(res, result);
+            }
+        });
     }
 };
 
