@@ -32,7 +32,7 @@ var mongoConnection = {
                 server.log(['mongo-connection', 'error'], err);
                 return next(err);
             }
-            server.log(['mongo-connection', 'info'], 'Connected to'+url);
+            server.log(['mongo-connection', 'info'], 'Connected to' + url);
             server.decorate('server', 'mongo', {
                 ObjectID: ObjectID,
                 db: db
@@ -57,7 +57,7 @@ mongoConnection.register.attributes = {
 
 
 
-var Service_App = new Hapi.Server({
+var ServiceApp = new Hapi.Server({
     connections: {
         routes: {
             files: {
@@ -66,35 +66,35 @@ var Service_App = new Hapi.Server({
         }
     }
 });
-Service_App.connection({
+ServiceApp.connection({
     host: setup.host,
     port: setup.port
 });
 
-Service_App.register(mongoConnection, function (err) {
+ServiceApp.register(mongoConnection, function (err) {
     if (err) {
         console.error('have you started your mongodb instance?\nnpm run db-start\n');
     }
 });
-Service_App.register(Api, {
+ServiceApp.register(Api, {
     routes: {
         prefix: '/api'
     }
 });
 
-Service_App.register(Inert, function (err) {});
-Service_App.register(Vision, function (err) {
-    Service_App.views({
+ServiceApp.register(Inert, function () {});
+ServiceApp.register(Vision, function () {
+    ServiceApp.views({
         engines: {
             html: require('nunjucks-hapi')
         },
         path: Path.join(__dirname, 'templates')
     });
-    Service_App.route(visionRoutes);
+    ServiceApp.route(visionRoutes);
 });
 
 if (setup.logToConsole) {
-    Service_App.register({
+    ServiceApp.register({
         register: require('good'),
         options: {
             ops: {
@@ -121,8 +121,8 @@ if (setup.logToConsole) {
     });
 }
 
-Service_App.start(function () {
+ServiceApp.start(function () {
     console.log("Server started on %s:%s", setup.host, setup.port);
 }); 
 
-module.exports = Service_App;
+module.exports = ServiceApp;
