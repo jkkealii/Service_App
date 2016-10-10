@@ -108,6 +108,20 @@ var respond = {
             message: result.result.n ? "Success deleting member!" : "No member found to delete!",
             result: result.result
         }).code(code);
+    },
+    failedToGetMember: function (res) {
+        res({
+            statusCode: 500,
+            message: "Unable to find member!"
+        }).code(500);
+    },
+    gotMember: function (res, member) {
+        var code = member ? 200 : 404;
+        res({
+            statusCode: code,
+            message: member ? "Success finding event!" : "Event not found!",
+            member: member
+        }).code(code);
     }
 };
 

@@ -52,6 +52,13 @@ var query = {
         members.remove({
             _id: new mongo.ObjectID(member)
         }, callback);
+    },
+    getMember: function (mongo, member, callback) {
+        if (!mongo.db) { return callback('no database found to query'); }
+        var members = mongo.db.collection('members');
+        members.findOne({
+            _id: new mongo.ObjectID(member)
+        }, callback);
     }
 };
 

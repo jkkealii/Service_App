@@ -49,11 +49,11 @@ var api = {
         });
     },
     getMemberList: function (req, res) {
-        Service.getMemberList(req.mongo, function (err, result) {
+        Service.getMemberList(req.mongo, function (err, members) {
             if (err) {
                 Respond.failedToGetMembers(res);
             } else {
-                Respond.gotMembers(res, result);
+                Respond.gotMembers(res, members);
             }
         });
     },
@@ -74,6 +74,15 @@ var api = {
                 Respond.deletedMember(res, result);
             }
         });
+    },
+    getMember: function (req, res) {
+        Service.getMember(req.mongo, req.params.member, function (err, member) {
+            if (err) {
+                Respond.failedToGetMember(res);
+            } else {
+                Respond.gotMember(res, member);
+            }
+        })
     }
 };
 

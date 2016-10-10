@@ -67,6 +67,11 @@ var apiRoutes = [
         method: 'DELETE',
         path: '/members/{member}',
         handler: Api.deleteMember
+    },
+    {
+        method: 'GET',
+        path: '/members/{member}',
+        handler: Api.getMember
     }
 ];
 

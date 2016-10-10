@@ -91,6 +91,24 @@ var service = {
     },
     deleteMember: function (mongo, member, callback) {
         Query.deleteMember(mongo, member, callback);
+    },
+    getMember: function (mongo, member, callback) {
+        Query.getMember(mongo, member, function (err, rawMember) {
+            if (err) {
+                callback(err);
+            } else {
+                if (rawMember) {
+                    callback(undefined, {
+                        id: rawMember._id,
+                        firstName: rawMember.firstName,
+                        lastName: rawMember.lastName,
+                        hours: rawMember.hours
+                    });
+                } else {
+                    callback();
+                }
+            }
+        });
     }
 };
 
