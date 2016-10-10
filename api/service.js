@@ -109,6 +109,9 @@ var service = {
                 }
             }
         });
+    },
+    updateMember: function (mongo, member, payload, callback) {
+        Query.updateMember(mongo, member, payload, callback);
     }
 };
 

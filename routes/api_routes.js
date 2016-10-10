@@ -72,6 +72,16 @@ var apiRoutes = [
         method: 'GET',
         path: '/members/{member}',
         handler: Api.getMember
+    },
+    {
+        method: 'PUT',
+        path: '/members/{member}',
+        config: {
+            validate: {
+                payload: Schema.member
+            }
+        },
+        handler: Api.updateMember
     }
 ];
 

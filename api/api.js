@@ -83,6 +83,15 @@ var api = {
                 Respond.gotMember(res, member);
             }
         })
+    },
+    updateMember: function (req, res) {
+        Service.updateMember(req.mongo, req.params.member, req.payload, function (err, result) {
+            if (err) {
+                Respond.failedToUpdateMember(res);
+            } else {
+                Respond.updatedMember(res, result);
+            }
+        })
     }
 };
 

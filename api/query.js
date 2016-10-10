@@ -59,6 +59,15 @@ var query = {
         members.findOne({
             _id: new mongo.ObjectID(member)
         }, callback);
+    },
+    updateMember: function (mongo, member, payload, callback) {
+        if (!mongo.db) { return callback('no database found to query'); }
+        var members = mongo.db.collection('members');
+        members.updateOne({
+            _id: new mongo.ObjectID(member)
+        }, {
+            $set: payload
+        }, callback);
     }
 };
 

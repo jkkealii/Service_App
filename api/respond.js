@@ -122,6 +122,20 @@ var respond = {
             message: member ? "Success finding event!" : "Event not found!",
             member: member
         }).code(code);
+    },
+    failedToUpdateMember: function (res) {
+        res({
+            statusCode: 500,
+            message: "Unable to update member!"
+        }).code(500);
+    },
+    updatedMember: function (res, result) {
+        var code = result.result.n ? 200 : 404;
+        res({
+            statusCode: code,
+            message: result.result.n ? "Success updating member!" : "No member found to update!",
+            result: result.result
+        }).code(code);
     }
 };
 
