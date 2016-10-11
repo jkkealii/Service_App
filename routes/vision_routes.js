@@ -50,6 +50,15 @@ var visionRoutes = [
         }
     },
     {
+        path: '/new-event',
+        method: 'GET',
+        handler: function (req, res) {
+            res.view('new_event.html', {
+                
+            });
+        }
+    },
+    {
         path: '/members',
         method: 'GET',
         handler: function (req, res) {
