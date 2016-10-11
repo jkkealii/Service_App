@@ -94,7 +94,59 @@ var api = {
         });
     },
     calculateHours: function(req, res) {
-        
+        Service.getEventList(req.mongo, function (err, events) {
+            if (err) {
+                Respond.failedToCalculateHours(res, err);
+            } else {
+                Service.getMemberList(req.mongo, function (err, members) {
+                    if (err) {
+                        Respond.failedToCalculateHours(res, err);
+                    } else {
+                        var count = 0;
+                        members.forEach(function (member) {
+                            count++;
+                            var hours = 0;
+                            for (var i = 0; i < events.length; i++) {
+                                var localEvent = events[i];
+                                var isThere = function (arr, element) {
+                                    var result = false;
+                                    for (var index = 0; index < arr.length; index++) {
+                                        if (arr[i] === "" + element) {
+                                            result = true;
+                                        }
+                                    }
+                                    return result;
+                                };
+
+                                if (isThere(localEvent.members, member.id)) {
+                                    hours += localEvent.hours;
+                                } else if (isThere(localEvent.drivers, member.id)) {
+                                    hours += localEvent.driverHours + localEvent.hours;
+                                } else if (isThere(localEvent.specials, member.id)) {
+                                    hours += localEvent.extraHours + localEvent.hours;
+                                }
+                            }
+
+                            var returnMember = {
+                                firstName: member.firstName,
+                                lastName: member.lastName,
+                                hours: hours
+                            };
+                            Service.updateMember(req.mongo, member.id, returnMember, function (err, result) {
+                                if (err) {
+                                    Respond.failedToCalculateHours(res, err);
+                                } else {
+                                    count--;
+                                    if (count <= 0) {
+                                        Respond.calculatedHours(res, "Success!");
+                                    }
+                                }
+                            });
+                        });
+                    }
+                })
+            }
+        });
     }
 };
 

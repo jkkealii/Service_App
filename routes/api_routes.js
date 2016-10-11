@@ -82,6 +82,11 @@ var apiRoutes = [
             }
         },
         handler: Api.updateMember
+    },
+    {
+        method: 'GET',
+        path: '/members/calculate',
+        handler: Api.calculateHours
     }
 ];
 

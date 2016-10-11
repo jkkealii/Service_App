@@ -136,6 +136,20 @@ var respond = {
             message: result.result.n ? "Success updating member!" : "No member found to update!",
             result: result.result
         }).code(code);
+    },
+    failedToCalculateHours: function (res, err) {
+        res({
+            statusCode: 500,
+            message: "Unable to calculate member hours!",
+            error: err
+        }).code(500);
+    },
+    calculatedHours: function (res, result) {
+        res({
+            statusCode: 200,
+            message: "Success calculating member hours!",
+            result: result
+        }).code(200);
     }
 };
 
