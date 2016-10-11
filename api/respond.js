@@ -119,7 +119,7 @@ var respond = {
         var code = member ? 200 : 404;
         res({
             statusCode: code,
-            message: member ? "Success finding event!" : "Event not found!",
+            message: member ? "Success finding member!" : "Member not found!",
             member: member
         }).code(code);
     },
