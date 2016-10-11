@@ -8,21 +8,21 @@
   <div>
     <h3>service name</h3>
     <div class="form-or-something">
-      <input type="text" class="form-something" placeholder="Service" data-original="{%= (locals.eventObj ? locals.eventObj.name : '') %}" id="name">
+      <input type="text" class="form-something" placeholder="Service" id="name">
     </div>
   </div>
 
   <div>
     <h3>hours</h3>
     <div class="form-or-something">
-      <input type="text" class="form-something" placeholder="2" data-original="{%= (locals.eventObj ? locals.eventObj.name : '') %}" id="hours">
+      <input type="text" class="form-something" placeholder="2" id="hours">
     </div>
   </div>
 
   <div>
     <h3>service name</h3>
     <div class="form-or-something">
-      <input type="text" class="form-something" placeholder="Service" data-original="{%= (locals.eventObj ? locals.eventObj.name : '') %}" id="name">
+      <input type="text" class="form-something" placeholder="Service" id="name">
     </div>
   </div>
 
@@ -30,25 +30,13 @@
     <h3>on/off campus</h3>
     <div>
       <label>
-        <input type="radio" name="is-on-campus" id="is-on-campus-true" value="true" 
-        {%= (locals.eventObj ?
-              (locals.eventObj.isOnCampus ? 'checked' : '')
-            :
-              ''
-            ) %}
-        >
+        <input type="radio" name="is-on-campus" id="is-on-campus-true" value="true">
         On Campus
       </label>
     </div>
     <div>
       <label>
-        <input type="radio" name="is-on-campus" id="is-on-campus-false" value="false" 
-        {%= (locals.eventObj ?
-              (locals.eventObj.isOnCampus ? '' : 'checked')
-            :
-              ''
-            ) %}
-        >
+        <input type="radio" name="is-on-campus" id="is-on-campus-false" value="false">
         Off Campus
       </label>
     </div>
@@ -58,37 +46,19 @@
     <h3>uniform</h3>
     <div>
       <label>
-        <input type="radio" name="uniform" id="uniform-casual" value="Casual" 
-        {%= ((locals.eventObj && locals.eventObj.uniform) ? 
-              ((locals.eventObj.uniform == 'Casual') ? 'checked' : '')
-            :
-              ''
-            ) %}
-        >
+        <input type="radio" name="uniform" id="uniform-casual" value="Casual">
         Casual Uniform
       </label>
     </div>
     <div>
       <label>
-        <input type="radio" name="uniform" id="uniform-polo" value="Polos" 
-        {%= ((locals.eventObj && locals.eventObj.uniform) ? 
-              ((locals.eventObj.uniform == 'Polos') ? 'checked' : '')
-            :
-              ''
-            ) %}
-        >
+        <input type="radio" name="uniform" id="uniform-polo" value="Polos">
         Polos Uniform
       </label>
     </div>
     <div>
       <label>
-        <input type="radio" name="uniform" id="uniform-sweater" value="Sweaters" 
-        {%= ((locals.eventObj && locals.eventObj.uniform) ? 
-              ((locals.eventObj.uniform == 'Sweaters') ? 'checked' : '')
-            :
-              ''
-            ) %}
-        >
+        <input type="radio" name="uniform" id="uniform-sweater" value="Sweaters">
         Sweaters Uniform
       </label>
     </div>
@@ -97,7 +67,7 @@
   <div>
     <h3>meeting place</h3>
     <div class="form-or-something">
-      <input type="text" class="form-control" placeholder="Leavey Circle" id="meeting-place" data-original="{%= (locals.eventObj ? locals.eventObj.meetingPlace : '') %}">
+      <input type="text" class="form-control" placeholder="Leavey Circle" id="meeting-place">
     </div>
   </div>
 
@@ -105,7 +75,7 @@
     <h3>start date/time</h3>
     <div class="form-group">
       <div class="input-group date form-control" id="datetimestart">
-        <input type="text" class="form-control" id="start-date" data-original="{%= (locals.eventObj ? locals.eventObj.startDateTime : '') %}"/>
+        <input type="text" class="form-control" id="start-date"/>
         <span class="input-group-addon">
           <span class="fa fa-calendar"></span>
         </span>
@@ -117,7 +87,7 @@
     <h3>end date/time</h3>
     <div class="form-group">
       <div class="input-group date form-control" id="datetimeend">
-        <input type="text" class="form-control" id="end-date" data-original="{%= (locals.eventObj ? locals.eventObj.endDateTime : '') %}"/>
+        <input type="text" class="form-control" id="end-date"/>
         <span class="input-group-addon">
           <span class="fa fa-calendar"></span>
         </span>
@@ -128,21 +98,21 @@
   <div>
     <h3>driver extra hours</h3>
     <div class="form-or-something">
-      <input type="text" class="form-something" placeholder="0.5" aria-describedby="addon2" id="driver-hours" data-original="{%= (locals.eventObj ? locals.eventObj.driverHours : '') %}">
+      <input type="text" class="form-something" placeholder="0.5" aria-describedby="addon2" id="driver-hours">
     </div>
   </div>
 
   <div>
     <h3>other extra hours</h3>
     <div class="form-or-something">
-      <input type="text" class="form-something" placeholder="0.5" aria-describedby="addon3" id="extra-hours" data-original="{%= (locals.eventObj ? locals.eventObj.extraHours : '') %}">
+      <input type="text" class="form-something" placeholder="0.5" aria-describedby="addon3" id="extra-hours">
     </div>
   </div>
 
   <div>
     <h3>comments</h3>
     <div class="form-something">
-      <textarea type="text" class="form-something" placeholder="écrire vos commentaires ici" data-original="{%= (locals.eventObj ? locals.eventObj.comments : '') %}" id="comments" rows="3"></textarea>
+      <textarea type="text" class="form-something" placeholder="écrire vos commentaires ici" id="comments" rows="3"></textarea>
     </div>
   </div>
 
@@ -183,7 +153,7 @@
   </div>
 
   <div>
-    <button type="button" id="update-event" data-loading-text="<i class='fa fa-refresh fa-spin'></i>  Updating"{%= (locals.admin ? '' : 'disabled') %}<i class="fa fa-refresh"></i>  Update</button>
+    <button type="button" id="update-event" ><i class="fa fa-refresh"></i>  Update</button>
   </div>
 
   <div>
@@ -194,12 +164,7 @@
 
         </thead>
         <tbody id="driving-members">
-          <!-- {% if (locals.eventObj && eventObj.drivers) { %}
-            {% locals.eventObj.drivers.forEach(function(member) { %}
-              {% var type = 'driving' %}
-              {% include helper/_attending %}
-            {% }) %}
-          {% } %} -->
+          
         </tbody>
       </table>
     </div>
@@ -211,12 +176,7 @@
             
         </thead>
         <tbody id="attending-members">
-          <!-- {% if (locals.eventObj && eventObj.members) { %}
-            {% locals.eventObj.members.forEach(function(member) { %}
-              {% var type = 'attending' %}
-              {% include helper/_attending %}
-            {% }) %}
-          {% } %} -->
+          
         </tbody>
       </table>
     </div>
@@ -228,12 +188,7 @@
 
         </thead>
         <tbody id="special-members">
-          <!-- {% if (locals.eventObj && eventObj.specials) { %}
-            {% locals.eventObj.specials.forEach(function(member) { %}
-              {% var type = 'special' %}
-              {% include helper/_attending %}
-            {% }) %}
-          {% } %} -->
+          
         </tbody>
       </table>
     </div>

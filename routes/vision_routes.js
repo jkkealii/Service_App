@@ -57,6 +57,15 @@ var visionRoutes = [
 
             });
         }
+    },
+    {
+        path: '/members/create',
+        method: 'GET',
+        handler: function (req, res) {
+            res.view('create_member.html', {
+
+            });
+        }
     }
 ];
 
