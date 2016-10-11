@@ -92,6 +92,9 @@ var api = {
                 Respond.updatedMember(res, result);
             }
         });
+    },
+    calculateHours: function(req, res) {
+        
     }
 };
 
