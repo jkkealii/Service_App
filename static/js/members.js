@@ -1,8 +1,27 @@
 $(function () {
     var createMember = function (member) {
-        return "<tr><td>" + member.lastName + "</td><td>" + member.firstName +
-                "</td><td>" + member.year + "</td><td>" + (member.hours || 0) +
-                "</td><td>BS</td></tr>";
+        return '<tr><td>' + member.lastName +
+                '</td><td>' + member.firstName +
+                '</td><td>' + member.year + '</td><td>' + (member.hours || 0) +
+                '</td><td><button class="delete-member" data-id="' + member.id +
+                '">Delete</button></td></tr>';
+    };
+    var deleteMember = function () {
+        var id = $(this).data("id");
+        var status = $('#status');
+
+        $.ajax({
+            url: "api/members/" + id,
+            method: "DELETE"
+        }).then(function (data) {
+            console.log(data);
+            status.text("Success deleting");
+            populateMembers();
+        }, function (obj) {
+            var json = obj.responseJSON;
+            console.log(json);
+            status.text("Failed delete");
+        });
     };
     var populateMembers = function () {
         var table = $('#members tbody');
@@ -18,7 +37,8 @@ $(function () {
             status.text("Success");
             data.members.forEach(function (element) {
                 table.append(createMember(element));
-            })
+                $('.delete-member').unbind('click').click(deleteMember);
+            });
         }, function (obj) {
             console.log(obj.responseJSON.statusCode);
             table.empty();
