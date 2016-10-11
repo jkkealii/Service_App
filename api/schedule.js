@@ -4,7 +4,7 @@ var Api = require(Path.join(__dirname, 'api.js'));
 
 module.exports.register = function (server, options, next) {
     var jobs = [
-        schedule.scheduleJob('0,10,20,30,40,50 * * * *', function() {
+        schedule.scheduleJob('0,10,20,30,40,50 * * * *', function () {
             server.log(['schedule', 'info'], "Starting hours job");
             var func = function (obj) {
                 if (obj.statusCode === 200) {

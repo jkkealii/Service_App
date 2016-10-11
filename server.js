@@ -12,6 +12,7 @@ var setup = {
 };
 var visionRoutes = require(Path.join(__dirname, 'routes/vision_routes.js'));
 var Api = require(Path.join(__dirname, 'routes/api_routes.js'));
+var schedule = require(Path.join(__dirname, 'api/schedule.js'));
 
 var mongoConnection = {
     register: function (server, options, next) {
@@ -43,8 +44,6 @@ mongoConnection.register.attributes = {
     version: "0.0.0"
 };
 
-
-
 var ServiceApp = new Hapi.Server({
     connections: {
         routes: {
@@ -69,6 +68,8 @@ ServiceApp.register(Api, {
         prefix: '/api'
     }
 });
+
+ServiceApp.register(schedule, function () {});
 
 ServiceApp.register(Inert, function () {});
 ServiceApp.register(Vision, function () {
@@ -112,5 +113,3 @@ ServiceApp.start(function () {
 }); 
 
 module.exports = ServiceApp;
-
-var jobs = require(Path.join(__dirname, 'api/schedule.js')); // eslint-disable-line
