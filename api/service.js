@@ -79,7 +79,10 @@ var service = {
                         id: rawMembers[i]._id,
                         firstName: rawMembers[i].firstName,
                         lastName: rawMembers[i].lastName,
-                        hours: rawMembers[i].hours
+                        hours: rawMembers[i].hours,
+                        email: rawMembers[i].email,
+                        phone: rawMembers[i].phone,
+                        year: rawMembers[i].year
                     });
                 }
                 callback(err, members);
@@ -102,7 +105,10 @@ var service = {
                         id: rawMember._id,
                         firstName: rawMember.firstName,
                         lastName: rawMember.lastName,
-                        hours: rawMember.hours
+                        hours: rawMember.hours,
+                        email: rawMember.email,
+                        phone: rawMember.phone,
+                        year: rawMember.year
                     });
                 } else {
                     callback();

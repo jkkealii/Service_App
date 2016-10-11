@@ -20,7 +20,10 @@ var schema = {
     member: Joi.object().keys({
         firstName: Joi.string().required(),
         lastName: Joi.string().required(),
-        hours: Joi.number()
+        hours: Joi.number(),
+        email: Joi.string().required(),
+        phone: Joi.string().required(),
+        year: Joi.number().required()
     }).unknown(false)
 };
 

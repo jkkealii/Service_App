@@ -130,6 +130,9 @@ var api = {
                             var returnMember = {
                                 firstName: member.firstName,
                                 lastName: member.lastName,
+                                email: member.email,
+                                year: member.year,
+                                phone: member.phone,
                                 hours: hours
                             };
                             Service.updateMember(req.mongo, member.id, returnMember, function (err, result) {
