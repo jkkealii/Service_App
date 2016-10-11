@@ -113,4 +113,4 @@ ServiceApp.start(function () {
 
 module.exports = ServiceApp;
 
-var jobs = require(Path.join(__dirname, 'api/schedule.js'));
+var jobs = require(Path.join(__dirname, 'api/schedule.js')); // eslint-disable-line

@@ -138,13 +138,13 @@ var api = {
                                 } else {
                                     count--;
                                     if (count <= 0) {
-                                        Respond.calculatedHours(res, "Success!");
+                                        Respond.calculatedHours(res, result);
                                     }
                                 }
                             });
                         });
                     }
-                })
+                });
             }
         });
     }
