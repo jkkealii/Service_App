@@ -7,14 +7,14 @@ var MongoClient = Mongo.MongoClient;
 var ObjectID = Mongo.ObjectID;
 
 module.exports.register = function (server, options, next) {
-    MongoClient.connect(process.env.DATABASE_URL, function (err, db) {
+    MongoClient.connect(process.env.MONGODB_URI, function (err, db) {
         if (err) {
             server.log(['schedule', 'error'], err);
             return next(err);
         }
-        server.log(['schedule', 'error'], 'Connected to ' + process.env.DATABASE_URL);
+        server.log(['schedule', 'error'], 'Connected to ' + process.env.MONGODB_URI);
         var jobs = [
-            schedule.scheduleJob('* * * * *', function () {
+            schedule.scheduleJob('0,10,20,30,40,50 * * * *', function () {
                 server.log(['schedule', 'info'], "Starting hours job");
                 var code = function () {};
                 var func = function (obj) {
