@@ -67,12 +67,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
-/* line 18, ../sass/modules/_sizing.scss */
+/* line 6, ../sass/partials/_base.scss */
 img {
   max-width: 100%;
 }
 
-/* line 22, ../sass/modules/_sizing.scss */
+/* line 10, ../sass/partials/_base.scss */
 img.cover {
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -81,35 +81,55 @@ img.cover {
 }
 
 @media screen and (max-width: 767px) {
-  /* line 28, ../sass/modules/_sizing.scss */
+  /* line 16, ../sass/partials/_base.scss */
   h1 {
     font-size: 20px;
   }
 
-  /* line 31, ../sass/modules/_sizing.scss */
+  /* line 19, ../sass/partials/_base.scss */
   h2 {
     font-size: 15px;
   }
 }
 @media screen and (max-width: 1024px) {
-  /* line 38, ../sass/modules/_sizing.scss */
+  /* line 26, ../sass/partials/_base.scss */
   h1 {
     font-size: 40px;
   }
 
-  /* line 41, ../sass/modules/_sizing.scss */
+  /* line 29, ../sass/partials/_base.scss */
   h2 {
     font-size: 30px;
   }
 }
 @media screen and (max-width: 1440px) {
-  /* line 48, ../sass/modules/_sizing.scss */
+  /* line 36, ../sass/partials/_base.scss */
   h1 {
     font-size: 60px;
   }
 
-  /* line 51, ../sass/modules/_sizing.scss */
+  /* line 39, ../sass/partials/_base.scss */
   h2 {
     font-size: 45px;
   }
+}
+/* line 47, ../sass/partials/_base.scss */
+h1 {
+  font-family: 'BebasNeueRegular';
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* line 53, ../sass/partials/_base.scss */
+h2, h3, h4 {
+  font-family: 'BebasNeueRegular';
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* line 59, ../sass/partials/_base.scss */
+p, label, input, textarea, button {
+  font-family: 'FantasqueSansMonoRegular';
+  font-weight: normal;
+  font-style: normal;
 }
