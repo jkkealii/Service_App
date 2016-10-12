@@ -11,7 +11,7 @@ $(function () {
         var status = $('#status');
 
         $.ajax({
-            url: "api/members/" + id,
+            url: "/api/members/" + id,
             method: "DELETE"
         }).then(function (data) {
             console.log(data);
@@ -29,7 +29,7 @@ $(function () {
 
         status.text('Pending');
         $.ajax({
-            url: "api/members",
+            url: "/api/members",
             method: "GET"
         }).then(function (data) {
             console.log(data);
