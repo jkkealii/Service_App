@@ -4,7 +4,9 @@
   <h2>Crimson <strong>service</strong></h2>
 </div>
 
-<table>
+<p id="status"></p>
+
+<table id="events">
   <thead>
     <tr>
       <th>Event</th>
@@ -18,6 +20,10 @@
 
   </tbody>
 </table>
+
+<div>
+  <a type="button" id="create-event" href="/events/create">Create Event</a>
+</div>
 
 {% include "helpers/_basescripts.html" %}
 

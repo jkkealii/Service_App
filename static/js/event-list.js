@@ -4,23 +4,49 @@ $(function () {
             '<td>' + moment(event.startDateTime.iso).format("MMM D, YYYY, h:mm a") + 
             '</td>' + '<td>' + event.meetingPlace +
             '</td>' + '<td>' + ((event.isOnCampus) ? 'On Campus' : 'Off Campus') + '</td> ' +
-            '<td>' + 'Unsupported' + '</td></tr>';
+            '<td><button class="delete-event" data-id="' + event.id + '">Delete</button></td></tr>';
     };
+    var deleteEvent = function () {
+        var id = $(this).data("id");
+        var status = $('#status');
 
+        $.ajax({
+            url: "/api/events/" + id,
+            method: "DELETE"
+        }).then(function (data) {
+            console.log(data);
+            status.text("Success deleting");
+            loadEvents();
+        }, function (obj) {
+            var json = obj.responseJSON;
+            console.log(json);
+            status.text("Failed delete");
+        });
+    };
     var loadEvents = function() {
-        $('table tbody').empty();
+        var table = $('#events tbody');
+        var status = $('#status');
+
+        status.text('Pending');
         $.ajax({
             method: 'GET',
             url: '/api/events'
-        }).then(function (data, textStatus, jqXHR) {
-            console.log('Got Events');
+        }).then(function (data) {
+            table.empty();
+            status.text("Success");
             $.each(data.events, function(index, value) {
-                $('table tbody').append($(newRow(value)))
-            }, function(jqXHR, textStatus, error) {
-                console.log(error);
-                console.log(textStatus);
+                table.append(newRow(value));
+                $('.delete-event').unbind('click').click(deleteEvent);
             });
-        })
+        }, function (obj) {
+            console.log(obj.responseJSON.statusCode);
+            table.empty();
+            if (obj.responseJSON.statusCode === 404) {
+                status.text("No Events");
+            } else {
+                status.text("Error");
+            }
+        });
     };
 
     loadEvents();
