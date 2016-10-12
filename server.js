@@ -16,7 +16,7 @@ var schedule = require(Path.join(__dirname, 'api/schedule.js'));
 
 var mongoConnection = {
     register: function (server, options, next) {
-        MongoClient.connect(process.env.DATABASE_URL, function(err, db) {
+        MongoClient.connect(process.env.DATABASE_URL, function (err, db) {
             if (err) {
                 server.log(['mongo-connection', 'error'], err);
                 return next(err);
