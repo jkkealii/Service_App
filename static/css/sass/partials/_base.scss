@@ -1,0 +1,63 @@
+@import "compass";
+
+// universals
+// ------------------------------------------------------------
+
+img {
+  max-width: 100%;
+}
+
+img.cover {
+  @include background-size(cover);
+}
+
+// small screen only
+@media screen and (max-width: $small) {
+  h1 {
+    font-size: $h1-size * 0.5;
+  }
+  h2 {
+    font-size: $h2-size * 0.5;
+  }
+}
+
+// medium screen only
+@media screen and (max-width: $medium) {
+  h1 {
+    font-size: $h1-size;
+  }
+  h2 {
+    font-size: $h2-size;
+  }
+}
+
+// large screen only
+@media screen and (max-width: $large) {
+  h1 {
+    font-size: $h1-size * 1.5;
+  }
+  h2 {
+    font-size: $h2-size * 1.5;
+  }
+}
+
+// fonts
+// ------------------------------------------------------------
+
+h1 {
+    font-family: 'BebasNeueRegular';
+    font-weight: bold;
+    font-style: normal;
+}
+
+h2, h3, h4 {
+    font-family: 'BebasNeueRegular';
+    font-weight: normal;
+    font-style: normal;
+}
+
+p, label, input, textarea, button {
+    font-family: 'FantasqueSansMonoRegular';
+    font-weight: normal;
+    font-style: normal;
+}

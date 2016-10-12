@@ -1,0 +1,32 @@
+{% include "helpers/_header.html" %}
+
+<div>
+  <h2>Crimson <strong>service</strong></h2>
+</div>
+
+<p id="status"></p>
+
+<table id="events">
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Date & Time</th>
+      <th>Meeting Place</th>
+      <th>On/Off Campus</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
+</table>
+
+<div>
+  <a type="button" id="create-event" href="/events/create">Create Event</a>
+</div>
+
+{% include "helpers/_basescripts.html" %}
+
+<script type="text/javascript" src="/static/js/event-list.js"></script>
+
+{% include "helpers/_footer.html" %}

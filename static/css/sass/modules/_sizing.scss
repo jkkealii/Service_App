@@ -12,47 +12,6 @@ $large: 1440px;
 $h1-size: 40px;
 $h2-size: 30px;
 
-// universals
-// ------------------------------------------------------------
-
-img {
-  max-width: 100%;
-}
-
-img.cover {
-  @include background-size(cover);
-}
-
-// small screen only
-@media screen and (max-width: $small) {
-  h1 {
-    font-size: $h1-size * 0.5;
-  }
-  h2 {
-    font-size: $h2-size * 0.5;
-  }
-}
-
-// medium screen only
-@media screen and (max-width: $medium) {
-  h1 {
-    font-size: $h1-size;
-  }
-  h2 {
-    font-size: $h2-size;
-  }
-}
-
-// large screen only
-@media screen and (max-width: $large) {
-  h1 {
-    font-size: $h1-size * 1.5;
-  }
-  h2 {
-    font-size: $h2-size * 1.5;
-  }
-}
-
 // functions
 // ------------------------------------------------------------
 

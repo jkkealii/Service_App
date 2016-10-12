@@ -1,27 +1,35 @@
 var Hapi = require('hapi');
-var Config = require('config');
 var Path = require('path');
 var Vision = require('vision');
 var Inert = require('inert');
-var MongoClient = require('mongodb').MongoClient;
+var Mongo = require('mongodb');
+var MongoClient = Mongo.MongoClient;
+var ObjectID = Mongo.ObjectID;
 
-var setup = Config.get('Node-Server');
+var setup = {
+    host: process.env.NODE_ENV === "production" ? "0.0.0.0" : "localhost",
+    port: process.env.PORT || "8080"
+};
 var visionRoutes = require(Path.join(__dirname, 'routes/vision_routes.js'));
 var Api = require(Path.join(__dirname, 'routes/api_routes.js'));
+var schedule = require(Path.join(__dirname, 'api/schedule.js'));
 
 var mongoConnection = {
     register: function (server, options, next) {
-        var dbconfig = Config.get('Mongo-Server');
-        var url = "mongodb://" + dbconfig.host +
-            ":" + dbconfig.port + "/" + dbconfig.db;
-        MongoClient.connect(url, function(err, db) {
+        MongoClient.connect(process.env.DATABASE_URL, function (err, db) {
             if (err) {
                 server.log(['mongo-connection', 'error'], err);
                 return next(err);
             }
-            server.log(['mongo-connection', 'info'], 'Connected to'+url);
-            server.decorate('server', 'mongo', db);
-            server.decorate('request', 'mongo', db);
+            server.log(['mongo-connection', 'info'], 'Connected to ' + process.env.DATABASE_URL);
+            server.decorate('server', 'mongo', {
+                ObjectID: ObjectID,
+                db: db
+            });
+            server.decorate('request', 'mongo', {
+                ObjectID: ObjectID,
+                db: db
+            });
             server.on('stop', function () {
                 db.close(function (err) {
                     server.log(['mongo-connection', 'error'], err);
@@ -36,9 +44,7 @@ mongoConnection.register.attributes = {
     version: "0.0.0"
 };
 
-
-
-var Service_App = new Hapi.Server({
+var ServiceApp = new Hapi.Server({
     connections: {
         routes: {
             files: {
@@ -47,63 +53,63 @@ var Service_App = new Hapi.Server({
         }
     }
 });
-Service_App.connection({
+ServiceApp.connection({
     host: setup.host,
     port: setup.port
 });
 
-Service_App.register(mongoConnection, function (err) {
+ServiceApp.register(mongoConnection, function (err) {
     if (err) {
         console.error('have you started your mongodb instance?\nnpm run db-start\n');
     }
 });
-Service_App.register(Api, {
+ServiceApp.register(Api, {
     routes: {
         prefix: '/api'
     }
 });
 
-Service_App.register(Inert, function (err) {});
-Service_App.register(Vision, function (err) {
-    Service_App.views({
+ServiceApp.register(schedule, function () {});
+
+ServiceApp.register(Inert, function () {});
+ServiceApp.register(Vision, function () {
+    ServiceApp.views({
         engines: {
             html: require('nunjucks-hapi')
         },
         path: Path.join(__dirname, 'templates')
     });
-    Service_App.route(visionRoutes);
+    ServiceApp.route(visionRoutes);
 });
 
-if (setup.logToConsole) {
-    Service_App.register({
-        register: require('good'),
-        options: {
-            ops: {
-                interval: 1000
-            },
-            reporters: {
-                console: [{
-                    module: 'good-squeeze',
-                    name: 'Squeeze',
-                    args: [{
-                        log: '*',
-                        response: '*'
-                    }]
-                }, {
-                    module: 'good-console'
-                }, 'stdout']
-            }
+ServiceApp.register({
+    register: require('good'),
+    options: {
+        ops: {
+            interval: 1000
+        },
+        reporters: {
+            console: [{
+                module: 'good-squeeze',
+                name: 'Squeeze',
+                args: [{
+                    log: '*',
+                    response: '*'
+                }]
+            }, {
+                module: 'good-console'
+            }, 'stdout']
         }
-    }, function (err) {
-        if (err) {
-            console.error(err);
-            throw err;
-        }
-    });
-}
+    }
+}, function (err) {
+    if (err) {
+        console.error(err);
+        throw err;
+    }
+});
 
-Service_App.start(function () {
-    console.log("Server started on %s:%s", setup.host, setup.port);
+ServiceApp.start(function () {
+    ServiceApp.log(['ServiceApp', 'info'], "Server started on " + setup.host + ":" + setup.port);
 }); 
 
-module.exports = Service_App;
+module.exports = ServiceApp;

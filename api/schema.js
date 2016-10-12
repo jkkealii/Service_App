@@ -12,9 +12,18 @@ var schema = {
         startDateTime: Joi.date().iso(),
         endDateTime: Joi.date().iso().min(Joi.ref('startDateTime')),
         uniform: Joi.string().required(),
-        members: Joi.string().required(),
-        drivers: Joi.string().required(),
-        specials: Joi.string().required(),
+        members: Joi.array().items(Joi.string()).required(),
+        drivers: Joi.array().items(Joi.string()).required(),
+        specials: Joi.array().items(Joi.string()).required(),
+    }).unknown(false),
+
+    member: Joi.object().keys({
+        firstName: Joi.string().required(),
+        lastName: Joi.string().required(),
+        hours: Joi.number(),
+        email: Joi.string().required(),
+        phone: Joi.string().required(),
+        year: Joi.number().required()
     }).unknown(false)
 };
 

@@ -32,6 +32,61 @@ var apiRoutes = [
         method: 'DELETE',
         path: '/events/{event}',
         handler: Api.deleteEvent
+    },
+    {
+        method: 'GET',
+        path: '/events/{event}',
+        handler: Api.getEvent
+    },
+    {
+        method: 'PUT',
+        path: '/events/{event}',
+        config: {
+            validate: {
+                payload: Schema.event
+            }
+        },
+        handler: Api.updateEvent
+    },
+    {
+        method: 'GET',
+        path: '/members',
+        handler: Api.getMemberList
+    },
+    {
+        method: 'POST',
+        path: '/members',
+        config: {
+            validate: {
+                payload: Schema.member
+            }
+        },
+        handler: Api.createMember
+    },
+    {
+        method: 'DELETE',
+        path: '/members/{member}',
+        handler: Api.deleteMember
+    },
+    {
+        method: 'GET',
+        path: '/members/{member}',
+        handler: Api.getMember
+    },
+    {
+        method: 'PUT',
+        path: '/members/{member}',
+        config: {
+            validate: {
+                payload: Schema.member
+            }
+        },
+        handler: Api.updateMember
+    },
+    {
+        method: 'GET',
+        path: '/members/calculate',
+        handler: Api.calculateHours
     }
 ];
 

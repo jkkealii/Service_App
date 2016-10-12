@@ -9,3 +9,4 @@ config.json
 .parse.local
 .parse.project
 db
+.sass-cache
