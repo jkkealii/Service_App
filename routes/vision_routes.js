@@ -50,7 +50,7 @@ var visionRoutes = [
         }
     },
     {
-        path: '/new-event',
+        path: '/events/create',
         method: 'GET',
         handler: function (req, res) {
             res.view('new_event.html', {
