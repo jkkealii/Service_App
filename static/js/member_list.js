@@ -1,7 +1,7 @@
 $(function () {
     var createMember = function (member) {
-        return '<tr><td>' + member.lastName +
-                '</td><td>' + member.firstName +
+        return '<tr><td><a href="/members/' + member.id + '">' + member.lastName +
+                '</a></td><td>' + member.firstName +
                 '</td><td>' + member.year + '</td><td>' + (member.hours || 0) +
                 '</td><td><button class="delete-member" data-id="' + member.id +
                 '">Delete</button></td></tr>';
