@@ -65,7 +65,39 @@ $(function () {
         });
     };
 
+    var newRow = function (event) {
+        return '<tr><td>' + '<a href="/events/' + event.id + '">' + event.name + '</a>' + '</td>' + 
+            '<td>' + moment(event.startDateTime.iso).format("MMM D, YYYY, h:mm a") + 
+            '</td>' + '<td>' + event.meetingPlace +
+            '</td>' + '<td>' + ((event.isOnCampus) ? 'On Campus' : 'Off Campus') + '</td></tr>';
+    };
+    var populateEvents = function () {
+        var table = $('#events tbody');
+        var status = $('#event-status');
+
+        status.text('Pending');
+        $.ajax({
+            method: 'GET',
+            url: '/api/members/' + $('#member-id').data('id') + '/events'
+        }).then(function (data) {
+            table.empty();
+            status.text("Success");
+            $.each(data.events, function(index, value) {
+                table.append(newRow(value));
+            });
+        }, function (obj) {
+            console.log(obj.responseJSON.statusCode);
+            table.empty();
+            if (obj.responseJSON.statusCode === 404) {
+                status.text("No Events");
+            } else {
+                status.text("Error");
+            }
+        });
+    };
+
     $('#edit-member').prop('disabled', true);
     $('#update-member').prop('disabled', true).click(updateMember);
     populateMember();
+    populateEvents();
 });
