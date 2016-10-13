@@ -68,6 +68,17 @@ var query = {
         }, {
             $set: payload
         }, callback);
+    },
+    getMembersEvents: function (mongo, member, callback) {
+        if (!mongo || !mongo.db) { return callback('no database found to query'); }
+        var events = mongo.db.collection('events');
+        events.find({
+            $or: [
+                {members: member},
+                {drivers: member},
+                {specials: member}
+            ]
+        }).toArray(callback);
     }
 };
 

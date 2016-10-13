@@ -87,6 +87,11 @@ var apiRoutes = [
         method: 'GET',
         path: '/members/calculate',
         handler: Api.calculateHours
+    },
+    {
+        method: 'GET',
+        path: '/members/{member}/events',
+        handler: Api.getMembersEvents
     }
 ];
 
