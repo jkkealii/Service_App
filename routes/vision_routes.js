@@ -68,6 +68,15 @@ var visionRoutes = [
         }
     },
     {
+        path: '/members/{member}',
+        method: 'GET',
+        handler: function (req, res) {
+            res.view('member.html', {
+                member: req.params.member
+            });
+        }
+    },
+    {
         path: '/members/create',
         method: 'GET',
         handler: function (req, res) {
