@@ -41,11 +41,11 @@ var visionRoutes = [
         }
     },
     {
-        path: '/edit-event',
+        path: '/events/{event}',
         method: 'GET',
         handler: function (req, res) {
-            res.view('edit_event.html', {
-
+            res.view('event.html', {
+                event: req.params.event
             });
         }
     },
