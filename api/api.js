@@ -150,6 +150,15 @@ var api = {
                 });
             }
         });
+    },
+    getMembersEvents: function (req, res) {
+        Service.getMembersEvents(req.mongo, req.params.member, function (err, events) {
+            if (err) {
+                Respond.failedToGetMembersEvents(res, err);
+            } else {
+                Respond.gotMembersEvents(res, events, req.params.member);
+            }
+        });
     }
 };
 

@@ -150,6 +150,22 @@ var respond = {
             message: "Success calculating member hours!",
             result: result
         }).code(200);
+    },
+    failedToGetMembersEvents: function (res, err) {
+        res({
+            statusCode: 500,
+            message: "Unable to get member's events!",
+            error: err
+        }).code(500);
+    },
+    gotMembersEvents: function (res, events, member) {
+        var code = events.length ? 200 : 404;
+        res({
+            statusCode: code,
+            message: events.length ? "Success finding member's events!" : "There are no events for member currently!",
+            events: events,
+            member: member
+        }).code(code);
     }
 };
 

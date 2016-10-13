@@ -118,6 +118,38 @@ var service = {
     },
     updateMember: function (mongo, member, payload, callback) {
         Query.updateMember(mongo, member, payload, callback);
+    },
+    getMembersEvents: function (mongo, member, callback) {
+        Query.getMembersEvents(mongo, member, function (err, rawEvents) {
+            if (err) {
+                callback(err);
+            } else {
+                if (rawEvents) {
+                    var events = [];
+                    for (var i = 0; i < rawEvents.length; i++) {
+                        events.push({
+                            id: rawEvents[i]._id,
+                            name: rawEvents[i].name,
+                            comments: rawEvents[i].comments,
+                            hours: rawEvents[i].hours,
+                            driverHours: rawEvents[i].driverHours,
+                            extraHours: rawEvents[i].extraHours,
+                            isOnCampus: rawEvents[i].isOnCampus,
+                            meetingPlace: rawEvents[i].meetingPlace,
+                            startDateTime: rawEvents[i].startDateTime,
+                            endDateTime: rawEvents[i].endDateTime,
+                            uniform: rawEvents[i].uniform,
+                            members: rawEvents[i].members,
+                            drivers: rawEvents[i].drivers,
+                            specials: rawEvents[i].specials
+                        });
+                    }
+                    callback(null, events);
+                } else {
+                    callback(null, null);
+                }
+            }
+        });
     }
 };
 
