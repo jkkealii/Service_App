@@ -111,7 +111,7 @@ var api = {
                                 var isThere = function (arr, element) {
                                     var result = false;
                                     for (var index = 0; index < arr.length; index++) {
-                                        if (arr[i] === "" + element) {
+                                        if (arr[index] === "" + element) {
                                             result = true;
                                         }
                                     }
