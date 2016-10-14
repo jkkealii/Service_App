@@ -1,7 +1,7 @@
 $(function () {
     var newRow = function (event) {
         return '<tr><td>' + '<a href="/events/' + event.id + '">' + event.name + '</a>' + '</td>' + 
-            '<td>' + moment(event.startDateTime.iso).format("MMM D, YYYY, h:mm a") + 
+            '<td>' + moment(event.startDateTime.iso).format("YYYY-MM-DD, HH:mm") + 
             '</td>' + '<td>' + event.meetingPlace +
             '</td>' + '<td>' + ((event.isOnCampus) ? 'On Campus' : 'Off Campus') + '</td> ' +
             '<td><button class="delete-event" data-id="' + event.id + '">Delete</button></td></tr>';

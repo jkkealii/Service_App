@@ -111,7 +111,7 @@ var api = {
                                 var isThere = function (arr, element) {
                                     var result = false;
                                     for (var index = 0; index < arr.length; index++) {
-                                        if (arr[i] === "" + element) {
+                                        if (arr[index] === "" + element) {
                                             result = true;
                                         }
                                     }
@@ -121,9 +121,9 @@ var api = {
                                 if (isThere(localEvent.members, member.id)) {
                                     hours += localEvent.hours;
                                 } else if (isThere(localEvent.drivers, member.id)) {
-                                    hours += localEvent.driverHours + localEvent.hours;
+                                    hours += (localEvent.driverHours ? localEvent.driverHours : 0) + localEvent.hours;
                                 } else if (isThere(localEvent.specials, member.id)) {
-                                    hours += localEvent.extraHours + localEvent.hours;
+                                    hours += (localEvent.extraHours ? localEvent.extraHours : 0) + localEvent.hours;
                                 }
                             }
 

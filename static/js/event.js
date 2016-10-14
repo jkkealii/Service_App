@@ -61,8 +61,8 @@ $(function () {
                 console.log('No Uniform ' + event.uniform);
             }
             $('#meeting-place').val(event.meetingPlace);
-            $('#start-date').val(moment(event.startDateTime).format('M/D/YY h:m A'));
-            $('#end-date').val(moment(event.endDateTime).format('M/D/YY h:m A'));
+            $('#start-date').val(moment(event.startDateTime).format('M/D/YY HH:mm'));
+            $('#end-date').val(moment(event.endDateTime).format('M/D/YY HH:mm'));
             $('#driver-hours').val(event.driverHours);
             $('#extra-hours').val(event.extraHours);
             $('#comments').val(event.comments ? event.comments : '');
@@ -105,10 +105,7 @@ $(function () {
         var status = $('#status');
         var eventDetails = {
             name: $('#name').val(),
-            comments: $('#comments').val(),
             hours: $('#hours').val(),
-            driverHours: $('#driver-hours').val(),
-            extraHours: $('#extra-hours').val(),
             isOnCampus: ($('input[name=is-on-campus]:checked').val() === 'true'),
             meetingPlace: $('#meeting-place').val(),
             startDateTime: moment($('#start-date').val()).toISOString(),
@@ -118,6 +115,19 @@ $(function () {
             drivers: [],
             specials: []
         };
+
+        var comments = $('#comments').val();
+        if (comments) {
+            eventDetails.comments = comments;
+        }
+        var driverHours = $('#driver-hours').val();
+        if (driverHours) {
+            eventDetails.driverHours = driverHours;
+        }
+        var extraHours = $('#extra-hours').val();
+        if (extraHours) {
+            eventDetails.extraHours = extraHours;
+        }
 
         $('.member-checkbox').each(function (index, element) {
             var jel = $(element);
