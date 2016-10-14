@@ -43,10 +43,7 @@ $(function () {
         var status = $('#status');
         var eventDetails = {
             name: $('#name').val(),
-            comments: $('#comments').val(),
             hours: $('#hours').val(),
-            driverHours: $('#driver-hours').val(),
-            extraHours: $('#extra-hours').val(),
             isOnCampus: ($('input[name=is-on-campus]:checked').val() === 'true'),
             meetingPlace: $('#meeting-place').val(),
             startDateTime: moment($('#start-date').val()).toISOString(),
@@ -56,6 +53,20 @@ $(function () {
             drivers: [],
             specials: []
         };
+
+        var comments = $('#comments').val();
+        if (comments) {
+            eventDetails.comments = comments;
+        }
+        var driverHours = $('#driver-hours').val();
+        if (driverHours) {
+            eventDetails.driverHours = driverHours;
+        }
+        var extraHours = $('#extra-hours').val();
+        if (extraHours) {
+            eventDetails.extraHours = extraHours;
+        }
+
 
         $('.member-checkbox').each(function (index, element) {
             var jel = $(element);

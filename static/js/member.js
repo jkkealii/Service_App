@@ -66,9 +66,20 @@ $(function () {
     };
 
     var newRow = function (event) {
+        var hours = function () {
+            var id = $('#member-id').data('id');
+            if (event.members.indexOf(id) !== -1) {
+                return event.hours;
+            } else if (event.drivers.indexOf(id) !== -1) {
+                return event.hours + (event.driverHours ? event.driverHours : 0);
+            } else if (event.specials.indexOf(id) !== -1) {
+                return event.hours + (event.extraHours ? event.extraHours : 0);
+            }
+        };
+
         return '<tr><td>' + '<a href="/events/' + event.id + '">' + event.name + '</a>' + '</td>' + 
-            '<td>' + moment(event.startDateTime.iso).format("MMM D, YYYY, h:mm a") + 
-            '</td>' + '<td>' + event.meetingPlace +
+            '<td>' + moment(event.startDateTime.iso).format("YYYY-MM-DD, HH:mm") + 
+            '</td>' + '<td>' + hours() +
             '</td>' + '<td>' + ((event.isOnCampus) ? 'On Campus' : 'Off Campus') + '</td></tr>';
     };
     var populateEvents = function () {
