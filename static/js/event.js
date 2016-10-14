@@ -61,7 +61,7 @@ $(function () {
                 console.log('No Uniform ' + event.uniform);
             }
             $('#meeting-place').val(event.meetingPlace);
-            $('#start-date').val(moment(event.startDfateTime).format('M/D/YY HH:mm'));
+            $('#start-date').val(moment(event.startDateTime).format('M/D/YY HH:mm'));
             $('#end-date').val(moment(event.endDateTime).format('M/D/YY HH:mm'));
             $('#driver-hours').val(event.driverHours);
             $('#extra-hours').val(event.extraHours);
