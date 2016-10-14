@@ -4,7 +4,7 @@
   "description": "The server for lmucrimsoncircle.com",
   "main": "server.js",
   "scripts": {
-    "start": "if [ -f $(npm bin)/../../config/set_db.sh ]; then DATABASE_URL=$($(npm bin)/../../config/set_db.sh) node server.js; else node server.js; fi;",
+    "start": "if [ -f $(npm bin)/../../config/set_db.sh ]; then MONGODB_URI=$($(npm bin)/../../config/set_db.sh) node server.js; else node server.js; fi;",
     "test": "mocha --recursive --require mocha-istanbul 'test' && istanbul report text-summary lcov",
     "lint": "eslint server.js **/*.js",
     "report": "istanbul report",

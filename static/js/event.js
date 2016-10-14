@@ -5,7 +5,7 @@ $(function () {
                 '"</td><td><input type="checkbox" class="extra-checkbox" data-id="' + member.id +
                 '"></td><td>' + member.firstName + '</td><td>' + member.lastName + '</td></tr>';
     };
-    var populateMembers = function () {
+    var populateMembers = function (callback) {
         var table = $('#members tbody');
         var status = $('#member-status');
 
@@ -14,13 +14,13 @@ $(function () {
             url: "/api/members",
             method: "GET"
         }).then(function (data) {
-            console.log(data);
             table.empty();
             status.text("Success");
             data.members.forEach(function (element) {
                 table.append(createMember(element));
                 // $('.delete-member').unbind('click').click(deleteMember);
             });
+            callback();
         }, function (obj) {
             console.log(obj.responseJSON.statusCode);
             table.empty();
@@ -29,12 +29,74 @@ $(function () {
             } else {
                 status.text("Error");
             }
+            callback();
         });
     };
 
-    populateMembers();
+    var populateEvent = function () {
+        var status = $('#status');
 
-    var createEvent = function () {
+        $.ajax({
+            url: "/api/events/" + $('#event-id').data('id'),
+            method: "GET"
+        }).then (function (data) {
+            status.text("Success");
+            var event = data.event;
+            $('input').prop('disabled', true);
+
+            $('#name').val(event.name);
+            $('#hours').val(event.hours);
+            if (event.isOnCampus) {
+                $('#is-on-campus-true').prop('checked', true);
+            } else {
+                $('#is-on-campus-false').prop('checked', true);
+            }
+            if (event.uniform.toLowerCase() === "casual") {
+                $('#uniform-casual').prop('checked', true);
+            } else if (event.uniform.toLowerCase() === "polos") {
+                $('#uniform-polo').prop('checked', true);
+            } else if (event.uniform.toLowerCase() === "sweaters") {
+                $('#uniform-sweater').prop('checked', true);
+            } else {
+                console.log('No Uniform ' + event.uniform);
+            }
+            $('#meeting-place').val(event.meetingPlace);
+            $('#start-date').val(moment(event.startDateTime).format('M/D/YY HH:mm'));
+            $('#end-date').val(moment(event.endDateTime).format('M/D/YY HH:mm'));
+            $('#driver-hours').val(event.driverHours);
+            $('#extra-hours').val(event.extraHours);
+            $('#comments').val(event.comments ? event.comments : '');
+
+            populateMembers(function () {
+                $('.member-checkbox').filter(function (i, e) {
+                    return event.members.indexOf($(e).data('id')) !== -1;
+                }).prop('checked', true);
+                $('.driver-checkbox').filter(function (i, e) {
+                    return event.drivers.indexOf($(e).data('id')) !== -1;
+                }).prop('checked', true);
+                $('.extra-checkbox').filter(function (i, e) {
+                    return event.specials.indexOf($(e).data('id')) !== -1;
+                }).prop('checked', true);
+
+                $('input').prop('disabled', true);
+                $('#edit-event').prop('disabled', false).click(function () {
+                    console.log
+                    $('input').prop('disabled', false);
+                    $('#update-event').prop('disabled', false);
+                });
+            });
+        }, function (obj) {
+            status.text("Error");
+            var json = obj.responseJSON;
+            if (json.statusCode == 404) {
+                $('form').empty();
+                status.text('404 - No Such Event');
+            }
+            console.log(json);
+        });
+    };
+
+    var updateEvent = function () {
         var uniform = $('input[name=uniform]:checked').val();
         if (!uniform) {
             uniform = '';
@@ -67,7 +129,6 @@ $(function () {
             eventDetails.extraHours = extraHours;
         }
 
-
         $('.member-checkbox').each(function (index, element) {
             var jel = $(element);
             if (jel.prop('checked')) {
@@ -95,8 +156,8 @@ $(function () {
 
         status.text('Pending');
         $.ajax({
-            url: "/api/events",
-            method: "POST",
+            url: "/api/events/" + $('#event-id').data('id'),
+            method: "PUT",
             data: eventDetails
         }).then(function (data) {
             console.log(data);
@@ -113,6 +174,8 @@ $(function () {
             }
         });
     };
-    
-    $('#create-event').click(createEvent);
+
+    $('#edit-event').prop('disabled', true);
+    $('#update-event').prop('disabled', true).click(updateEvent);
+    populateEvent();
 });

@@ -8,54 +8,59 @@
 
 The Crimson Circle website dedicated to tracking and viewing service hours.
 
-### Installation
+### Requirements
+Install `npm` and `mongodb` if you don't already have them installed
+```
+brew install node
+brew install mongodb
+```
 
-Download repo; install packages
+### Installation
+Download and install packages
 ```
 git clone https://github.com/jkkealii/Service_App.git
 cd Service_App
 npm install
 ```
 
-Install MongoDB locally if you don't already have it installed
+Configure server with config file to go into `config/set_db.sh`
 ```
-brew install mongodb
+echo 'mongodb://localhost:27017/db'
+```
+Alternately, get the most recent config folder from Slack
+
+### Using Database
+
+Initialize MongoDB for Service App
+```
+npm run db-init
 ```
 
-Configure server with config file to go into `config/default.json`
-```
-{
-    "Node-Server": {
-        "host": <desired host>,
-        "port": <desired port>,
-        "logToConsole": <desired logging boolean>
-    },
-    "Mongo-Server": {
-        "host": <mongodb server>,
-        "port": <mongodb server port>,
-        "db": <db to interact with>
-    }
-}
-```
-Alternately, get the most recent config folder from Team member/Slack
-
-### Running & Development
-
-Start your local db and optionally seed the db
+Start Database
 ```
 npm run db-start
-npm run db-seed -- --file <filepath>
 ```
+
+Stop Database
+```
+npm run db-stop
+```
+Reset Database (stop, initialize, start)
+```
+npm run db-reset
+```
+
+### Running & Development
 
 Start the server
 ```
 npm start
 ```
 
-Stop the server and local mongo instance
+Run Tests
 ```
-ctrl-c
-npm run db-stop
+npm test
+npm run lint
 ```
 
 [crimson-img]: resources/large-crimson-logo.png

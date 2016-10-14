@@ -3,6 +3,21 @@
 // universals
 // ------------------------------------------------------------
 
+#wrapper {
+  min-height: 100%;
+  position: relative;
+}
+
+#content {
+  padding-bottom: 40px; /* Height of the footer element */
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 img {
   max-width: 100%;
 }

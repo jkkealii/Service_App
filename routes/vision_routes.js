@@ -41,11 +41,11 @@ var visionRoutes = [
         }
     },
     {
-        path: '/edit-event',
+        path: '/events/{event}',
         method: 'GET',
         handler: function (req, res) {
-            res.view('edit_event.html', {
-
+            res.view('event.html', {
+                event: req.params.event
             });
         }
     },
@@ -62,8 +62,17 @@ var visionRoutes = [
         path: '/members',
         method: 'GET',
         handler: function (req, res) {
-            res.view('members.html', {
+            res.view('member_list.html', {
 
+            });
+        }
+    },
+    {
+        path: '/members/{member}',
+        method: 'GET',
+        handler: function (req, res) {
+            res.view('member.html', {
+                member: req.params.member
             });
         }
     },

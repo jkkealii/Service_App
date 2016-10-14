@@ -3,10 +3,10 @@ var Joi = require('joi');
 var schema = {
     event: Joi.object().keys({
         name: Joi.string().required(),
-        comments: Joi.string().required(),
+        comments: Joi.string(),
         hours: Joi.number().required(),
-        driverHours: Joi.number().required(),
-        extraHours: Joi.number().required(),
+        driverHours: Joi.number(),
+        extraHours: Joi.number(),
         isOnCampus: Joi.boolean().required(),
         meetingPlace: Joi.string().required(),
         startDateTime: Joi.date().iso(),

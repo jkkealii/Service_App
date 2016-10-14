@@ -1,0 +1,82 @@
+{% include "helpers/_header.html" %}
+
+<div>
+  <h2>Crimson <strong>Create Member</strong></h2>
+</div>
+
+<div id="member-id" data-id="{{ member }}"></div>
+
+<p id="status"></p>
+
+<form method="post">
+
+  <div>
+    <h3>First Name</h3>
+    <div class="form-or-something">
+      <input type="text" class="form-something" placeholder="John" id="first-name">
+    </div>
+  </div>
+
+  <div>
+    <h3>Last Name</h3>
+    <div class="form-or-something">
+      <input type="text" class="form-something" placeholder="Doe" id="last-name">
+    </div>
+  </div>
+
+  <div>
+    <h3>Hours</h3>
+    <div class="form-or-something">
+      <p id="hours"></p>
+    </div>
+  </div>
+
+  <div>
+    <h3>phone</h3>
+    <div class="form-or-something">
+      <input type="text" class="form-something" placeholder="(777) 777-7777" id="phone">
+    </div>
+  </div>
+
+  <div>
+    <h3>email</h3>
+    <div class="form-or-something">
+      <input type="text" class="form-something" placeholder="user@gmail.com" id="email">
+    </div>
+  </div>
+
+  <div>
+    <h3>year</h3>
+    <div class="form-or-something">
+      <input type="text" class="form-something" placeholder="2017" id="year">
+    </div>
+  </div>
+
+  <div>
+    <button type="button" id="edit-member">Edit</button>
+    <button type="button" id="update-member">Update</button>
+  </div>
+
+</form>
+
+<p id="event-status"></p>
+
+<table id="events">
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Date & Time</th>
+      <th>Personal Hours</th>
+      <th>On/Off Campus</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
+</table>
+
+{% include "helpers/_basescripts.html" %}
+
+<script type="text/javascript" src="/static/js/member.js"></script>
+
+{% include "helpers/_footer.html" %}
