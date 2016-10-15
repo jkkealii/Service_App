@@ -3,9 +3,22 @@
 // universals
 // ------------------------------------------------------------
 
+table, th, td {
+   border: 1px solid black;
+   text-align: center;
+}
+
+td {
+  height: 28px;
+}
+
 #wrapper {
   min-height: 100%;
   position: relative;
+}
+
+#content {
+  padding-left: 5px;
 }
 
 html, body {
@@ -22,10 +35,21 @@ img.cover {
   @include background-size(cover);
 }
 
+// responsive css
+// ------------------------------------------------------------
+
 // small screen only
 @media screen and (max-width: $small) {
   #content {
     padding-bottom: $sm-footer; /* Height of the footer element */
+  }
+
+  table {
+    width: 100%;
+  }
+
+  th {
+    height: 30px;
   }
 }
 
@@ -34,12 +58,28 @@ img.cover {
   #content {
     padding-bottom: $md-footer; /* Height of the footer element */
   }
+
+  table {
+    width: 75%;
+  }
+
+  th {
+    height: 40px;
+  }
 }
 
 // large screen only
 @media screen and (max-width: $large) and (min-width: $medium) {
   #content {
     padding-bottom: $lg-footer; /* Height of the footer element */
+  }
+
+  table {
+    width: 50%;
+  }
+
+  th {
+    height: 50px;
   }
 }
 
@@ -50,16 +90,37 @@ h1 {
     font-family: 'BebasNeueRegular';
     font-weight: bold;
     font-style: normal;
+    font-size: $h1-size;
+}
+
+h2 {
+  font-size: $h2-size;
+}
+
+h3 {
+  font-size: $h3-size;
+}
+
+h4 {
+  font-size: $h4-size;
 }
 
 h2, h3, h4 {
-    font-family: 'BebasNeueRegular';
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'BebasNeueRegular';
+  font-weight: normal;
+  font-style: normal;
 }
 
-p, label, input, textarea, button {
-    font-family: 'FantasqueSansMonoRegular';
-    font-weight: normal;
-    font-style: normal;
+p, td, a, button, label, input, textarea { //aka ptdablit
+  font-family: 'FantasqueSansMonoRegular';
+  font-weight: normal;
+  font-style: normal;
+  font-size: $ptdablit-size;
+}
+
+th {
+  font-family: 'FantasqueSansMonoRegular';
+  font-weight: normal;
+  font-style: normal;
+  font-size: $th-size;
 }
