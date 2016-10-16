@@ -31,7 +31,7 @@
 }
 
 // large screen only
-@media screen and (max-width: $large) and (min-width: $medium) {
+@media screen and (min-width: $medium) {
   .footer-block {
     height: $lg-footer; /* Height of the footer element */
   }
