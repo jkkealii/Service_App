@@ -3,13 +3,21 @@
 // universals
 // ------------------------------------------------------------
 
+.create-button {
+  background: $light-purple;
+  border: 0;
+  border-radius: 0;
+  padding: 10px 40px;
+  color: #ffffff;
+}
+
 #wrapper {
   min-height: 100%;
   position: relative;
 }
 
 #content {
-  padding-bottom: 40px; /* Height of the footer element */
+  padding-left: 5px;
 }
 
 html, body {
@@ -26,33 +34,51 @@ img.cover {
   @include background-size(cover);
 }
 
+// responsive css
+// ------------------------------------------------------------
+
 // small screen only
 @media screen and (max-width: $small) {
-  h1 {
-    font-size: $h1-size * 0.5;
+  #content {
+    padding-bottom: $sm-footer; /* Height of the footer element */
   }
-  h2 {
-    font-size: $h2-size * 0.5;
+
+  table {
+    width: 100%;
+  }
+
+  th {
+    height: 30px;
   }
 }
 
 // medium screen only
-@media screen and (max-width: $medium) {
-  h1 {
-    font-size: $h1-size;
+@media screen and (max-width: $medium) and (min-width: $small) {
+  #content {
+    padding-bottom: $md-footer; /* Height of the footer element */
   }
-  h2 {
-    font-size: $h2-size;
+
+  table {
+    width: 75%;
+  }
+
+  th {
+    height: 40px;
   }
 }
 
 // large screen only
-@media screen and (max-width: $large) {
-  h1 {
-    font-size: $h1-size * 1.5;
+@media screen and (max-width: $large) and (min-width: $medium) {
+  #content {
+    padding-bottom: $lg-footer; /* Height of the footer element */
   }
-  h2 {
-    font-size: $h2-size * 1.5;
+
+  table {
+    width: 50%;
+  }
+
+  th {
+    height: 50px;
   }
 }
 
@@ -63,16 +89,37 @@ h1 {
     font-family: 'BebasNeueRegular';
     font-weight: bold;
     font-style: normal;
+    font-size: $h1-size;
+}
+
+h2 {
+  font-size: $h2-size;
+}
+
+h3 {
+  font-size: $h3-size;
+}
+
+h4 {
+  font-size: $h4-size;
 }
 
 h2, h3, h4 {
-    font-family: 'BebasNeueRegular';
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'BebasNeueRegular';
+  font-weight: normal;
+  font-style: normal;
 }
 
-p, label, input, textarea, button {
-    font-family: 'FantasqueSansMonoRegular';
-    font-weight: normal;
-    font-style: normal;
+p, td, a, button, label, input, textarea { //aka ptdablit
+  font-family: 'FantasqueSansMonoRegular';
+  font-weight: normal;
+  font-style: normal;
+  font-size: $ptdablit-size;
+}
+
+th {
+  font-family: 'FantasqueSansMonoRegular';
+  font-weight: normal;
+  font-style: normal;
+  font-size: $th-size;
 }

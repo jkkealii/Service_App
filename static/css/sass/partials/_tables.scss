@@ -1,0 +1,23 @@
+@import "../modules/_sizing";
+@import "../modules/_colors";
+
+table, th, td {
+   border: 1px solid black;
+   text-align: center;
+}
+
+th {
+  background-color: $light-purple;
+}
+
+td {
+  height: 28px;
+}
+
+tr:hover {
+  background-color: $hover-grey;
+}
+
+table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
+    content: " \25B4\25BE" 
+}
