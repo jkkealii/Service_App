@@ -60,7 +60,7 @@ img.cover {
 }
 
 // large screen only
-@media screen and (max-width: $large) and (min-width: $medium) {
+@media screen and (min-width: $medium) {
   #content {
     padding-bottom: $lg-footer; /* Height of the footer element */
   }
