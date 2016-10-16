@@ -2,7 +2,7 @@ $(function () {
     var createMember = function (member) {
         return '<tr><td><input type="checkbox" class="member-checkbox" data-id="' + member.id +
                 '"></td><td><input type="checkbox" class="driver-checkbox" data-id="' + member.id +
-                '"</td><td><input type="checkbox" class="extra-checkbox" data-id="' + member.id +
+                '"></td><td><input type="checkbox" class="extra-checkbox" data-id="' + member.id +
                 '"></td><td>' + member.firstName + '</td><td>' + member.lastName + '</td></tr>';
     };
     var populateMembers = function (callback) {
@@ -18,7 +18,6 @@ $(function () {
             status.text("Success");
             data.members.forEach(function (element) {
                 table.append(createMember(element));
-                // $('.delete-member').unbind('click').click(deleteMember);
             });
             callback();
         }, function (obj) {
@@ -68,15 +67,15 @@ $(function () {
             $('#comments').val(event.comments ? event.comments : '');
 
             populateMembers(function () {
-                $('.member-checkbox').filter(function (i, e) {
+                $('.member-checkbox').attr("sorttable_customkey", "1").click(checkIt).filter(function (i, e) {
                     return event.members.indexOf($(e).data('id')) !== -1;
-                }).prop('checked', true);
-                $('.driver-checkbox').filter(function (i, e) {
+                }).prop('checked', true).attr("sorttable_customkey", "0").unbind("click").click(unCheckIt);
+                $('.driver-checkbox').attr("sorttable_customkey", "1").click(checkIt).filter(function (i, e) {
                     return event.drivers.indexOf($(e).data('id')) !== -1;
-                }).prop('checked', true);
-                $('.extra-checkbox').filter(function (i, e) {
+                }).prop('checked', true).attr("sorttable_customkey", "0").unbind("click").click(unCheckIt);
+                $('.extra-checkbox').attr("sorttable_customkey", "1").click(checkIt).filter(function (i, e) {
                     return event.specials.indexOf($(e).data('id')) !== -1;
-                }).prop('checked', true);
+                }).prop('checked', true).attr("sorttable_customkey", "0").unbind("click").click(unCheckIt);
 
                 $('input').prop('disabled', true);
                 $('#edit-event').prop('disabled', false).click(function () {
@@ -173,6 +172,13 @@ $(function () {
                 status.text("Error");
             }
         });
+    };
+
+    var unCheckIt = function () {
+        $(this).attr("sorttable_customkey", "1").unbind("click").click(checkIt);
+    };
+    var checkIt = function () {
+        $(this).attr("sorttable_customkey", "0").unbind("click").click(unCheckIt);
     };
 
     $('#edit-event').prop('disabled', true);
