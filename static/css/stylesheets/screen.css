@@ -150,7 +150,7 @@ img.cover {
     height: 50px;
   }
 }
-/* line 80, ../sass/partials/_base.scss */
+/* line 4, ../sass/partials/_fonts.scss */
 h1 {
   font-family: 'BebasNeueRegular';
   font-weight: bold;
@@ -158,29 +158,29 @@ h1 {
   font-size: 60px;
 }
 
-/* line 87, ../sass/partials/_base.scss */
+/* line 11, ../sass/partials/_fonts.scss */
 h2 {
   font-size: 50px;
 }
 
-/* line 91, ../sass/partials/_base.scss */
+/* line 15, ../sass/partials/_fonts.scss */
 h3 {
   font-size: 37px;
 }
 
-/* line 95, ../sass/partials/_base.scss */
+/* line 19, ../sass/partials/_fonts.scss */
 h4 {
   font-size: 27px;
 }
 
-/* line 99, ../sass/partials/_base.scss */
+/* line 23, ../sass/partials/_fonts.scss */
 h2, h3, h4 {
   font-family: 'BebasNeueRegular';
   font-weight: normal;
   font-style: normal;
 }
 
-/* line 105, ../sass/partials/_base.scss */
+/* line 29, ../sass/partials/_fonts.scss */
 p, td, a, button, label, input, textarea {
   font-family: 'FantasqueSansMonoRegular';
   font-weight: normal;
@@ -188,7 +188,7 @@ p, td, a, button, label, input, textarea {
   font-size: 15px;
 }
 
-/* line 112, ../sass/partials/_base.scss */
+/* line 36, ../sass/partials/_fonts.scss */
 th {
   font-family: 'FantasqueSansMonoRegular';
   font-weight: normal;
