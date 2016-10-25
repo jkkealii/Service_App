@@ -7,17 +7,19 @@
 <p id="status"></p>
 
 <div>
-  <a type="button" id="create-member" href="/members/create">Create Member</a>
+  <a href="/members/create" class="create-button" id="create-member">
+    <span class="fa fa-plus" aria-hidden="true"></span> Create Member
+  </a>
 </div>
 
-<table id="members">
+<table class="sortable" id="members">
   <thead>
     <tr>
       <th>Last Name</th>
       <th>First Name</th>
       <th>Year</th>
-      <th>Hours</th>
-      <th>Actions</th>
+      <th class="sorttable_numeric">Hours</th>
+      <th class="sorttable_nosort">Actions</th>
     </tr>
   </thead>
   <tbody>

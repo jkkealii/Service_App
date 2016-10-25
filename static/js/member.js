@@ -78,7 +78,7 @@ $(function () {
         };
 
         return '<tr><td>' + '<a href="/events/' + event.id + '">' + event.name + '</a>' + '</td>' + 
-            '<td>' + moment(event.startDateTime.iso).format("YYYY-MM-DD, HH:mm") + 
+            '<td>' + moment(event.startDateTime).format("YYYY-MM-DD, HH:mm") + 
             '</td>' + '<td>' + hours() +
             '</td>' + '<td>' + ((event.isOnCampus) ? 'On Campus' : 'Off Campus') + '</td></tr>';
     };

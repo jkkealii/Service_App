@@ -2,7 +2,7 @@ $(function () {
     var createMember = function (member) {
         return '<tr><td><input type="checkbox" class="member-checkbox" data-id="' + member.id +
                 '"></td><td><input type="checkbox" class="driver-checkbox" data-id="' + member.id +
-                '"</td><td><input type="checkbox" class="extra-checkbox" data-id="' + member.id +
+                '"></td><td><input type="checkbox" class="extra-checkbox" data-id="' + member.id +
                 '"></td><td>' + member.firstName + '</td><td>' + member.lastName + '</td></tr>';
     };
     var populateMembers = function () {
@@ -19,7 +19,10 @@ $(function () {
             status.text("Success");
             data.members.forEach(function (element) {
                 table.append(createMember(element));
-                // $('.delete-member').unbind('click').click(deleteMember);
+
+                $('.member-checkbox').attr("sorttable_customkey", "1").click(checkIt);
+                $('.driver-checkbox').attr("sorttable_customkey", "1").click(checkIt);
+                $('.extra-checkbox').attr("sorttable_customkey", "1").click(checkIt);
             });
         }, function (obj) {
             console.log(obj.responseJSON.statusCode);
@@ -112,6 +115,13 @@ $(function () {
                 status.text("Error");
             }
         });
+    };
+
+    var unCheckIt = function () {
+        $(this).attr("sorttable_customkey", "1").unbind("click").click(checkIt);
+    };
+    var checkIt = function () {
+        $(this).attr("sorttable_customkey", "0").unbind("click").click(unCheckIt);
     };
     
     $('#create-event').click(createEvent);
