@@ -107,6 +107,11 @@ var apiRoutes = [
             }
         },
         handler: Api.createUser
+    },
+    {
+        method: 'PUT',
+        path: '/login',
+        handler: Api.login
     }
 ];
 

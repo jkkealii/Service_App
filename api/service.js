@@ -184,6 +184,29 @@ var service = {
                 password: hash
             }, callback);
         });
+    },
+    getUser: function (mongo, username, callback) {
+        Query.getUser(mongo, username, function (err, rawUser) {
+            if (err) {
+                return callback(err);
+            }
+            if (!rawUsers) {
+                return callback();
+            }
+            callback(null, {
+                id: rawUser._id,
+                username: rawUser.username,
+                hashedPassword: rawUser.password
+            });
+        });
+    },
+    matchPasswords: function (password, hashedPassword, callback) {
+        bcrypt.compare(password, hashedPassword, function (err, res) {
+            if (err) {
+                return callback(err);
+            }
+            return callback(null, res);
+        });
     }
 };
 

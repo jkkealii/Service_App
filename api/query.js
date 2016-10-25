@@ -89,6 +89,13 @@ var query = {
         if (!mongo || !mongo.db) { return callback('no database found to query'); }
         var users = mongo.db.collection('users');
         users.insertOne(payload, callback);
+    },
+    getUser: function (mongo, username, callback) {
+        if (!mongo || !mongo.db) { return callback('no database found to query'); }
+        var users = mongo.db.collection('users');
+        users.findOne({
+            username: username
+        }, callback);
     }
 };
 
