@@ -159,6 +159,24 @@ var api = {
                 Respond.gotMembersEvents(res, events, req.params.member);
             }
         });
+    },
+    getUserList: function (req, res) {
+        Service.getUserList(req.mongo, function (err, users) {
+            if (err) {
+                Respond.failedToGetUsers(res, err);
+            } else {
+                Respond.gotUserList(res, users);
+            }
+        });
+    },
+    createUser: function (req, res) {
+        Service.createUser(req.mongo, req.payload, function (err, result) {
+            if (err) {
+                Respond.failedToCreateUser(res, err);
+            } else {
+                Respond.createdUser(res, result);
+            }
+        });
     }
 };
 

@@ -166,6 +166,35 @@ var respond = {
             events: events,
             member: member
         }).code(code);
+    },
+    failedToGetUsers: function (res, err) {
+        res({
+            statusCode: 500,
+            message: "Unable to get users!",
+            error: err
+        }).code(500);
+    },
+    gotUserList: function (res, users) {
+        var code = users.length ? 200 : 404;
+        res({
+            statusCode: code,
+            message: users.length ? "Success finding users!" : "There are no users currently!",
+            users: users
+        }).code(code);
+    },
+    failedToCreateUser: function (res, err) {
+        res({
+            statusCode: 500,
+            message: "Unable to create user!",
+            error: err
+        }).code(500);
+    },
+    createdUser: function (res, result) {
+        res({
+            statusCode: 201,
+            message: "Success creating user!",
+            result: result
+        }).code(201);
     }
 };
 

@@ -79,6 +79,16 @@ var query = {
                 {specials: member}
             ]
         }).toArray(callback);
+    },
+    getUserList: function (mongo, callback) {
+        if (!mongo || !mongo.db) { return callback('no database found to query'); }
+        var users = mongo.db.collection('users');
+        users.find({}).toArray(callback);
+    },
+    createUser: function (mongo, payload, callback) {
+        if (!mongo || !mongo.db) { return callback('no database found to query'); }
+        var users = mongo.db.collection('users');
+        users.insertOne(payload, callback);
     }
 };
 
