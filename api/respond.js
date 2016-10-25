@@ -195,6 +195,26 @@ var respond = {
             message: "Success creating user!",
             result: result
         }).code(201);
+    },
+    failedToGetUser: function (res, err) {
+        res({
+            statusCode: 500,
+            message: "Unable to find user!",
+            err: err
+        }).code(500);
+    },
+    userPassNoMatch: function (res) {
+        res({
+            statusCode: 401,
+            message: "Username or Password do not match!"
+        }).code(401);
+    },
+    failedToComparePasswords: function (res, err) {
+        res({
+            statusCode: 500,
+            message: "Unable to compare passwords!",
+            error: err
+        }).code(500);
     }
 };
 
