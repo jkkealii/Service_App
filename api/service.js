@@ -190,7 +190,7 @@ var service = {
             if (err) {
                 return callback(err);
             }
-            if (!rawUsers) {
+            if (!rawUser) {
                 return callback();
             }
             callback(null, {
