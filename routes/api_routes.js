@@ -109,7 +109,7 @@ var apiRoutes = [
         handler: Api.createUser
     },
     {
-        method: 'PUT',
+        method: 'POST',
         path: '/login',
         handler: Api.login
     }
