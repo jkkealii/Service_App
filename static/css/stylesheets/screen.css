@@ -77,21 +77,22 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 /* line 11, ../sass/partials/_base.scss */
 #content {
   padding-left: 5px;
+  padding-right: 5px;
 }
 
-/* line 15, ../sass/partials/_base.scss */
+/* line 16, ../sass/partials/_base.scss */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
 }
 
-/* line 21, ../sass/partials/_base.scss */
+/* line 22, ../sass/partials/_base.scss */
 img {
   max-width: 100%;
 }
 
-/* line 25, ../sass/partials/_base.scss */
+/* line 26, ../sass/partials/_base.scss */
 img.cover {
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -100,52 +101,52 @@ img.cover {
 }
 
 @media screen and (max-width: 767px) {
-  /* line 34, ../sass/partials/_base.scss */
+  /* line 35, ../sass/partials/_base.scss */
   #content {
     padding-bottom: 65px;
     /* Height of the footer element */
   }
 
-  /* line 38, ../sass/partials/_base.scss */
+  /* line 39, ../sass/partials/_base.scss */
   table {
     width: 100%;
   }
 
-  /* line 42, ../sass/partials/_base.scss */
+  /* line 43, ../sass/partials/_base.scss */
   th {
     height: 30px;
   }
 }
 @media screen and (max-width: 1024px) and (min-width: 767px) {
-  /* line 49, ../sass/partials/_base.scss */
+  /* line 50, ../sass/partials/_base.scss */
   #content {
     padding-bottom: 52px;
     /* Height of the footer element */
   }
 
-  /* line 53, ../sass/partials/_base.scss */
+  /* line 54, ../sass/partials/_base.scss */
   table {
     width: 75%;
   }
 
-  /* line 57, ../sass/partials/_base.scss */
+  /* line 58, ../sass/partials/_base.scss */
   th {
     height: 40px;
   }
 }
 @media screen and (min-width: 1024px) {
-  /* line 64, ../sass/partials/_base.scss */
+  /* line 65, ../sass/partials/_base.scss */
   #content {
     padding-bottom: 40px;
     /* Height of the footer element */
   }
 
-  /* line 68, ../sass/partials/_base.scss */
+  /* line 69, ../sass/partials/_base.scss */
   table {
     width: 50%;
   }
 
-  /* line 72, ../sass/partials/_base.scss */
+  /* line 73, ../sass/partials/_base.scss */
   th {
     height: 50px;
   }
@@ -219,19 +220,37 @@ th {
     height: 65px;
     /* Height of the footer element */
   }
+
+  /* line 25, ../sass/partials/_footer.scss */
+  #content {
+    padding-bottom: 65px;
+    /* to prevent cutting off content */
+  }
 }
 @media screen and (max-width: 1024px) and (min-width: 767px) {
-  /* line 28, ../sass/partials/_footer.scss */
+  /* line 32, ../sass/partials/_footer.scss */
   .footer-block {
     height: 52px;
     /* Height of the footer element */
   }
+
+  /* line 36, ../sass/partials/_footer.scss */
+  #content {
+    padding-bottom: 65px;
+    /* to prevent cutting off content */
+  }
 }
 @media screen and (min-width: 1024px) {
-  /* line 35, ../sass/partials/_footer.scss */
+  /* line 43, ../sass/partials/_footer.scss */
   .footer-block {
     height: 40px;
     /* Height of the footer element */
+  }
+
+  /* line 47, ../sass/partials/_footer.scss */
+  #content {
+    padding-bottom: 65px;
+    /* to prevent cutting off content */
   }
 }
 /* line 4, ../sass/partials/_tables.scss */
