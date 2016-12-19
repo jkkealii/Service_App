@@ -24,6 +24,11 @@ var schema = {
         email: Joi.string().required(),
         phone: Joi.string().required(),
         year: Joi.number().required()
+    }).unknown(false),
+
+    newUser: Joi.object().keys({
+        username: Joi.string().required().trim(),
+        password: Joi.string().required().min(8).trim()
     }).unknown(false)
 };
 

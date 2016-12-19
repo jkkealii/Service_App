@@ -159,6 +159,48 @@ var api = {
                 Respond.gotMembersEvents(res, events, req.params.member);
             }
         });
+    },
+    getUserList: function (req, res) {
+        Service.getUserList(req.mongo, function (err, users) {
+            if (err) {
+                Respond.failedToGetUsers(res, err);
+            } else {
+                Respond.gotUserList(res, users);
+            }
+        });
+    },
+    createUser: function (req, res) {
+        Service.createUser(req.mongo, req.payload, function (err, result) {
+            if (err) {
+                Respond.failedToCreateUser(res, err);
+            } else {
+                Respond.createdUser(res, result);
+            }
+        });
+    },
+    login: function (req, res) {
+        Service.getUser(req.mongo, req.payload.username, function (err, user) {
+            if (err) {
+                Respond.failedToGetUser(res, err);
+            } else if (!user) {
+                Respond.userPassNoMatch(res);
+            } else {
+                Service.matchPasswords(req.payload.password, user.hashedPassword, function (err, match) {
+                    if (err) {
+                        Respond.failedToComparePasswords(res, err);
+                    } else if (match) {
+                        // Service.genToken()
+                    } else {
+                        Respond.userPassNoMatch(res);
+                    }
+                });
+            }
+            // if (err) {
+            //     Respond.failedToLogin(res, err);
+            // } else {
+            //     Respond.loggedIn(res, result);
+            // }
+        });
     }
 };
 

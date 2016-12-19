@@ -1,5 +1,8 @@
 var Path = require('path');
 var Query = require(Path.join(__dirname, 'query.js'));
+var bcrypt = require('bcrypt');
+
+var saltRounds = 10;
 
 var service = {
     getEventList: function (mongo, callback) {
@@ -149,6 +152,60 @@ var service = {
                     callback(null, null);
                 }
             }
+        });
+    },
+    getUserList: function (mongo, callback) {
+        Query.getUserList(mongo, function (err, rawUsers) {
+            if (err) {
+                callback(err);
+            } else {
+                if (rawUsers) {
+                    var users = [];
+                    for (var i = 0; i < rawUsers.length; i++) {
+                        var local = rawUsers[i];
+                        users.push({
+                            username: local.username
+                        });
+                    }
+                    callback(null, users);
+                } else {
+                    callback();
+                }
+            }
+        });
+    },
+    createUser: function (mongo, payload, callback) {
+        bcrypt.hash(payload.password, saltRounds, function (err, hash) {
+            if (err) {
+                return callback(err);
+            }
+            Query.createUser(mongo, {
+                username: payload.username,
+                password: hash
+            }, callback);
+        });
+    },
+    getUser: function (mongo, username, callback) {
+        Query.getUser(mongo, username, function (err, rawUser) {
+            if (err) {
+                return callback(err);
+            }
+            if (!rawUser) {
+                return callback();
+            }
+            callback(null, {
+                id: rawUser._id,
+                username: rawUser.username,
+                hashedPassword: rawUser.password
+            });
+        });
+    },
+    matchPasswords: function (password, hashedPassword, callback) {
+        bcrypt.compare(password, hashedPassword, function (err, res) {
+            if (err) {
+                return callback(err);
+            }
+            return callback(null, res);
         });
     }
 };
