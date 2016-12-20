@@ -92,6 +92,26 @@ var apiRoutes = [
         method: 'GET',
         path: '/members/{member}/events',
         handler: Api.getMembersEvents
+    },
+    {
+        method: 'GET',
+        path: '/users',
+        handler: Api.getUserList
+    },
+    {
+        method: 'POST',
+        path: '/users',
+        config: {
+            validate: {
+                payload: Schema.newUser
+            }
+        },
+        handler: Api.createUser
+    },
+    {
+        method: 'POST',
+        path: '/login',
+        handler: Api.login
     }
 ];
 

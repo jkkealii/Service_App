@@ -57,6 +57,11 @@ Start the server
 npm start
 ```
 
+Alternately, start server to auto restart when a file changes, _provided by [nodemon](https://github.com/remy/nodemon/)_
+```
+npm run nodemon
+```
+
 Run Tests
 ```
 npm test

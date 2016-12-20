@@ -9,8 +9,8 @@ var schema = {
         extraHours: Joi.number(),
         isOnCampus: Joi.boolean().required(),
         meetingPlace: Joi.string().required(),
-        startDateTime: Joi.date().iso(),
-        endDateTime: Joi.date().iso().min(Joi.ref('startDateTime')),
+        startDateTime: Joi.date().iso().required(),
+        endDateTime: Joi.date().iso().min(Joi.ref('startDateTime')).required(),
         uniform: Joi.string().required(),
         members: Joi.array().items(Joi.string()).required(),
         drivers: Joi.array().items(Joi.string()).required(),
@@ -24,6 +24,11 @@ var schema = {
         email: Joi.string().required(),
         phone: Joi.string().required(),
         year: Joi.number().required()
+    }).unknown(false),
+
+    newUser: Joi.object().keys({
+        username: Joi.string().required().trim(),
+        password: Joi.string().required().min(8).trim()
     }).unknown(false)
 };
 
