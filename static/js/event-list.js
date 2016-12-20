@@ -30,7 +30,7 @@ $(function () {
         status.text('Pending');
         $.ajax({
             method: 'GET',
-            url: '/api/events'
+            url: '/api/events?semester=true'
         }).then(function (data) {
             table.empty();
             status.text("Success");
