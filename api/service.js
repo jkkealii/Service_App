@@ -8,7 +8,35 @@ var service = {
     getEventList: function (mongo, callback) {
         Query.getEventList(mongo, function (err, rawEvents) {
             if (err) {
-                callback(err);
+                return callback(err);
+            } else {
+                var events = [];
+                for (var i = 0; i < rawEvents.length; i++) {
+                    events.push({
+                        id: rawEvents[i]._id,
+                        name: rawEvents[i].name,
+                        comments: rawEvents[i].comments,
+                        hours: rawEvents[i].hours,
+                        driverHours: rawEvents[i].driverHours,
+                        extraHours: rawEvents[i].extraHours,
+                        isOnCampus: rawEvents[i].isOnCampus,
+                        meetingPlace: rawEvents[i].meetingPlace,
+                        startDateTime: rawEvents[i].startDateTime,
+                        endDateTime: rawEvents[i].endDateTime,
+                        uniform: rawEvents[i].uniform,
+                        members: rawEvents[i].members,
+                        drivers: rawEvents[i].drivers,
+                        specials: rawEvents[i].specials
+                    });
+                }
+                callback(err, events);
+            }
+        });
+    },
+    getSemesterEventList: function (mongo, callback) {
+        Query.getSemesterEventList(mongo, function (err, rawEvents) {
+            if (err) {
+                return callback(err);
             } else {
                 var events = [];
                 for (var i = 0; i < rawEvents.length; i++) {
