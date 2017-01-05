@@ -162,13 +162,23 @@ var api = {
         });
     },
     getMembersEvents: function (req, res) {
-        Service.getMembersEvents(req.mongo, req.params.member, function (err, events) {
-            if (err) {
-                Respond.failedToGetMembersEvents(res, err);
-            } else {
-                Respond.gotMembersEvents(res, events, req.params.member);
-            }
-        });
+        if (req.query.semester) {
+            Service.getMembersSemesterEvents(req.mongo, req.params.member, function (err, events) {
+                if (err) {
+                    Respond.failedToGetMembersSemesterEvents(res, err);
+                } else {
+                    Respond.gotMembersEvents(res, events, req.params.member);
+                }
+            });
+        } else {
+            Service.getMembersEvents(req.mongo, req.params.member, function (err, events) {
+                if (err) {
+                    Respond.failedToGetMembersEvents(res, err);
+                } else {
+                    Respond.gotMembersEvents(res, events, req.params.member);
+                }
+            });
+        }
     },
     getUserList: function (req, res) {
         Service.getUserList(req.mongo, function (err, users) {

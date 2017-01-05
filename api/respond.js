@@ -151,6 +151,13 @@ var respond = {
             result: result
         }).code(200);
     },
+    failedToGetMembersSemesterEvents: function (res, err) {
+        res({
+            statusCode: 500,
+            message: "Unable to get member's semester events!",
+            error: err
+        }).code(500);
+    },
     failedToGetMembersEvents: function (res, err) {
         res({
             statusCode: 500,

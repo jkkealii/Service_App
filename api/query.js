@@ -102,6 +102,32 @@ var query = {
             ]
         }).toArray(callback);
     },
+    getMembersSemesterEvents: function (mongo, member, callback) {
+        if (!mongo || !mongo.db) { return callback('no database found to query'); }
+        var events = mongo.db.collection('events');
+        var midpoint = Moment().month(6).date(1).hours(0).minutes(0).seconds(0).milliseconds(0);
+
+        var start, end;
+        if (Moment().isAfter(midpoint)) {
+            start = midpoint;
+            end = Moment().endOf("year");
+        } else {
+            start = Moment().startOf("year");
+            end = midpoint;
+        }
+
+        events.find({
+            startDateTime: {
+                "$gte": start.toDate(),
+                "$lt": end.toDate()
+            },
+            $or: [
+                {members: member},
+                {drivers: member},
+                {specials: member}
+            ]
+        }).toArray(callback);
+    },
     getUserList: function (mongo, callback) {
         if (!mongo || !mongo.db) { return callback('no database found to query'); }
         var users = mongo.db.collection('users');
