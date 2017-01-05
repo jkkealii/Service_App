@@ -85,11 +85,23 @@ $(function () {
     var populateEvents = function () {
         var table = $('#events tbody');
         var status = $('#event-status');
+        var semesterSelect = $('#semester-select').val();
+
+        var memberID = $('#member-id').data('id');
+        var urlEvents;
+        if (semesterSelect === "current") {
+            urlEvents = '/api/members/' + memberID + '/events?semester=true';
+        } else if (semesterSelect === "all") {
+            urlEvents = '/api/members/' + memberID + '/events';
+        } else {
+            urlEvents = '/api/members/' + memberID + '/events';
+            console.error("Semester Select invalid option");
+        }
 
         status.text('Pending');
         $.ajax({
             method: 'GET',
-            url: '/api/members/' + $('#member-id').data('id') + '/events'
+            url: urlEvents
         }).then(function (data) {
             table.empty();
             status.text("Success");
@@ -106,6 +118,10 @@ $(function () {
             }
         });
     };
+
+    $("#semester-select").change(function (event) {
+        populateEvents();
+    });
 
     $('#edit-member').prop('disabled', true);
     $('#update-member').prop('disabled', true).click(updateMember);
