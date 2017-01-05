@@ -253,6 +253,35 @@ th {
     /* to prevent cutting off content */
   }
 }
+/* line 4, ../sass/partials/_navbar.scss */
+nav {
+  background-color: #D3E9F0;
+}
+
+/* line 8, ../sass/partials/_navbar.scss */
+img#nav-logo {
+  max-width: 4em;
+}
+
+/* line 12, ../sass/partials/_navbar.scss */
+a.nav-link {
+  font-family: 'FantasqueSansMonoRegular';
+  font-weight: bold;
+  font-style: normal;
+  font-size: 39px;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 1px;
+  color: #660d0f;
+}
+
+/* line 23, ../sass/partials/_navbar.scss */
+li.nav-item {
+  position: relative;
+  display: inline;
+  list-style-type: none;
+}
+
 /* line 4, ../sass/partials/_tables.scss */
 table, th, td {
   border: 1px solid black;
