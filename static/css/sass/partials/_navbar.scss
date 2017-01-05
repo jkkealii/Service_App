@@ -1,0 +1,27 @@
+@import "../modules/_sizing";
+@import "../modules/_colors";
+
+nav {
+  background-color: $nav-background;
+}
+
+img#nav-logo {
+  max-width: 4em;
+}
+
+a.nav-link {
+  font-family: 'FantasqueSansMonoRegular';
+  font-weight: bold;
+  font-style: normal;
+  font-size: $navlink-size;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 1px;
+  color: $crimson-color;
+}
+
+li.nav-item {
+  position: relative;
+  display: inline;
+  list-style-type: none;
+}

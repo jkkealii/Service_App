@@ -1,5 +1,6 @@
 var Path = require('path');
 var Queries = require(Path.join(__dirname, 'queries.js')); // eslint-disable-line
+var Moment = require('moment');
 // var ObjectID = require('mongomongo').ObjectID;
 
 var query = {
@@ -7,6 +8,27 @@ var query = {
         if (!mongo || !mongo.db) { return callback('no database found to query'); }
         var events = mongo.db.collection('events');
         events.find({}).toArray(callback);
+    },
+    getSemesterEventList: function (mongo, callback) {
+        if (!mongo || !mongo.db) { return callback('no database found to query'); }
+        var events = mongo.db.collection('events');
+        var midpoint = Moment().month(6).date(1).hours(0).minutes(0).seconds(0).milliseconds(0);
+
+        var start, end;
+        if (Moment().isAfter(midpoint)) {
+            start = midpoint;
+            end = Moment().endOf("year");
+        } else {
+            start = Moment().startOf("year");
+            end = midpoint;
+        }
+
+        events.find({
+            startDateTime: {
+                "$gte": start.toDate(),
+                "$lt": end.toDate()
+            }
+        }).toArray(callback);
     },
     createEvent: function (mongo, payload, callback) {
         if (!mongo || !mongo.db) { return callback('no database found to query'); }
@@ -79,6 +101,49 @@ var query = {
                 {specials: member}
             ]
         }).toArray(callback);
+    },
+    getMembersSemesterEvents: function (mongo, member, callback) {
+        if (!mongo || !mongo.db) { return callback('no database found to query'); }
+        var events = mongo.db.collection('events');
+        var midpoint = Moment().month(6).date(1).hours(0).minutes(0).seconds(0).milliseconds(0);
+
+        var start, end;
+        if (Moment().isAfter(midpoint)) {
+            start = midpoint;
+            end = Moment().endOf("year");
+        } else {
+            start = Moment().startOf("year");
+            end = midpoint;
+        }
+
+        events.find({
+            startDateTime: {
+                "$gte": start.toDate(),
+                "$lt": end.toDate()
+            },
+            $or: [
+                {members: member},
+                {drivers: member},
+                {specials: member}
+            ]
+        }).toArray(callback);
+    },
+    getUserList: function (mongo, callback) {
+        if (!mongo || !mongo.db) { return callback('no database found to query'); }
+        var users = mongo.db.collection('users');
+        users.find({}).toArray(callback);
+    },
+    createUser: function (mongo, payload, callback) {
+        if (!mongo || !mongo.db) { return callback('no database found to query'); }
+        var users = mongo.db.collection('users');
+        users.insertOne(payload, callback);
+    },
+    getUser: function (mongo, username, callback) {
+        if (!mongo || !mongo.db) { return callback('no database found to query'); }
+        var users = mongo.db.collection('users');
+        users.findOne({
+            username: username
+        }, callback);
     }
 };
 

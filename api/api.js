@@ -4,13 +4,23 @@ var Respond = require(Path.join(__dirname, 'respond.js'));
 
 var api = {
     getEventList: function (req, res) {
-        Service.getEventList(req.mongo, function (err, events) {
-            if (err) {
-                Respond.failedToFindEvents(res);
-            } else {
-                Respond.returnEvents(res, events);
-            }
-        });
+        if (req.query.semester) {
+            Service.getSemesterEventList(req.mongo, function (err, events) {
+                if (err) {
+                    Respond.failedToGetSemesterEventList(res);
+                } else {
+                    Respond.returnEvents(res, events);
+                }
+            });
+        } else {
+            Service.getEventList(req.mongo, function (err, events) {
+                if (err) {
+                    Respond.failedToFindEvents(res);
+                } else {
+                    Respond.returnEvents(res, events);
+                }
+            });
+        }
     },
     createEvent: function (req, res) {
         Service.createEvent(req.mongo, req.payload, function (err, result) {
@@ -94,7 +104,7 @@ var api = {
         });
     },
     calculateHours: function(req, res) {
-        Service.getEventList(req.mongo, function (err, events) {
+        Service.getSemesterEventList(req.mongo, function (err, events) {
             if (err) {
                 Respond.failedToCalculateHours(res, err);
             } else {
@@ -152,12 +162,64 @@ var api = {
         });
     },
     getMembersEvents: function (req, res) {
-        Service.getMembersEvents(req.mongo, req.params.member, function (err, events) {
+        if (req.query.semester) {
+            Service.getMembersSemesterEvents(req.mongo, req.params.member, function (err, events) {
+                if (err) {
+                    Respond.failedToGetMembersSemesterEvents(res, err);
+                } else {
+                    Respond.gotMembersEvents(res, events, req.params.member);
+                }
+            });
+        } else {
+            Service.getMembersEvents(req.mongo, req.params.member, function (err, events) {
+                if (err) {
+                    Respond.failedToGetMembersEvents(res, err);
+                } else {
+                    Respond.gotMembersEvents(res, events, req.params.member);
+                }
+            });
+        }
+    },
+    getUserList: function (req, res) {
+        Service.getUserList(req.mongo, function (err, users) {
             if (err) {
-                Respond.failedToGetMembersEvents(res, err);
+                Respond.failedToGetUsers(res, err);
             } else {
-                Respond.gotMembersEvents(res, events, req.params.member);
+                Respond.gotUserList(res, users);
             }
+        });
+    },
+    createUser: function (req, res) {
+        Service.createUser(req.mongo, req.payload, function (err, result) {
+            if (err) {
+                Respond.failedToCreateUser(res, err);
+            } else {
+                Respond.createdUser(res, result);
+            }
+        });
+    },
+    login: function (req, res) {
+        Service.getUser(req.mongo, req.payload.username, function (err, user) {
+            if (err) {
+                Respond.failedToGetUser(res, err);
+            } else if (!user) {
+                Respond.userPassNoMatch(res);
+            } else {
+                Service.matchPasswords(req.payload.password, user.hashedPassword, function (err, match) {
+                    if (err) {
+                        Respond.failedToComparePasswords(res, err);
+                    } else if (match) {
+                        // Service.genToken()
+                    } else {
+                        Respond.userPassNoMatch(res);
+                    }
+                });
+            }
+            // if (err) {
+            //     Respond.failedToLogin(res, err);
+            // } else {
+            //     Respond.loggedIn(res, result);
+            // }
         });
     }
 };
