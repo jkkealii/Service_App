@@ -104,7 +104,7 @@ var api = {
         });
     },
     calculateHours: function(req, res) {
-        Service.getEventList(req.mongo, function (err, events) {
+        Service.getSemesterEventList(req.mongo, function (err, events) {
             if (err) {
                 Respond.failedToCalculateHours(res, err);
             } else {
