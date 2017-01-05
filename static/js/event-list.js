@@ -6,6 +6,7 @@ $(function () {
                 '</td><td>' + ((event.isOnCampus) ? 'On Campus' : 'Off Campus') + '</td> ' +
                 '<td><button class="delete-event" data-id="' + event.id + '">Delete</button></td></tr>';
     };
+
     var deleteEvent = function () {
         var id = $(this).data("id");
         var status = $('#status');
@@ -23,14 +24,26 @@ $(function () {
             status.text("Failed delete");
         });
     };
+
     var loadEvents = function() {
         var table = $('#events tbody');
         var status = $('#status');
+        var semesterSelect = $('#semester-select').val();
+
+        var urlEvents;
+        if (semesterSelect === "current") {
+            urlEvents = '/api/events?semester=true';
+        } else if (semesterSelect === "all") {
+            urlEvents = '/api/events';
+        } else {
+            urlEvents = '/api/events';
+            console.error("Semester Select invalid option");
+        }
 
         status.text('Pending');
         $.ajax({
             method: 'GET',
-            url: '/api/events?semester=true'
+            url: urlEvents
         }).then(function (data) {
             table.empty();
             status.text("Success");
@@ -48,6 +61,10 @@ $(function () {
             }
         });
     };
+
+    $("#semester-select").change(function (event) {
+        loadEvents();
+    });
 
     loadEvents();
 });
