@@ -59,13 +59,23 @@ var api = {
         });
     },
     getMemberList: function (req, res) {
-        Service.getMemberList(req.mongo, function (err, members) {
-            if (err) {
-                Respond.failedToGetMembers(res);
-            } else {
-                Respond.gotMembers(res, members);
-            }
-        });
+        if (req.query.semester) {
+            Service.getSemesterMemberList(req.mongo, function (err, members) {
+                if (err) {
+                    Respond.failedToGetSemesterMembers(res);
+                } else {
+                    Respond.gotMembers(res, members);
+                }
+            });
+        } else {
+            Service.getMemberList(req.mongo, function (err, members) {
+                if (err) {
+                    Respond.failedToGetMembers(res);
+                } else {
+                    Respond.gotMembers(res, members);
+                }
+            });
+        }
     },
     createMember: function (req, res) {
         Service.createMember(req.mongo, req.payload, function (err, result) {
