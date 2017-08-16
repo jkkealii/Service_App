@@ -26,13 +26,23 @@ $(function () {
     var populateMembers = function () {
         var table = $('#members tbody');
         var status = $('#status');
+        var semesterSelect = $('#semester-select').val();
+
+        var urlMembers;
+        if (semesterSelect === "current") {
+            urlMembers = '/api/members?semester=true';
+        } else if (semesterSelect === "all") {
+            urlMembers = '/api/members';
+        } else {
+            urlMembers = '/api/members';
+            console.error("Semester select invalid option");
+        }
 
         status.text('Pending');
         $.ajax({
-            url: "/api/members",
-            method: "GET"
+            method: 'GET',
+            url: urlMembers
         }).then(function (data) {
-            console.log(data);
             table.empty();
             status.text("Success");
             data.members.forEach(function (element) {
@@ -49,5 +59,9 @@ $(function () {
             }
         });
     };
+    $("#semester-select").change(function (event) {
+        populateMembers();
+    });
+
     populateMembers();
 });
