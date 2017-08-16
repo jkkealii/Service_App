@@ -1,5 +1,3 @@
-var Path = require('path');
-var Queries = require(Path.join(__dirname, 'queries.js')); // eslint-disable-line
 var Moment = require('moment');
 // var ObjectID = require('mongomongo').ObjectID;
 
