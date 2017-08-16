@@ -1,6 +1,6 @@
 {
   "name": "service_app",
-  "version": "0.0.0",
+  "version": "2.2.0",
   "description": "The server for lmucrimsoncircle.com",
   "main": "server.js",
   "scripts": {
