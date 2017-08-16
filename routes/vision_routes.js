@@ -9,11 +9,11 @@ var visionRoutes = [
                 return req.params.path;
             }
         }
-            // directory: {
-            //     path: './static',
-            //     listing: false,
-            //     index: false
-            // }
+        // directory: {
+        //     path: './static',
+        //     listing: false,
+        //     index: false
+        // }
     },
     {
         path: '/favicon.png',
@@ -54,7 +54,7 @@ var visionRoutes = [
         method: 'GET',
         handler: function (req, res) {
             res.view('new_event.html', {
-                
+
             });
         }
     },
