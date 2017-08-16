@@ -120,6 +120,28 @@ var service = {
             }
         });
     },
+    getSemesterMemberList: function (mongo, callback) {
+        Query.getSemesterMemberList(mongo, function (err, rawMembers) {
+            if (err) {
+                callback(err);
+            } else {
+                var members = [];
+                for (var i = 0; i < rawMembers.length; i++) {
+                    members.push({
+                        // TODO: whats the full list of things to a member
+                        id: rawMembers[i]._id,
+                        firstName: rawMembers[i].firstName,
+                        lastName: rawMembers[i].lastName,
+                        hours: rawMembers[i].hours,
+                        email: rawMembers[i].email,
+                        phone: rawMembers[i].phone,
+                        year: rawMembers[i].year
+                    });
+                }
+                callback(err, members);
+            }
+        });
+    },
     createMember: function (mongo, payload, callback) {
         Query.createMember(mongo, payload, callback);
     },

@@ -74,6 +74,12 @@ var respond = {
             message: "Unable to retrieve the list of members!"
         }).code(500);
     },
+    failedToGetSemesterMembers: function (res) {
+        res({
+            statusCode: 500,
+            message: "Unable to retrieve the list of current semester members!"
+        }).code(500);
+    },
     gotMembers: function (res, members) {
         var code = members.length ? 200 : 404;
         res({

@@ -1,5 +1,3 @@
-var Path = require('path');
-var Queries = require(Path.join(__dirname, 'queries.js')); // eslint-disable-line
 var Moment = require('moment');
 // var ObjectID = require('mongomongo').ObjectID;
 
@@ -62,6 +60,24 @@ var query = {
         if (!mongo || !mongo.db) { return callback('no database found to query'); }
         var members = mongo.db.collection('members');
         members.find({}).toArray(callback);
+    },
+    getSemesterMemberList: function (mongo, callback) {
+        if (!mongo || !mongo.db) { return callback('no database found to query'); }
+        var members = mongo.db.collection('members');
+        var midpoint = Moment().month(6).date(1).hours(0).minutes(0).seconds(0).milliseconds(0);
+
+        var yearReq;
+        if (Moment().isAfter(midpoint)) { // we are in the fall semester
+            yearReq = Moment().add(1, "years").format("YYYY"); // you must be graduating this value or later
+        } else { // we are in the spring semester
+            yearReq = Moment().format("YYYY");
+        }
+
+        members.find({
+            year: {
+                "$gte": +yearReq
+            }
+        }).toArray(callback);
     },
     createMember: function (mongo, payload, callback) {
         if (!mongo || !mongo.db) { return callback('no database found to query'); }
