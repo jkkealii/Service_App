@@ -75,7 +75,7 @@ var query = {
 
         members.find({
             year: {
-                "$gte": yearReq
+                "$gte": +yearReq
             }
         }).toArray(callback);
     },
