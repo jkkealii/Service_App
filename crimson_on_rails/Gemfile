@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # React on Rails!
+gem 'mini_racer'
 gem 'react_on_rails', '10.0.0'
 gem 'webpacker', '~> 3.0'
 
