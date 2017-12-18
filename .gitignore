@@ -10,3 +10,13 @@ config.json
 .parse.project
 db
 .sass-cache
+
+# React on Rails
+npm-debug.log*
+node_modules
+
+crimson_on_rails/public/packs/*
+crimson_on_rails/tmp/*
+
+# Generated js bundles
+/app/assets/webpack/*
