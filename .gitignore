@@ -15,5 +15,8 @@ db
 npm-debug.log*
 node_modules
 
+crimson_on_rails/public/packs/*
+crimson_on_rails/tmp/*
+
 # Generated js bundles
 /app/assets/webpack/*
